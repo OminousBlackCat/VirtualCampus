@@ -1,15 +1,20 @@
 package com.seu.vCampus.Server;
 
+
+/**
+ * 服务端的界面与线程逻
+ * 执行main方法启动服务端
+ * 完成日期：2019_8_22
+ * 作者：wxy
+ */
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.io.IOException;
-import java.net.InetAddress;
-import java.net.ServerSocket;
-import java.net.Socket;
+import java.net.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.net.UnknownHostException;
 
 public class ServerUI  extends JFrame{
 
@@ -21,6 +26,45 @@ public class ServerUI  extends JFrame{
     private JTextArea mainTextArea;
     private JButton StartButton;
     private JButton StopButton;
+    private socketThread socketthread;
+
+
+
+
+    class socketThread extends Thread{
+        @Override
+        public void run(){
+            StartButton.setEnabled(false);
+            StopButton.setEnabled(true);
+            mainTextArea.setText(mainTextArea.getText()+"正在启动");
+
+            try{
+                serverSocket = new ServerSocket(port);
+                mainTextArea.setText(mainTextArea.getText()+"\n"+"成功启动！");
+            }catch (IOException ioe){
+                mainTextArea.setText(mainTextArea.getText()+"\n"+ioe.toString());
+            }
+
+            int count = 0;
+            while (true){
+                try{
+                    if(serverSocket.isClosed()){
+                        return;
+                    }
+                    System.out.println("正在等待连接.........");
+                    Socket socket = serverSocket.accept();
+                    new  ServerThread(socket).start();
+                    mainTextArea.setText(mainTextArea.getText()+"\n"+"成功连接到第"+count+"个客户端");
+                }
+                catch (IOException ioe){
+                    mainTextArea.setText(mainTextArea.getText()+"\n"+ioe.toString());
+                }
+
+            }
+        }
+    }
+
+
 
     public ServerUI(){
         setTitle("服务端");
@@ -80,15 +124,8 @@ public class ServerUI  extends JFrame{
         StartButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        StartButton.setEnabled(false);
-                        StopButton.setEnabled(true);
-                        mainTextArea.setText(mainTextArea.getText()+"\n"+"正在启动");
-                        startServer();
-                    }
-                }).start();
+                socketthread = new socketThread();
+                socketthread.start();
             }
         });
 
@@ -98,41 +135,17 @@ public class ServerUI  extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 StartButton.setEnabled(true);
                 StopButton.setEnabled(false);
-                serverSocket = null;
+                try{
+                    serverSocket.close();
+                }catch (IOException ioe){
+                    mainTextArea.setText(mainTextArea.getText()+"\n"+ioe.toString());
+                }
                 mainTextArea.setText(mainTextArea.getText()+"\n"+"服务端已停止");
             }
         });
 
 
         setVisible(true);
-    }
-
-    private void startServer(){
-        try{
-            serverSocket = new ServerSocket(port);
-            mainTextArea.setText(mainTextArea.getText()+"\n"+"成功启动！");
-        }catch (IOException ioe){
-            mainTextArea.setText(mainTextArea.getText()+"\n"+ioe.toString());
-        }
-
-        int count = 0;
-        while (true){
-            try{
-                Socket socket = serverSocket.accept();
-                new  ServerThread(socket).start();
-                mainTextArea.setText(mainTextArea.getText()+"\n"+"成功连接到第"+count+"个客户端");
-            }catch (IOException ioe){
-                mainTextArea.setText(mainTextArea.getText()+"\n"+ioe.toString());
-            }
-        }
-    }
-
-    private void stopServer(){
-        try{
-            serverSocket.close();
-        }catch (IOException ioe){
-            mainTextArea.setText(mainTextArea.getText()+"\n"+ioe.toString());
-        }
     }
 
     public static void main(String args[]){
