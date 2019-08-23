@@ -2,6 +2,7 @@ package com.seu.vCampus.Server;
 
 
 /**
+ * ServerUI.java
  * 服务端的界面与线程逻
  * 执行main方法启动服务端
  * 完成日期：2019_8_22
