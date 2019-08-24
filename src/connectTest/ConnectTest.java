@@ -6,7 +6,7 @@ public class ConnectTest {
 	public static void main(String[] args) throws Exception{
 		AccessConnection student=new AccessConnection();
 		Connection conn=student.getConn();
-		System.out.println("表中现有数据：");
+		System.out.println("鏁版嵁搴撶幇鏈夋暟鎹涓嬶細");
 		student.ShowTable(conn);
 	}
 }
