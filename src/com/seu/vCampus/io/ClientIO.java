@@ -37,12 +37,17 @@ public class ClientIO {
     }
 
     public void SendMessages(Message send) throws IOException {
+
        oos = new ObjectOutputStream(os);
        oos.writeObject(send);
     }
 
-    public Message ReceiveMessage(){
-        
+    public Message ReceiveMessage() throws IOException{
+        ois = new ObjectInputStream(is);
+        Message
+
+
+
     }
 
 }

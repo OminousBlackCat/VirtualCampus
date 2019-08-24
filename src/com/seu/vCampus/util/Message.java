@@ -20,4 +20,12 @@ public class Message implements java.io.Serializable{
     public String getECardNumber() {
         return ECardNumber;
     }
+
+    public MESSAGE_TYPE getType() {
+        return Type;
+    }
+
+    public void setType(MESSAGE_TYPE type) {
+        Type = type;
+    }
 }

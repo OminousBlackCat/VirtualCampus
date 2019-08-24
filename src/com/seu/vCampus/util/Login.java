@@ -4,6 +4,7 @@ public class Login extends Message {
 
     private String passWord;
     private boolean isMatched;
+    private int AuthorityLevel;
 
 
     public Login(){
@@ -25,5 +26,14 @@ public class Login extends Message {
     public void setMatched(boolean matched) {
         isMatched = matched;
     }
+
+    public int getAuthorityLevel() {
+        return AuthorityLevel;
+    }
+
+    public void setAuthorityLevel(int authorityLevel) {
+        AuthorityLevel = authorityLevel;
+    }
 }
+
 

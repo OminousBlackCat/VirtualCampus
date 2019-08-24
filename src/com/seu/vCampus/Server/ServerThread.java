@@ -61,6 +61,16 @@ public class ServerThread  extends Thread{
             obtian = (Message) ois.readObject();   //获得message对象
 
 
+            switch (obtian.getType()){
+                case TYPE_LOGIN:
+
+                    break;
+                case TYPE_PERSON:
+
+                    break;
+
+            }
+
 
 
 
