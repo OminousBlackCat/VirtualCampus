@@ -117,11 +117,13 @@ public class DatabaseConnection extends Person{
                 String Name = res.getString("userName");
                 String AL=res.getString("AuthorityNumber");
                 String LB=res.getString("LendBooksNumber");
+                String ECB=res.getString("ECardBalance");
                 p.setAuthorityLevel((short) Integer.parseInt(AL));
                 p.setMatched(true);
                 p.setPassWord(PW);
                 p.setName(Name);
                 p.setLendBooksNumber((short) Integer.parseInt(LB));
+                p.setECardBalance((short) Integer.parseInt(ECB));
                 return p;
             }
             else
