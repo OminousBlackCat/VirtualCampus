@@ -104,11 +104,10 @@ public class AccessConnection {
             System.out.print("用户名：" + name);
         }
     }
-    public String  passwordCompare(Connection c,String ecardn,String password)throws SQLException  { //匹配用户名与密码
-            String sql="select*from Users where ECardNumber=? and PassWord=?";
+    public String  passwordCompare(Connection c,String ecardn)throws SQLException  { //匹配用户名与密码
+            String sql="select*from Users where ECardNumber=?";
             PreparedStatement pst=c.prepareStatement(sql);
             pst.setString(1,ecardn);
-            pst.setString(2,password);
             ResultSet res=pst.executeQuery();
             if(res.next()){
                 String PW = res.getString("PassWord");
