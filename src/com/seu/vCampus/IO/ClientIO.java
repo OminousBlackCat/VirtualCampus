@@ -1,8 +1,7 @@
-package com.seu.vCampus.io;
+package com.seu.vCampus.IO;
 
 
 import com.seu.vCampus.util.Message;
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 
 
 import java.net.Socket;
@@ -21,7 +20,7 @@ public class ClientIO {
     private BufferedInputStream bis;
 
 
-    public ClientIO(String ip, int port){
+    public ClientIO(String ip, int port) throws Exception {
         IPAddress = ip;
         Port = port;
 

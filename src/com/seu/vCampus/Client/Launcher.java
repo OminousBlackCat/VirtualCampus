@@ -1,6 +1,6 @@
 package com.seu.vCampus.Client;
 
-import com.seu.vCampus.io.ClientIO;
+import com.seu.vCampus.IO.ClientIO;
 import com.seu.vCampus.util.Login;
 
 import javax.swing.*;
@@ -10,7 +10,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.IOException;
 
 public class Launcher extends JFrame{
 
@@ -66,7 +65,13 @@ public class Launcher extends JFrame{
         Login.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                io = new ClientIO(ipAddress,Port);
+                try{
+                    io = new ClientIO(ipAddress,Port);
+                }catch (Exception ex){
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(null,"网络连接异常","错误",JOptionPane.ERROR_MESSAGE);
+                }
+
                 com.seu.vCampus.util.Login LoginMessage = new Login();
                 LoginMessage.setPassWord(String.valueOf(passWord.getPassword()));
                 LoginMessage.setECardNumber(ECardNumber.getText());
