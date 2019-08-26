@@ -71,10 +71,10 @@ public class ServerThread  extends Thread{
                     DatabaseConnection login=new DatabaseConnection();
                     Connection conn=login.getConn();
                     try{
-                        String compare = login.passwordCompare(conn,obtian.getECardNumber(),((Login) obtian).getPassWord());
+                        String compare = login.passwordCompare(conn,((Login) obtian).getPassWord());
                         System.out.println(compare);
                         System.out.println(((Login) obtian).getPassWord());
-                        if(compare.equals(((Login) obtian).getPassWord())){
+                        if(compare.equals("")){
                             System.out.println("匹配成功");
                         }else  {
                             System.out.println("匹配失败");
