@@ -36,8 +36,7 @@ public class ClientIO {
         }
     }
 
-    public void SendMessages(Message send) throws IOException {
-
+    public void SendMessages(Message send) throws Exception {
        oos = new ObjectOutputStream(os);
        oos.writeObject(send);
     }
