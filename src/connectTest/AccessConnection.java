@@ -56,7 +56,7 @@ public class AccessConnection {
         Statement st = c.createStatement();
         ResultSet res = st.executeQuery("select*from Users");
         while (res.next()) {
-            System.out.print(res.getString("UID") + "\t");
+            System.out.print(res.getString("ECardNumber") + "\t");
             System.out.print(res.getString("userName") + "\t");
             System.out.print(res.getString("password") + "\t");
             System.out.println();
@@ -65,7 +65,7 @@ public class AccessConnection {
 
     public void insertScore(Connection c) throws Exception {   //添加新用户数据
         try {
-            PreparedStatement sql = c.prepareStatement("insert into Users(UID,userName,password)values(?,?,?)");
+            PreparedStatement sql = c.prepareStatement("insert into Users(ECardNumber,userName,password)values(?,?,?)");
             sql.setString(1, "");
             sql.setString(2, "");
             sql.setString(3, "");
@@ -80,28 +80,38 @@ public class AccessConnection {
         st.executeUpdate("delete from Users where UID=(select max(UID)from Users)");
     }
 
-    public void Search(Connection c) throws Exception {  //通过UID搜索用户
+    public void Search(Connection c,String ecardn) throws Exception {  //通过UID搜索用户
         Statement sql = c.createStatement();
-        ResultSet res = sql.executeQuery("select*from Users where UID=09017211");
+        ResultSet res = sql.executeQuery("select*from Users where ECardNumber="+ecardn);
         if (res.isLast()) {
             while (res.next()) {
-                String id = res.getString("UID");
+                String id = res.getString("ECardNumber");
                 String name = res.getString("userName");
-                System.out.print("学号：" + id);
+                System.out.print("一卡通号：" + id);
                 System.out.print("用户名：" + name);
             }
         } else
             System.out.println("未查到这名学生。");
     }
 
-    public void indistinctSearch(Connection c) throws Exception {
+    public void indistinctSearch(Connection c) throws Exception {   //模糊查询
         Statement sql = c.createStatement();
-        ResultSet res = sql.executeQuery("select*from Users where UID like '09017%'");
+        ResultSet res = sql.executeQuery("select*from Users where ECardNumber like '09017%'");
         while (res.next()) {
-            String id = res.getString("UID");
+            String id = res.getString("ECardNumber");
             String name = res.getString("userName");
-            System.out.print("学号：" + id);
+            System.out.print("一卡通号：" + id);
             System.out.print("用户名：" + name);
         }
     }
+    public String  passwordCompare(Connection c,String ecardn,String password) throws Exception { //匹配用户名与密码
+            Statement sql = c.createStatement();
+            ResultSet res = sql.executeQuery("select*from Users where EcardNumber="+ecardn+"and Password="+password);
+            if(res.next()){
+                String PW = res.getString("PassWord");
+                return PW;
+            }else
+                return "Unmatched";
+    }
 }
+
