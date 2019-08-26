@@ -43,11 +43,16 @@ public class ClientIO {
     }
 
     public Message ReceiveMessage() throws IOException{
-        ois = new ObjectInputStream(is);
-        Message
-
-
-
+        is = socket.getInputStream();          //获得socket的输入流
+        bis = new BufferedInputStream(is);     //构建缓冲输入流
+        ois = new ObjectInputStream(bis);      //反序列化获得对象
+        Message rtn = new Message();
+        try{
+            rtn = (Message) ois.readObject();   //获得message对象
+        }catch (ClassNotFoundException cne){
+            cne.printStackTrace();
+        }
+        return  rtn;
     }
 
 }

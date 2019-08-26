@@ -7,6 +7,7 @@ package com.seu.vCampus.Server;
 
 
 
+import com.seu.vCampus.util.Login;
 import com.seu.vCampus.util.Message;
 
 import java.sql.Connection;
@@ -59,11 +60,12 @@ public class ServerThread  extends Thread{
             bis = new BufferedInputStream(is);     //构建缓冲输入流
             ois = new ObjectInputStream(bis);      //反序列化获得对象
             obtian = (Message) ois.readObject();   //获得message对象
+            System.out.println(obtian.getECardNumber());
 
 
             switch (obtian.getType()){
                 case TYPE_LOGIN:
-
+                    System.out.println("是登录信息,密码是"+((Login) obtian).getPassWord());
                     break;
                 case TYPE_PERSON:
 

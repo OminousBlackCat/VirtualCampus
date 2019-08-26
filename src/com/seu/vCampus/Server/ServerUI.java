@@ -55,6 +55,7 @@ public class ServerUI  extends JFrame{
                     System.out.println("正在等待连接.........");
                     Socket socket = serverSocket.accept();
                     new  ServerThread(socket).start();
+                    count++;
                     mainTextArea.setText(mainTextArea.getText()+"\n"+"成功连接到第"+count+"个客户端");
                 }
                 catch (IOException ioe){
