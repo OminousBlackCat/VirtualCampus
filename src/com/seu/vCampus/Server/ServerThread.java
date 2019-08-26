@@ -9,11 +9,9 @@ package com.seu.vCampus.Server;
 
 import com.seu.vCampus.util.Login;
 import com.seu.vCampus.util.Message;
-import connectTest.AccessConnection;
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
+import com.seu.vCampus.Database.DatabaseConnection;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.net.Socket;
 import java.io.*;
 import java.sql.SQLException;
@@ -70,7 +68,7 @@ public class ServerThread  extends Thread{
             switch (obtian.getType()){
                 case TYPE_LOGIN:
                     System.out.println("是登录信息,密码是"+((Login) obtian).getPassWord());
-                    AccessConnection login=new AccessConnection();
+                    DatabaseConnection login=new DatabaseConnection();
                     Connection conn=login.getConn();
                     try{
                         String compare = login.passwordCompare(conn,obtian.getECardNumber(),((Login) obtian).getPassWord());

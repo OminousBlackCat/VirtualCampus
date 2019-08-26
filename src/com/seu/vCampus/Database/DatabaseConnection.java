@@ -1,4 +1,4 @@
-package connectTest;
+package com.seu.vCampus.Database;
 /**
  * 数据库连接测试（已成功）
  * 完成人：毛泊涵（2019/8/23）
@@ -6,9 +6,9 @@ package connectTest;
 
 import java.sql.*;
 
-public class AccessConnection {
+public class DatabaseConnection {
     private static final String dbURL = "jdbc:ucanaccess://" +
-            "./././mySource/VirtualCampus.accdb";
+            "./././././mySource/VirtualCampus.accdb";
 
     static {
         try {
