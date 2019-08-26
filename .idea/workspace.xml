@@ -2,25 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="18bad0e5-d8eb-4a34-a2f0-fba80d82ed4b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/UCanAccess-4.0.4-bin/console.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UCanAccess-4.0.4-bin/console.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UCanAccess-4.0.4-bin/copyright.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UCanAccess-4.0.4-bin/lib/commons-lang-2.6.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UCanAccess-4.0.4-bin/lib/commons-logging-1.1.3.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UCanAccess-4.0.4-bin/lib/hsqldb.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UCanAccess-4.0.4-bin/lib/jackcess-2.1.11.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UCanAccess-4.0.4-bin/licenses/apache-license-2.0.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UCanAccess-4.0.4-bin/licenses/hsqldb_lic.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UCanAccess-4.0.4-bin/licenses/hypersonic_lic.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UCanAccess-4.0.4-bin/licenses/lgpl-2.1.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UCanAccess-4.0.4-bin/licenses/licenses.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UCanAccess-4.0.4-bin/loader/ucanload.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UCanAccess-4.0.4-bin/ucanaccess-4.0.4.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UCanAccess-4.0.4-bin/version.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysql-connector-java-8.0.16.jar" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mySource/VirtualCampus.accdb" beforeDir="false" afterPath="$PROJECT_DIR$/mySource/VirtualCampus.accdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mySource/VirtualCampus.laccdb" beforeDir="false" afterPath="$PROJECT_DIR$/mySource/VirtualCampus.laccdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/seu/vCampus/Database/DatabaseConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/seu/vCampus/Database/DatabaseConnection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/seu/vCampus/Server/ServerThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/seu/vCampus/Server/ServerThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/connectTest/AccessConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/seu/vCampus/Database/DatabaseConnection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/connectTest/ConnectTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/seu/vCampus/Server/ServerUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/seu/vCampus/Server/ServerUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/seu/vCampus/util/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/seu/vCampus/util/Person.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/文档/~$分工表.docx" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -112,7 +101,9 @@
       <updated>1566785033107</updated>
       <workItem from="1566785034633" duration="1749000" />
       <workItem from="1566787387080" duration="114000" />
-      <workItem from="1566787909286" duration="248000" />
+      <workItem from="1566787909286" duration="1918000" />
+      <workItem from="1566807146811" duration="1709000" />
+      <workItem from="1566809581585" duration="850000" />
     </task>
     <servers />
   </component>

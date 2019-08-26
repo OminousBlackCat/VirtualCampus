@@ -4,9 +4,12 @@ package com.seu.vCampus.Database;
  * 完成人：毛泊涵（2019/8/23）
  */
 
+import com.seu.vCampus.util.Person;
+
 import java.sql.*;
 
-public class DatabaseConnection {
+public class DatabaseConnection extends Person{
+
     private static final String dbURL = "jdbc:ucanaccess://" +
             "./././././mySource/VirtualCampus.accdb";
 
@@ -104,16 +107,28 @@ public class DatabaseConnection {
             System.out.print("用户名：" + name);
         }
     }
-    public String  passwordCompare(Connection c,String ecardn)throws SQLException  { //匹配用户名与密码
+    public Person  passwordCompare(Connection c,Person p)throws SQLException  { //匹配用户名与密码
             String sql="select*from Users where ECardNumber=?";
             PreparedStatement pst=c.prepareStatement(sql);
-            pst.setString(1,ecardn);
+            pst.setString(1,p.getECardNumber());
             ResultSet res=pst.executeQuery();
             if(res.next()){
                 String PW = res.getString("PassWord");
-                return PW;
-            }else
-                return "Unmatched";
+                String Name = res.getString("userName");
+                String AL=res.getString("AuthorityNumber");
+                String LB=res.getString("LendBooksNumber");
+                p.setAuthorityLevel((short) Integer.parseInt(AL));
+                p.setMatched(true);
+                p.setPassWord(PW);
+                p.setName(Name);
+                p.setLendBooksNumber((short) Integer.parseInt(LB));
+                return p;
+            }
+            else
+            {
+                p.setMatched(false);
+                return p;
+            }
     }
 }
 
