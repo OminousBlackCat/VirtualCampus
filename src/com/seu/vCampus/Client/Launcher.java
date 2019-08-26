@@ -8,6 +8,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 
 public class Launcher extends JFrame{
@@ -120,6 +122,14 @@ public class Launcher extends JFrame{
                                 setVisible(false);
                                 Launcher.this.setEnabled(true);
                                 IPLabel.setText("服务端IP："+ipAddress);
+                            }
+                        });
+
+                        addWindowListener(new WindowAdapter() {
+                            @Override
+                            public void windowClosing(WindowEvent e) {
+                                super.windowClosing(e);
+                                Launcher.this.setEnabled(true);
                             }
                         });
 
