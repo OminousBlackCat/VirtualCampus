@@ -55,7 +55,7 @@ public class DatabaseConnection{
         }
     }
 
-    public void ShowTable(Connection c) throws Exception {   //展示某些数据
+    public void ShowTable(Connection c) throws SQLException {   //展示某些数据
         Statement st = c.createStatement();
         ResultSet res = st.executeQuery("select*from Users");
         while (res.next()) {
@@ -66,7 +66,7 @@ public class DatabaseConnection{
         }
     }
 
-    public void insertScore(Connection c) throws Exception {   //添加新用户数据
+    public void insertScore(Connection c) throws SQLException {   //添加新用户数据
         try {
             PreparedStatement sql = c.prepareStatement("insert into Users(ECardNumber,userName,password)values(?,?,?)");
             sql.setString(1, "");
@@ -78,12 +78,12 @@ public class DatabaseConnection{
         }
     }
 
-    public void delete(Connection c) throws Exception {  //删除最近添加的用户（可改成特定用户）
+    public void delete(Connection c) throws SQLException {  //删除最近添加的用户（可改成特定用户）
         Statement st = c.createStatement();
         st.executeUpdate("delete from Users where UID=(select max(UID)from Users)");
     }
 
-    public void Search(Connection c,String ecardn) throws Exception {  //通过UID搜索用户
+    public void Search(Connection c,String ecardn) throws SQLException {  //通过UID搜索用户
         Statement sql = c.createStatement();
         ResultSet res = sql.executeQuery("select*from Users where ECardNumber="+ecardn);
         if (res.isLast()) {
@@ -97,7 +97,7 @@ public class DatabaseConnection{
             System.out.println("未查到这名学生。");
     }
 
-    public void indistinctSearch(Connection c) throws Exception {   //模糊查询
+    public void indistinctSearch(Connection c) throws SQLException {   //模糊查询
         Statement sql = c.createStatement();
         ResultSet res = sql.executeQuery("select*from Users where ECardNumber like '09017%'");
         while (res.next()) {
