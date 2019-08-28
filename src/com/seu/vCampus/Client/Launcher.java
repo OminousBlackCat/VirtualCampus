@@ -1,7 +1,9 @@
 package com.seu.vCampus.Client;
 
 /**
+ * @Launcher.java
  * @启动器UI
+ * @执行main方法启动客户端
  * @作者：wxy
  * @完成日期：2019_8_26
  */
