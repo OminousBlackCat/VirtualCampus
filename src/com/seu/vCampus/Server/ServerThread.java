@@ -61,28 +61,44 @@ public class ServerThread  extends Thread{
         try {
 
             is = socket.getInputStream();          //获得socket的输入流
-            bis = new BufferedInputStream(is);     //构建缓冲输入流
-            ois = new ObjectInputStream(bis);      //反序列化获得对象
-            msg = (Message) ois.readObject();   //获得message对象
-            System.out.println(msg.getECardNumber());
+            os = socket.getOutputStream();         //获得socket输入流
+
+            while (true){
 
 
-            switch (msg.getType()){
-                case TYPE_LOGIN:
-                    System.out.println("是登录信息,密码是" + ((Login) msg).getPassWord());
-                    try{
-                        act.validatePassword(conn, ((Login) msg));
-                        System.out.println(msg.getType());
-                    }catch (SQLException e){
-                        e.printStackTrace();
-                    }
 
-                    break;
-                case TYPE_PERSON:
+                bis = new BufferedInputStream(is);     //构建缓冲输入流
+                ois = new ObjectInputStream(bis);      //反序列化获得对象
+                oos = new ObjectOutputStream(os);      //
+                msg = (Message) ois.readObject();   //获得message对象
+                System.out.println(msg.getECardNumber());
+                switch (msg.getType()){
+                    case TYPE_LOGIN:
+                        System.out.println("是登录信息,密码是" + ((Login) msg).getPassWord());
+                        try{
+                            act.validatePassword(conn, ((Login) msg));
+                            System.out.println(msg.getType());
+                        }catch (SQLException e){
+                            e.printStackTrace();
+                        }
+                        oos.writeObject(msg);
+                        break;
+                    case TYPE_PERSON:
 
-                    break;
+                        break;
+
+                }
+
 
             }
+
+
+
+
+
+
+
+
 
 
 

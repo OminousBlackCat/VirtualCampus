@@ -1,7 +1,14 @@
 package com.seu.vCampus.Client;
 
+/**
+ * @启动器UI
+ * @作者：wxy
+ * @完成日期：2019_8_26
+ */
+
 import com.seu.vCampus.IO.ClientIO;
 import com.seu.vCampus.util.Login;
+import com.seu.vCampus.util.Message;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -10,6 +17,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
 
 public class Launcher extends JFrame{
 
@@ -69,18 +77,39 @@ public class Launcher extends JFrame{
                     io = new ClientIO(ipAddress,Port);
                 }catch (Exception ex){
                     ex.printStackTrace();
-                    JOptionPane.showMessageDialog(null,"网络连接异常","错误",JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null,"连接超时",
+                            "错误",JOptionPane.ERROR_MESSAGE);
+                    return;
                 }
 
                 com.seu.vCampus.util.Login LoginMessage = new Login();
                 LoginMessage.setPassWord(String.valueOf(passWord.getPassword()));
                 LoginMessage.setECardNumber(ECardNumber.getText());
-                LoginMessage.setAuthorityLevel(5);
+
                 try{
                     io.SendMessages(LoginMessage);
                 }catch (Exception ioe){
                     ioe.printStackTrace();
-                    JOptionPane.showMessageDialog(null,"网络连接异常","错误",JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null,"网络连接异常",
+                            "错误",JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                try{
+                    LoginMessage = (Login)io.ReceiveMessage();
+                }catch (IOException ioe){
+                    JOptionPane.showMessageDialog(null,"网络连接异常",
+                            "错误",JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                if(LoginMessage.getType() == Message.MESSAGE_TYPE.TYPE_SUCCESS){
+                    setVisible(false);
+
+
+                }else {
+                    JOptionPane.showMessageDialog(null,"用户名或密码错误",
+                            "错误",JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
