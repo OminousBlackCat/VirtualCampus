@@ -3,7 +3,6 @@ package com.seu.vCampus.util;
 public class Login extends Message {
 
     private String passWord;
-    private boolean isMatched;
     private int AuthorityLevel;
 
 
@@ -15,16 +14,8 @@ public class Login extends Message {
         return passWord;
     }
 
-    public boolean isMatched() {
-        return isMatched;
-    }
-
     public void setPassWord(String passWord) {
         this.passWord = passWord;
-    }
-
-    public void setMatched(boolean matched) {
-        isMatched = matched;
     }
 
     public int getAuthorityLevel() {

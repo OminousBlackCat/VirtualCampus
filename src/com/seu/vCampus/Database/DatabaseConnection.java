@@ -8,7 +8,7 @@ import com.seu.vCampus.util.Person;
 
 import java.sql.*;
 
-public class DatabaseConnection extends Person{
+public class DatabaseConnection{
 
     private static final String dbURL = "jdbc:ucanaccess://" +
             "./././././mySource/VirtualCampus.accdb";
@@ -26,7 +26,7 @@ public class DatabaseConnection extends Person{
         try {
             return DriverManager.getConnection(dbURL);
         } catch (Exception e) {
-            System.out.println("AccessDB connection fail");
+            System.out.println("AccessDB connection failed!");
             e.printStackTrace();
         }
         return null;
@@ -106,31 +106,6 @@ public class DatabaseConnection extends Person{
             System.out.print("一卡通号：" + id);
             System.out.print("用户名：" + name);
         }
-    }
-    public Person  passwordCompare(Connection c,Person p)throws SQLException  { //匹配用户名与密码
-            String sql="select*from Users where ECardNumber=?";
-            PreparedStatement pst=c.prepareStatement(sql);
-            pst.setString(1,p.getECardNumber());
-            ResultSet res=pst.executeQuery();
-            if(res.next()){
-                String PW = res.getString("PassWord");
-                String Name = res.getString("userName");
-                String AL=res.getString("AuthorityNumber");
-                String LB=res.getString("LendBooksNumber");
-                String ECB=res.getString("ECardBalance");
-                p.setAuthorityLevel((short) Integer.parseInt(AL));
-                p.setMatched(true);
-                p.setPassWord(PW);
-                p.setName(Name);
-                p.setLendBooksNumber((short) Integer.parseInt(LB));
-                p.setECardBalance((short) Integer.parseInt(ECB));
-                return p;
-            }
-            else
-            {
-                p.setMatched(false);
-                return p;
-            }
     }
 }
 

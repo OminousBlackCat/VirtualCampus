@@ -10,6 +10,7 @@ package com.seu.vCampus.Server;
 import com.seu.vCampus.util.Login;
 import com.seu.vCampus.util.Message;
 import com.seu.vCampus.Database.DatabaseConnection;
+import com.seu.vCampus.Database.DatabaseActions;
 
 import java.sql.Connection;
 import java.net.Socket;
@@ -33,8 +34,10 @@ public class ServerThread  extends Thread{
     /**
      * 输入的message对象与输出的message对象
      **/
-    private Message obtain;
-    private Message target;
+    private Message msg;
+    private DatabaseConnection connect = new DatabaseConnection();
+    private Connection conn = connect.getConn();
+    private DatabaseActions act = new DatabaseActions();
 
 
 
@@ -49,8 +52,7 @@ public class ServerThread  extends Thread{
         os = null;
         oos = null;
 
-        obtain = new Message();
-        target = new Message();
+        msg = new Message();
     }
 
 
@@ -61,26 +63,16 @@ public class ServerThread  extends Thread{
             is = socket.getInputStream();          //获得socket的输入流
             bis = new BufferedInputStream(is);     //构建缓冲输入流
             ois = new ObjectInputStream(bis);      //反序列化获得对象
-            obtain = (Message) ois.readObject();   //获得message对象
-            System.out.println(obtain.getECardNumber());
+            msg = (Message) ois.readObject();   //获得message对象
+            System.out.println(msg.getECardNumber());
 
 
-            switch (obtain.getType()){
+            switch (msg.getType()){
                 case TYPE_LOGIN:
-                    System.out.println("是登录信息,密码是"+((Login) obtain).getPassWord());
-                    DatabaseConnection login=new DatabaseConnection();
-                    Connection conn=login.getConn();
+                    System.out.println("是登录信息,密码是" + ((Login) msg).getPassWord());
                     try{
-                        String compare = login.passwordCompare(conn,((Login) obtain).getECardNumber());
-                        System.out.println(compare);
-                        System.out.println(((Login) obtain).getPassWord());
-                        if(compare.equals(((Login) obtain).getPassWord())){
-                            System.out.println("匹配成功");
-                            target = new Login();
-                            ((Login) target).setMatched(true);
-                        }else  {
-                            System.out.println("匹配失败");
-                        }
+                        act.validatePassword(conn, ((Login) msg));
+                        System.out.println(msg.getType());
                     }catch (SQLException e){
                         e.printStackTrace();
                     }

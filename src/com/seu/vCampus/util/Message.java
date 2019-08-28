@@ -8,8 +8,13 @@ public class Message implements java.io.Serializable{
     protected String ECardNumber;
 
     public enum  MESSAGE_TYPE{
+        TYPE_NULL,
+        TYPE_SUCCESS,
+        TYPE_FAIL,
         TYPE_LOGIN,
         TYPE_PERSON,
+        TYPE_SELECT_COURSE,
+        TYPE_DELETE_COURSE,
         ;
     }
 
@@ -28,4 +33,5 @@ public class Message implements java.io.Serializable{
     public void setType(MESSAGE_TYPE type) {
         Type = type;
     }
+
 }
