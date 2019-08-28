@@ -1,8 +1,10 @@
 package com.seu.vCampus.Server;
 
 /**
- *
- *
+ * @ServerThread.java
+ * @服务端线程
+ * @完成日期：2019_8_24
+ * @作者：wxy
  */
 
 
