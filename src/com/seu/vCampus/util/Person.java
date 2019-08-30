@@ -6,19 +6,11 @@ public class Person extends Message{
     private short AuthorityLevel;
     private short LendBooksNumber;
     private short ECardBalance;
-    private String passWord;
     private boolean isMatched;
 
-    public String getPassWord() {
-        return passWord;
-    }
 
     public boolean isMatched() {
         return isMatched;
-    }
-
-    public void setPassWord(String passWord) {
-        this.passWord = passWord;
     }
 
     public void setMatched(boolean matched) {
