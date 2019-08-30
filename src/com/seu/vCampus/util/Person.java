@@ -8,13 +8,7 @@ public class Person extends Message{
     private short AuthorityLevel;
     private short LendBooksNumber;
     private short ECardBalance;
-<<<<<<< HEAD
-=======
 
-
-
-    private boolean isMatched;
->>>>>>> 5cee7161157ab124f2a8b826c83915222303f5ab
 
 
     public Person(){
