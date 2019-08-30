@@ -20,4 +20,10 @@ public class Goods extends Message{
     public String getGoodsName() {
         return goodsName;
     }
+
+    public void setGoodsName(String goodsName) { this.goodsName = goodsName; }
+
+    public void setGoodsNumber(String goodsNumber) { this.goodsNumber = goodsNumber; }
+
+    public void setGoodsPrice(short goodsPrice) { this.goodsPrice = goodsPrice; }
 }
