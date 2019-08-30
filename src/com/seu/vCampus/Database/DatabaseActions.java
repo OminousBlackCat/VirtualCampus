@@ -36,4 +36,6 @@ public class DatabaseActions {
             login.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
         }
     }
+
+
 }

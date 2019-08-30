@@ -1,5 +1,7 @@
 package com.seu.vCampus.util;
 
+import java.util.ArrayList;
+
 public class Person extends Message{
     private String Name;
     private String StudentNumber;
@@ -7,6 +9,7 @@ public class Person extends Message{
     private short LendBooksNumber;
     private short ECardBalance;
     private String passWord;
+
     private boolean isMatched;
 
     public String getPassWord() {
