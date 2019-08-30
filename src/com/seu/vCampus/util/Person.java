@@ -8,11 +8,9 @@ public class Person extends Message{
     private short AuthorityLevel;
     private short LendBooksNumber;
     private short ECardBalance;
-<<<<<<< HEAD
-    private String passWord;
 
-=======
->>>>>>> de59c441e48944e2dd47bb0bd784cb2612af041b
+
+
     private boolean isMatched;
 
 

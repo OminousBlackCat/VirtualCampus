@@ -36,9 +36,7 @@ public class DatabaseActions {
             login.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
         }
     }
-<<<<<<< HEAD
 
-=======
     public Person messageSend(Connection conn,Person p)throws SQLException{
         String sql= "select*from Users where ECardNumber=?";
         this.stmt = conn.prepareStatement(sql);
@@ -57,12 +55,8 @@ public class DatabaseActions {
             p.setAuthorityLevel((short)Integer.parseInt(AL));
             p.setLendBooksNumber((short) Integer.parseInt(LBN));
             p.setECardBalance((short) Integer.parseInt(ECB));
-            p.setMatched(true);
         }
-        else p.setMatched(false);
-
         return p;
     }
->>>>>>> de59c441e48944e2dd47bb0bd784cb2612af041b
 
 }
