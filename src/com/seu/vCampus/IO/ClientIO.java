@@ -29,6 +29,7 @@ public class ClientIO {
 
         socket = new Socket();
         socket.connect(new InetSocketAddress(IPAddress,Port),5000);
+        socket.setSoTimeout(10000);
         os = socket.getOutputStream();
         is = socket.getInputStream();
 

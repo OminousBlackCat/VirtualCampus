@@ -11,6 +11,7 @@ package com.seu.vCampus.Client;
 import com.seu.vCampus.IO.ClientIO;
 import com.seu.vCampus.util.Login;
 import com.seu.vCampus.util.Message;
+import com.seu.vCampus.util.Person;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -75,12 +76,15 @@ public class Launcher extends JFrame{
         Login.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+                Login.setEnabled(false);
                 try{
                     io = new ClientIO(ipAddress,Port);
                 }catch (Exception ex){
                     ex.printStackTrace();
                     JOptionPane.showMessageDialog(null,"连接超时",
                             "错误",JOptionPane.ERROR_MESSAGE);
+                    Login.setEnabled(true);
                     return;
                 }
 
@@ -94,6 +98,7 @@ public class Launcher extends JFrame{
                     ioe.printStackTrace();
                     JOptionPane.showMessageDialog(null,"网络连接异常",
                             "错误",JOptionPane.ERROR_MESSAGE);
+                    Login.setEnabled(true);
                     return;
                 }
 
@@ -102,16 +107,42 @@ public class Launcher extends JFrame{
                 }catch (IOException ioe){
                     JOptionPane.showMessageDialog(null,"网络连接异常",
                             "错误",JOptionPane.ERROR_MESSAGE);
+                    Login.setEnabled(true);
                     return;
                 }
 
                 if(LoginMessage.getType() == Message.MESSAGE_TYPE.TYPE_SUCCESS){
+                    Person user = new Person();
+                    user.setType(Message.MESSAGE_TYPE.TYPE_PERSON);
+                    user.setECardNumber(ECardNumber.getText());
+                    try {
+                        io.SendMessages(user);
+                    }catch (Exception e1){
+                        e1.printStackTrace();
+                        JOptionPane.showMessageDialog(null,"网络连接异常",
+                                "错误",JOptionPane.ERROR_MESSAGE);
+                        Login.setEnabled(true);
+                        return;
+                    }
+                    try{
+                        user = (Person)io.ReceiveMessage();
+                    }catch (Exception e2){
+                        e2.printStackTrace();
+                        JOptionPane.showMessageDialog(null,"网络连接异常",
+                                "错误",JOptionPane.ERROR_MESSAGE);
+                        Login.setEnabled(true);
+                        return;
+                    }
+
+
+
                     setVisible(false);
 
 
                 }else {
                     JOptionPane.showMessageDialog(null,"用户名或密码错误",
                             "错误",JOptionPane.ERROR_MESSAGE);
+                    setEnabled(true);
                 }
             }
         });

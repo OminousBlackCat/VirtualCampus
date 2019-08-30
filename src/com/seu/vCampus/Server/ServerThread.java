@@ -67,8 +67,6 @@ public class ServerThread  extends Thread{
 
             while (true){
 
-
-
                 bis = new BufferedInputStream(is);     //构建缓冲输入流
                 ois = new ObjectInputStream(bis);      //反序列化获得对象
                 oos = new ObjectOutputStream(os);      //
@@ -85,11 +83,24 @@ public class ServerThread  extends Thread{
                         }
                         oos.writeObject(msg);
                         break;
+                    case TYPE_FAIL:
+                        break;
                     case TYPE_PERSON:
+                        System.out.println("是获取基本信息mes，一卡通号是："+msg.getECardNumber());
+//                        try {
+//
+//                        }catch (){
+//
+//                        }
+                        break;
+                    case TYPE_DELETE_COURSE:
 
                         break;
+                    case TYPE_SELECT_COURSE:
 
+                        break;
                 }
+
 
 
             }
