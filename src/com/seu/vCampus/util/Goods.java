@@ -4,6 +4,7 @@ public class Goods extends Message{
     private String goodsNumber;
     private String goodsName;
     private short  goodsPrice;
+    private short  goodsStock;
 
     public Goods(){this.Type = MESSAGE_TYPE.TYPE_NULL;}
 
@@ -19,9 +20,13 @@ public class Goods extends Message{
         return goodsName;
     }
 
-    public void setGoodsName(String goodsName) { this.goodsName = goodsName; }
+    public short getGoodsStock() { return goodsStock; }
 
-    public void setGoodsNumber(String goodsNumber) { this.goodsNumber = goodsNumber; }
+    public void setGoodsStock(short goodsStock) {}
 
-    public void setGoodsPrice(short goodsPrice) { this.goodsPrice = goodsPrice; }
+    public void setGoodsName(String goodsName) {}
+
+    public void setGoodsNumber(String goodsNumber) {}
+
+    public void setGoodsPrice(short goodsPrice) {}
 }

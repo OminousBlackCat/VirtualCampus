@@ -6,16 +6,7 @@ public class Person extends Message{
     private short AuthorityLevel;
     private short LendBooksNumber;
     private short ECardBalance;
-    private boolean isMatched;
 
-
-    public boolean isMatched() {
-        return isMatched;
-    }
-
-    public void setMatched(boolean matched) {
-        isMatched = matched;
-    }
 
     public Person(){
         this.Type = MESSAGE_TYPE.TYPE_PERSON;
@@ -60,4 +51,5 @@ public class Person extends Message{
     public void setECardBalance(short ECardBalance) {
         this.ECardBalance = ECardBalance;
     }
+
 }
