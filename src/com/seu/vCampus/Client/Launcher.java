@@ -8,11 +8,11 @@ package com.seu.vCampus.Client;
  * @完成日期：2019_8_26
  */
 
-import com.seu.vCampus.IO.ClientIO;
 import javax.swing.*;
 
 
 public class Launcher extends JFrame{
+    private Common FrameData;
 
     private Launcher(){
         setTitle("登录");
@@ -20,8 +20,22 @@ public class Launcher extends JFrame{
         setBounds(400,400,300,300);
         setContentPane(new LauncherPanel());
         setResizable(false);
+        FrameData = Common.getInstance();
 
 
+        Thread launcherThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for(;;){
+                    System.out.print("");
+                    if(FrameData.isLogin()){
+                        setVisible(false);
+                        break;
+                    }
+                }
+            }
+        });
+        launcherThread.start();
         setVisible(true);
       }
 

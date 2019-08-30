@@ -13,6 +13,8 @@ import com.seu.vCampus.util.Login;
 import com.seu.vCampus.util.Message;
 import com.seu.vCampus.Database.DatabaseConnection;
 import com.seu.vCampus.Database.DatabaseActions;
+import com.seu.vCampus.util.Person;
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 import java.sql.Connection;
 import java.net.Socket;
@@ -87,11 +89,13 @@ public class ServerThread  extends Thread{
                         break;
                     case TYPE_PERSON:
                         System.out.println("是获取基本信息mes，一卡通号是："+msg.getECardNumber());
-//                        try {
-//
-//                        }catch (){
-//
-//                        }
+                        try {
+                            act.messageSend(conn,(Person)msg);
+                            System.out.println(msg.getType());
+                        }catch (SQLException e){
+                            e.printStackTrace();
+                        }
+                        oos.writeObject(msg);
                         break;
                     case TYPE_DELETE_COURSE:
 

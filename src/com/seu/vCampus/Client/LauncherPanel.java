@@ -26,7 +26,6 @@ public class LauncherPanel extends JPanel {
     public LauncherPanel(){
         setBorder(new EmptyBorder(5,5,5,5));
         setLayout(null);
-        launcherData = new Common();
         launcherData = Common.getInstance();
 
 
@@ -101,6 +100,7 @@ public class LauncherPanel extends JPanel {
                 }
 
                 if(LoginMessage.getType() == Message.MESSAGE_TYPE.TYPE_SUCCESS){
+                    launcherData.setLogin(true);
                     Person user = new Person();
                     user.setType(Message.MESSAGE_TYPE.TYPE_PERSON);
                     user.setECardNumber(ECardNumber.getText());
@@ -115,18 +115,13 @@ public class LauncherPanel extends JPanel {
                     }
                     try{
                         user = (Person)launcherData.getIo().ReceiveMessage();
+                        System.out.println(user.getName()+user.getStudentNumber());
                     }catch (Exception e2){
                         e2.printStackTrace();
                         JOptionPane.showMessageDialog(null,"网络连接异常",
                                 "错误",JOptionPane.ERROR_MESSAGE);
                         Login.setEnabled(true);
-                        return;
                     }
-
-
-
-                    setVisible(false);
-
 
                 }else {
                     JOptionPane.showMessageDialog(null,"用户名或密码错误",
