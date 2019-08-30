@@ -1,4 +1,0 @@
-INDEX VERSION 1.131+D:\学习\短学期\java\张浩飞\.metadata\.plugins\org.eclipse.jdt.core
-3342071132.index
-2381006668.index
-2152162369.index
