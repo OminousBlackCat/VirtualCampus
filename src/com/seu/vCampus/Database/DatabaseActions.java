@@ -33,8 +33,14 @@ public class DatabaseActions {
             login.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
         }
     }
+<<<<<<< HEAD
     public Person PersonMessageSend(Connection conn,Person p)throws SQLException { //将用户基本信息发给服务端
         String sql = "select*from Users where ECardNumber=?";
+=======
+
+    public Person messageSend(Connection conn,Person p)throws SQLException{
+        String sql= "select*from Users where ECardNumber=?";
+>>>>>>> 5cee7161157ab124f2a8b826c83915222303f5ab
         this.stmt = conn.prepareStatement(sql);
         stmt.setString(1, p.getECardNumber());
         ResultSet res = stmt.executeQuery();
@@ -51,9 +57,13 @@ public class DatabaseActions {
             p.setAuthorityLevel((short) Integer.parseInt(AL));
             p.setLendBooksNumber((short) Integer.parseInt(LBN));
             p.setECardBalance((short) Integer.parseInt(ECB));
+<<<<<<< HEAD
 
         }
 
+=======
+        }
+>>>>>>> 5cee7161157ab124f2a8b826c83915222303f5ab
         return p;
     }
 

@@ -1,5 +1,7 @@
 package com.seu.vCampus.util;
 
+import java.util.ArrayList;
+
 public class Goods extends Message{
     private String goodsNumber;
     private String goodsName;
