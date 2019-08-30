@@ -1,5 +1,7 @@
 package com.seu.vCampus.util;
 
+import java.util.ArrayList;
+
 public class Person extends Message{
     private String Name;
     private String StudentNumber;
@@ -8,6 +10,16 @@ public class Person extends Message{
     private short ECardBalance;
     private String passWord;
     private boolean isMatched;
+
+    public ArrayList<Course> getCoursesSelected() {
+        return coursesSelected;
+    }
+
+    public void setCoursesSelected(ArrayList<Course> coursesSelected) {
+        this.coursesSelected = coursesSelected;
+    }
+
+    private ArrayList<Course> coursesSelected;
 
     public String getPassWord() {
         return passWord;
