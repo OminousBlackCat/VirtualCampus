@@ -1,6 +1,7 @@
 package com.seu.vCampus.Client;
 
 import com.seu.vCampus.IO.ClientIO;
+import com.seu.vCampus.util.Person;
 
 
 public class Common {
@@ -10,6 +11,10 @@ public class Common {
     private int Port;
     private boolean isLogin;
     private static Common instance = new Common();
+
+
+
+    private Person BasicInformation;
 
 
     public static Common getInstance(){
@@ -48,4 +53,10 @@ public class Common {
     }
     public boolean isLogin() { return isLogin; }
     public void setLogin(boolean login) { isLogin = login; }
+    public void setBasicInformation(Person basicInformation) {
+        BasicInformation = basicInformation;
+    }
+    public Person getBasicInformation() {
+        return BasicInformation;
+    }
 }

@@ -1,5 +1,6 @@
 package com.seu.vCampus.Client;
 
+import com.seu.vCampus.Client.Home.Home;
 import com.seu.vCampus.IO.ClientIO;
 import com.seu.vCampus.util.Login;
 import com.seu.vCampus.util.Message;
@@ -116,6 +117,11 @@ public class LauncherPanel extends JPanel {
                     try{
                         user = (Person)launcherData.getIo().ReceiveMessage();
                         System.out.println(user.getName()+user.getStudentNumber());
+                        launcherData.setBasicInformation(user);
+                        new Home();
+
+
+
                     }catch (Exception e2){
                         e2.printStackTrace();
                         JOptionPane.showMessageDialog(null,"网络连接异常",
@@ -184,7 +190,6 @@ public class LauncherPanel extends JPanel {
                                 LauncherPanel.this.setEnabled(true);
                             }
                         });
-
                         setVisible(true);
                     }
                 }

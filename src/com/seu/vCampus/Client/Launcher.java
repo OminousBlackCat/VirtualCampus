@@ -26,13 +26,10 @@ public class Launcher extends JFrame{
         Thread launcherThread = new Thread(new Runnable() {
             @Override
             public void run() {
-                for(;;){
+                while(!FrameData.isLogin()){
                     System.out.print("");
-                    if(FrameData.isLogin()){
-                        setVisible(false);
-                        break;
-                    }
                 }
+                setVisible(false);
             }
         });
         launcherThread.start();

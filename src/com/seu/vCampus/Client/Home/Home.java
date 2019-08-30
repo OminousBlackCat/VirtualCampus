@@ -1,9 +1,13 @@
 package com.seu.vCampus.Client.Home;
+import com.seu.vCampus.Client.Common;
+import javafx.scene.layout.HBox;
+
 import javax.swing.*;
 import java.awt.*;
 public class Home {
     private JFrame 选课;
     private JTable table;
+    private Common HomeData;
 
     /**
      * Launch the application.
@@ -36,6 +40,7 @@ public class Home {
         选课.setBounds(100, 100, 476, 353);
         选课.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         选课.getContentPane().setLayout(null);
+        HomeData = Common.getInstance();
 
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.LEFT);
         tabbedPane.setBounds(0, 13, 444, 280);
@@ -44,6 +49,12 @@ public class Home {
         JPanel panel = new JPanel();
         tabbedPane.addTab("学生信息", null, panel, null);
         panel.setLayout(null);
+        JLabel mes = new JLabel(HomeData.getBasicInformation().getName()+
+                HomeData.getBasicInformation().getStudentNumber()+
+                HomeData.getBasicInformation().getAuthorityLevel());
+        mes.setBounds(50,50,300,50);
+        panel.add(mes);
+
 
         JPanel panel_1 = new JPanel();
         tabbedPane.addTab("图书馆", null, panel_1, null);
@@ -82,6 +93,8 @@ public class Home {
 
         JPanel panel_4 = new JPanel();
         tabbedPane.addTab("银行", null, panel_4, null);
+
+        this.选课.setVisible(true);
     }
 }
 
