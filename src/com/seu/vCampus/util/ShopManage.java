@@ -32,9 +32,4 @@ public class ShopManage extends Message{
         this.finance = finance;
     }
 
-    public void setGoodsPrice(short goodsprice){}
-
-    public void setGoodsName(String goodsname){}
-
-    public void setGoodsNumber(String goodsnumber){}
 }
