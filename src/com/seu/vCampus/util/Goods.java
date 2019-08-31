@@ -1,34 +1,35 @@
 package com.seu.vCampus.util;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Goods extends Message{
-    private String goodsNumber;
-    private String goodsName;
-    private short  goodsPrice;
-    private short  goodsStock;
+    protected List<String> goodsNumber=new ArrayList<String>();
+    protected List<String> goodsName=new ArrayList<String>();
+    protected List<Short>  goodsPrice= new ArrayList<Short>();
+    protected List<Short>  goodsStock= new ArrayList<Short>();
 
     public Goods(){this.Type = MESSAGE_TYPE.TYPE_NULL;}
 
-    public short getGoodsPrice() {
-        return goodsPrice;
-    }
+    public List<Short> getGoodsPrice() { return goodsPrice; }
 
-    public String getGoodsNumber() {
+    public List<String> getGoodsNumber() {
         return goodsNumber;
     }
 
-    public String getGoodsName() {
+    public List<String> getGoodsName() {
         return goodsName;
     }
 
-    public short getGoodsStock() { return goodsStock; }
+    public List<Short> getGoodsStock() { return goodsStock; }
 
-    public void setGoodsStock(short goodsStock) {}
+    public void setGoodsStock(List<Short> GoodsStock) {}
 
-    public void setGoodsName(String goodsName) {}
+    public void setGoodsName(List<String> GoodsName) {}
 
-    public void setGoodsNumber(String goodsNumber) {}
+    public void setGoodsNumber(List<String> GoodsNumber) {}
 
-    public void setGoodsPrice(short goodsPrice) {}
+    public void setGoodsPrice(List<Short> GoodsPrice) {}
+
+    public void setGoods(String Number,String Name,short Price,short Stock){}
 }
