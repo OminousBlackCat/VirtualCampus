@@ -3,7 +3,6 @@ import com.seu.vCampus.util.*;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.regex.*;
 
 /**
  * @author Jamie , mbh
@@ -14,6 +13,11 @@ import java.util.regex.*;
 
 public class DatabaseActions {
     private PreparedStatement stmt = null;
+
+    /*
+      The following is written by Jamie Liu
+      Database functions relating to courses and grades.
+     */
 
     /**
      * Compare course times (including their semesters) in the database and decide whether they conflict.
@@ -34,6 +38,45 @@ public class DatabaseActions {
             }
         }
         return false;
+    }
+
+    /**
+     *
+     * @param conn SQL connection.
+     * @param sql SQL statement to be executed.
+     * @param person Person.
+     * @param semester Semester, can be empty string.
+     * @throws SQLException Common SQL exceptions.
+     */
+    private void setStudentCoursesList(Connection conn, String sql, Person person, String semester) throws SQLException {
+        ArrayList<Course> cs = new ArrayList<Course>();
+        try {
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, person.getECardNumber());
+            if(!semester.isEmpty()){
+                stmt.setString(2, semester);
+            }
+            ResultSet courseRes = stmt.executeQuery();
+            while(courseRes.next()) {
+                String courseNumber = courseRes.getString("courseNumber");
+                String courseName = courseRes.getString("courseName");
+                String courseLecturer = courseRes.getString("courseLecturer");
+                String courseSemester = courseRes.getString("courseSemester");
+                String coursePlace = courseRes.getString("coursePlace");
+                String courseTime = courseRes.getString("courseTime");
+                String courseType = courseRes.getString("courseType");
+                String courseCredit = courseRes.getString("courseCredit");
+                int maxStuds = courseRes.getInt("maximumStudents");
+                int erdStuds = courseRes.getInt("enrolledStudents");
+                cs.add(new Course(courseNumber,courseName,courseSemester,courseLecturer,coursePlace,courseTime,
+                        courseCredit,courseType,maxStuds,erdStuds));
+            }
+            person.setCourses(cs);
+            person.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            person.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
+        }
     }
 
     /**
@@ -88,8 +131,8 @@ public class DatabaseActions {
 
         Person per = new Person();
         per.setECardNumber(course.getECardNumber());
-        getCoursesSelected(conn,per);
-        ArrayList<Course> coursesSelected = per.getCoursesSelected();
+        getCoursesSelected(conn,per,"");
+        ArrayList<Course> coursesSelected = per.getCourses();
 
         boolean conflict = false;
         for (Course c:coursesSelected
@@ -174,44 +217,50 @@ public class DatabaseActions {
     }
 
     /**
-     * Get all the courses taken by designated student.
+     * Get all the courses taken by designated student at some semester.
      * @param conn SQL connection.
-     * @param per Person, namely the student.
+     * @param person Person, namely the student.
+     * @param semester Specify which semester to be retrieved.
      * @throws SQLException Message type will be set to FAIL when exception happens.
      */
-    public void getCoursesSelected(Connection conn, Person per)throws SQLException {
-        try{
-            ArrayList<Course> cst = new ArrayList<Course>();
-            String sql = "select Courses.* from Users inner join (Courses inner join CoursesSelectedStatus" +
-                    " on Courses.courseNumber = CoursesSelectedStatus.courseNumber) on Users.ECardNumber = " +
-                    "CoursesSelectedStatus.EcardNumber where (((Users.EcardNumber)= ?))"; //SQL statement to
-            // retrieve all the courses selected by designated student.
-            stmt = conn.prepareStatement(sql);
-            stmt.setString(1, per.getECardNumber());
-            ResultSet courseRes = stmt.executeQuery();
-            while(courseRes.next()) {
-                String courseNumber = courseRes.getString("courseNumber");
-                String courseName = courseRes.getString("courseName");
-                String courseLecturer = courseRes.getString("courseLecturer");
-                String courseSemester = courseRes.getString("courseSemester");
-                String coursePlace = courseRes.getString("coursePlace");
-                String courseTime = courseRes.getString("courseTime");
-                String courseType = courseRes.getString("courseType");
-                String courseCredit = courseRes.getString("courseCredit");
-                int maxStuds = courseRes.getInt("maximumStudents");
-                int erdStuds = courseRes.getInt("enrolledStudents");
-                cst.add(new Course(courseNumber,courseName,courseSemester,courseLecturer,coursePlace,courseTime,
-                        courseCredit,courseType,maxStuds,erdStuds));
-            }
-            per.setCoursesSelected(cst);
-            per.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            per.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
-        }
+    public void getCoursesSelected(Connection conn, Person person, String semester)throws SQLException {
+        String sql = "select * from Courses where exists (select * from CoursesSelectedStatus, Users where " +
+                "Courses.courseNumber = CoursesSelectedStatus.courseNumber and CoursesSelectedStatus.ECardNumber " +
+                "= Users.ECardNumber and Users.ECardNumber = ?) and Courses.courseSemester = ?";
+        setStudentCoursesList(conn,sql,person,semester);
+    }
+    /**
+     * Get all the courses taken by designated student.
+     * @param conn SQL connection.
+     * @param person Person, namely the student.
+     * @throws SQLException Message type will be set to FAIL when exception happens.
+     */
+    public void getCoursesSelected(Connection conn, Person person) throws SQLException {
+        String sql = "select * from Courses where exists (select * from CoursesSelectedStatus, Users where " +
+                "Courses.courseNumber = CoursesSelectedStatus.courseNumber and CoursesSelectedStatus.ECardNumber " +
+                "= Users.ECardNumber and Users.ECardNumber = ?) ";
+        setStudentCoursesList(conn,sql,person,"");
+    }
+
+    /**
+     * Get all the courses available to (not full) and not selected by this student this semester.
+     * @param conn SQL connection.
+     * @param person Person object. Should contain ECardNumber.
+     * @throws SQLException Message type will be set to FAIL when exception happens.
+     */
+    public void getCoursesAvailable(Connection conn, Person person, String semester) throws SQLException {
+        String sql = "select * from Courses where not exists (select * from CoursesSelectedStatus, Users where " +
+                "Courses.courseNumber = CoursesSelectedStatus.courseNumber and CoursesSelectedStatus.ECardNumber " +
+                "= Users.ECardNumber and Users.ECardNumber = ?) and Courses.courseSemester = ? " +
+                "and Courses.enrolledStudents < Courses.maximumStudents";
+        setStudentCoursesList(conn,sql,person,semester);
     }
 
 
+    /*
+    The following is written by mbh.
+    Database functions relating to bank and shop.
+     */
 
     public Person PersonMessageSend(Connection conn,Person p)throws SQLException { //将用户基本信息发给服务端
 

@@ -10,16 +10,15 @@ public class Person extends Message{
     private short ECardBalance;
     private String passWord;
     private boolean isMatched;
+    private ArrayList<Course> courses;
 
-    public ArrayList<Course> getCoursesSelected() {
-        return coursesSelected;
+    public ArrayList<Course> getCourses() {
+        return courses;
     }
 
-    public void setCoursesSelected(ArrayList<Course> coursesSelected) {
-        this.coursesSelected = coursesSelected;
+    public void setCourses(ArrayList<Course> courses) {
+        this.courses = courses;
     }
-
-    private ArrayList<Course> coursesSelected;
 
     public String getPassWord() {
         return passWord;
