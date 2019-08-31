@@ -155,6 +155,17 @@ public class DatabaseActions {
             stmt.setString(1,course.getCourseNumber());
             stmt.setString(2,course.getECardNumber());
             stmt.executeUpdate();
+
+            sql = "select * from Courses where courseNumber = ?";
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, course.getCourseNumber());
+            ResultSet courseRes = stmt.executeQuery();
+
+            sql = "update Courses set enrolledStudents = ? where courseNumber = ?";
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, courseRes.getInt("enrolledStudents") - 1);
+            stmt.setString(2, course.getCourseNumber());
+            stmt.executeUpdate();
             course.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
         } catch (SQLException e) {
             e.printStackTrace();
