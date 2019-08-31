@@ -1,12 +1,15 @@
 package com.seu.vCampus.util;
 
 
-public class ShopManage extends Message{
+public class ShopManage extends Goods{
     private String Orders;
     private String State;
-    private short finance;
+    private short Finance;
+    private short Amount;
 
     public ShopManage(){this.Type = MESSAGE_TYPE.TYPE_NULL;}
+
+    public short getAmount() { return Amount; }
 
     public String getOrders() {
         return Orders;
@@ -17,7 +20,7 @@ public class ShopManage extends Message{
     }
 
     public short getFinance() {
-        return finance;
+        return Finance;
     }
 
     public void setOrders(String orders) {
@@ -29,12 +32,20 @@ public class ShopManage extends Message{
     }
 
     public void setFinance(short finance) {
-        this.finance = finance;
+        this.Finance = finance;
     }
 
-    public void setGoodsPrice(short goodsprice){}
+    public void setAmount(short amount) { Amount = amount; }
 
-    public void setGoodsName(String goodsname){}
+    @Override
+    public void setGoodsNumber(String goodsNumber) { super.setGoodsNumber(goodsNumber); }
 
-    public void setGoodsNumber(String goodsnumber){}
+    @Override
+    public void setGoodsName(String goodsName) { super.setGoodsName(goodsName); }
+
+    @Override
+    public void setGoodsPrice(short goodsPrice) { super.setGoodsPrice(goodsPrice); }
+
+    @Override
+    public void setGoodsStock(short goodsStock) { super.setGoodsStock(goodsStock); }
 }

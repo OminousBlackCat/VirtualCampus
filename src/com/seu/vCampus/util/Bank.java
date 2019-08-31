@@ -27,7 +27,5 @@ public class Bank extends Message {
         return Income;
     }
 
-    public short getExpenditure() {
-        return Expenditure;
-    }
+    public short getExpenditure() { return Expenditure; }
 }
