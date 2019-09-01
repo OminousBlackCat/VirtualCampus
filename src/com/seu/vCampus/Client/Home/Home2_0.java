@@ -2,10 +2,10 @@ package com.seu.vCampus.Client.Home;
 
 import javax.swing.*;
 
-public class UItest {
+public class Home2_0 {
     public static void main(String[] args) {
         JFrame frame = new JFrame("UItest");
-        frame.setContentPane(new UItest().panel1);
+        frame.setContentPane(new Home2_0().panel1);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
