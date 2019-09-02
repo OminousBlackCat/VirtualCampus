@@ -46,9 +46,8 @@ public class DatabaseActions {
      * @param sql SQL statement to be executed.
      * @param person Person.
      * @param semester Semester, can be empty string.
-     * @throws SQLException Common SQL exceptions.
      */
-    private void setStudentCoursesList(Connection conn, String sql, Person person, String semester) throws SQLException {
+    private void setStudentCoursesList(Connection conn, String sql, Person person, String semester) {
         ArrayList<Course> cs = new ArrayList<Course>();
         try {
             stmt = conn.prepareStatement(sql);
@@ -86,9 +85,8 @@ public class DatabaseActions {
      *
      * @param conn  Database connection
      * @param login Login message object
-     * @throws SQLException Exceptions such as database not found, and other common ones.
      */
-    public void validatePassword(Connection conn, Login login) throws SQLException {
+    public void validatePassword(Connection conn, Login login) {
         try {
             String sql = "select*from Users where ECardNumber=?";
             stmt = conn.prepareStatement(sql);
@@ -117,30 +115,34 @@ public class DatabaseActions {
      *
      * @param conn   Database connection
      * @param course Course message object. Should contain the course information and the ECard number.
-     * @throws SQLException Common exceptions as well as exceptions related to this specific action, such as maximum
-     *                      student capacity reached.
      */
-    public void selectCourse(Connection conn, Course course) throws SQLException {
-        stmt = conn.prepareStatement("select courseTime, courseSemester from Courses where courseNumber = ?");
-        stmt.setString(1,course.getCourseNumber());
-        ResultSet timeInfoRes = stmt.executeQuery();
-        if(timeInfoRes.next()) {
-            course.setCourseTime(timeInfoRes.getString("courseTime"));
-            course.setCourseSemester(timeInfoRes.getString("courseSemester"));
-        }
-
-        Person per = new Person();
-        per.setECardNumber(course.getECardNumber());
-        getCoursesSelected(conn,per,"");
-        ArrayList<Course> coursesSelected = per.getCourses();
-
+    public void selectCourse(Connection conn, Course course) {
         boolean conflict = false;
-        for (Course c:coursesSelected
-             ) {
-            if(isConflicted(c,course)) {
-                conflict = true;
-                break;
+
+        try {
+            stmt = conn.prepareStatement("select courseTime, courseSemester from Courses where courseNumber = ?");
+            stmt.setString(1, course.getCourseNumber());
+            ResultSet timeInfoRes = stmt.executeQuery();
+            if (timeInfoRes.next()) {
+                course.setCourseTime(timeInfoRes.getString("courseTime"));
+                course.setCourseSemester(timeInfoRes.getString("courseSemester"));
             }
+
+            Person per = new Person();
+            per.setECardNumber(course.getECardNumber());
+            getCoursesSelected(conn, per, "");
+            ArrayList<Course> coursesSelected = per.getCourses();
+
+            for (Course c : coursesSelected
+            ) {
+                if (isConflicted(c, course)) {
+                    conflict = true;
+                    break;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            conflict = true;
         }
 
         //Proceed only if no conflict happens.
@@ -189,9 +191,8 @@ public class DatabaseActions {
      * Delete a course selected by the student.
      * @param conn SQL connection object.
      * @param course Course Object that contains at least ECardNumber and CourseNumber.
-     * @throws SQLException All exceptions are treated as FAIL.
      */
-    public void deselectCourse(Connection conn, Course course) throws SQLException {
+    public void deselectCourse(Connection conn, Course course) {
         try {
             String sql = "delete from CoursesSelectedStatus where courseNumber = ? and ECardNumber = ?";
             stmt = conn.prepareStatement(sql);
@@ -221,9 +222,8 @@ public class DatabaseActions {
      * @param conn SQL connection.
      * @param person Person, namely the student.
      * @param semester Specify which semester to be retrieved.
-     * @throws SQLException Message type will be set to FAIL when exception happens.
      */
-    public void getCoursesSelected(Connection conn, Person person, String semester)throws SQLException {
+    public void getCoursesSelected(Connection conn, Person person, String semester) {
         String sql = "select * from Courses where exists (select * from CoursesSelectedStatus, Users where " +
                 "Courses.courseNumber = CoursesSelectedStatus.courseNumber and CoursesSelectedStatus.ECardNumber " +
                 "= Users.ECardNumber and Users.ECardNumber = ?) and Courses.courseSemester = ?";
@@ -233,9 +233,8 @@ public class DatabaseActions {
      * Get all the courses taken by designated student.
      * @param conn SQL connection.
      * @param person Person, namely the student.
-     * @throws SQLException Message type will be set to FAIL when exception happens.
      */
-    public void getCoursesSelected(Connection conn, Person person) throws SQLException {
+    public void getCoursesSelected(Connection conn, Person person) {
         String sql = "select * from Courses where exists (select * from CoursesSelectedStatus, Users where " +
                 "Courses.courseNumber = CoursesSelectedStatus.courseNumber and CoursesSelectedStatus.ECardNumber " +
                 "= Users.ECardNumber and Users.ECardNumber = ?) ";
@@ -246,9 +245,8 @@ public class DatabaseActions {
      * Get all the courses available to (not full) and not selected by this student this semester.
      * @param conn SQL connection.
      * @param person Person object. Should contain ECardNumber.
-     * @throws SQLException Message type will be set to FAIL when exception happens.
      */
-    public void getCoursesAvailable(Connection conn, Person person, String semester) throws SQLException {
+    public void getCoursesAvailable(Connection conn, Person person, String semester) {
         String sql = "select * from Courses where not exists (select * from CoursesSelectedStatus, Users where " +
                 "Courses.courseNumber = CoursesSelectedStatus.courseNumber and CoursesSelectedStatus.ECardNumber " +
                 "= Users.ECardNumber and Users.ECardNumber = ?) and Courses.courseSemester = ? " +
@@ -256,6 +254,9 @@ public class DatabaseActions {
         setStudentCoursesList(conn,sql,person,semester);
     }
 
+    public void getGrades(Connection conn, Person person) {
+
+    }
 
     /*
     The following is written by mbh.
