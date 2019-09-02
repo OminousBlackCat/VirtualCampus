@@ -357,7 +357,7 @@ public class DatabaseActions {
         }
     }
 
-    public ShopManage ShopMessageSend(Connection conn, ShopManage SM)throws SQLException {//传输商店商品信息
+    public ShopManage getShopMessage(Connection conn, ShopManage SM) {//传输商店商品信息
         try {
             Statement st = conn.createStatement();
             ResultSet res = st.executeQuery("select *from Goods");
@@ -384,7 +384,7 @@ public class DatabaseActions {
         }
     }
 
-        public void deleteGoods(Connection conn, Goods g){
+    public void deleteGoods(Connection conn, Goods g){
         try{
             String sql= "delete from Goods where GID= ?";
             this.stmt=conn.prepareStatement(sql);
@@ -398,9 +398,8 @@ public class DatabaseActions {
         }
     }
 
-    public void insertGoods(Connection conn,Goods g,ShopManage SM) {
+    public void insertGoods(Connection conn,Goods g) {
         try{
-            SM.addGoods(g);
             PreparedStatement sql = conn.prepareStatement("insert into Goods(GID,goodsName,Price,Stock)" +
                     "values(?,?,?,?)");
             sql.setString(1, g.getGoodsNumber());
@@ -408,6 +407,7 @@ public class DatabaseActions {
             sql.setString(3, Double.toString(g.getGoodsPrice()));
             sql.setString(4, Integer.toString(g.getGoodsStock()));
             sql.executeUpdate();
+            g.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
         }catch (SQLException E)
         {
             E.printStackTrace();

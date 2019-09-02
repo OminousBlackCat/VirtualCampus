@@ -9,12 +9,9 @@ package com.seu.vCampus.Server;
 
 
 
-import com.seu.vCampus.util.Course;
-import com.seu.vCampus.util.Login;
-import com.seu.vCampus.util.Message;
+import com.seu.vCampus.util.*;
 import com.seu.vCampus.Database.DatabaseConnection;
 import com.seu.vCampus.Database.DatabaseActions;
-import com.seu.vCampus.util.Person;
 
 import java.util.ArrayList;
 import javax.xml.crypto.Data;
@@ -79,19 +76,14 @@ public class ServerThread  extends Thread{
                         System.out.println(msg.getType());
                         oos.writeObject(msg);
                         break;
-                    case TYPE_FAIL:
-                        break;
                     case TYPE_QUERY_PERSON:
                         System.out.println("是获取基本信息mes，一卡通号是："+msg.getECardNumber());
-
                         act.PersonMessageSend(conn,(Person)msg);
                         System.out.println(msg.getType());
-
                         oos.writeObject(msg);
                         break;
                     case TYPE_DELETE_COURSE:
                         System.out.println("是删除课程mes，一卡通号是："+msg.getECardNumber());
-
                         act.deselectCourse(conn, (Course) msg);
                         System.out.println(msg.getType());
                         oos.writeObject(msg);
@@ -117,24 +109,42 @@ public class ServerThread  extends Thread{
                         act.getCoursesAvailable(conn, (Person) msg, semester);
                         System.out.println(msg.getType());
                         oos.writeObject(msg);
+                        break;
                     }
-                    case TYPE_GET_COURSES_SELECTED:
-                    {
+                    case TYPE_GET_COURSES_SELECTED: {
                         int l = ((Person) msg).getCourses().size();
-                        if(l != 0) {
+                        if (l != 0) {
                             String semester = ((Person) msg).getCourses().get(l).getCourseSemester();
                             act.getCoursesSelected(conn, (Person) msg, semester);
-                        }
-                        else {
+                        } else {
                             act.getCoursesSelected(conn, (Person) msg);
                         }
                         System.out.println(msg.getType());
                         oos.writeObject(msg);
+                        break;
                     }
                     case TYPE_GET_GRADES:
                         act.getGrades(conn, (Person) msg);
                         System.out.println(msg.getType());
                         oos.writeObject(msg);
+                        break;
+                    case TYPE_QUERY_GOODS:
+                        act.getShopMessage(conn,(ShopManage) msg);
+                        System.out.println(msg.getType());
+                        oos.writeObject(msg);
+                        break;
+                    case TYPE_ADD_GOODS:
+                        act.insertGoods(conn,(Goods)msg);
+                        System.out.println(msg.getType());
+                        oos.writeObject(msg);
+                    case TYPE_DELETE_GOODS:
+                        act.deleteGoods(conn,(Goods)msg);
+                        System.out.println(msg.getType());
+                        oos.writeObject(msg);
+                        break;
+
+
+
                 }
             }
 
