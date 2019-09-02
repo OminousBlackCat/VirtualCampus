@@ -1,7 +1,6 @@
 package com.seu.vCampus.Client;
 
 import com.seu.vCampus.Client.Home.Home;
-import com.seu.vCampus.IO.ClientIO;
 import com.seu.vCampus.util.Login;
 import com.seu.vCampus.util.Message;
 import com.seu.vCampus.util.Person;
