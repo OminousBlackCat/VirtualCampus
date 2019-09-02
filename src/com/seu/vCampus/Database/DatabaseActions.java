@@ -157,7 +157,7 @@ public class DatabaseActions {
                     if ((courseRes.getInt("maximumStudents") -
                             courseRes.getInt("enrolledStudents")) > 0) {
                         try {
-                            sql = "insert into CoursesSelectedStatus values(?,?)";
+                            sql = "insert into CoursesSelected values(?,?)";
                             stmt = conn.prepareStatement(sql);
                             stmt.setString(1, course.getECardNumber());
                             stmt.setString(2, course.getCourseNumber());
@@ -194,7 +194,7 @@ public class DatabaseActions {
      */
     public void deselectCourse(Connection conn, Course course) {
         try {
-            String sql = "delete from CoursesSelectedStatus where courseNumber = ? and ECardNumber = ?";
+            String sql = "delete from CoursesSelected where courseNumber = ? and ECardNumber = ?";
             stmt = conn.prepareStatement(sql);
             stmt.setString(1,course.getCourseNumber());
             stmt.setString(2,course.getECardNumber());
@@ -224,19 +224,20 @@ public class DatabaseActions {
      * @param semester Specify which semester to be retrieved.
      */
     public void getCoursesSelected(Connection conn, Person person, String semester) {
-        String sql = "select * from Courses where exists (select * from CoursesSelectedStatus, Users where " +
-                "Courses.courseNumber = CoursesSelectedStatus.courseNumber and CoursesSelectedStatus.ECardNumber " +
+        String sql = "select * from Courses where exists (select * from CoursesSelected, Users where " +
+                "Courses.courseNumber = CoursesSelected.courseNumber and CoursesSelected.ECardNumber " +
                 "= Users.ECardNumber and Users.ECardNumber = ?) and Courses.courseSemester = ?";
         setStudentCoursesList(conn,sql,person,semester);
     }
+
     /**
      * Get all the courses taken by designated student.
      * @param conn SQL connection.
      * @param person Person, namely the student.
      */
     public void getCoursesSelected(Connection conn, Person person) {
-        String sql = "select * from Courses where exists (select * from CoursesSelectedStatus, Users where " +
-                "Courses.courseNumber = CoursesSelectedStatus.courseNumber and CoursesSelectedStatus.ECardNumber " +
+        String sql = "select * from Courses where exists (select * from CoursesSelected, Users where " +
+                "Courses.courseNumber = CoursesSelected.courseNumber and CoursesSelected.ECardNumber " +
                 "= Users.ECardNumber and Users.ECardNumber = ?) ";
         setStudentCoursesList(conn,sql,person,"");
     }
@@ -247,15 +248,41 @@ public class DatabaseActions {
      * @param person Person object. Should contain ECardNumber.
      */
     public void getCoursesAvailable(Connection conn, Person person, String semester) {
-        String sql = "select * from Courses where not exists (select * from CoursesSelectedStatus, Users where " +
-                "Courses.courseNumber = CoursesSelectedStatus.courseNumber and CoursesSelectedStatus.ECardNumber " +
+        String sql = "select * from Courses where not exists (select * from CoursesSelected, Users where " +
+                "Courses.courseNumber = CoursesSelected.courseNumber and CoursesSelected.ECardNumber " +
                 "= Users.ECardNumber and Users.ECardNumber = ?) and Courses.courseSemester = ? " +
                 "and Courses.enrolledStudents < Courses.maximumStudents";
         setStudentCoursesList(conn,sql,person,semester);
     }
 
+    /**
+     * Get the grades of the student.
+     * @param conn SQL connection.
+     * @param person Person object.
+     */
     public void getGrades(Connection conn, Person person) {
-
+        ArrayList<Course> cs = new ArrayList<Course>();
+        String sql = "SELECT Courses.*, CoursesSelected.* FROM Courses INNER JOIN CoursesSelected ON " +
+                "(CoursesSelected.courseNumber = Courses.courseNumber and CoursesSelected.EcardNumber = ? and " +
+                "CoursesSelected.grade is not null)";
+        try {
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1,person.getECardNumber());
+            ResultSet gradesRes = stmt.executeQuery();
+            while (gradesRes.next()){
+                Course c = new Course(gradesRes.getString("courseNumber"),
+                        gradesRes.getString("courseName"), gradesRes.getString("courseSemester"),
+                        gradesRes.getString("courseLecturer"),
+                        gradesRes.getString("courseCredit"),
+                        gradesRes.getString("courseType"),gradesRes.getInt("grade"));
+                cs.add(c);
+            }
+            person.setCourses(cs);
+            person.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            person.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
+        }
     }
 
     /*

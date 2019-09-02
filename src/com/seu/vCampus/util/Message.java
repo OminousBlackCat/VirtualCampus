@@ -19,7 +19,8 @@ public class Message implements java.io.Serializable{
         TYPE_COURSE_CONFLICT,
         TYPE_COURSE_ALREADY_SELECTED,
         TYPE_GET_COURSES_AVAILABLE,
-        TYPE_GET_COURSES_SELECTED
+        TYPE_GET_COURSES_SELECTED,
+        TYPE_GET_GRADES,
         ;
     }
 

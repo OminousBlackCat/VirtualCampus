@@ -11,6 +11,7 @@ public class Person extends Message{
     private String passWord;
     private boolean isMatched;
     private ArrayList<Course> courses;
+
     private double GPA;
 
     public Person(){
@@ -35,31 +36,29 @@ public class Person extends Message{
             double GPSum = 0.00;
             double credSum = 0.00;
             for (Course c : courses) {
-                int g = c.getCourseGrade();
-                double GP = 0.00;
-                double credit = Double.parseDouble( c.getCourseCredit());
+                if(c.getCourseType().equals("必修")) {
+                    int g = c.getCourseGrade();
+                    double GP = 0.00;
+                    double credit = Double.parseDouble( c.getCourseCredit());
+                    if (g >= 60) {
+                        if (g >= 100) {
+                            GP = 4.8;
+                        } else {
+                            GP += (g - 50) / 10;
+                            int r = g % 10;
+                            if (r >= 0 && r < 3) {
+                                ;
+                            } else if (r >= 3 && r < 6) {
+                                GP += 0.5;
+                            } else {
+                                GP += 0.8;
+                            }
+                        }
+                    }
 
-                if (g >= 60) {
-                    if (g >= 100) {
-                        GP = 4.8;
-                    }
-                    else {
-                        GP += (g - 50)/10;
-                        int r = g % 10;
-                        if(r >= 0 && r < 3) {
-                            ;
-                        }
-                        else if (r >= 3 && r < 6) {
-                            GP += 0.5;
-                        }
-                        else {
-                            GP += 0.8;
-                        }
-                    }
+                    GPSum += GP * credit;
+                    credSum += credit;
                 }
-                GPSum += GP * credit;
-                credSum += credit;
-
             }
             this.GPA = GPSum / credSum;
         }
@@ -123,5 +122,9 @@ public class Person extends Message{
 
     public void setECardBalance(short ECardBalance) {
         this.ECardBalance = ECardBalance;
+    }
+
+    public double getGPA() {
+        return GPA;
     }
 }
