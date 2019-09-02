@@ -289,22 +289,35 @@ public class DatabaseActions {
 
     public ShopManage ShopMessageSend(Connection conn, ShopManage SM)throws SQLException { return SM; } //传输商店管理信息
 
-    public Bank BankMessage(Connection conn,Bank bankUsers)throws SQLException {                        //传输银行客户信息
-        String sql = "select*from Bank where ECardNumber=?";
-        this.stmt = conn.prepareStatement(sql);
-        stmt.setString(1, bankUsers.getECardNumber());
-        ResultSet res = stmt.executeQuery();
+    public BankCount BankMessage(Connection conn, BankCount bankCountUsers)throws SQLException {                        //传输银行客户信息
+//        String sql = "select*from Bank where ECardNumber=?";
+//        this.stmt = conn.prepareStatement(sql);
+//        stmt.setString(1, bankCountUsers.getECardNumber());
+//        ResultSet res = stmt.executeQuery();
+//
+//        if(res.next()){
+//            String BB=res.getString("BankBalance");
+//            String Exp=res.getString("Expenditure");
+//            String Inc=res.getString("Income");
+//
+//            bankCountUsers.setBankBalance((short) Integer.parseInt(BB));
+//            bankCountUsers.setExpenditure((short) Integer.parseInt(Exp));
+//            bankCountUsers.setIncome((short) Integer.parseInt(Inc));
+//        }
+//        return bankCountUsers;
 
-        if(res.next()){
-            String BB=res.getString("BankBalance");
-            String Exp=res.getString("Expenditure");
-            String Inc=res.getString("Income");
+        try {
+            String sql = "select*from Bank where ECardNumber=?";
+            this.stmt = conn.prepareStatement(sql);
+            stmt.setString(1, bankCountUsers.getECardNumber());
+            ResultSet res = stmt.executeQuery();
+            return bankCountUsers;
 
-            bankUsers.setBankBalance((short) Integer.parseInt(BB));
-            bankUsers.setExpenditure((short) Integer.parseInt(Exp));
-            bankUsers.setIncome((short) Integer.parseInt(Inc));
+
+        }catch (SQLException e){
+            e.printStackTrace();
+            return  bankCountUsers;
         }
-        return bankUsers;
     }
 
 }

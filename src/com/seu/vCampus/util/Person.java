@@ -37,7 +37,7 @@ public class Person extends Message{
     }
 
     public Person(){
-        this.Type = MESSAGE_TYPE.TYPE_PERSON;
+        this.Type = MESSAGE_TYPE.TYPE_QUERY_PERSON;
     }
 
     public String getName() {
