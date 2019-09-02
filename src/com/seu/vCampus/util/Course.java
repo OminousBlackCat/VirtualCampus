@@ -19,7 +19,28 @@ public class Course extends Message{
     private String courseType;
     private int maximumStudents;
     private int enrolledStudents;
+    private int courseGrade;
 
+    /**
+     *Initialize Message type as null, since the specific action to be performed is unknown.
+     */
+    public Course(){
+        this.Type = MESSAGE_TYPE.TYPE_NULL; //Default type
+    }
+
+    /**
+     * Constructor for course selection use.
+     * @param courseNumber Course Number
+     * @param courseName Course Name
+     * @param courseSemester Semester of this course
+     * @param courseLecturer Lecturer
+     * @param coursePlace Classroom or lecture hall of course
+     * @param courseTime Time for course, should be formatted like '19-20-1'
+     * @param courseCredit Course credit
+     * @param courseType Type of course
+     * @param maximumStudents Maximum student capacity
+     * @param enrolledStudents Students enrolled
+     */
     public Course(String courseNumber, String courseName, String courseSemester,
                   String courseLecturer, String coursePlace, String courseTime,
                   String courseCredit, String courseType, int maximumStudents,
@@ -37,6 +58,31 @@ public class Course extends Message{
         this.enrolledStudents = enrolledStudents;
     }
 
+    /**
+     * Constructor for grade use.
+     * @param courseNumber Course Number
+     * @param courseName Name of Course
+     * @param courseSemester Semester of course
+     * @param courseLecturer Lecturer
+     * @param courseCredit Credit
+     * @param courseType Type of course, to calculate GPA
+     * @param courseGrade Grade
+     */
+    public Course(String courseNumber, String courseName, String courseSemester, String courseLecturer,
+                  String courseCredit, String courseType, int courseGrade) {
+        this.courseNumber = courseNumber;
+        this.courseName = courseName;
+        this.courseSemester = courseSemester;
+        this.courseLecturer = courseLecturer;
+        this.courseCredit = courseCredit;
+        this.courseType = courseType;
+        this.courseGrade = courseGrade;
+    }
+
+    /**
+     * The following methods are just basic setters and getters.
+     */
+
     public String getCourseType() {
         return courseType;
     }
@@ -44,17 +90,6 @@ public class Course extends Message{
     public void setCourseType(String courseType) {
         this.courseType = courseType;
     }
-
-    /**
-     *Initialize Message type as null, since the specific action to be performed is unknown.
-     */
-    public Course(){
-        this.Type = MESSAGE_TYPE.TYPE_NULL; //Default type
-    }
-
-    /**
-     * The following methods are just basic setters and getters.
-     */
 
     public String getCourseName() {
         return courseName;
@@ -126,5 +161,13 @@ public class Course extends Message{
 
     public void setCourseNumber(String courseNumber) {
         this.courseNumber = courseNumber;
+    }
+
+    public int getCourseGrade() {
+        return courseGrade;
+    }
+
+    public void setCourseGrade(int courseGrade) {
+        this.courseGrade = courseGrade;
     }
 }

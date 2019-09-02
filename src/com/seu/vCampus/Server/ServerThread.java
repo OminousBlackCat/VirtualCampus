@@ -9,6 +9,7 @@ package com.seu.vCampus.Server;
 
 
 
+import com.seu.vCampus.util.Course;
 import com.seu.vCampus.util.Login;
 import com.seu.vCampus.util.Message;
 import com.seu.vCampus.Database.DatabaseConnection;
@@ -16,6 +17,8 @@ import com.seu.vCampus.Database.DatabaseActions;
 import com.seu.vCampus.util.Person;
 import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
+import java.util.ArrayList;
+import javax.xml.crypto.Data;
 import java.sql.Connection;
 import java.net.Socket;
 import java.io.*;
@@ -24,28 +27,26 @@ import java.sql.SQLException;
 
 public class ServerThread  extends Thread{
     private Socket socket;
+
     /**
      * 输入的流
      **/
     private InputStream is;
     private BufferedInputStream bis ;
     private ObjectInputStream ois;
+
     /**
      * 输出的流
      **/
     private ObjectOutputStream oos;
     private OutputStream os;
+
     /**
      * 输入的message对象与输出的message对象
      **/
     private Message msg;
-    private DatabaseConnection connect = new DatabaseConnection();
-    private Connection conn = connect.getConn();
+    private Connection conn = DatabaseConnection.getConn();
     private DatabaseActions act = new DatabaseActions();
-
-
-
-
 
     public ServerThread(Socket s){
         this.socket = s;
@@ -65,23 +66,18 @@ public class ServerThread  extends Thread{
         try {
 
             is = socket.getInputStream();          //获得socket的输入流
-            os = socket.getOutputStream();         //获得socket输入流
+            os = socket.getOutputStream();         //获得socket的输出流
 
             while (true){
-
                 bis = new BufferedInputStream(is);     //构建缓冲输入流
                 ois = new ObjectInputStream(bis);      //反序列化获得对象
                 oos = new ObjectOutputStream(os);      //
-                msg = (Message) ois.readObject();   //获得message对象
+                msg = (Message) ois.readObject();   //获得Message对象
                 System.out.println(msg.getECardNumber());
                 switch (msg.getType()){
                     case TYPE_LOGIN:
-                        try{
-                            act.validatePassword(conn, ((Login) msg));
-                            System.out.println(msg.getType());
-                        }catch (SQLException e){
-                            e.printStackTrace();
-                        }
+                        act.validatePassword(conn, (Login) msg);
+                        System.out.println(msg.getType());
                         oos.writeObject(msg);
                         break;
                     case TYPE_FAIL:
@@ -97,21 +93,41 @@ public class ServerThread  extends Thread{
                         oos.writeObject(msg);
                         break;
                     case TYPE_DELETE_COURSE:
-
+                        act.deselectCourse(conn, (Course) msg);
+                        System.out.println(msg.getType());
+                        oos.writeObject(msg);
                         break;
                     case TYPE_SELECT_COURSE:
-
+                        act.selectCourse(conn, (Course) msg);
+                        System.out.println(msg.getType());
                         break;
+                    case TYPE_GET_COURSES_AVAILABLE: //Message must be a person object with the last
+                        // element of courses list containing semester info.
+                    {
+                        int l = ((Person) msg).getCourses().size();
+                        String semester = ((Person) msg).getCourses().get(l).getCourseSemester();
+                        act.getCoursesAvailable(conn, (Person) msg, semester);
+                        System.out.println(msg.getType());
+                        oos.writeObject(msg);
+                    }
+                    case TYPE_GET_COURSES_SELECTED:
+                    {
+                        int l = ((Person) msg).getCourses().size();
+                        if(l != 0) {
+                            String semester = ((Person) msg).getCourses().get(l).getCourseSemester();
+                            act.getCoursesSelected(conn, (Person) msg, semester);
+                        }
+                        else {
+                            act.getCoursesSelected(conn, (Person) msg);
+                        }
+                        System.out.println(msg.getType());
+                        oos.writeObject(msg);
+                    }
                 }
-
-
-
             }
 
-        }catch (IOException ioe){
+        }catch (IOException | ClassNotFoundException ioe){
             ioe.printStackTrace();
-        }catch (ClassNotFoundException cfe){
-            cfe.printStackTrace();
         }
 
     }
