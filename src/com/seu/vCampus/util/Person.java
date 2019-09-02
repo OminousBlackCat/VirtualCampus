@@ -19,6 +19,16 @@ public class Person extends Message{
         this.Type = MESSAGE_TYPE.TYPE_QUERY_PERSON;
     }
 
+    public Person(String lecturerECN) {
+        this.setECardNumber(lecturerECN);
+    }
+
+    public Person(String lecturerECN, String semester) {
+        this.setECardNumber(lecturerECN);
+        courses = new ArrayList<Course>();
+        courses.add(new Course(semester));
+    }
+
     public void setSemester(String sem) {
         Course c = new Course();
         c.setCourseSemester(sem);

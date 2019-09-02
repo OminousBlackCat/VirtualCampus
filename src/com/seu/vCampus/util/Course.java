@@ -27,6 +27,15 @@ public class Course extends Message{
     public Course(){
         this.Type = MESSAGE_TYPE.TYPE_NULL; //Default type
     }
+    public Course(String ecn, String courseNumber, int grade) {
+        this.setECardNumber(ecn);
+        this.setCourseNumber(courseNumber);
+        this.setCourseGrade(grade);
+    }
+
+    public Course(String semester) {
+        this.setCourseSemester(semester);
+    }
 
     /**
      * Constructor for course selection use.

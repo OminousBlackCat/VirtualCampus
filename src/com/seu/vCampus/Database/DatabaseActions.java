@@ -13,6 +13,12 @@ import java.util.ArrayList;
 
 public class DatabaseActions {
     private PreparedStatement stmt = null;
+    private Connection conn;
+
+    public DatabaseActions(Connection conn) {
+        this.conn = conn;
+    }
+
 
     /*
       The following is written by Jamie Liu
@@ -42,12 +48,11 @@ public class DatabaseActions {
 
     /**
      *
-     * @param conn SQL connection.
      * @param sql SQL statement to be executed.
      * @param person Person.
      * @param semester Semester, can be empty string.
      */
-    private void setStudentCoursesList(Connection conn, String sql, Person person, String semester) {
+    private void setStudentCoursesList(String sql, Person person, String semester) {
         ArrayList<Course> cs = new ArrayList<Course>();
         try {
             stmt = conn.prepareStatement(sql);
@@ -83,10 +88,9 @@ public class DatabaseActions {
      * according to the compared result. If the account is not found or the password is not correct, then the login
      * object's message type will be set to FAIL, otherwise SUCCESS.
      *
-     * @param conn  Database connection
      * @param login Login message object
      */
-    public void validatePassword(Connection conn, Login login) {
+    public void validatePassword(Login login) {
         try {
             String sql = "select*from Users where ECardNumber=?";
             stmt = conn.prepareStatement(sql);
@@ -112,11 +116,9 @@ public class DatabaseActions {
     /**
      * Select one specific course by modifying the student count of this course and adding this course to the selected
      * courses of the specific student who wants to select the course now.
-     *
-     * @param conn   Database connection
      * @param course Course message object. Should contain the course information and the ECard number.
      */
-    public void selectCourse(Connection conn, Course course) {
+    public void selectCourse(Course course) {
         boolean conflict = false;
 
         try {
@@ -130,7 +132,7 @@ public class DatabaseActions {
 
             Person per = new Person();
             per.setECardNumber(course.getECardNumber());
-            getCoursesSelected(conn, per, "");
+            getCoursesSelected(per, "");
             ArrayList<Course> coursesSelected = per.getCourses();
 
             for (Course c : coursesSelected
@@ -189,10 +191,9 @@ public class DatabaseActions {
 
     /**
      * Delete a course selected by the student.
-     * @param conn SQL connection object.
      * @param course Course Object that contains at least ECardNumber and CourseNumber.
      */
-    public void deselectCourse(Connection conn, Course course) {
+    public void deselectCourse(Course course) {
         try {
             String sql = "delete from CoursesSelected where courseNumber = ? and ECardNumber = ?";
             stmt = conn.prepareStatement(sql);
@@ -219,48 +220,44 @@ public class DatabaseActions {
 
     /**
      * Get all the courses taken by designated student at some semester.
-     * @param conn SQL connection.
      * @param person Person, namely the student.
      * @param semester Specify which semester to be retrieved.
      */
-    public void getCoursesSelected(Connection conn, Person person, String semester) {
+    public void getCoursesSelected(Person person, String semester) {
         String sql = "select * from Courses where exists (select * from CoursesSelected, Users where " +
                 "Courses.courseNumber = CoursesSelected.courseNumber and CoursesSelected.ECardNumber " +
                 "= Users.ECardNumber and Users.ECardNumber = ?) and Courses.courseSemester = ?";
-        setStudentCoursesList(conn,sql,person,semester);
+        setStudentCoursesList(sql,person,semester);
     }
 
     /**
      * Get all the courses taken by designated student.
-     * @param conn SQL connection.
      * @param person Person, namely the student.
      */
-    public void getCoursesSelected(Connection conn, Person person) {
+    public void getCoursesSelected(Person person) {
         String sql = "select * from Courses where exists (select * from CoursesSelected, Users where " +
                 "Courses.courseNumber = CoursesSelected.courseNumber and CoursesSelected.ECardNumber " +
                 "= Users.ECardNumber and Users.ECardNumber = ?) ";
-        setStudentCoursesList(conn,sql,person,"");
+        setStudentCoursesList(sql,person,"");
     }
 
     /**
      * Get all the courses available to (not full) and not selected by this student this semester.
-     * @param conn SQL connection.
      * @param person Person object. Should contain ECardNumber.
      */
-    public void getCoursesAvailable(Connection conn, Person person, String semester) {
+    public void getCoursesAvailable(Person person, String semester) {
         String sql = "select * from Courses where not exists (select * from CoursesSelected, Users where " +
                 "Courses.courseNumber = CoursesSelected.courseNumber and CoursesSelected.ECardNumber " +
                 "= Users.ECardNumber and Users.ECardNumber = ?) and Courses.courseSemester = ? " +
                 "and Courses.enrolledStudents < Courses.maximumStudents";
-        setStudentCoursesList(conn,sql,person,semester);
+        setStudentCoursesList(sql,person,semester);
     }
 
     /**
      * Get the grades of the student.
-     * @param conn SQL connection.
      * @param person Person object.
      */
-    public void getGrades(Connection conn, Person person) {
+    public void getGrades(Person person) {
         ArrayList<Course> cs = new ArrayList<Course>();
         String sql = "SELECT Courses.*, CoursesSelected.* FROM Courses INNER JOIN CoursesSelected ON " +
                 "(CoursesSelected.courseNumber = Courses.courseNumber and CoursesSelected.EcardNumber = ? and " +
@@ -285,12 +282,152 @@ public class DatabaseActions {
         }
     }
 
+    /**
+     * Add a new course to the database.
+     * @param course Course object. Should contain all the information, with the ECardNumber being the lecturer's.
+     */
+    public void addCourse(Course course) {
+        try{
+            String sql = "insert into Courses (courseNumber, courseName, courseSemester, lecturerECardNumber," +
+                    "coursePlace, courseTime, maximumStudents, enrolledStudents, courseCredit, courseType," +
+                    "courseLecturer) values (?,?,?,?,?,?,?,?,?,?,?)";
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1,course.getCourseNumber());
+            stmt.setString(2,course.getCourseName());
+            stmt.setString(3,course.getCourseSemester());
+            stmt.setString(4,course.getECardNumber());
+            stmt.setString(5,course.getCoursePlace());
+            stmt.setString(6,course.getCourseTime());
+            stmt.setInt(7,course.getMaximumStudents());
+            stmt.setInt(8,course.getEnrolledStudents());
+            stmt.setString(9,course.getCourseCredit());
+            stmt.setString(10,course.getCourseType());
+            stmt.setString(11,course.getCourseLecturer());
+            stmt.executeUpdate();
+            course.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            course.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
+        }
+    }
+
+    /**
+     * Set grade for one course of one student.
+     * @param course Course Object. Should contain grade, course number and ECard Number.
+     */
+    public void setGrade(Course course) {
+        String sql = "UPDATE CoursesSelected SET grade = ? WHERE courseNumber = ? and ECardNumber = ?";
+        try{
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1,course.getCourseGrade());
+            stmt.setString(2,course.getCourseNumber());
+            stmt.setString(3,course.getECardNumber());
+            stmt.executeUpdate();
+            course.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            course.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
+        }
+    }
+
+    /**
+     * Get the enrolled students of a course.
+     * @param person Person Object. Must contain ECardNumber (of the teacher) and course number(Please store it in the
+     *               last element of the Person.courses list.)
+     *               When this action is performed, a list of courses that contain all the information you need will be
+     *               stored into the Person.courses list (the original courses list information will be overwritten).
+     */
+    public void getEnrolledStudents(Person person) {
+        String sql = "SELECT Courses.*, CoursesSelected.* FROM Courses, CoursesSelected WHERE " +
+                "Courses.courseNumber = CoursesSelected.courseNumber AND Courses.courseNumber = ?";
+        int l = person.getCourses().size();
+        String cN = person.getCourses().get(l-1).getCourseNumber();
+        ArrayList<Course> cs = new ArrayList<Course>();
+
+        try{
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1,cN);
+            ResultSet cRes = stmt.executeQuery();
+            while (cRes.next()) {
+                Course c = new Course(cRes.getString("courseNumber"),cRes.getString("courseName"),
+                        cRes.getString("courseSemester"),cRes.getString("courseLecturer"),
+                        cRes.getString("coursePlace"),cRes.getString("courseTime"),
+                        cRes.getString("courseCredit"),cRes.getString("courseType"),
+                        cRes.getInt("maximumStudents"),cRes.getInt("enrolledStudents"));
+                c.setECardNumber(cRes.getString("ECardNumber"));
+                cs.add(c);
+            }
+            person.setCourses(cs);
+            person.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            person.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
+        }
+    }
+
+    /**
+     * Get the courses of the designated lecturer.
+     * @param person Person object. Should contain ECardNumber of the lecturer. If the last item of Person.courses has
+     *               courseSemester info that is not empty string, the semester info will be included in the sql.
+     */
+    public void getLecturerCourses(Person person) {
+        ArrayList<Course> cs = new ArrayList<Course>();
+        String sql;
+        try{
+            if (person.getCourses() == null){
+                sql = "select * from Courses where lecturerECardNumber = ?";
+                stmt = conn.prepareStatement(sql);
+                stmt.setString(1,person.getECardNumber());
+            }
+            else {
+                String semester = person.getCourses().get(person.getCourses().size() - 1).getCourseSemester();
+                sql = "select * from Courses where lecturerECardNumber = ? and courseSemester = ?";
+                stmt = conn.prepareStatement(sql);
+                stmt.setString(1, person.getECardNumber());
+                stmt.setString(2, semester);
+            }
+
+            ResultSet cRes = stmt.executeQuery();
+            while (cRes.next()) {
+                cs.add(new Course(cRes.getString("courseNumber"),cRes.getString("courseName"),
+                        cRes.getString("courseSemester"), cRes.getString("courseLecturer"),
+                        cRes.getString("coursePlace"),cRes.getString("courseTime"),
+                        cRes.getString("courseCredit"),cRes.getString("courseType"),
+                        cRes.getInt("maximumStudents"),cRes.getInt("enrolledStudents")));
+            }
+            person.setCourses(cs);
+            person.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
+        } catch (SQLException | NullPointerException e) {
+            e.printStackTrace();
+            person.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
+        }
+
+    }
+
+    /**
+     * Give me a list of courses and I'll set all the grades in it to the database.
+     * @param person Person object. It's list of courses should not be empty.
+     */
+    public void gradesInput(Person person) {
+        try {
+            for (Course c : person.getCourses()) {
+                if (!c.getECardNumber().isEmpty()) {
+                    setGrade(c);
+                }
+            }
+            person.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
+        }catch (NullPointerException e) {
+            e.printStackTrace();
+            person.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
+        }
+    }
+
     /*
     The following is written by mbh.
     Database functions relating to bank and shop.
      */
 
-    public Person PersonMessageSend(Connection conn, Person p) { //将用户基本信息发给服务端
+    public Person PersonMessageSend(Person p) { //将用户基本信息发给服务端
         try {
             String sql = "select*from Users where ECardNumber=?";
             this.stmt = conn.prepareStatement(sql);
@@ -321,7 +458,7 @@ public class DatabaseActions {
         }
     }
 
-    public void deletePerson(Connection conn, Person p){
+    public void deletePerson(Person p){
         try{
             String sql= "delete from Users where ECardNumber= ?";
             this.stmt=conn.prepareStatement(sql);
@@ -357,7 +494,7 @@ public class DatabaseActions {
         }
     }
 
-    public ShopManage getShopMessage(Connection conn, ShopManage SM) {//传输商店商品信息
+    public ShopManage getShopMessage(ShopManage SM) {//传输商店商品信息
         try {
             Statement st = conn.createStatement();
             ResultSet res = st.executeQuery("select *from Goods");
@@ -384,7 +521,7 @@ public class DatabaseActions {
         }
     }
 
-    public void deleteGoods(Connection conn, Goods g){
+    public void deleteGoods(Goods g){
         try{
             String sql= "delete from Goods where GID= ?";
             this.stmt=conn.prepareStatement(sql);
@@ -398,7 +535,7 @@ public class DatabaseActions {
         }
     }
 
-    public void insertGoods(Connection conn,Goods g) {
+    public void insertGoods(Goods g) {
         try{
             PreparedStatement sql = conn.prepareStatement("insert into Goods(GID,goodsName,Price,Stock)" +
                     "values(?,?,?,?)");
@@ -415,7 +552,7 @@ public class DatabaseActions {
         }
     }
 
-    public BankCount BankMessage(Connection conn, BankCount bankCountUsers)throws SQLException {                        //传输银行客户信息
+    public BankCount BankMessage(BankCount bankCountUsers)throws SQLException {                        //传输银行客户信息
 //        String sql = "select*from Bank where ECardNumber=?";
 //        this.stmt = conn.prepareStatement(sql);
 //        stmt.setString(1, bankCountUsers.getECardNumber());
