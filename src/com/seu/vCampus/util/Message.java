@@ -27,7 +27,8 @@ public class Message implements java.io.Serializable{
         TYPE_DELETE_GOODS,
         TYPE_ADD_GOODS,
         TYPE_GET_COURSES_AVAILABLE,
-        TYPE_GET_COURSES_SELECTED
+        TYPE_GET_COURSES_SELECTED,
+        TYPE_GET_GRADES,
         ;
     }
 

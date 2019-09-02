@@ -131,6 +131,10 @@ public class ServerThread  extends Thread{
                         System.out.println(msg.getType());
                         oos.writeObject(msg);
                     }
+                    case TYPE_GET_GRADES:
+                        act.getGrades(conn, (Person) msg);
+                        System.out.println(msg.getType());
+                        oos.writeObject(msg);
                 }
             }
 
