@@ -262,32 +262,130 @@ public class DatabaseActions {
     Database functions relating to bank and shop.
      */
 
-    public Person PersonMessageSend(Connection conn,Person p)throws SQLException { //将用户基本信息发给服务端
+    public Person PersonMessageSend(Connection conn, Person p) { //将用户基本信息发给服务端
+        try {
+            String sql = "select*from Users where ECardNumber=?";
+            this.stmt = conn.prepareStatement(sql);
+            stmt.setString(1, p.getECardNumber());
+            ResultSet res = stmt.executeQuery();
 
-        String sql= "select*from Users where ECardNumber=?";
-        this.stmt = conn.prepareStatement(sql);
-        stmt.setString(1, p.getECardNumber());
-        ResultSet res = stmt.executeQuery();
+            if (res.next()) {
+                String Name = res.getString("userName");
+                String SN = res.getString("StudentNumber");
+                String AL = res.getString("AuthorityNumber");
+                String LBN = res.getString("LendBooksNumber");
+                String ECB = res.getString("ECardBalance");
+                String Sex=res.getString("Sex");
 
-        if (res.next()) {
-            String Name = res.getNString("userName");
-            String SN = res.getString("StudentNumber");
-            String AL = res.getString("AuthorityNumber");
-            String LBN = res.getString("LendBooksNumber");
-            String ECB = res.getString("ECardBalance");
-
-            p.setName(Name);
-            p.setStudentNumber(SN);
-            p.setAuthorityLevel((short) Integer.parseInt(AL));
-            p.setLendBooksNumber((short) Integer.parseInt(LBN));
-            p.setECardBalance((short) Integer.parseInt(ECB));
+                p.setName(Name);
+                p.setStudentNumber(SN);
+                p.setAuthorityLevel((short) Integer.parseInt(AL));
+                p.setLendBooksNumber((short) Integer.parseInt(LBN));
+                p.setECardBalance((short) Integer.parseInt(ECB));
+                p.setSex(Sex);
+            }
+            return p;
+        }catch (SQLException E)
+        {
+            E.printStackTrace();
+            p.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
+            return  p;
         }
-        return p;
     }
 
-    public Goods GoodsMessageSend(Connection conn, Goods g)throws SQLException { return g; }            //传输商店所有商品信息
+    public void deletePerson(Connection conn, Person p){
+        try{
+            String sql= "delete from Users where ECardNumber= ?";
+            this.stmt=conn.prepareStatement(sql);
+            stmt.setString(1,p.getECardNumber());
+            stmt.executeUpdate();
 
-    public ShopManage ShopMessageSend(Connection conn, ShopManage SM)throws SQLException { return SM; } //传输商店管理信息
+        }catch (SQLException E)
+        {
+            E.printStackTrace();
+            p.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
+        }
+    }
+
+    public void insertPerson(Connection conn,Person p){
+        try{
+            PreparedStatement sql = conn.prepareStatement("insert into Users" +
+                    "(ECardNumber,userName,password,Sex,AuthorityNumber,LendBooksNumber,ECardBalance,StudentNumber)" +
+                    "values(?,?,?,?,?,?,?,?)");
+            sql.setString(1, p.getECardNumber());
+            sql.setString(2, p.getName());
+            sql.setString(3, p.getPassWord());
+            sql.setString(4, p.getSex());
+            sql.setString(5, Integer.toString(p.getAuthorityLevel()));
+            sql.setString(6, Integer.toString(p.getLendBooksNumber()));
+            sql.setString(7, Integer.toString(p.getECardBalance()));
+            sql.setString(8, p.getStudentNumber());
+            sql.executeUpdate();
+
+        }catch (SQLException E)
+        {
+            E.printStackTrace();
+            p.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
+        }
+    }
+
+    public ShopManage ShopMessageSend(Connection conn, ShopManage SM)throws SQLException {//传输商店商品信息
+        try {
+            Statement st = conn.createStatement();
+            ResultSet res = st.executeQuery("select *from Goods");
+            Goods temp = new Goods();
+
+            while (res.next()) {
+                String ID = res.getString("GID");
+                String GN = res.getString("goodsName");
+                String GP = res.getString("Price");
+                String St = res.getString("Stock");
+
+                temp.setGoodsNumber(ID);
+                temp.setGoodsName(GN);
+                temp.setGoodsPrice((short) Integer.parseInt(GP));
+                temp.setGoodsStock((short) Integer.parseInt(St));
+            }
+
+            SM.addGoods(temp);
+            return SM;
+        }catch (SQLException E)
+        {
+            E.printStackTrace();
+            return  SM;
+        }
+    }
+
+        public void deleteGoods(Connection conn, Goods g){
+        try{
+            String sql= "delete from Goods where GID= ?";
+            this.stmt=conn.prepareStatement(sql);
+            stmt.setString(1,g.getGoodsNumber());
+            stmt.executeUpdate();
+
+        }catch (SQLException E)
+        {
+            E.printStackTrace();
+            g.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
+        }
+    }
+
+    public void insertGoods(Connection conn,Goods g,ShopManage SM) {
+        try{
+            SM.addGoods(g);
+            PreparedStatement sql = conn.prepareStatement("insert into Goods(GID,goodsName,Price,Stock)" +
+                    "values(?,?,?,?)");
+            sql.setString(1, g.getGoodsNumber());
+            sql.setString(2, g.getGoodsName());
+            sql.setString(3, Integer.toString(g.getGoodsPrice()));
+            sql.setString(4, Integer.toString(g.getGoodsStock()));
+            sql.executeUpdate();
+        }catch (SQLException E)
+        {
+            E.printStackTrace();
+            g.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
+        }
+    }
 
     public Bank BankMessage(Connection conn,Bank bankUsers)throws SQLException {                        //传输银行客户信息
         String sql = "select*from Bank where ECardNumber=?";

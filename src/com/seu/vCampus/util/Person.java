@@ -5,11 +5,11 @@ import java.util.ArrayList;
 public class Person extends Message{
     private String Name;
     private String StudentNumber;
+    private String Sex;
     private short AuthorityLevel;
     private short LendBooksNumber;
     private short ECardBalance;
     private String passWord;
-    private boolean isMatched;
     private ArrayList<Course> courses;
 
     public ArrayList<Course> getCourses() {
@@ -20,21 +20,13 @@ public class Person extends Message{
         this.courses = courses;
     }
 
-    public String getPassWord() {
-        return passWord;
-    }
+    public String getPassWord() { return passWord; }
 
-    public boolean isMatched() {
-        return isMatched;
-    }
+    public void setPassWord(String passWord) { this.passWord = passWord; }
 
-    public void setPassWord(String passWord) {
-        this.passWord = passWord;
-    }
+    public String getSex() { return Sex; }
 
-    public void setMatched(boolean matched) {
-        isMatched = matched;
-    }
+    public void setSex(String sex) { Sex = sex; }
 
     public Person(){
         this.Type = MESSAGE_TYPE.TYPE_PERSON;

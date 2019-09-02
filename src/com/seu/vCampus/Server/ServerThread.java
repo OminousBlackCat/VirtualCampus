@@ -88,12 +88,10 @@ public class ServerThread  extends Thread{
                         break;
                     case TYPE_PERSON:
                         System.out.println("是获取基本信息mes，一卡通号是："+msg.getECardNumber());
-                        try {
-                            act.PersonMessageSend(conn,(Person)msg);
-                            System.out.println(msg.getType());
-                        }catch (SQLException e){
-                            e.printStackTrace();
-                        }
+
+                        act.PersonMessageSend(conn,(Person)msg);
+                        System.out.println(msg.getType());
+
                         oos.writeObject(msg);
                         break;
                     case TYPE_DELETE_COURSE:
