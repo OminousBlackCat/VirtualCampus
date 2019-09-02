@@ -76,7 +76,6 @@ public class ServerThread  extends Thread{
                 System.out.println(msg.getECardNumber());
                 switch (msg.getType()){
                     case TYPE_LOGIN:
-                        System.out.println("是登录信息,密码是" + ((Login) msg).getPassWord());
                         try{
                             act.validatePassword(conn, ((Login) msg));
                             System.out.println(msg.getType());
@@ -108,17 +107,6 @@ public class ServerThread  extends Thread{
 
 
             }
-
-
-
-
-
-
-
-
-
-
-
 
         }catch (IOException ioe){
             ioe.printStackTrace();

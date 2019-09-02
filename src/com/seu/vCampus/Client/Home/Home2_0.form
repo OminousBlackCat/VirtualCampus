@@ -1,0 +1,858 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.seu.vCampus.Client.Home.Home2_0">
+  <grid id="27dc6" binding="panel1" default-binding="true" layout-manager="BorderLayout" hgap="0" vgap="0">
+    <constraints>
+      <xy x="20" y="20" width="836" height="517"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <tabbedpane id="9800" binding="tabbedPane1" default-binding="true">
+        <constraints border-constraint="Center"/>
+        <properties>
+          <tabPlacement value="2"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <grid id="a70ba" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <tabbedpane title="学生信息"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children/>
+          </grid>
+          <grid id="86205" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <tabbedpane title="图书馆"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children/>
+          </grid>
+          <tabbedpane id="1ed1b" binding="tabbedPane2" default-binding="true">
+            <constraints>
+              <tabbedpane title="选课"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <grid id="fa9b3" binding="first" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="0" left="0" bottom="0" right="0"/>
+                <constraints>
+                  <tabbedpane title="第一学期"/>
+                </constraints>
+                <properties/>
+                <border type="none"/>
+                <children>
+                  <splitpane id="6a48f">
+                    <constraints>
+                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                        <preferred-size width="200" height="200"/>
+                      </grid>
+                    </constraints>
+                    <properties/>
+                    <border type="none"/>
+                    <children>
+                      <grid id="35c71" layout-manager="GridBagLayout">
+                        <constraints>
+                          <splitpane position="left"/>
+                        </constraints>
+                        <properties/>
+                        <border type="none"/>
+                        <children>
+                          <component id="e9093" class="javax.swing.JLabel">
+                            <constraints>
+                              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                              <gridbag top="40" left="0" bottom="55" right="0" weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="上午"/>
+                            </properties>
+                          </component>
+                          <component id="63400" class="javax.swing.JLabel">
+                            <constraints>
+                              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                              <gridbag top="40" left="0" bottom="75" right="0" weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="下午"/>
+                            </properties>
+                          </component>
+                          <component id="bcd46" class="javax.swing.JLabel">
+                            <constraints>
+                              <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                              <gridbag top="10" left="0" bottom="0" right="0" weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="晚上"/>
+                            </properties>
+                          </component>
+                          <component id="a15f1" class="javax.swing.JLabel">
+                            <constraints>
+                              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="1" fill="0" indent="0" use-parent-layout="false"/>
+                              <gridbag weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="时间"/>
+                            </properties>
+                          </component>
+                          <component id="6a01" class="javax.swing.JSeparator">
+                            <constraints>
+                              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                              <gridbag weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties/>
+                          </component>
+                          <component id="65042" class="javax.swing.JSeparator">
+                            <constraints>
+                              <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                              <gridbag weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties/>
+                          </component>
+                        </children>
+                      </grid>
+                      <grid id="edf" layout-manager="GridBagLayout">
+                        <constraints>
+                          <splitpane position="right"/>
+                        </constraints>
+                        <properties/>
+                        <border type="none"/>
+                        <children>
+                          <component id="7a79a" class="javax.swing.JButton" binding="选择Button23" default-binding="true">
+                            <constraints>
+                              <grid row="7" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                              <gridbag top="10" left="20" bottom="10" right="20" weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="选择"/>
+                            </properties>
+                          </component>
+                          <component id="2a281" class="javax.swing.JButton" binding="选择Button22" default-binding="true">
+                            <constraints>
+                              <grid row="7" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                              <gridbag top="10" left="20" bottom="10" right="20" weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="选择"/>
+                            </properties>
+                          </component>
+                          <component id="e2ad5" class="javax.swing.JButton" binding="选择Button21" default-binding="true">
+                            <constraints>
+                              <grid row="7" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                              <gridbag top="10" left="20" bottom="10" right="20" weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="选择"/>
+                            </properties>
+                          </component>
+                          <component id="1532c" class="javax.swing.JButton" binding="选择Button20" default-binding="true">
+                            <constraints>
+                              <grid row="7" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                              <gridbag top="10" left="20" bottom="10" right="20" weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="选择"/>
+                            </properties>
+                          </component>
+                          <component id="355d4" class="javax.swing.JSeparator">
+                            <constraints>
+                              <grid row="3" column="0" row-span="1" col-span="6" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                              <gridbag weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties/>
+                          </component>
+                          <component id="1214e" class="javax.swing.JSeparator">
+                            <constraints>
+                              <grid row="6" column="1" row-span="1" col-span="5" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                              <gridbag weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties/>
+                          </component>
+                          <component id="4cc62" class="javax.swing.JLabel">
+                            <constraints>
+                              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                              <gridbag weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="周一"/>
+                            </properties>
+                          </component>
+                          <component id="dab28" class="javax.swing.JLabel">
+                            <constraints>
+                              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                              <gridbag weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="周二"/>
+                            </properties>
+                          </component>
+                          <component id="a385a" class="javax.swing.JLabel">
+                            <constraints>
+                              <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                              <gridbag weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="周三"/>
+                            </properties>
+                          </component>
+                          <component id="75232" class="javax.swing.JLabel">
+                            <constraints>
+                              <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                              <gridbag weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="周四"/>
+                            </properties>
+                          </component>
+                          <component id="8fc1d" class="javax.swing.JLabel">
+                            <constraints>
+                              <grid row="0" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                              <gridbag weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="周五"/>
+                            </properties>
+                          </component>
+                          <component id="1898a" class="javax.swing.JButton" binding="选择Button" default-binding="true">
+                            <constraints>
+                              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                              <gridbag top="20" left="20" bottom="20" right="20" weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="选择"/>
+                            </properties>
+                          </component>
+                          <component id="29730" class="javax.swing.JButton" binding="选择Button5" default-binding="true">
+                            <constraints>
+                              <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                              <gridbag top="20" left="20" bottom="20" right="20" weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="选择"/>
+                            </properties>
+                          </component>
+                          <component id="4c42b" class="javax.swing.JButton" binding="选择Button1" default-binding="true">
+                            <constraints>
+                              <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                              <gridbag top="0" left="20" bottom="0" right="20" weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="选择"/>
+                            </properties>
+                          </component>
+                          <component id="4feb1" class="javax.swing.JButton" binding="选择Button6" default-binding="true">
+                            <constraints>
+                              <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                              <gridbag top="0" left="20" bottom="0" right="20" weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="选择"/>
+                            </properties>
+                          </component>
+                          <component id="79c83" class="javax.swing.JButton" binding="选择Button2" default-binding="true">
+                            <constraints>
+                              <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                              <gridbag top="0" left="20" bottom="0" right="20" weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="选择"/>
+                            </properties>
+                          </component>
+                          <component id="ebc61" class="javax.swing.JButton" binding="选择Button7" default-binding="true">
+                            <constraints>
+                              <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                              <gridbag top="0" left="20" bottom="0" right="20" weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="选择"/>
+                            </properties>
+                          </component>
+                          <component id="1cb13" class="javax.swing.JButton" binding="选择Button3" default-binding="true">
+                            <constraints>
+                              <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                              <gridbag top="0" left="20" bottom="0" right="20" weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="选择"/>
+                            </properties>
+                          </component>
+                          <component id="6d339" class="javax.swing.JButton" binding="选择Button8" default-binding="true">
+                            <constraints>
+                              <grid row="2" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                              <gridbag top="0" left="20" bottom="0" right="20" weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="选择"/>
+                            </properties>
+                          </component>
+                          <component id="5ab1b" class="javax.swing.JButton" binding="选择Button4" default-binding="true">
+                            <constraints>
+                              <grid row="1" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                              <gridbag top="0" left="20" bottom="0" right="20" weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="选择"/>
+                            </properties>
+                          </component>
+                          <component id="a3d1" class="javax.swing.JButton" binding="选择Button9" default-binding="true">
+                            <constraints>
+                              <grid row="2" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                              <gridbag top="0" left="20" bottom="0" right="20" weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="选择"/>
+                            </properties>
+                          </component>
+                          <component id="ff6d1" class="javax.swing.JButton" binding="选择Button15" default-binding="true">
+                            <constraints>
+                              <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                              <gridbag top="20" left="20" bottom="20" right="20" weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="选择"/>
+                            </properties>
+                          </component>
+                          <component id="9ca" class="javax.swing.JButton" binding="选择Button11" default-binding="true">
+                            <constraints>
+                              <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                              <gridbag top="20" left="20" bottom="20" right="20" weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="选择"/>
+                            </properties>
+                          </component>
+                          <component id="be4a1" class="javax.swing.JButton" binding="选择Button10" default-binding="true">
+                            <constraints>
+                              <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                              <gridbag top="20" left="20" bottom="20" right="20" weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="选择"/>
+                            </properties>
+                          </component>
+                          <component id="2a124" class="javax.swing.JButton" binding="选择Button16" default-binding="true">
+                            <constraints>
+                              <grid row="5" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                              <gridbag top="0" left="20" bottom="0" right="20" weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="选择"/>
+                            </properties>
+                          </component>
+                          <component id="ff7dc" class="javax.swing.JButton" binding="选择Button12" default-binding="true">
+                            <constraints>
+                              <grid row="4" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                              <gridbag top="0" left="20" bottom="0" right="20" weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="选择"/>
+                            </properties>
+                          </component>
+                          <component id="4c3d7" class="javax.swing.JButton" binding="选择Button17" default-binding="true">
+                            <constraints>
+                              <grid row="5" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                              <gridbag top="0" left="20" bottom="0" right="20" weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="选择"/>
+                            </properties>
+                          </component>
+                          <component id="efdb0" class="javax.swing.JButton" binding="选择Button13" default-binding="true">
+                            <constraints>
+                              <grid row="4" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                              <gridbag top="0" left="20" bottom="0" right="20" weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="选择"/>
+                            </properties>
+                          </component>
+                          <component id="6d04a" class="javax.swing.JButton" binding="选择Button18" default-binding="true">
+                            <constraints>
+                              <grid row="5" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                              <gridbag top="0" left="20" bottom="0" right="20" weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="选择"/>
+                            </properties>
+                          </component>
+                          <component id="b66bd" class="javax.swing.JButton" binding="选择Button14" default-binding="true">
+                            <constraints>
+                              <grid row="4" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                              <gridbag top="0" left="20" bottom="0" right="20" weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="选择"/>
+                            </properties>
+                          </component>
+                          <component id="5d14" class="javax.swing.JButton" binding="选择Button19" default-binding="true">
+                            <constraints>
+                              <grid row="5" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                              <gridbag top="0" left="20" bottom="0" right="20" weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="选择"/>
+                            </properties>
+                          </component>
+                          <component id="94a89" class="javax.swing.JButton" binding="选择Button24" default-binding="true">
+                            <constraints>
+                              <grid row="7" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                              <gridbag top="10" left="20" bottom="10" right="20" weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="选择"/>
+                            </properties>
+                          </component>
+                        </children>
+                      </grid>
+                    </children>
+                  </splitpane>
+                  <grid id="32a8" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                    <margin top="0" left="0" bottom="0" right="0"/>
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties/>
+                    <border type="none"/>
+                    <children>
+                      <component id="1b9ea" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <text value="已选课程"/>
+                        </properties>
+                      </component>
+                      <vspacer id="7df55">
+                        <constraints>
+                          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                      </vspacer>
+                    </children>
+                  </grid>
+                </children>
+              </grid>
+              <grid id="9195e" binding="second" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="0" left="0" bottom="0" right="0"/>
+                <constraints>
+                  <tabbedpane title="第二学期"/>
+                </constraints>
+                <properties/>
+                <border type="none"/>
+                <children>
+                  <splitpane id="df819">
+                    <constraints>
+                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                        <preferred-size width="200" height="200"/>
+                      </grid>
+                    </constraints>
+                    <properties/>
+                    <border type="none"/>
+                    <children>
+                      <grid id="b6f72" layout-manager="GridBagLayout">
+                        <constraints>
+                          <splitpane position="left"/>
+                        </constraints>
+                        <properties/>
+                        <border type="none"/>
+                        <children>
+                          <component id="4046f" class="javax.swing.JLabel">
+                            <constraints>
+                              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                              <gridbag top="40" left="0" bottom="55" right="0" weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="上午"/>
+                            </properties>
+                          </component>
+                          <component id="53aff" class="javax.swing.JLabel">
+                            <constraints>
+                              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                              <gridbag top="40" left="0" bottom="75" right="0" weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="下午"/>
+                            </properties>
+                          </component>
+                          <component id="698e1" class="javax.swing.JLabel">
+                            <constraints>
+                              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="1" fill="0" indent="0" use-parent-layout="false"/>
+                              <gridbag weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="时间"/>
+                            </properties>
+                          </component>
+                          <component id="56a94" class="javax.swing.JLabel">
+                            <constraints>
+                              <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                              <gridbag top="10" left="0" bottom="0" right="0" weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="晚上"/>
+                            </properties>
+                          </component>
+                          <component id="5a5fa" class="javax.swing.JSeparator">
+                            <constraints>
+                              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                              <gridbag weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties/>
+                          </component>
+                          <component id="1d302" class="javax.swing.JSeparator">
+                            <constraints>
+                              <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                              <gridbag weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties/>
+                          </component>
+                        </children>
+                      </grid>
+                      <grid id="812fb" layout-manager="GridBagLayout">
+                        <constraints>
+                          <splitpane position="right"/>
+                        </constraints>
+                        <properties/>
+                        <border type="none"/>
+                        <children>
+                          <component id="79d63" class="javax.swing.JLabel">
+                            <constraints>
+                              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                              <gridbag weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="周一"/>
+                            </properties>
+                          </component>
+                          <component id="25f9f" class="javax.swing.JLabel">
+                            <constraints>
+                              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                              <gridbag weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="周二"/>
+                            </properties>
+                          </component>
+                          <component id="a9fbd" class="javax.swing.JLabel">
+                            <constraints>
+                              <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                              <gridbag weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="周三"/>
+                            </properties>
+                          </component>
+                          <component id="fb3ab" class="javax.swing.JLabel">
+                            <constraints>
+                              <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                              <gridbag weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="周四"/>
+                            </properties>
+                          </component>
+                          <component id="33426" class="javax.swing.JButton" binding="选择Button27" default-binding="true">
+                            <constraints>
+                              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                              <gridbag top="20" left="20" bottom="20" right="20" weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="选择"/>
+                            </properties>
+                          </component>
+                          <component id="abfab" class="javax.swing.JButton" binding="选择Button26" default-binding="true">
+                            <constraints>
+                              <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                              <gridbag top="0" left="20" bottom="0" right="20" weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="选择"/>
+                            </properties>
+                          </component>
+                          <component id="3c969" class="javax.swing.JButton" binding="选择Button25" default-binding="true">
+                            <constraints>
+                              <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                              <gridbag top="0" left="20" bottom="0" right="20" weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="选择"/>
+                            </properties>
+                          </component>
+                          <component id="2f763" class="javax.swing.JButton" binding="选择Button28" default-binding="true">
+                            <constraints>
+                              <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                              <gridbag top="0" left="20" bottom="0" right="20" weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="选择"/>
+                            </properties>
+                          </component>
+                          <component id="d0237" class="javax.swing.JButton" binding="选择Button30" default-binding="true">
+                            <constraints>
+                              <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                              <gridbag top="20" left="20" bottom="20" right="20" weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="选择"/>
+                            </properties>
+                          </component>
+                          <component id="68628" class="javax.swing.JButton" binding="选择Button31" default-binding="true">
+                            <constraints>
+                              <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                              <gridbag top="0" left="20" bottom="0" right="20" weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="选择"/>
+                            </properties>
+                          </component>
+                          <component id="440fc" class="javax.swing.JButton" binding="选择Button32" default-binding="true">
+                            <constraints>
+                              <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                              <gridbag top="0" left="20" bottom="0" right="20" weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="选择"/>
+                            </properties>
+                          </component>
+                          <component id="a7e84" class="javax.swing.JButton" binding="选择Button35" default-binding="true">
+                            <constraints>
+                              <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                              <gridbag top="20" left="20" bottom="20" right="20" weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="选择"/>
+                            </properties>
+                          </component>
+                          <component id="8f971" class="javax.swing.JButton" binding="选择Button40" default-binding="true">
+                            <constraints>
+                              <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                              <gridbag top="20" left="20" bottom="20" right="20" weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="选择"/>
+                            </properties>
+                          </component>
+                          <component id="f75c1" class="javax.swing.JButton" binding="选择Button45" default-binding="true">
+                            <constraints>
+                              <grid row="7" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                              <gridbag top="10" left="20" bottom="10" right="20" weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="选择"/>
+                            </properties>
+                          </component>
+                          <component id="93043" class="javax.swing.JButton" binding="选择Button36" default-binding="true">
+                            <constraints>
+                              <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                              <gridbag top="0" left="20" bottom="0" right="20" weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="选择"/>
+                            </properties>
+                          </component>
+                          <component id="8192f" class="javax.swing.JButton" binding="选择Button37" default-binding="true">
+                            <constraints>
+                              <grid row="4" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                              <gridbag top="0" left="20" bottom="0" right="20" weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="选择"/>
+                            </properties>
+                          </component>
+                          <component id="d8648" class="javax.swing.JButton" binding="选择Button41" default-binding="true">
+                            <constraints>
+                              <grid row="5" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                              <gridbag top="0" left="20" bottom="0" right="20" weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="选择"/>
+                            </properties>
+                          </component>
+                          <component id="ee510" class="javax.swing.JButton" binding="选择Button33" default-binding="true">
+                            <constraints>
+                              <grid row="2" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                              <gridbag top="20" left="20" bottom="20" right="20" weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="选择"/>
+                            </properties>
+                          </component>
+                          <component id="ac125" class="javax.swing.JButton" binding="选择Button38" default-binding="true">
+                            <constraints>
+                              <grid row="4" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                              <gridbag top="0" left="20" bottom="0" right="20" weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="选择"/>
+                            </properties>
+                          </component>
+                          <component id="e90e7" class="javax.swing.JButton" binding="选择Button42" default-binding="true">
+                            <constraints>
+                              <grid row="5" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                              <gridbag top="0" left="20" bottom="0" right="20" weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="选择"/>
+                            </properties>
+                          </component>
+                          <component id="cab18" class="javax.swing.JButton" binding="选择Button43" default-binding="true">
+                            <constraints>
+                              <grid row="5" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                              <gridbag top="0" left="20" bottom="0" right="20" weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="选择"/>
+                            </properties>
+                          </component>
+                          <component id="9d596" class="javax.swing.JButton" binding="选择Button46" default-binding="true">
+                            <constraints>
+                              <grid row="7" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                              <gridbag top="0" left="20" bottom="0" right="20" weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="选择"/>
+                            </properties>
+                          </component>
+                          <component id="e5270" class="javax.swing.JButton" binding="选择Button47" default-binding="true">
+                            <constraints>
+                              <grid row="7" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                              <gridbag top="0" left="20" bottom="0" right="20" weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="选择"/>
+                            </properties>
+                          </component>
+                          <component id="7fbca" class="javax.swing.JButton" binding="选择Button48" default-binding="true">
+                            <constraints>
+                              <grid row="7" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                              <gridbag top="0" left="20" bottom="0" right="20" weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="选择"/>
+                            </properties>
+                          </component>
+                          <component id="35b8a" class="javax.swing.JSeparator">
+                            <constraints>
+                              <grid row="3" column="0" row-span="1" col-span="6" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                              <gridbag weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties/>
+                          </component>
+                          <component id="e78a2" class="javax.swing.JSeparator">
+                            <constraints>
+                              <grid row="6" column="0" row-span="1" col-span="6" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                              <gridbag weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties/>
+                          </component>
+                          <component id="9b186" class="javax.swing.JLabel">
+                            <constraints>
+                              <grid row="0" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                              <gridbag weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="周五"/>
+                            </properties>
+                          </component>
+                          <component id="856fd" class="javax.swing.JButton" binding="选择Button29" default-binding="true">
+                            <constraints>
+                              <grid row="1" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                              <gridbag top="0" left="20" bottom="0" right="20" weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="选择"/>
+                            </properties>
+                          </component>
+                          <component id="a1eb6" class="javax.swing.JButton" binding="选择Button34" default-binding="true">
+                            <constraints>
+                              <grid row="2" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                              <gridbag top="0" left="20" bottom="0" right="20" weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="选择"/>
+                            </properties>
+                          </component>
+                          <component id="b19ae" class="javax.swing.JButton" binding="选择Button39" default-binding="true">
+                            <constraints>
+                              <grid row="4" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                              <gridbag top="0" left="20" bottom="0" right="20" weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="选择"/>
+                            </properties>
+                          </component>
+                          <component id="8299d" class="javax.swing.JButton" binding="选择Button44" default-binding="true">
+                            <constraints>
+                              <grid row="5" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                              <gridbag top="0" left="20" bottom="0" right="20" weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="选择"/>
+                            </properties>
+                          </component>
+                          <component id="839f4" class="javax.swing.JButton" binding="选择Button49" default-binding="true">
+                            <constraints>
+                              <grid row="7" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                              <gridbag top="0" left="20" bottom="0" right="20" weightx="0.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <text value="选择"/>
+                            </properties>
+                          </component>
+                        </children>
+                      </grid>
+                    </children>
+                  </splitpane>
+                  <grid id="7578c" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                    <margin top="0" left="0" bottom="0" right="0"/>
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties/>
+                    <border type="none"/>
+                    <children>
+                      <component id="acd79" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <text value="已选课程"/>
+                        </properties>
+                      </component>
+                      <vspacer id="3f09a">
+                        <constraints>
+                          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                      </vspacer>
+                    </children>
+                  </grid>
+                </children>
+              </grid>
+            </children>
+          </tabbedpane>
+          <grid id="5ed88" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <tabbedpane title="商店"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children/>
+          </grid>
+          <grid id="7df23" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <tabbedpane title="银行"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children/>
+          </grid>
+        </children>
+      </tabbedpane>
+    </children>
+  </grid>
+</form>

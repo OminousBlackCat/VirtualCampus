@@ -8,8 +8,33 @@ public class Person extends Message{
     private short AuthorityLevel;
     private short LendBooksNumber;
     private short ECardBalance;
+    private String passWord;
+    private boolean isMatched;
+    private ArrayList<Course> courses;
 
+    public ArrayList<Course> getCourses() {
+        return courses;
+    }
 
+    public void setCourses(ArrayList<Course> courses) {
+        this.courses = courses;
+    }
+
+    public String getPassWord() {
+        return passWord;
+    }
+
+    public boolean isMatched() {
+        return isMatched;
+    }
+
+    public void setPassWord(String passWord) {
+        this.passWord = passWord;
+    }
+
+    public void setMatched(boolean matched) {
+        isMatched = matched;
+    }
 
     public Person(){
         this.Type = MESSAGE_TYPE.TYPE_PERSON;
@@ -54,5 +79,4 @@ public class Person extends Message{
     public void setECardBalance(short ECardBalance) {
         this.ECardBalance = ECardBalance;
     }
-
 }
