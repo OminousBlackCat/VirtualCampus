@@ -2,7 +2,7 @@ package com.seu.vCampus.util;
 
 import java.util.Date;
 
-public class BankBill {
+public class BankBill extends Message{
 
     public enum BILL_TYPE{
         TYPE_INCOME,
@@ -12,7 +12,7 @@ public class BankBill {
 
     private Date BillDate;
     private BILL_TYPE BillType;
-    private double BillNumber;
+    private double BillAmount;
 
     public Date getBillDate() {
         return BillDate;
@@ -22,8 +22,8 @@ public class BankBill {
         return BillType;
     }
 
-    public double getBillNumber() {
-        return BillNumber;
+    public double getBillAmount() {
+        return BillAmount;
     }
 
     public void setBillDate(Date billDate) {
@@ -34,7 +34,7 @@ public class BankBill {
         BillType = billType;
     }
 
-    public void setBillNumber(double billNumber) {
-        BillNumber = billNumber;
+    public void setBillAmount(double billAmount) {
+        BillAmount = billAmount;
     }
 }

@@ -129,9 +129,21 @@ public class ServerThread  extends Thread{
                     case TYPE_DELETE_GOODS:
                         act.deleteGoods((Goods)msg);
                         break;
+                    case TYPE_QUERY_PERSON_MANAGE:
+                        act.getPersonManage(conn,(PersonManage)msg);
+                        break;
+                    case TYPE_RECHARGE_ECARD:
+                        act.ECardRecharge(conn,(BankBill)msg);
+                        break;
+                    case TYPE_QUERY_BANK_COUNT:
+                        act.getBankMessage(conn,(BankCount)msg);
+                        break;
                 }
+
                 System.out.println(msg.getType());
                 oos.writeObject(msg);
+
+                }
             }
 
         }catch (IOException | ClassNotFoundException ioe){
