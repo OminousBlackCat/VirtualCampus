@@ -5,17 +5,18 @@ import java.util.ArrayList;
 public class Person extends Message{
     private String Name;
     private String StudentNumber;
+    private String Sex;
     private short AuthorityLevel;
     private short LendBooksNumber;
     private short ECardBalance;
     private String passWord;
-    private boolean isMatched;
     private ArrayList<Course> courses;
 
     private double GPA;
 
+
     public Person(){
-        this.Type = MESSAGE_TYPE.TYPE_PERSON;
+        this.Type = MESSAGE_TYPE.TYPE_QUERY_PERSON;
     }
 
     public void setSemester(String sem) {
@@ -68,21 +69,14 @@ public class Person extends Message{
         this.courses = courses;
     }
 
-    public String getPassWord() {
-        return passWord;
-    }
+    public String getPassWord() { return passWord; }
 
-    public boolean isMatched() {
-        return isMatched;
-    }
 
-    public void setPassWord(String passWord) {
-        this.passWord = passWord;
-    }
+    public void setPassWord(String passWord) { this.passWord = passWord; }
 
-    public void setMatched(boolean matched) {
-        isMatched = matched;
-    }
+    public String getSex() { return Sex; }
+
+    public void setSex(String sex) { Sex = sex; }
 
     public String getName() {
         return Name;

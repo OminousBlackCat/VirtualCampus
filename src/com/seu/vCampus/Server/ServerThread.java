@@ -15,7 +15,6 @@ import com.seu.vCampus.util.Message;
 import com.seu.vCampus.Database.DatabaseConnection;
 import com.seu.vCampus.Database.DatabaseActions;
 import com.seu.vCampus.util.Person;
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 import java.util.ArrayList;
 import javax.xml.crypto.Data;
@@ -82,17 +81,17 @@ public class ServerThread  extends Thread{
                         break;
                     case TYPE_FAIL:
                         break;
-                    case TYPE_PERSON:
+                    case TYPE_QUERY_PERSON:
                         System.out.println("是获取基本信息mes，一卡通号是："+msg.getECardNumber());
-                        try {
-                            act.PersonMessageSend(conn,(Person)msg);
-                            System.out.println(msg.getType());
-                        }catch (SQLException e){
-                            e.printStackTrace();
-                        }
+
+                        act.PersonMessageSend(conn,(Person)msg);
+                        System.out.println(msg.getType());
+
                         oos.writeObject(msg);
                         break;
                     case TYPE_DELETE_COURSE:
+                        System.out.println("是删除课程mes，一卡通号是："+msg.getECardNumber());
+
                         act.deselectCourse(conn, (Course) msg);
                         System.out.println(msg.getType());
                         oos.writeObject(msg);
@@ -100,6 +99,15 @@ public class ServerThread  extends Thread{
                     case TYPE_SELECT_COURSE:
                         act.selectCourse(conn, (Course) msg);
                         System.out.println(msg.getType());
+                        break;
+                    case TYPE_COURSE_ALREADY_SELECTED:
+
+                        break;
+                    case TYPE_COURSE_CONFLICT:
+
+                        break;
+                    case TYPE_COURSE_STUDENTS_FULL:
+
                         break;
                     case TYPE_GET_COURSES_AVAILABLE: //Message must be a person object with the last
                         // element of courses list containing semester info.

@@ -1,8 +1,5 @@
 /target/
 /.idea
-/mySource
-<<<<<<< HEAD
 /.metadata/
-=======
-/.metadata
->>>>>>> de59c441e48944e2dd47bb0bd784cb2612af041b
+/mySource
+

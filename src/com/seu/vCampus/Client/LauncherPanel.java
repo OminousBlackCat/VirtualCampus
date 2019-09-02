@@ -1,7 +1,6 @@
 package com.seu.vCampus.Client;
 
 import com.seu.vCampus.Client.Home.Home;
-import com.seu.vCampus.IO.ClientIO;
 import com.seu.vCampus.util.Login;
 import com.seu.vCampus.util.Message;
 import com.seu.vCampus.util.Person;
@@ -103,7 +102,7 @@ public class LauncherPanel extends JPanel {
                 if(LoginMessage.getType() == Message.MESSAGE_TYPE.TYPE_SUCCESS){
                     launcherData.setLogin(true);
                     Person user = new Person();
-                    user.setType(Message.MESSAGE_TYPE.TYPE_PERSON);
+                    user.setType(Message.MESSAGE_TYPE.TYPE_QUERY_PERSON);
                     user.setECardNumber(ECardNumber.getText());
                     try {
                         launcherData.getIo().SendMessages(user);
