@@ -1,12 +1,9 @@
 package com.seu.vCampus.util;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Goods extends Message{
     protected String goodsNumber;
     protected String goodsName;
-    protected short  goodsPrice;
+    protected double goodsPrice;
     protected short  goodsStock;
 
     public Goods(){this.Type = MESSAGE_TYPE.TYPE_NULL;}
@@ -19,7 +16,7 @@ public class Goods extends Message{
         this.goodsName = goodsName;
     }
 
-    public void setGoodsPrice(short goodsPrice) {
+    public void setGoodsPrice(double goodsPrice) {
         this.goodsPrice = goodsPrice;
     }
 
@@ -35,7 +32,7 @@ public class Goods extends Message{
         return goodsName;
     }
 
-    public short getGoodsPrice() {
+    public double getGoodsPrice() {
         return goodsPrice;
     }
 

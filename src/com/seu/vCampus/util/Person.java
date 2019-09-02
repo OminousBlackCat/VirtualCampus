@@ -8,7 +8,7 @@ public class Person extends Message{
     private String Sex;
     private short AuthorityLevel;
     private short LendBooksNumber;
-    private short ECardBalance;
+    private double ECardBalance;
     private String passWord;
     private ArrayList<Course> courses;
     private double GPA;
@@ -95,7 +95,7 @@ public class Person extends Message{
         return LendBooksNumber;
     }
 
-    public short getECardBalance() {
+    public double getECardBalance() {
         return ECardBalance;
     }
 
@@ -115,7 +115,7 @@ public class Person extends Message{
         LendBooksNumber = lendBooksNumber;
     }
 
-    public void setECardBalance(short ECardBalance) {
+    public void setECardBalance(double ECardBalance) {
         this.ECardBalance = ECardBalance;
     }
 }

@@ -76,6 +76,7 @@ public class courseSelect extends JPanel{
 
     }
 
+
     /**
      * Initialize the contents of the frame.
      */

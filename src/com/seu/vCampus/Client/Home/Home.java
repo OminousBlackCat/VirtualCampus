@@ -4,7 +4,7 @@ import javax.swing.*;
 
 import java.awt.*;
 import com.seu.vCampus.Client.Home.courseSelect;
-public class Home {
+public class Home extends JFrame{
 
     private JFrame Homepage;
 

@@ -282,7 +282,7 @@ public class DatabaseActions {
                 p.setStudentNumber(SN);
                 p.setAuthorityLevel((short) Integer.parseInt(AL));
                 p.setLendBooksNumber((short) Integer.parseInt(LBN));
-                p.setECardBalance((short) Integer.parseInt(ECB));
+                p.setECardBalance(Double.parseDouble(ECB));
                 p.setSex(Sex);
             }
             return p;
@@ -319,7 +319,7 @@ public class DatabaseActions {
             sql.setString(4, p.getSex());
             sql.setString(5, Integer.toString(p.getAuthorityLevel()));
             sql.setString(6, Integer.toString(p.getLendBooksNumber()));
-            sql.setString(7, Integer.toString(p.getECardBalance()));
+            sql.setString(7, Double.toString(p.getECardBalance()));
             sql.setString(8, p.getStudentNumber());
             sql.executeUpdate();
 
@@ -344,7 +344,7 @@ public class DatabaseActions {
 
                 temp.setGoodsNumber(ID);
                 temp.setGoodsName(GN);
-                temp.setGoodsPrice((short) Integer.parseInt(GP));
+                temp.setGoodsPrice(Double.parseDouble(GP));
                 temp.setGoodsStock((short) Integer.parseInt(St));
             }
 
@@ -378,7 +378,7 @@ public class DatabaseActions {
                     "values(?,?,?,?)");
             sql.setString(1, g.getGoodsNumber());
             sql.setString(2, g.getGoodsName());
-            sql.setString(3, Integer.toString(g.getGoodsPrice()));
+            sql.setString(3, Double.toString(g.getGoodsPrice()));
             sql.setString(4, Integer.toString(g.getGoodsStock()));
             sql.executeUpdate();
         }catch (SQLException E)

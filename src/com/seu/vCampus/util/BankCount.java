@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BankCount extends Message {
-    private short BankBalance;
+    private double BankBalance;
     private String BankPassword;
     private List<BankBill> CountBill;
 
     public BankCount() { this.Type = MESSAGE_TYPE.TYPE_NULL; this.CountBill = new ArrayList<>();
     }
 
-    public short getBankBalance() {
+    public double getBankBalance() {
         return BankBalance;
     }
 
