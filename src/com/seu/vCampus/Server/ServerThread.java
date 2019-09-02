@@ -92,15 +92,6 @@ public class ServerThread  extends Thread{
                         act.selectCourse(conn, (Course) msg);
                         System.out.println(msg.getType());
                         break;
-                    case TYPE_COURSE_ALREADY_SELECTED:
-
-                        break;
-                    case TYPE_COURSE_CONFLICT:
-
-                        break;
-                    case TYPE_COURSE_STUDENTS_FULL:
-
-                        break;
                     case TYPE_GET_COURSES_AVAILABLE: //Message must be a person object with the last
                         // element of courses list containing semester info.
                     {
@@ -141,6 +132,17 @@ public class ServerThread  extends Thread{
                         act.deleteGoods(conn,(Goods)msg);
                         System.out.println(msg.getType());
                         oos.writeObject(msg);
+                        break;
+                    case TYPE_QUERY_PERSON_MANAGE:
+                        act.getPersonManage(conn,(PersonManage)msg);
+                        System.out.println(msg.getType());
+                        oos.writeObject(msg);
+                        break;
+                    case TYPE_RECHARGE_ECARD:
+
+                        break;
+                    case TYPE_QUERY_BANK_COUNT:
+
                         break;
 
 

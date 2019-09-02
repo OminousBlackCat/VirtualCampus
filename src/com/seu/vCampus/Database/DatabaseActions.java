@@ -357,6 +357,38 @@ public class DatabaseActions {
         }
     }
 
+    public  PersonManage  getPersonManage(Connection conn,PersonManage PM){
+        try {
+            Statement st = conn.createStatement();
+            ResultSet res = st.executeQuery("select *from Users");
+            Person temp = new Person();
+
+            while (res.next()){
+                String ECardNumber = res.getString("ECardNumber");
+                String userName = res.getString("userName");
+                String PassWord = res.getString("PassWord");
+                String Sex = res.getString("Sex");
+                short AuthorityNumber = (short)Integer.parseInt("AuthorityNumber");
+                short LendBooksNumber = (short)Integer.parseInt("LendBooksNumber");
+                double ECardBalance = Double.parseDouble("ECardBalance");
+
+                temp.setECardNumber(ECardNumber);
+                temp.setName(userName);
+                temp.setPassWord(PassWord);
+                temp.setAuthorityLevel(AuthorityNumber);
+                temp.setSex(Sex);
+                temp.setECardBalance(ECardBalance);
+                temp.setLendBooksNumber(LendBooksNumber);
+
+                PM.addUser(temp);
+            }
+            return PM;
+        }catch (SQLException e){
+            e.printStackTrace();
+            return PM;
+        }
+    }
+
     public ShopManage getShopMessage(Connection conn, ShopManage SM) {//传输商店商品信息
         try {
             Statement st = conn.createStatement();
@@ -373,9 +405,10 @@ public class DatabaseActions {
                 temp.setGoodsName(GN);
                 temp.setGoodsPrice(Double.parseDouble(GP));
                 temp.setGoodsStock((short) Integer.parseInt(St));
+
+                SM.addGoods(temp);
             }
 
-            SM.addGoods(temp);
             return SM;
         }catch (SQLException E)
         {

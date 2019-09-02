@@ -1,4 +1,4 @@
-package com.seu.vCampus.Client;
+package com.seu.vCampus.Client.Launcher;
 
 /**
  * @Launcher.java
@@ -7,6 +7,8 @@ package com.seu.vCampus.Client;
  * @作者：wxy
  * @完成日期：2019_8_26
  */
+
+import com.seu.vCampus.Client.Common;
 
 import javax.swing.*;
 
