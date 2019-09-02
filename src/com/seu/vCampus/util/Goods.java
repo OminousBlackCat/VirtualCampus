@@ -4,32 +4,42 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Goods extends Message{
-    protected List<String> goodsNumber=new ArrayList<String>();
-    protected List<String> goodsName=new ArrayList<String>();
-    protected List<Short>  goodsPrice= new ArrayList<Short>();
-    protected List<Short>  goodsStock= new ArrayList<Short>();
+    protected String goodsNumber;
+    protected String goodsName;
+    protected short  goodsPrice;
+    protected short  goodsStock;
 
     public Goods(){this.Type = MESSAGE_TYPE.TYPE_NULL;}
 
-    public List<Short> getGoodsPrice() { return goodsPrice; }
+    public void setGoodsNumber(String goodsNumber) {
+        this.goodsNumber = goodsNumber;
+    }
 
-    public List<String> getGoodsNumber() {
+    public void setGoodsName(String goodsName) {
+        this.goodsName = goodsName;
+    }
+
+    public void setGoodsPrice(short goodsPrice) {
+        this.goodsPrice = goodsPrice;
+    }
+
+    public void setGoodsStock(short goodsStock) {
+        this.goodsStock = goodsStock;
+    }
+
+    public String getGoodsNumber() {
         return goodsNumber;
     }
 
-    public List<String> getGoodsName() {
+    public String getGoodsName() {
         return goodsName;
     }
 
-    public List<Short> getGoodsStock() { return goodsStock; }
+    public short getGoodsPrice() {
+        return goodsPrice;
+    }
 
-    public void setGoodsStock(List<Short> GoodsStock) {}
-
-    public void setGoodsName(List<String> GoodsName) {}
-
-    public void setGoodsNumber(List<String> GoodsNumber) {}
-
-    public void setGoodsPrice(List<Short> GoodsPrice) {}
-
-    public void setGoods(String Number,String Name,short Price,short Stock){}
+    public short getGoodsStock() {
+        return goodsStock;
+    }
 }
