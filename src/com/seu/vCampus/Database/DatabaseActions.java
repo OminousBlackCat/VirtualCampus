@@ -3,6 +3,7 @@ import com.seu.vCampus.util.*;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * @author Jamie , mbh
@@ -321,7 +322,7 @@ public class DatabaseActions {
         }
     }
 
-    public void deletePerson(Connection conn, Person p){
+    public void deletePerson(Connection conn, Person p){      //删除一位客户的账号信息
         try{
             String sql= "delete from Users where ECardNumber= ?";
             this.stmt=conn.prepareStatement(sql);
@@ -335,10 +336,10 @@ public class DatabaseActions {
         }
     }
 
-    public void insertPerson(Connection conn,Person p){
+    public void insertPerson(Connection conn,Person p){       //添加一位新用户信息
         try{
             PreparedStatement sql = conn.prepareStatement("insert into Users" +
-                    "(ECardNumber,userName,password,Sex,AuthorityNumber,LendBooksNumber,ECardBalance,StudentNumber)" +
+                    "(ECardNumber,userName,PassWord,Sex,AuthorityNumber,LendBooksNumber,ECardBalance,StudentNumber)" +
                     "values(?,?,?,?,?,?,?,?)");
             sql.setString(1, p.getECardNumber());
             sql.setString(2, p.getName());
@@ -389,7 +390,8 @@ public class DatabaseActions {
         }
     }
 
-    public ShopManage getShopMessage(Connection conn, ShopManage SM) {//传输商店商品信息
+    public ShopManage getShopMessage(Connection conn, ShopManage SM) {          //传输商店商品信息
+
         try {
             Statement st = conn.createStatement();
             ResultSet res = st.executeQuery("select *from Goods");
@@ -417,7 +419,7 @@ public class DatabaseActions {
         }
     }
 
-    public void deleteGoods(Connection conn, Goods g){
+    public void deleteGoods(Connection conn, Goods g){     //删除某个商品信息
         try{
             String sql= "delete from Goods where GID= ?";
             this.stmt=conn.prepareStatement(sql);
@@ -431,7 +433,7 @@ public class DatabaseActions {
         }
     }
 
-    public void insertGoods(Connection conn,Goods g) {
+    public void insertGoods(Connection conn,Goods g) {      //添加某个新商品
         try{
             PreparedStatement sql = conn.prepareStatement("insert into Goods(GID,goodsName,Price,Stock)" +
                     "values(?,?,?,?)");
@@ -448,34 +450,96 @@ public class DatabaseActions {
         }
     }
 
-    public BankCount BankMessage(Connection conn, BankCount bankCountUsers)throws SQLException {                        //传输银行客户信息
-//        String sql = "select*from Bank where ECardNumber=?";
-//        this.stmt = conn.prepareStatement(sql);
-//        stmt.setString(1, bankCountUsers.getECardNumber());
-//        ResultSet res = stmt.executeQuery();
-//
-//        if(res.next()){
-//            String BB=res.getString("BankBalance");
-//            String Exp=res.getString("Expenditure");
-//            String Inc=res.getString("Income");
-//
-//            bankCountUsers.setBankBalance((short) Integer.parseInt(BB));
-//            bankCountUsers.setExpenditure((short) Integer.parseInt(Exp));
-//            bankCountUsers.setIncome((short) Integer.parseInt(Inc));
-//        }
-//        return bankCountUsers;
-
+    public BankCount getBankMessage(Connection conn, BankCount bankCountUsers) {              //传输银行客户信息
         try {
-            String sql = "select*from Bank where ECardNumber=?";
+            BankBill temp=new BankBill();
+            String sql = "select*from BankCount where ECardNumber=? and CountPassword=?";
             this.stmt = conn.prepareStatement(sql);
             stmt.setString(1, bankCountUsers.getECardNumber());
+            stmt.setString(2,bankCountUsers.getBankPassword());
             ResultSet res = stmt.executeQuery();
+
+            if(res.next()){
+                String BB=res.getString("BankBalance");
+                bankCountUsers.setBankBalance(Double.parseDouble(BB));
+
+                sql="select*from BankCount FULL INNER JOIN BankBill ON " +    //取两表以一卡通为准的交集
+                        "(BankCount.ECardNumber =BankBill.ECardNumber" +
+                        "where BankBill.ECardNumber=?)";
+                stmt=conn.prepareStatement(sql);
+                stmt.setString(1,bankCountUsers.getECardNumber());
+                ResultSet Res=stmt.executeQuery();
+
+                while(Res.next()){
+                    boolean Type=res.getBoolean("Type");
+                    String BA=res.getString("Amount");
+                    String TransactionTime=res.getString("TransactionTime");
+                    Date BD=res.getDate("TransactionTime");
+
+                    temp.setBillType(Type? BankBill.BILL_TYPE.TYPE_EXPENDITURE: BankBill.BILL_TYPE.TYPE_INCOME);
+                    temp.setBillDate(BD);
+                    temp.setBillAmount(Double.parseDouble(BA));
+                    bankCountUsers.addBill(temp);
+                }
+
+            }
             return bankCountUsers;
 
-
-        }catch (SQLException e){
-            e.printStackTrace();
+        }catch (SQLException E){
+            E.printStackTrace();
+            bankCountUsers.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
             return  bankCountUsers;
+        }
+    }
+
+    public BankBill ECardRecharge(Connection conn,BankBill bankBill)   //一卡通充值
+    {
+        try {
+            String sql = "select*from Users where ECardNumber=?";
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1,bankBill.getECardNumber());
+            ResultSet res=stmt.executeQuery();
+            double ECB;
+            double BB;
+
+            if(res.next()) {
+                ECB = res.getDouble("ECardBalance");
+                ECB = ECB + bankBill.getBillAmount();
+
+                sql = "select*from BankCount where ECardNumber=?";
+                stmt = conn.prepareStatement(sql);
+                stmt.setString(1,bankBill.getECardNumber());
+                res = stmt.executeQuery();
+                BB = res.getDouble("BankBalance") - bankBill.getBillAmount();
+
+                sql = "UPDATE Users set ECardBalance=? where ECardNumber=?";
+                stmt = conn.prepareStatement(sql);
+                stmt.setDouble(1, ECB);
+                stmt.setString(2, bankBill.getECardNumber());
+
+                sql = "UPDATE BankCount set BankBalance=? where ECardNumber=?";
+                stmt = conn.prepareStatement(sql);
+                stmt.setDouble(1,BB);
+                stmt.setString(2,bankBill.getECardNumber());
+
+                sql="insert into BankBill(ECardNumber,Type,Amount,TransactionTime) value (?,?,?,?)";
+                stmt=conn.prepareStatement(sql);
+                stmt.setString(1,bankBill.getECardNumber());
+                stmt.setBoolean(2,true);
+                stmt.setDouble(3,bankBill.getBillAmount());
+                stmt.setDate(4, (java.sql.Date) bankBill.getBillDate());
+
+                bankBill.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
+                return bankBill;
+            }else{
+                bankBill.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
+                return bankBill;
+            }
+        }catch (SQLException E)
+        {
+            E.printStackTrace();
+            bankBill.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
+            return  bankBill;
         }
     }
 

@@ -19,9 +19,7 @@ public class BankCount extends Message {
         return BankPassword;
     }
 
-    public void setBankBalance(short bankBalance) {
-        BankBalance = bankBalance;
-    }
+    public void setBankBalance(double bankBalance) { BankBalance = bankBalance; }
 
     public void setBankPassword(String bankPassword) {
         BankPassword = bankPassword;

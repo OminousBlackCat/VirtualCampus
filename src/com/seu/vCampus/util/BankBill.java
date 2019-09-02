@@ -2,7 +2,7 @@ package com.seu.vCampus.util;
 
 import java.util.Date;
 
-public class BankBill {
+public class BankBill extends Message{
 
     public enum BILL_TYPE{
         TYPE_INCOME,

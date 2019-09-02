@@ -139,10 +139,14 @@ public class ServerThread  extends Thread{
                         oos.writeObject(msg);
                         break;
                     case TYPE_RECHARGE_ECARD:
-
+                        act.ECardRecharge(conn,(BankBill)msg);
+                        System.out.println(msg.getType());
+                        oos.writeObject(msg);
                         break;
                     case TYPE_QUERY_BANK_COUNT:
-
+                        act.getBankMessage(conn,(BankCount)msg);
+                        System.out.println(msg.getType());
+                        oos.writeObject(msg);
                         break;
 
 
