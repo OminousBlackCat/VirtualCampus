@@ -11,7 +11,7 @@ public class BookManage extends Message {
         BookList = new ArrayList<>();
     }
 
-    private void AddBook(Book add){
+    public void AddBook(Book add){
         BookList.add(add);
     }
 }
