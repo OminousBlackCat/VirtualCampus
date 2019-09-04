@@ -130,13 +130,13 @@ public class ServerThread  extends Thread{
                         act.deleteGoods((Goods)msg);
                         break;
                     case TYPE_QUERY_PERSON_MANAGE:
-                        act.getPersonManage(conn,(PersonManage)msg);
+                        act.getPersonManage((PersonManage)msg);
                         break;
                     case TYPE_RECHARGE_ECARD:
-                        act.ECardRecharge(conn,(BankBill)msg);
+                        act.ECardRecharge((BankBill)msg);
                         break;
                     case TYPE_QUERY_BANK_COUNT:
-                        act.getBankMessage(conn,(BankCount)msg);
+                        act.getBankMessage((BankCount)msg);
                         break;
                 }
 
@@ -144,7 +144,7 @@ public class ServerThread  extends Thread{
                 oos.writeObject(msg);
 
                 }
-            }
+
 
         }catch (IOException | ClassNotFoundException ioe){
             ioe.printStackTrace();
