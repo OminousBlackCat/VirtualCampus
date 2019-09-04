@@ -482,7 +482,7 @@ public class DatabaseActions {
             sql.setString(2, p.getName());
             sql.setString(3, p.getPassWord());
             sql.setString(4, p.getSex());
-            sql.setString(5, Integer.toString(p.getAuthorityLevel()));
+            sql.setString(5, Integer.toString(p.getAuthorityLevel().valueOf()));
             sql.setString(6, Integer.toString(p.getLendBooksNumber()));
             sql.setString(7, Double.toString(p.getECardBalance()));
             sql.setString(8, p.getStudentNumber());
@@ -506,7 +506,7 @@ public class DatabaseActions {
                 String userName = res.getString("userName");
                 String PassWord = res.getString("PassWord");
                 String Sex = res.getString("Sex");
-                short AuthorityNumber = (short)Integer.parseInt("AuthorityNumber");
+                int AuthorityNumber = (short)Integer.parseInt("AuthorityNumber");
                 short LendBooksNumber = (short)Integer.parseInt("LendBooksNumber");
                 double ECardBalance = Double.parseDouble("ECardBalance");
 
@@ -679,5 +679,18 @@ public class DatabaseActions {
             return  bankBill;
         }
     }
+
+//    public Book insertBook(Book insert){
+////        try{
+////            PreparedStatement sql = conn.prepareStatement("insert into Books(BID,bookName,,Stock)" +
+////                    "values(?,?,?,?)");
+////            sql.setString(1, g.getGoodsNumber());
+////            sql.setString(2, g.getGoodsName());
+////            sql.setString(3, Double.toString(g.getGoodsPrice()));
+////            sql.setString(4, Integer.toString(g.getGoodsStock()));
+////            sql.executeUpdate();
+////            g.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
+////        }
+//    }
 
 }

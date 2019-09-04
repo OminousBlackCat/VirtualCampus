@@ -6,7 +6,7 @@ public class Person extends Message{
     private String Name;
     private String StudentNumber;
     private String Sex;
-    private short AuthorityLevel;
+    private USER_GROUP AuthorityLevel;
     private short LendBooksNumber;
     private double ECardBalance;
     private String passWord;
@@ -17,6 +17,26 @@ public class Person extends Message{
 
     public Person(){
         this.Type = MESSAGE_TYPE.TYPE_QUERY_PERSON;
+    }
+
+    public enum USER_GROUP{
+        GROUP_STUDENT(0),
+        GROUP_TEACHER(1),
+        GROUP_SHOP_MANAGER(2),
+        GROUP_LIBRARY_MANAGER(3),
+        GROUP_USER_MANAGER(4),
+        ;
+
+        private final int value;
+        USER_GROUP(int v){
+            this.value = v;
+        }
+
+        public int valueOf(){
+            return value;
+        }
+
+
     }
 
     public Person(String lecturerECN) {
@@ -96,7 +116,7 @@ public class Person extends Message{
         return StudentNumber;
     }
 
-    public short getAuthorityLevel() {
+    public USER_GROUP getAuthorityLevel() {
         return AuthorityLevel;
     }
 
@@ -116,8 +136,27 @@ public class Person extends Message{
         StudentNumber = studentNumber;
     }
 
-    public void setAuthorityLevel(short authorityLevel) {
+    public void setAuthorityLevel(USER_GROUP authorityLevel) {
         AuthorityLevel = authorityLevel;
+    }
+    public void setAuthorityLevel(int value){
+        switch (value){
+            case 0:
+                AuthorityLevel = USER_GROUP.GROUP_STUDENT;
+                break;
+            case 1:
+                AuthorityLevel = USER_GROUP.GROUP_TEACHER;
+                break;
+            case 2:
+                AuthorityLevel = USER_GROUP.GROUP_SHOP_MANAGER;
+                break;
+            case 3:
+                AuthorityLevel = USER_GROUP.GROUP_LIBRARY_MANAGER;
+                break;
+            case 4:
+                AuthorityLevel = USER_GROUP.GROUP_USER_MANAGER;
+                break;
+        }
     }
 
     public void setLendBooksNumber(short lendBooksNumber) {
