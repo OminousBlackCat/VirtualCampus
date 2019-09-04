@@ -9,6 +9,7 @@ public class Book extends Message{
     private String Author;
     private boolean isLent;
     private Date LendDate;
+    private short lendDays;
 
 
     /**
@@ -39,6 +40,8 @@ public class Book extends Message{
         return LendDate;
     }
 
+    public short getLendDays() { return lendDays; }
+
     public void setBID(String BID) {
         this.BID = BID;
     }
@@ -58,4 +61,6 @@ public class Book extends Message{
     public void setLendDate(Date lendDate) {
         LendDate = lendDate;
     }
+
+    public void setLendDays(short LendDays) { lendDays = LendDays; }
 }
