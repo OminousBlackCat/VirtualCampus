@@ -495,7 +495,7 @@ public class DatabaseActions {
         }
     }
 
-    public  PersonManage  getPersonManage(,PersonManage PM){
+    public  PersonManage  getPersonManage(PersonManage PM){
         try {
             Statement st = conn.createStatement();
             ResultSet res = st.executeQuery("select *from Users");
