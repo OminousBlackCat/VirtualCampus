@@ -118,7 +118,8 @@ public class LauncherPanel extends JPanel {
                         user = (Person)launcherData.getIo().ReceiveMessage();
                         System.out.println(user.getName()+user.getStudentNumber());
                         launcherData.setBasicInformation(user);
-                        new Home().setVisible(true);
+                        new Home();
+
                     }catch (Exception e2){
                         e2.printStackTrace();
                         JOptionPane.showMessageDialog(null,"网络连接异常",

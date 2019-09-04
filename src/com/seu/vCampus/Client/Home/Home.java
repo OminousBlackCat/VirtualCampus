@@ -1,15 +1,24 @@
 package com.seu.vCampus.Client.Home;
 
 import javax.swing.*;
+import javax.swing.plaf.FontUIResource;
 
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
+import java.util.Enumeration;
 
 import com.seu.vCampus.Client.Common;
 import com.seu.vCampus.Client.Home.courseSelect;
+import com.seu.vCampus.util.Person;
+
 public class Home extends JFrame{
 
-    private JFrame Homepage;
     private Common homeData;
+    private static Point origin = new Point();
+    private static ImageIcon TitleIcon = new ImageIcon("src/icon/cheen.png") ;
+    private JLabel Title;
 
     /**
      * Launch the application.
@@ -18,8 +27,9 @@ public class Home extends JFrame{
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    Home window = new Home();
-                    window.Homepage.setVisible(true);
+                    Common temp = Common.getInstance();
+                    temp.setBasicInformation(new Person());
+                    new Home();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -31,6 +41,8 @@ public class Home extends JFrame{
      * Create the application.
      */
     public Home() {
+        this.setUndecorated(true);
+        this.setAlwaysOnTop(true);
         initialize();
     }
 
@@ -38,19 +50,37 @@ public class Home extends JFrame{
      * Initialize the contents of the frame.
      */
     private void initialize() {
-        Homepage = new JFrame();
-        Homepage.setBounds(100, 100, 1000, 700);
-        Homepage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Homepage.getContentPane().setLayout(new BorderLayout());
+        InitGlobalFont(new Font("alias", Font.PLAIN, 18));
+
+
+
+        setBounds(200, 200, 1200, 864);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        getContentPane().setLayout(null);
+        getContentPane().setBackground(Color.cyan);
+
+
+
+        Title = new JLabel("虚拟校园");
+        Title.setBounds(60,30,80,20);
+
+
+        getContentPane().add(Title);
+        JLabel Icon = new JLabel(TitleIcon);
+        Icon.setBounds(10,10,50,50);
+        getContentPane().add(Icon);
         homeData = Common.getInstance();
 
+
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.LEFT);
-        tabbedPane.setBounds(0, 13, 444, 280);
-        Homepage.getContentPane().add(tabbedPane);
+        tabbedPane.setBounds(0, 64, 1200, 800);
+        getContentPane().add(tabbedPane);
 
 
         JPanel basicInformation = new JPanel();  //*****
         tabbedPane.addTab("个人信息",null,basicInformation,null);
+
+        System.out.println(homeData.getBasicInformation().getAuthorityLevel());
 
         switch (homeData.getBasicInformation().getAuthorityLevel()){
             case GROUP_USER_MANAGER:
@@ -103,5 +133,41 @@ public class Home extends JFrame{
             }
 
         }
+
+
+
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                origin.x = e.getX();
+                origin.y = e.getY();
+            }
+        });
+
+        addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                Point p = getLocation();
+                setLocation(p.x + e.getX() - origin.x, p.y + e.getY() - origin.y);
+            }
+        });
+
+
+        setVisible(true);
+
+
     }
+
+    private static void InitGlobalFont(Font font) {
+        FontUIResource fontRes = new FontUIResource(font);
+        for (Enumeration<Object> keys = UIManager.getDefaults().keys();
+             keys.hasMoreElements(); ) {
+            Object key = keys.nextElement();
+            Object value = UIManager.get(key);
+            if (value instanceof FontUIResource) {
+                UIManager.put(key, fontRes);
+            }
+        }
+    }
+
 }
