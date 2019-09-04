@@ -36,7 +36,7 @@ public class Home extends JFrame{
      */
     private void initialize() {
         Homepage = new JFrame();
-        Homepage.setBounds(100, 100, 476, 353);
+        Homepage.setBounds(100, 100, 1000, 700);
         Homepage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Homepage.getContentPane().setLayout(new BorderLayout());
 
@@ -47,6 +47,7 @@ public class Home extends JFrame{
         JPanel panel = new JPanel();
         ImageIcon image=new ImageIcon("C:\\Users\\Fly\\Desktop\\社会实践\\timg.jpg");
         image.setImage(image.getImage().getScaledInstance(50, 50, 100));
+
         tabbedPane.addTab("学生信息", null, panel, null);
 
         JPanel panel_1 = new JPanel();
