@@ -429,7 +429,7 @@ public class DatabaseActions {
     Database functions relating to bank and shop.
      */
 
-    public Person PersonMessageSend(Person p) { //将用户基本信息发给服务端
+    public Person PersonMessageSend(Person p) {                       //将用户基本信息发给服务端
         try {
             String sql = "select*from Users where ECardNumber=?";
             this.stmt = conn.prepareStatement(sql);
@@ -460,7 +460,7 @@ public class DatabaseActions {
         }
     }
 
-    public void deletePerson(Person p){
+    public void deletePerson(Person p){                //删除一位用户的信息
         try{
             String sql= "delete from Users where ECardNumber= ?";
             this.stmt=conn.prepareStatement(sql);
@@ -474,7 +474,7 @@ public class DatabaseActions {
         }
     }
 
-    public void insertPerson(Person p){
+    public void insertPerson(Person p){                     //添加一位用户信息
         try{
             PreparedStatement sql = conn.prepareStatement("insert into Users" +
                     "(ECardNumber,userName,PassWord,Sex,AuthorityNumber,LendBooksNumber,ECardBalance,StudentNumber)" +
@@ -496,7 +496,7 @@ public class DatabaseActions {
         }
     }
 
-    public  PersonManage  getPersonManage(PersonManage PM){
+    public  PersonManage  getPersonManage(PersonManage PM){         //获取所有用户的信息
         try {
             Statement st = conn.createStatement();
             ResultSet res = st.executeQuery("select *from Users");
