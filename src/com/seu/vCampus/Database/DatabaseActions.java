@@ -12,6 +12,7 @@ import java.util.Date;
  * @description All the functions need to manipulate the database and interact with the server.
  */
 
+@SuppressWarnings("JpaQueryApiInspection")
 public class DatabaseActions {
     private PreparedStatement stmt = null;
 
@@ -431,7 +432,7 @@ public class DatabaseActions {
 
                 sql="select*from BankCount FULL INNER JOIN BankBill ON " +    //取两表以一卡通为准的交集
                         "(BankCount.ECardNumber =BankBill.ECardNumber" +
-                        "where BankBill.ECardNumber=?)";
+                        " and where BankBill.ECardNumber=?)";
                 stmt=conn.prepareStatement(sql);
                 stmt.setString(1,bankCountUsers.getECardNumber());
                 ResultSet Res=stmt.executeQuery();
