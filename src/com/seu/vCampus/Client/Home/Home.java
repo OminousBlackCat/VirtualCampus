@@ -3,10 +3,13 @@ package com.seu.vCampus.Client.Home;
 import javax.swing.*;
 
 import java.awt.*;
+
+import com.seu.vCampus.Client.Common;
 import com.seu.vCampus.Client.Home.courseSelect;
 public class Home extends JFrame{
 
     private JFrame Homepage;
+    private Common homeData;
 
     /**
      * Launch the application.
@@ -39,29 +42,66 @@ public class Home extends JFrame{
         Homepage.setBounds(100, 100, 1000, 700);
         Homepage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Homepage.getContentPane().setLayout(new BorderLayout());
+        homeData = Common.getInstance();
 
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.LEFT);
         tabbedPane.setBounds(0, 13, 444, 280);
         Homepage.getContentPane().add(tabbedPane);
 
-        JPanel panel = new JPanel();
-        ImageIcon image=new ImageIcon("C:\\Users\\Fly\\Desktop\\社会实践\\timg.jpg");
-        image.setImage(image.getImage().getScaledInstance(50, 50, 100));
 
-        tabbedPane.addTab("学生信息", null, panel, null);
+        JPanel basicInformation = new JPanel();  //*****
+        tabbedPane.addTab("个人信息",null,basicInformation,null);
 
-        JPanel panel_1 = new JPanel();
-        tabbedPane.addTab("图书馆", null, panel_1, null);
+        switch (homeData.getBasicInformation().getAuthorityLevel()){
+            case GROUP_USER_MANAGER:
+            {
+                JPanel UserManager = new JPanel();
+                tabbedPane.addTab("管理用户",null,UserManager,null);
+                break;
+            }
+            case GROUP_STUDENT:{
+                JPanel panel_1 = new JPanel();
+                tabbedPane.addTab("图书馆", null, panel_1, null);
 
-        courseSelect panel_2 = new courseSelect();
-        tabbedPane.addTab("选课", null, panel_2, null);
+                courseSelect panel_2 = new courseSelect();
+                tabbedPane.addTab("选课", null, panel_2, null);
 
 
-        JPanel panel_3 = new JPanel();
-        tabbedPane.addTab("商店",null, panel_3, null);
+                JPanel panel_3 = new JPanel();
+                tabbedPane.addTab("商店",null, panel_3, null);
 
 
-        JPanel panel_4 = new JPanel();
-        tabbedPane.addTab("银行", null, panel_4, null);
+                JPanel panel_4 = new JPanel();
+                tabbedPane.addTab("银行", null, panel_4, null);
+                break;
+            }
+            case GROUP_TEACHER:{
+                JPanel panel_1 = new JPanel();
+                tabbedPane.addTab("图书馆", null, panel_1, null);
+
+                courseSelect panel_2 = new courseSelect();
+                tabbedPane.addTab("教务", null, panel_2, null);
+
+
+                JPanel panel_3 = new JPanel();
+                tabbedPane.addTab("商店",null, panel_3, null);
+
+
+                JPanel panel_4 = new JPanel();
+                tabbedPane.addTab("银行", null, panel_4, null);
+                break;
+            }
+            case GROUP_LIBRARY_MANAGER:{
+                JPanel LibraryManager = new JPanel();
+                tabbedPane.addTab("图书管理",null,LibraryManager,null);
+                break;
+            }
+            case GROUP_SHOP_MANAGER:{
+                JPanel ShopManager = new JPanel();
+                tabbedPane.addTab("图书管理",null,ShopManager,null);
+                break;
+            }
+
+        }
     }
 }
