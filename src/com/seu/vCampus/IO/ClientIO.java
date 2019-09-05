@@ -2,8 +2,10 @@ package com.seu.vCampus.IO;
 
 
 import com.seu.vCampus.util.Message;
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 
 
+import javax.swing.*;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.io.*;
@@ -35,21 +37,29 @@ public class ClientIO {
 
     }
 
-    public void SendMessages(Message send) throws Exception {
-       oos = new ObjectOutputStream(os);
-       oos.writeObject(send);
+    public void SendMessages(Message send) {
+        try{
+            oos = new ObjectOutputStream(os);
+            oos.writeObject(send);
+        }catch (Exception e){
+            e.printStackTrace();
+            send.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
+        }
     }
 
-    public Message ReceiveMessage() throws IOException{
-        bis = new BufferedInputStream(is);     //构建缓冲输入流
-        ois = new ObjectInputStream(bis);      //反序列化获得对象
+    public Message ReceiveMessage(){
         Message rtn = new Message();
         try{
+            bis = new BufferedInputStream(is);     //构建缓冲输入流
+            ois = new ObjectInputStream(bis);      //反序列化获得对象
             rtn = (Message) ois.readObject();   //获得message对象
-        }catch (ClassNotFoundException cne){
-            cne.printStackTrace();
+            return  rtn;
+        }catch (Exception e){
+            e.printStackTrace();
+            rtn.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
+            return  rtn;
         }
-        return  rtn;
+
     }
 
 }

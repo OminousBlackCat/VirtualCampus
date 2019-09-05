@@ -467,6 +467,7 @@ public class DatabaseActions {
                 p.setECardBalance(Double.parseDouble(ECB));
                 p.setSex(Sex);
                 p.setAvatarID(avatar);
+                p.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
             }
             return p;
         }catch (SQLException E)

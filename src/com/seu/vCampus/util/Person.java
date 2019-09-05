@@ -19,7 +19,7 @@ public class Person extends Message{
     public Person(){
         this.Type = MESSAGE_TYPE.TYPE_QUERY_PERSON;
         this.AuthorityLevel = USER_GROUP.GROUP_STUDENT;
-        this.AvatarID = "01";
+        this.AvatarID = "1";
     }
 
     public enum USER_GROUP{
