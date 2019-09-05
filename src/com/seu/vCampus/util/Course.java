@@ -83,9 +83,7 @@ public class Course extends Message{
      * The following methods are just basic setters and getters.
      */
 
-    public String getCourseType() {
-        return courseType;
-    }
+    public String getCourseType() { return courseType; }
 
     public void setCourseType(String courseType) {
         this.courseType = courseType;

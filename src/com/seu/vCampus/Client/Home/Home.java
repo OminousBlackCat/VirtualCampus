@@ -3,7 +3,9 @@ package com.seu.vCampus.Client.Home;
 import javax.swing.*;
 
 import java.awt.*;
-import com.seu.vCampus.Client.Home.courseSelect;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 public class Home {
 
     private JFrame Homepage;
@@ -45,16 +47,34 @@ public class Home {
         Homepage.getContentPane().add(tabbedPane);
 
         JPanel panel = new JPanel();
-        ImageIcon image=new ImageIcon("C:\\Users\\Fly\\Desktop\\社会实践\\timg.jpg");
-        image.setImage(image.getImage().getScaledInstance(50, 50, 100));
+        ImageIcon image=new ImageIcon("C:\\Users\\Fly\\Desktop\\111.png");
+        image.setImage(image.getImage().getScaledInstance(80, 80, 100));
         tabbedPane.addTab("学生信息", null, panel, null);
 
         JPanel panel_1 = new JPanel();
         tabbedPane.addTab("图书馆", null, panel_1, null);
 
-        courseSelect panel_2 = new courseSelect();
-        tabbedPane.addTab("选课", null, panel_2, null);
+        courseSelectForStu panel_2 = new courseSelectForStu();
+        tabbedPane.addTab("", null, panel_2, null);
 
+        tabbedPane.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                p(e);
+            }
+            private  void p(MouseEvent e){
+                for (int i = 0; i < tabbedPane.getTabCount(); i++) {
+                    Rectangle rect = tabbedPane.getBoundsAt(i);
+                    if (rect.contains(e.getX(), e.getY())) {
+                        if(i==2)
+                            panel_2.refresh();
+                    }
+                }
+            }
+        }
+
+        );
 
         JPanel panel_3 = new JPanel();
         tabbedPane.addTab("商店",null, panel_3, null);
