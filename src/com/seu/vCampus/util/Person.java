@@ -11,6 +11,7 @@ public class Person extends Message{
     private double ECardBalance;
     private String passWord;
     private ArrayList<Course> courses;
+    private String AvatarID;
 
     private double GPA;
 
@@ -18,6 +19,7 @@ public class Person extends Message{
     public Person(){
         this.Type = MESSAGE_TYPE.TYPE_QUERY_PERSON;
         this.AuthorityLevel = USER_GROUP.GROUP_STUDENT;
+        this.AvatarID = "01";
     }
 
     public enum USER_GROUP{
@@ -170,5 +172,13 @@ public class Person extends Message{
 
     public double getGPA() {
         return GPA;
+    }
+
+    public String getAvatarID() {
+        return AvatarID;
+    }
+
+    public void setAvatarID(String avatarID) {
+        AvatarID = avatarID;
     }
 }

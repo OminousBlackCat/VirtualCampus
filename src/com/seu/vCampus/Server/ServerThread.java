@@ -138,6 +138,18 @@ public class ServerThread  extends Thread{
                     case TYPE_QUERY_BANK_COUNT:
                         act.getBankMessage((BankCount)msg);
                         break;
+                    case TYPE_QUERY_BOOKS:
+                        act.getBookMessage((BookManage)msg);
+                        break;
+                    case TYPE_ADD_BOOK:
+                        act.insertBook((Book)msg);
+                        break;
+                    case TYPE_DELETE_BOOK:
+                        act.deleteBook((Book)msg);
+                        break;
+                    case TYPE_CHANGE_AVATAR:
+                        act.changeAvatar((Person)msg);
+                        break;
                 }
 
                 System.out.println(msg.getType());

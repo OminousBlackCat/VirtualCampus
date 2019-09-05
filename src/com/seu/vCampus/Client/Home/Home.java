@@ -4,20 +4,28 @@ import javax.swing.*;
 import javax.swing.plaf.FontUIResource;
 
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
+import java.awt.event.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Enumeration;
+import javax.swing.Timer;
 
 import com.seu.vCampus.Client.Common;
 import com.seu.vCampus.Client.Home.courseSelect;
 import com.seu.vCampus.util.Person;
 
+
 public class Home extends JFrame{
 
     private Common homeData;
     private static Point origin = new Point();
-    private static ImageIcon TitleIcon = new ImageIcon("src/icon/cheen.png") ;
+    private static ImageIcon TitleIcon = new ImageIcon("src/icon/cheen.png");
+    private static ImageIcon Home = new ImageIcon("src/icon/left/Home.png");
+    private static ImageIcon Library = new ImageIcon("src/icon/left/library.png");
+    private static ImageIcon Shop = new ImageIcon("src/icon/left/shop.png");
+    private static ImageIcon Bank = new ImageIcon("src/icon/left/Bank.png");
+    private static ImageIcon Edu = new ImageIcon("src/icon/left/school.png");
+    private static ImageIcon UserImage = new ImageIcon("src/icon/left/user.png");
     private JLabel Title;
 
     /**
@@ -50,35 +58,125 @@ public class Home extends JFrame{
      * Initialize the contents of the frame.
      */
     private void initialize() {
-        InitGlobalFont(new Font("alias", Font.PLAIN, 18));
+        InitGlobalFont(new Font("Microsoft Yahei", Font.BOLD, 17));
+        homeData = Common.getInstance();
 
 
 
         setBounds(200, 200, 1200, 864);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
-        getContentPane().setBackground(Color.cyan);
+        getContentPane().setBackground(Color.DARK_GRAY);
 
 
 
         Title = new JLabel("虚拟校园");
-        Title.setBounds(60,30,80,20);
-
-
+        Title.setBounds(60,25,80,20);
+        Title.setForeground(Color.WHITE);
         getContentPane().add(Title);
         JLabel Icon = new JLabel(TitleIcon);
+
+
         Icon.setBounds(10,10,50,50);
         getContentPane().add(Icon);
-        homeData = Common.getInstance();
+
+
+        JLabel LogOut  = new JLabel("注销");
+        LogOut.setBounds(1000,8,50,50);
+        LogOut.setForeground(Color.WHITE);
+        LogOut.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                LogOut.setForeground(Color.gray);
+            }
+        });
+        LogOut.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseExited(MouseEvent e) {
+                LogOut.setForeground(Color.WHITE);
+            }
+        });
+        getContentPane().add(LogOut);
+
+        JLabel User = new JLabel("欢迎！"+homeData.getBasicInformation().getName());
+        User.setForeground(Color.WHITE);
+        User.setBounds(890,8,100,50);
+        getContentPane().add(User);
+
+
+        JLabel Time = new JLabel();
+        Date now = new Date();
+        Time.setBounds(580,8,300,50);
+        getContentPane().add(Time);
+        Time.setForeground(Color.WHITE);
+        Timer timer;
+        timer = new Timer(1000,new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                Time.setText(new SimpleDateFormat("yyyy年MM月dd日 EEEE hh:mm:ss").format(new Date()));
+            }
+        });
+        timer.start();
+
+        JLabel Smallest = new JLabel("—");
+        Smallest.setBounds(1120,8,25,50);
+        Smallest.setForeground(Color.WHITE);
+        getContentPane().add(Smallest);
+        Smallest.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                setExtendedState(JFrame.ICONIFIED);
+            }
+        });
+        Smallest.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                Smallest.setForeground(Color.gray);
+            }
+        });
+        Smallest.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseExited(MouseEvent e) {
+                Smallest.setForeground(Color.WHITE);
+            }
+        });
+
+
+        JLabel exit = new JLabel("X");
+        exit.setBounds(1160,8,25,50);
+        exit.setForeground(Color.WHITE);
+        getContentPane().add(exit);
+        exit.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                System.exit(0);
+            }
+        });
+        exit.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                exit.setForeground(Color.gray);
+            }
+        });
+        exit.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseExited(MouseEvent e) {
+                exit.setForeground(Color.WHITE);
+            }
+        });
+
+
 
 
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.LEFT);
+        tabbedPane.setBackground(Color.BLACK);
         tabbedPane.setBounds(0, 64, 1200, 800);
         getContentPane().add(tabbedPane);
 
 
         JPanel basicInformation = new JPanel();  //*****
-        tabbedPane.addTab("个人信息",null,basicInformation,null);
+        tabbedPane.addTab("主页",Home,basicInformation,null);
+        tabbedPane.setForeground(Color.WHITE);
 
         System.out.println(homeData.getBasicInformation().getAuthorityLevel());
 
@@ -86,49 +184,49 @@ public class Home extends JFrame{
             case GROUP_USER_MANAGER:
             {
                 JPanel UserManager = new JPanel();
-                tabbedPane.addTab("管理用户",null,UserManager,null);
+                tabbedPane.addTab("用户管理",UserImage,UserManager,null);
                 break;
             }
             case GROUP_STUDENT:{
                 JPanel panel_1 = new JPanel();
-                tabbedPane.addTab("图书馆", null, panel_1, null);
+                tabbedPane.addTab("图书", Library, panel_1, null);
 
                 courseSelect panel_2 = new courseSelect();
-                tabbedPane.addTab("选课", null, panel_2, null);
+                tabbedPane.addTab("选课", Edu, panel_2, null);
 
 
                 JPanel panel_3 = new JPanel();
-                tabbedPane.addTab("商店",null, panel_3, null);
+                tabbedPane.addTab("商店",Shop, panel_3, null);
 
 
                 JPanel panel_4 = new JPanel();
-                tabbedPane.addTab("银行", null, panel_4, null);
+                tabbedPane.addTab("银行", Bank, panel_4, null);
                 break;
             }
             case GROUP_TEACHER:{
                 JPanel panel_1 = new JPanel();
-                tabbedPane.addTab("图书馆", null, panel_1, null);
+                tabbedPane.addTab("图书馆", Library, panel_1, null);
 
                 courseSelect panel_2 = new courseSelect();
-                tabbedPane.addTab("教务", null, panel_2, null);
+                tabbedPane.addTab("教务", Edu, panel_2, null);
 
 
                 JPanel panel_3 = new JPanel();
-                tabbedPane.addTab("商店",null, panel_3, null);
+                tabbedPane.addTab("商店",Shop, panel_3, null);
 
 
                 JPanel panel_4 = new JPanel();
-                tabbedPane.addTab("银行", null, panel_4, null);
+                tabbedPane.addTab("银行", Bank, panel_4, null);
                 break;
             }
             case GROUP_LIBRARY_MANAGER:{
                 JPanel LibraryManager = new JPanel();
-                tabbedPane.addTab("图书管理",null,LibraryManager,null);
+                tabbedPane.addTab("图书管理",Library,LibraryManager,null);
                 break;
             }
             case GROUP_SHOP_MANAGER:{
                 JPanel ShopManager = new JPanel();
-                tabbedPane.addTab("图书管理",null,ShopManager,null);
+                tabbedPane.addTab("商品管理",Shop,ShopManager,null);
                 break;
             }
 

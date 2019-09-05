@@ -1,6 +1,7 @@
 package com.seu.vCampus.Database;
 import com.seu.vCampus.util.*;
 
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -443,6 +444,7 @@ public class DatabaseActions {
                 String LBN = res.getString("LendBooksNumber");
                 String ECB = res.getString("ECardBalance");
                 String Sex=res.getString("Sex");
+                String avatar = res.getString("AvatarID");
 
                 p.setName(Name);
                 p.setStudentNumber(SN);
@@ -450,6 +452,7 @@ public class DatabaseActions {
                 p.setLendBooksNumber((short) Integer.parseInt(LBN));
                 p.setECardBalance(Double.parseDouble(ECB));
                 p.setSex(Sex);
+                p.setAvatarID(avatar);
             }
             return p;
         }catch (SQLException E)
@@ -477,8 +480,8 @@ public class DatabaseActions {
     public void insertPerson(Person p){                     //添加一位用户信息
         try{
             PreparedStatement sql = conn.prepareStatement("insert into Users" +
-                    "(ECardNumber,userName,PassWord,Sex,AuthorityNumber,LendBooksNumber,ECardBalance,StudentNumber)" +
-                    "values(?,?,?,?,?,?,?,?)");
+                    "(ECardNumber,userName,PassWord,Sex,AuthorityNumber,LendBooksNumber,ECardBalance,StudentNumber,AvatarID)" +
+                    "values(?,?,?,?,?,?,?,?,?)");
             sql.setString(1, p.getECardNumber());
             sql.setString(2, p.getName());
             sql.setString(3, p.getPassWord());
@@ -487,6 +490,7 @@ public class DatabaseActions {
             sql.setString(6, Integer.toString(p.getLendBooksNumber()));
             sql.setString(7, Double.toString(p.getECardBalance()));
             sql.setString(8, p.getStudentNumber());
+            sql.setString(9,p.getAvatarID());
             sql.executeUpdate();
 
         }catch (SQLException E)
@@ -510,6 +514,7 @@ public class DatabaseActions {
                 int AuthorityNumber = (short)Integer.parseInt("AuthorityNumber");
                 short LendBooksNumber = (short)Integer.parseInt("LendBooksNumber");
                 double ECardBalance = Double.parseDouble("ECardBalance");
+                String Avatar = res.getString("AvatarID");
 
                 temp.setECardNumber(ECardNumber);
                 temp.setName(userName);
@@ -518,6 +523,7 @@ public class DatabaseActions {
                 temp.setSex(Sex);
                 temp.setECardBalance(ECardBalance);
                 temp.setLendBooksNumber(LendBooksNumber);
+                temp.setAvatarID(Avatar);
 
                 PM.addUser(temp);
             }
@@ -681,7 +687,7 @@ public class DatabaseActions {
         }
     }
 
-    public BookManage sendBookMessage(BookManage bookManage){            //获取所有图书信息
+    public BookManage getBookMessage(BookManage bookManage){            //获取所有图书信息
         try{
             Statement st=conn.createStatement();
             ResultSet res=st.executeQuery("select *from Books");
@@ -783,6 +789,22 @@ public class DatabaseActions {
         }catch (SQLException E){
             E.printStackTrace();
             book.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
+        }
+    }
+
+    public Person changeAvatar(Person p){     //修改头像
+        try{
+            String sql = "update Users set AvatarID = ? where ECardNumber=?";
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1,p.getAvatarID());
+            stmt.setString(2,p.getECardNumber());
+            stmt.executeUpdate();
+            p.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
+            return p;
+        }catch (SQLException e){
+            e.printStackTrace();
+            p.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
+            return p;
         }
     }
 }
