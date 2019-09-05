@@ -254,6 +254,20 @@ public class DatabaseActions {
                 "= Users.ECardNumber and Users.ECardNumber = ?) and Courses.courseSemester = ? " +
                 "and Courses.enrolledStudents < Courses.maximumStudents";
         setStudentCoursesList(sql,person,semester);
+        ArrayList<Course> cAvailable = person.getCourses();
+        getCoursesSelected(person,semester);
+        ArrayList<Course> cSelected = person.getCourses();
+        if(!cSelected.isEmpty()) {
+            for (Course cA : cAvailable) {
+                for (Course cS : cSelected) {
+                    if (isConflicted(cS,cA)) {
+                        cA.setConflict(true);
+                        break;
+                    }
+                }
+            }
+        }
+        person.setCourses(cAvailable);
     }
 
     /**
