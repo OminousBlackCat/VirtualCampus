@@ -137,6 +137,21 @@ public class ServerThread  extends Thread{
                         break;
                     case TYPE_QUERY_BANK_COUNT:
                         act.getBankMessage((BankCount)msg);
+<<<<<<< HEAD
+=======
+                        break;
+                    case TYPE_QUERY_BOOKS:
+                        act.getBookMessage((BookManage)msg);
+                        break;
+                    case TYPE_ADD_BOOK:
+                        act.insertBook((Book)msg);
+                        break;
+                    case TYPE_DELETE_BOOK:
+                        act.deleteBook((Book)msg);
+                        break;
+                    case TYPE_CHANGE_AVATAR:
+                        act.changeAvatar((Person)msg);
+>>>>>>> 89418970b98ac0dc5c4e3a149ca023e552af0290
                         break;
                 }
 
@@ -144,7 +159,7 @@ public class ServerThread  extends Thread{
                 oos.writeObject(msg);
 
                 }
-            }
+
 
         catch (IOException | ClassNotFoundException ioe){
             ioe.printStackTrace();

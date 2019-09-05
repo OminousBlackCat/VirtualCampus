@@ -149,6 +149,8 @@ public class Shop {
     private JLabel label4;
     private JLabel page4;
     private JPanel product10;
+
+
     private JPanel product11;
     private JPanel product12;
 

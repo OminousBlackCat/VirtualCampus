@@ -1,10 +1,5 @@
 package com.seu.vCampus.util;
 
-import com.sun.deploy.security.ValidationState;
-import net.ucanaccess.commands.ICommand;
-
-import java.io.*;
-
 public class Message implements java.io.Serializable{
 
     protected MESSAGE_TYPE Type;
@@ -35,6 +30,10 @@ public class Message implements java.io.Serializable{
         TYPE_QUERY_GOODS,
         TYPE_DELETE_GOODS,
         TYPE_ADD_GOODS,
+        TYPE_ADD_BOOK,
+        TYPE_DELETE_BOOK,
+        TYPE_QUERY_BOOKS,
+        TYPE_CHANGE_AVATAR,
         ;
     }
 

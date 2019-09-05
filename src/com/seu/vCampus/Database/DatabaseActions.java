@@ -1,6 +1,7 @@
 package com.seu.vCampus.Database;
 import com.seu.vCampus.util.*;
 
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,6 +13,7 @@ import java.util.Date;
  * @description All the functions need to manipulate the database and interact with the server.
  */
 
+@SuppressWarnings("JpaQueryApiInspection")
 public class DatabaseActions {
     private PreparedStatement stmt = null;
     private Connection conn;
@@ -252,6 +254,20 @@ public class DatabaseActions {
                 "= Users.ECardNumber and Users.ECardNumber = ?) and Courses.courseSemester = ? " +
                 "and Courses.enrolledStudents < Courses.maximumStudents";
         setStudentCoursesList(sql,person,semester);
+        ArrayList<Course> cAvailable = person.getCourses();
+        getCoursesSelected(person,semester);
+        ArrayList<Course> cSelected = person.getCourses();
+        if(!cSelected.isEmpty()) {
+            for (Course cA : cAvailable) {
+                for (Course cS : cSelected) {
+                    if (isConflicted(cS,cA)) {
+                        cA.setConflict(true);
+                        break;
+                    }
+                }
+            }
+        }
+        person.setCourses(cAvailable);
     }
 
     /**
@@ -428,7 +444,7 @@ public class DatabaseActions {
     Database functions relating to bank and shop.
      */
 
-    public Person PersonMessageSend(Person p) { //将用户基本信息发给服务端
+    public Person PersonMessageSend(Person p) {                       //将用户基本信息发给服务端
         try {
             String sql = "select*from Users where ECardNumber=?";
             this.stmt = conn.prepareStatement(sql);
@@ -442,6 +458,7 @@ public class DatabaseActions {
                 String LBN = res.getString("LendBooksNumber");
                 String ECB = res.getString("ECardBalance");
                 String Sex=res.getString("Sex");
+                String avatar = res.getString("AvatarID");
 
                 p.setName(Name);
                 p.setStudentNumber(SN);
@@ -449,6 +466,8 @@ public class DatabaseActions {
                 p.setLendBooksNumber((short) Integer.parseInt(LBN));
                 p.setECardBalance(Double.parseDouble(ECB));
                 p.setSex(Sex);
+                p.setAvatarID(avatar);
+                p.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
             }
             return p;
         }catch (SQLException E)
@@ -459,7 +478,7 @@ public class DatabaseActions {
         }
     }
 
-    public void deletePerson(Person p){
+    public void deletePerson(Person p){                //删除一位用户的信息
         try{
             String sql= "delete from Users where ECardNumber= ?";
             this.stmt=conn.prepareStatement(sql);
@@ -473,19 +492,20 @@ public class DatabaseActions {
         }
     }
 
-    public void insertPerson(Person p){
+    public void insertPerson(Person p){                     //添加一位用户信息
         try{
             PreparedStatement sql = conn.prepareStatement("insert into Users" +
-                    "(ECardNumber,userName,PassWord,Sex,AuthorityNumber,LendBooksNumber,ECardBalance,StudentNumber)" +
-                    "values(?,?,?,?,?,?,?,?)");
+                    "(ECardNumber,userName,PassWord,Sex,AuthorityNumber,LendBooksNumber,ECardBalance,StudentNumber,AvatarID)" +
+                    "values(?,?,?,?,?,?,?,?,?)");
             sql.setString(1, p.getECardNumber());
             sql.setString(2, p.getName());
             sql.setString(3, p.getPassWord());
             sql.setString(4, p.getSex());
-            sql.setString(5, Integer.toString(p.getAuthorityLevel()));
+            sql.setString(5, Integer.toString(p.getAuthorityLevel().valueOf()));
             sql.setString(6, Integer.toString(p.getLendBooksNumber()));
             sql.setString(7, Double.toString(p.getECardBalance()));
             sql.setString(8, p.getStudentNumber());
+            sql.setString(9,p.getAvatarID());
             sql.executeUpdate();
 
         }catch (SQLException E)
@@ -495,7 +515,11 @@ public class DatabaseActions {
         }
     }
 
+<<<<<<< HEAD
     public  PersonManage  getPersonManage(PersonManage PM){
+=======
+    public  PersonManage  getPersonManage(PersonManage PM){         //获取所有用户的信息
+>>>>>>> 89418970b98ac0dc5c4e3a149ca023e552af0290
         try {
             Statement st = conn.createStatement();
             ResultSet res = st.executeQuery("select *from Users");
@@ -506,9 +530,10 @@ public class DatabaseActions {
                 String userName = res.getString("userName");
                 String PassWord = res.getString("PassWord");
                 String Sex = res.getString("Sex");
-                short AuthorityNumber = (short)Integer.parseInt("AuthorityNumber");
+                int AuthorityNumber = (short)Integer.parseInt("AuthorityNumber");
                 short LendBooksNumber = (short)Integer.parseInt("LendBooksNumber");
                 double ECardBalance = Double.parseDouble("ECardBalance");
+                String Avatar = res.getString("AvatarID");
 
                 temp.setECardNumber(ECardNumber);
                 temp.setName(userName);
@@ -517,6 +542,7 @@ public class DatabaseActions {
                 temp.setSex(Sex);
                 temp.setECardBalance(ECardBalance);
                 temp.setLendBooksNumber(LendBooksNumber);
+                temp.setAvatarID(Avatar);
 
                 PM.addUser(temp);
             }
@@ -602,7 +628,7 @@ public class DatabaseActions {
 
                 sql="select*from BankCount FULL INNER JOIN BankBill ON " +    //取两表以一卡通为准的交集
                         "(BankCount.ECardNumber =BankBill.ECardNumber" +
-                        "where BankBill.ECardNumber=?)";
+                        " and where BankBill.ECardNumber=?)";
                 stmt=conn.prepareStatement(sql);
                 stmt.setString(1,bankCountUsers.getECardNumber());
                 ResultSet Res=stmt.executeQuery();
@@ -680,4 +706,124 @@ public class DatabaseActions {
         }
     }
 
+    public BookManage getBookMessage(BookManage bookManage){            //获取所有图书信息
+        try{
+            Statement st=conn.createStatement();
+            ResultSet res=st.executeQuery("select *from Books");
+            Book temp=new Book();
+
+            while(res.next()){
+                String BID=res.getString("BID");
+                String BN=res.getString("bookName");
+                String Auth=res.getString("Author");
+                String isLent=res.getString("isLent");
+                Date lD=res.getDate("lendDate");
+                short lday=res.getShort("lendDays");
+                String ECN=res.getString("ECardNumber");
+
+                temp.setBID(BID);
+                temp.setName(BN);
+                temp.setAuthor(Auth);
+                temp.setLent(isLent=="在库"?false:true);
+                temp.setLendDate(lD);
+                temp.setLendDays(lday);
+                temp.setECardNumber(ECN);
+
+                bookManage.AddBook(temp);
+            }
+            return bookManage;
+        }catch (SQLException E){
+            E.printStackTrace();
+            return bookManage;
+        }
+    }
+
+    public void insertBook(Book book){                     //添加一本新书
+        try{
+            PreparedStatement sql = conn.prepareStatement("insert into Books(BID,bookName,Author,isLent,lendDate,lendDays)" +
+                    "values(?,?,?,?,?,?)");
+            sql.setString(1,book.getBID() );
+            sql.setString(2, book.getName());
+            sql.setString(3, book.getAuthor());
+            sql.setBoolean(4, book.isLent());
+            sql.setDate(5, (java.sql.Date) book.getLendDate());
+            sql.setShort(6,book.getLendDays());
+            sql.executeUpdate();
+            book.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
+        }catch (SQLException E)
+        {
+            E.printStackTrace();
+            book.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
+        }
+    }
+
+    public void deleteBook(Book book){                  //从书库中删除一本书
+        try{
+            String sql= "delete from Books where BID= ?";
+            this.stmt=conn.prepareStatement(sql);
+            stmt.setString(1,book.getBID());
+            stmt.executeUpdate();
+
+        }catch (SQLException E)
+        {
+            E.printStackTrace();
+            book.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
+        }
+    }
+
+    public void updateLendDate(Book book,int Type){       //修改书的状态
+        try{
+            switch (Type){
+                case 0: {                                                         //续订
+                    String sql = "UPDATE Books set lendDays=? where BID=?";
+                    stmt = conn.prepareStatement(sql);
+                    stmt.setShort(1, (short) 30);
+                    stmt.setString(2,book.getBID());
+                    book.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
+                    break;
+                }
+                case 1:{                                                          //还书
+                    String sql = "UPDATE Books set lendDays=?,isLent=?,ECardNumber=? where BID=?";
+                    stmt = conn.prepareStatement(sql);
+                    stmt.setShort(1, (short) 0);
+                    stmt.setBoolean(2,false);
+                    stmt.setString(3, "");
+                    stmt.setString(4,book.getBID());
+                    book.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
+                    break;
+                }
+                case 2:{                                                         //借书
+                    String sql = "UPDATE Books set lendDays=?,isLent=?,ECardNumber=? where BID=?";
+                    stmt = conn.prepareStatement(sql);
+                    stmt.setShort(1, (short) 30);
+                    stmt.setBoolean(2,true);
+                    stmt.setString(3, book.getECardNumber());
+                    stmt.setString(4,book.getBID());
+                    book.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
+                    break;
+                }
+                default:
+                    book.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
+            }
+        }catch (SQLException E){
+            E.printStackTrace();
+            book.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
+        }
+    }
+
+    public Person changeAvatar(Person p){     //修改头像
+        try{
+            String sql = "update Users set AvatarID = ? where ECardNumber=?";
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1,p.getAvatarID());
+            stmt.setString(2,p.getECardNumber());
+            stmt.executeUpdate();
+            p.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
+            return p;
+        }catch (SQLException e){
+            e.printStackTrace();
+            p.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
+            return p;
+        }
+    }
 }
