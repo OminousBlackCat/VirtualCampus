@@ -5,7 +5,6 @@ import com.seu.vCampus.util.Message;
 import com.seu.vCampus.util.Person;
 
 import javax.swing.*;
-import javax.swing.border.BevelBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,13 +15,23 @@ public class BasicInformationPanel extends JPanel {
     private JLabel Avatar;
     private ImageIcon AvatarImage;
     private JPanel AvatarPanel;
+    private JLabel CurrentAvatar;
+    private JButton ChangeAvatar;
+    private JButton ConfirmAvatar;
+    private JButton CancelAvatar;
+    private JLabel Welcome;
+    private JLabel BasicTitle;
+    private JLabel Name;
+    private JLabel UserGroup;
+    private JLabel LendBook;
+    private JLabel ECardBlance;
     private static ImageIcon BackGroundImage;
     private static final int AvatarNumber = 23;
     private int current;
     private int next;
 
-    public BasicInformationPanel(){
 
+    private void initialize(){
         userData = Common.getInstance();
         setBackground(Color.gray);
         setForeground(Color.WHITE);
@@ -41,20 +50,21 @@ public class BasicInformationPanel extends JPanel {
         Avatar.setIcon(AvatarImage);
         AvatarPanel.add(Avatar);
         add(AvatarPanel);
-        JLabel CurrentAvatar = new JLabel("当前头像");
+
+        CurrentAvatar = new JLabel("当前头像");
         CurrentAvatar.setForeground(Color.WHITE);
         CurrentAvatar.setBounds(190,270,100,20);
         add(CurrentAvatar);
-        JButton ChangeAvatar = new JButton("修改头像");
+        ChangeAvatar = new JButton("修改头像");
         ChangeAvatar.setBackground(Color.BLACK);
         ChangeAvatar.setForeground(Color.WHITE);
         ChangeAvatar.setBounds(168,300,110,40);
         add(ChangeAvatar);
-        JButton ConfirmAvatar = new JButton("保存");
+        ConfirmAvatar = new JButton("保存");
         ConfirmAvatar.setForeground(Color.WHITE);
         ConfirmAvatar.setBackground(Color.pink);
         ConfirmAvatar.setBounds(100,300,70,40);
-        JButton CancelAvatar = new JButton("取消");
+        CancelAvatar = new JButton("取消");
         CancelAvatar.setForeground(Color.WHITE);
         CancelAvatar.setBackground(Color.ORANGE);
         CancelAvatar.setBounds(270,300,70,40);
@@ -64,10 +74,17 @@ public class BasicInformationPanel extends JPanel {
         ConfirmAvatar.setVisible(false);
 
         current = Integer.parseInt(userData.getBasicInformation().getAvatarID());
+    }
+    public BasicInformationPanel(){
+
+        initialize();
+
+
         ChangeAvatar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(current<23){
+
+                if(current<AvatarNumber){
                     current++;
                     next = current;
                 }else {
@@ -108,6 +125,7 @@ public class BasicInformationPanel extends JPanel {
                 Avatar.setIcon(AvatarImage);
                 CancelAvatar.setVisible(false);
                 ConfirmAvatar.setVisible(false);
+                current = Integer.parseInt(userData.getBasicInformation().getAvatarID());
             }
         });
 
