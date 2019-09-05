@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.Enumeration;
 import javax.swing.Timer;
 
+import com.seu.vCampus.Client.BasicInformation.BasicInformationPanel;
 import com.seu.vCampus.Client.Common;
 import com.seu.vCampus.Client.Home.courseSelect;
 import com.seu.vCampus.util.Person;
@@ -49,6 +50,7 @@ public class Home extends JFrame{
      * Create the application.
      */
     public Home() {
+
         this.setUndecorated(true);
         this.setAlwaysOnTop(true);
         initialize();
@@ -174,7 +176,7 @@ public class Home extends JFrame{
         getContentPane().add(tabbedPane);
 
 
-        JPanel basicInformation = new JPanel();  //*****
+        BasicInformationPanel basicInformation = new BasicInformationPanel();  //*****
         tabbedPane.addTab("主页",Home,basicInformation,null);
         tabbedPane.setForeground(Color.WHITE);
 
