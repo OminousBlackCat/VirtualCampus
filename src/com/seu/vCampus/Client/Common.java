@@ -38,7 +38,6 @@ public class Common {
     private Person User;
     private BankCount userCount;
     private BankBill userBill;
-
     private ShopManage shopInfomation;
 
 

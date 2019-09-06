@@ -19,20 +19,21 @@ public class BasicInformationPanel extends JPanel {
     private JButton ChangeAvatar;
     private JButton ConfirmAvatar;
     private JButton CancelAvatar;
+    private JPanel Information;
     private JLabel Welcome;
     private JLabel BasicTitle;
     private JLabel Name;
     private JLabel UserGroup;
     private JLabel LendBook;
     private JLabel ECardBlance;
-    private ImageIcon BackGroundImage = new ImageIcon("src/BackGroundImage/01.jpg");
-    private JLabel BackGround;
+    private static ImageIcon  BackGroundImage;
+    private JLabel BackGround = new JLabel();
     private static final int AvatarNumber = 31;
     private int current;
     private int next;
 
 
-    private void initialize(){
+    private void initialize(String index){
         userData = Common.getInstance();
 
         setBackground(new Color(63,87,123));
@@ -129,16 +130,28 @@ public class BasicInformationPanel extends JPanel {
         });
 
 
-        BackGround = new JLabel(BackGroundImage);
-        BackGround.setBounds(0,200,1040,650);
+
+
+
+
+
+
+
+
+
+        BackGround.setBounds(0,0,1040,800);
+        ChangeBackGround(index);
+        BackGround.setIcon(BackGroundImage);
+
         add(BackGround);
     }
-    public BasicInformationPanel(){
-        initialize();
+    public BasicInformationPanel(String index){
+        initialize(index);
     }
     public void ChangeBackGround(String index){
-        BackGroundImage = new ImageIcon("src/BackGroundImage/"+index+".jpg");
-        BackGround.setIcon(BackGroundImage);
+        String filepath = "src/BackGroundImage/"+index+".jpg";
+        System.out.println(filepath);
+        BackGroundImage = new ImageIcon(filepath);
     }
 
 
