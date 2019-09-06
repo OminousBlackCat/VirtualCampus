@@ -13,7 +13,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.IOException;
 
 
 public class LauncherPanel extends JPanel {
@@ -95,7 +94,7 @@ public class LauncherPanel extends JPanel {
 
 
                     if(user.getType() == Message.MESSAGE_TYPE.TYPE_SUCCESS){
-                        launcherData.setBasicInformation(user);
+                        launcherData.setUser(user);
                         new Home();
                     }
                     if(user.getType() == Message.MESSAGE_TYPE.TYPE_FAIL){

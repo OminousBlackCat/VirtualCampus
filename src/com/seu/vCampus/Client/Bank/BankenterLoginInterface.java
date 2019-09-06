@@ -1,4 +1,4 @@
-package com.seu.vCampus.Client.Home;
+package com.seu.vCampus.Client.Bank;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,6 +13,7 @@ public class BankenterLoginInterface {
     private JLabel label72;
     /*登陆图片*/
     private JLabel Plabel73;
+    private JButton login_in;
 
 
     {
