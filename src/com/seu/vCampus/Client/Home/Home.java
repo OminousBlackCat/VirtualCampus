@@ -34,6 +34,7 @@ public class Home extends JFrame{
     private BasicInformationPanel homePanel;
     private Shop shopPanel;
     private MangerShop mangerShopPanel;
+    private int skinNumber = 1;
 
 
     private void initialize() {
@@ -153,6 +154,31 @@ public class Home extends JFrame{
             @Override
             public void mouseExited(MouseEvent e) {
                 skin.setForeground(Color.WHITE);
+            }
+        });
+        skin.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                skinNumber ++;
+                switch (skinNumber){
+                    case 1:
+                        getContentPane().setBackground(new Color(63,87,123));
+                        homePanel.ChangeBackGround("01");
+                        break;
+                    case 2:
+                        getContentPane().setBackground(Color.BLACK);
+                        homePanel.ChangeBackGround("02");
+                        break;
+                    case 3:
+                        getContentPane().setBackground(new Color(85,20,0));
+                        homePanel.ChangeBackGround("03");
+                        break;
+                    case 4:
+                        getContentPane().setBackground(new Color(0,70,40));
+                        homePanel.ChangeBackGround("04");
+                        skinNumber = 0;
+                        break;
+                }
             }
         });
 

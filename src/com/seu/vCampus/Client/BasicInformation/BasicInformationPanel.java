@@ -25,7 +25,7 @@ public class BasicInformationPanel extends JPanel {
     private JLabel UserGroup;
     private JLabel LendBook;
     private JLabel ECardBlance;
-    private static ImageIcon BackGroundImage = new ImageIcon("src/BackGroundImage/backGround.jpg");
+    private ImageIcon BackGroundImage = new ImageIcon("src/BackGroundImage/01.jpg");
     private JLabel BackGround;
     private static final int AvatarNumber = 31;
     private int current;

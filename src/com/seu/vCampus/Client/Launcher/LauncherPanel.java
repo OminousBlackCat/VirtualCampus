@@ -81,7 +81,16 @@ public class LauncherPanel extends JPanel {
                 LoginMessage.setECardNumber(ECardNumber.getText());
 
                 launcherData.getIo().SendMessages(LoginMessage);
-                LoginMessage = (Login)launcherData.getIo().ReceiveMessage();
+                try {
+                    LoginMessage = (Login)launcherData.getIo().ReceiveMessage();
+                }catch (Exception e2){
+                    e2.printStackTrace();
+                    JOptionPane.showMessageDialog(null,"连接超时",
+                            "错误",JOptionPane.ERROR_MESSAGE);
+                    Login.setEnabled(true);
+                    return;
+                }
+
 
                 if(LoginMessage.getType() == Message.MESSAGE_TYPE.TYPE_SUCCESS){
                     launcherData.setLogin(true);
