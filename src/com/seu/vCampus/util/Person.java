@@ -19,6 +19,7 @@ public class Person extends Message{
     public Person(){
         this.Type = MESSAGE_TYPE.TYPE_QUERY_PERSON;
         this.AuthorityLevel = USER_GROUP.GROUP_STUDENT;
+        courses = new ArrayList<>();
         this.AvatarID = "1";
     }
 
