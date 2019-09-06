@@ -53,6 +53,15 @@ public class Common {
         io = new ClientIO(ipAddress, Port);
     }
 
+    public void reset(){
+        isLogin = false;
+        io = null;
+        User = null;
+        userCount = null;
+        shopInformation = null;
+        bookInformation = null;
+    }
+
 
 
     public ClientIO getIo() { return io; }
