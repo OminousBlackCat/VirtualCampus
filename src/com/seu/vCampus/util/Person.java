@@ -17,8 +17,8 @@ public class Person extends Message{
 
 
     public Person(){
-        this.ECardNumber = null;
-        this.Name = null;
+        this.ECardNumber = "null";
+        this.Name = "null";
         this.Type = MESSAGE_TYPE.TYPE_QUERY_PERSON;
         this.AuthorityLevel = USER_GROUP.GROUP_STUDENT;
         this.Sex = "女";
