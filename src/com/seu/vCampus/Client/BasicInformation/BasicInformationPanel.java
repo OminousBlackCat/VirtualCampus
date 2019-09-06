@@ -25,17 +25,20 @@ public class BasicInformationPanel extends JPanel {
     private JLabel UserGroup;
     private JLabel LendBook;
     private JLabel ECardBlance;
-    private static ImageIcon BackGroundImage;
-    private static final int AvatarNumber = 23;
+    private static ImageIcon BackGroundImage = new ImageIcon("src/BackGroundImage/backGround.jpg");
+    private JLabel BackGround;
+    private static final int AvatarNumber = 31;
     private int current;
     private int next;
 
 
     private void initialize(){
         userData = Common.getInstance();
-        setBackground(Color.gray);
+
+        setBackground(new Color(63,87,123));
         setForeground(Color.WHITE);
         setLayout(null);
+
 
 
         AvatarPanel = new JPanel();
@@ -44,8 +47,8 @@ public class BasicInformationPanel extends JPanel {
         AvatarPanel.setBackground(Color.WHITE);
         Avatar = new JLabel();
         Avatar.setBackground(Color.WHITE);
-        System.out.println("src/Head_Big/"+userData.getBasicInformation().getAvatarID()+".png");
-        AvatarImage = new ImageIcon("src/Head_Big/"+userData.getBasicInformation().getAvatarID()+".png");
+        System.out.println("src/Head_Big/"+userData.getUser().getAvatarID()+".png");
+        AvatarImage = new ImageIcon("src/Head_Big/"+userData.getUser().getAvatarID()+".png");
         Avatar.setBounds(0,0,180,180);
         Avatar.setIcon(AvatarImage);
         AvatarPanel.add(Avatar);
@@ -73,11 +76,7 @@ public class BasicInformationPanel extends JPanel {
         CancelAvatar.setVisible(false);
         ConfirmAvatar.setVisible(false);
 
-        current = Integer.parseInt(userData.getBasicInformation().getAvatarID());
-    }
-    public BasicInformationPanel(){
-
-        initialize();
+        current = Integer.parseInt(userData.getUser().getAvatarID());
 
 
         ChangeAvatar.addActionListener(new ActionListener() {
@@ -101,13 +100,13 @@ public class BasicInformationPanel extends JPanel {
         ConfirmAvatar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                userData.getBasicInformation().setAvatarID(Integer.toString(next));
-                System.out.println(userData.getBasicInformation().getAvatarID());
-                userData.getBasicInformation().setType(Message.MESSAGE_TYPE.TYPE_CHANGE_AVATAR);
-                userData.getIo().SendMessages(userData.getBasicInformation());
-                userData.setBasicInformation((Person) userData.getIo().ReceiveMessage());
-                System.out.println(userData.getBasicInformation().getType());
-                if(userData.getBasicInformation().getType() == Message.MESSAGE_TYPE.TYPE_SUCCESS){
+                userData.getUser().setAvatarID(Integer.toString(next));
+                System.out.println(userData.getUser().getAvatarID());
+                userData.getUser().setType(Message.MESSAGE_TYPE.TYPE_CHANGE_AVATAR);
+                userData.getIo().SendMessages(userData.getUser());
+                userData.setUser((Person) userData.getIo().ReceiveMessage());
+                System.out.println(userData.getUser().getType());
+                if(userData.getUser().getType() == Message.MESSAGE_TYPE.TYPE_SUCCESS){
                     CancelAvatar.setVisible(false);
                     ConfirmAvatar.setVisible(false);
                 }else {
@@ -121,14 +120,25 @@ public class BasicInformationPanel extends JPanel {
         CancelAvatar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                AvatarImage = new ImageIcon("src/Head_Big/"+userData.getBasicInformation().getAvatarID()+".png");
+                AvatarImage = new ImageIcon("src/Head_Big/"+userData.getUser().getAvatarID()+".png");
                 Avatar.setIcon(AvatarImage);
                 CancelAvatar.setVisible(false);
                 ConfirmAvatar.setVisible(false);
-                current = Integer.parseInt(userData.getBasicInformation().getAvatarID());
+                current = Integer.parseInt(userData.getUser().getAvatarID());
             }
         });
 
+
+        BackGround = new JLabel(BackGroundImage);
+        BackGround.setBounds(0,200,1040,650);
+        add(BackGround);
+    }
+    public BasicInformationPanel(){
+        initialize();
+    }
+    public void ChangeBackGround(String index){
+        BackGroundImage = new ImageIcon("src/BackGroundImage/"+index+".jpg");
+        BackGround.setIcon(BackGroundImage);
     }
 
 

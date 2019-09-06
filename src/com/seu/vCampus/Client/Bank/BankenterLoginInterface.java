@@ -1,4 +1,4 @@
-package com.seu.vCampus.Client.Home;
+package com.seu.vCampus.Client.Bank;
 
 import javax.swing.*;
 import java.awt.*;

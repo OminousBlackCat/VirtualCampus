@@ -1,4 +1,4 @@
-package com.seu.vCampus.Client.Home;
+package com.seu.vCampus.Client.Shop;
 
 import javax.swing.*;
 import java.awt.*;
@@ -663,6 +663,9 @@ public class Shop {
      * @noinspection ALL
      */
     public JComponent $$$getRootComponent$$$() {
+        return panel1;
+    }
+    public JPanel getPanel(){
         return panel1;
     }
 }

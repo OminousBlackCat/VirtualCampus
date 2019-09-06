@@ -1,4 +1,4 @@
-package com.seu.vCampus.Client.Home;
+package com.seu.vCampus.Client.Bank;
 
 import javax.swing.*;
 import java.awt.*;
@@ -85,4 +85,7 @@ public class Bank {
         return panel1;
     }
 
+    public JPanel getPanel(){
+        return panel1;
+    }
 }
