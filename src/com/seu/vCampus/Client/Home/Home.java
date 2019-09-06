@@ -36,6 +36,7 @@ public class Home extends JFrame{
     private static ImageIcon Edu = new ImageIcon("src/icon/left/school.png");
     private static ImageIcon UserImage = new ImageIcon("src/icon/left/user.png");
 
+    private JTabbedPane tabbedPane;
     private Bank bankPanel;
     private BasicInformationPanel homePanel;
     private courseSelectForStu coursePanelS;
@@ -61,164 +62,168 @@ public class Home extends JFrame{
         mangerShopPanel = new MangerShop();
 
 
-
         setBounds(200, 200, 1200, 864);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
         getContentPane().setBackground(Color.BLACK);
 
-
-        JLabel Icon = new JLabel(TitleIcon);
-        Icon.setBounds(10,0,350,64);
-        getContentPane().add(Icon);
-
-
-        JLabel LogOut  = new JLabel("注销");
-        LogOut.setBounds(1000,8,50,50);
-        LogOut.setForeground(Color.WHITE);
-        LogOut.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                dispose();
-                homeData.reset();
-                new Launcher();
-            }
-        });
-        LogOut.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                LogOut.setForeground(Color.gray);
-            }
-        });
-        LogOut.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseExited(MouseEvent e) {
-                LogOut.setForeground(Color.WHITE);
-            }
-        });
-        getContentPane().add(LogOut);
-
-        JLabel User = new JLabel("欢迎！"+homeData.getUser().getName());
-        User.setForeground(Color.WHITE);
-        User.setBounds(850,8,150,50);
-        getContentPane().add(User);
+        /**
+         * @此处代码块用来初始化Home的顶部与侧部装饰元素
+         * */
+        {
+            JLabel Icon = new JLabel(TitleIcon);
+            Icon.setBounds(10, 0, 350, 64);
+            getContentPane().add(Icon);
 
 
-        JLabel Time = new JLabel();
-        Date now = new Date();
-        Time.setBounds(500,8,300,50);
-        getContentPane().add(Time);
-        Time.setForeground(Color.WHITE);
-        Timer timer;
-        timer = new Timer(1000,new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-                Time.setText(new SimpleDateFormat("yyyy年MM月dd日 EEEE hh:mm:ss").format(new Date()));
-            }
-        });
-        timer.start();
-
-        JLabel Smallest = new JLabel("—");
-        Smallest.setBounds(1120,8,25,50);
-        Smallest.setForeground(Color.WHITE);
-        getContentPane().add(Smallest);
-        Smallest.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                setExtendedState(JFrame.ICONIFIED);
-            }
-        });
-        Smallest.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                Smallest.setForeground(Color.gray);
-            }
-        });
-        Smallest.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseExited(MouseEvent e) {
-                Smallest.setForeground(Color.WHITE);
-            }
-        });
-
-
-        JLabel exit = new JLabel("X");
-        exit.setBounds(1160,8,25,50);
-        exit.setForeground(Color.WHITE);
-        getContentPane().add(exit);
-        exit.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                System.exit(0);
-            }
-        });
-        exit.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                exit.setForeground(Color.gray);
-            }
-        });
-        exit.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseExited(MouseEvent e) {
-                exit.setForeground(Color.WHITE);
-            }
-        });
-
-
-        JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.LEFT);
-        tabbedPane.setBackground(Color.BLACK);
-        tabbedPane.setBounds(0, 64, 1200, 800);
-        getContentPane().add(tabbedPane);
-
-
-        tabbedPane.addTab("主页",Home,homePanel,null);
-        tabbedPane.setForeground(Color.WHITE);
-
-        JLabel skin = new JLabel("换肤");
-        skin.setBounds(400,8,50,50);
-        skin.setForeground(Color.WHITE);
-        getContentPane().add(skin);
-        skin.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent e) {skin.setForeground(Color.gray);
-            }
-        });
-        skin.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseExited(MouseEvent e) {
-                skin.setForeground(Color.WHITE);
-            }
-        });
-        skin.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                skinNumber ++;
-                switch (skinNumber){
-                    case 1:
-                        getContentPane().setBackground(new Color(63,87,123));
-                        homePanel = new BasicInformationPanel("01");
-                        tabbedPane.setComponentAt(0,homePanel);
-                        break;
-                    case 2:
-                        getContentPane().setBackground(Color.BLACK);
-                        homePanel = new BasicInformationPanel("02");
-                        tabbedPane.setComponentAt(0,homePanel);
-                        break;
-                    case 3:
-                        getContentPane().setBackground(new Color(85,20,0));
-                        homePanel = new BasicInformationPanel("03");
-                        tabbedPane.setComponentAt(0,homePanel);
-                        break;
-                    case 4:
-                        getContentPane().setBackground(new Color(0,70,40));
-                        homePanel = new BasicInformationPanel("04");
-                        tabbedPane.setComponentAt(0,homePanel);
-                        skinNumber = 0;
-                        break;
+            JLabel LogOut = new JLabel("注销");
+            LogOut.setBounds(1000, 8, 50, 50);
+            LogOut.setForeground(Color.WHITE);
+            LogOut.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    dispose();
+                    homeData.reset();
+                    new Launcher();
                 }
-            }
-        });
+            });
+            LogOut.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                    LogOut.setForeground(Color.gray);
+                }
+            });
+            LogOut.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseExited(MouseEvent e) {
+                    LogOut.setForeground(Color.WHITE);
+                }
+            });
+            getContentPane().add(LogOut);
+
+            JLabel User = new JLabel("欢迎！" + homeData.getUser().getName());
+            User.setForeground(Color.WHITE);
+            User.setBounds(850, 8, 150, 50);
+            getContentPane().add(User);
+
+
+            JLabel Time = new JLabel();
+            Date now = new Date();
+            Time.setBounds(500, 8, 300, 50);
+            getContentPane().add(Time);
+            Time.setForeground(Color.WHITE);
+            Timer timer;
+            timer = new Timer(1000, new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent arg0) {
+                    Time.setText(new SimpleDateFormat("yyyy年MM月dd日 EEEE hh:mm:ss").format(new Date()));
+                }
+            });
+            timer.start();
+
+            JLabel Smallest = new JLabel("—");
+            Smallest.setBounds(1120, 8, 25, 50);
+            Smallest.setForeground(Color.WHITE);
+            getContentPane().add(Smallest);
+            Smallest.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    setExtendedState(JFrame.ICONIFIED);
+                }
+            });
+            Smallest.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                    Smallest.setForeground(Color.gray);
+                }
+            });
+            Smallest.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseExited(MouseEvent e) {
+                    Smallest.setForeground(Color.WHITE);
+                }
+            });
+
+
+            JLabel exit = new JLabel("X");
+            exit.setBounds(1160, 8, 25, 50);
+            exit.setForeground(Color.WHITE);
+            getContentPane().add(exit);
+            exit.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    System.exit(0);
+                }
+            });
+            exit.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                    exit.setForeground(Color.gray);
+                }
+            });
+            exit.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseExited(MouseEvent e) {
+                    exit.setForeground(Color.WHITE);
+                }
+            });
+
+
+            tabbedPane = new JTabbedPane(JTabbedPane.LEFT);
+            tabbedPane.setBackground(Color.BLACK);
+            tabbedPane.setBounds(0, 64, 1200, 800);
+            getContentPane().add(tabbedPane);
+
+
+            tabbedPane.addTab("主页", Home, homePanel, null);
+            tabbedPane.setForeground(Color.WHITE);
+
+            JLabel skin = new JLabel("换肤");
+            skin.setBounds(400, 8, 50, 50);
+            skin.setForeground(Color.WHITE);
+            getContentPane().add(skin);
+            skin.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                    skin.setForeground(Color.gray);
+                }
+            });
+            skin.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseExited(MouseEvent e) {
+                    skin.setForeground(Color.WHITE);
+                }
+            });
+            skin.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    skinNumber++;
+                    switch (skinNumber) {
+                        case 1:
+                            getContentPane().setBackground(new Color(63, 87, 123));
+                            homePanel = new BasicInformationPanel("01");
+                            tabbedPane.setComponentAt(0, homePanel);
+                            break;
+                        case 2:
+                            getContentPane().setBackground(Color.BLACK);
+                            homePanel = new BasicInformationPanel("02");
+                            tabbedPane.setComponentAt(0, homePanel);
+                            break;
+                        case 3:
+                            getContentPane().setBackground(new Color(85, 20, 0));
+                            homePanel = new BasicInformationPanel("03");
+                            tabbedPane.setComponentAt(0, homePanel);
+                            break;
+                        case 4:
+                            getContentPane().setBackground(new Color(0, 70, 40));
+                            homePanel = new BasicInformationPanel("04");
+                            tabbedPane.setComponentAt(0, homePanel);
+                            skinNumber = 0;
+                            break;
+                    }
+                }
+            });
+        }
 
 
         System.out.println(homeData.getUser().getAuthorityLevel());
@@ -272,21 +277,28 @@ public class Home extends JFrame{
 
         }
 
-        addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                origin.x = e.getX();
-                origin.y = e.getY();
-            }
-        });
 
-        addMouseMotionListener(new MouseMotionAdapter() {
-            @Override
-            public void mouseDragged(MouseEvent e) {
-                Point p = getLocation();
-                setLocation(p.x + e.getX() - origin.x, p.y + e.getY() - origin.y);
-            }
-        });
+        /***
+         * @此处的代码块用来为窗口提供鼠标拖动功能
+         */
+
+        {
+            addMouseListener(new MouseAdapter() {
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    origin.x = e.getX();
+                    origin.y = e.getY();
+                }
+            });
+
+            addMouseMotionListener(new MouseMotionAdapter() {
+                @Override
+                public void mouseDragged(MouseEvent e) {
+                    Point p = getLocation();
+                    setLocation(p.x + e.getX() - origin.x, p.y + e.getY() - origin.y);
+                }
+            });
+        }
 
         setVisible(true);
 

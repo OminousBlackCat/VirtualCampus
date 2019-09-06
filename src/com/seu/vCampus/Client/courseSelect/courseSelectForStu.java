@@ -56,8 +56,8 @@ public class courseSelectForStu extends JPanel {
     public void initialize(){
         coursedata = Common.getInstance();
         coursedata.getUser().setType(Message.MESSAGE_TYPE.TYPE_QUERY_PERSON);
-        coursedata.getIo().SendMessages(coursedata.getUser());
-        coursedata.setUser((Person)coursedata.getIo().ReceiveMessage());
+//        coursedata.getIo().SendMessages(coursedata.getUser());
+//        coursedata.setUser((Person)coursedata.getIo().ReceiveMessage());
     }
     public courseSelectForStu() {
         initialize();

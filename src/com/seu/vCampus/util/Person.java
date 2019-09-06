@@ -39,8 +39,21 @@ public class Person extends Message{
         public int valueOf(){
             return value;
         }
-
-
+        public String toString(){
+            switch (value){
+                case 0:
+                    return "学生";
+                case 1:
+                    return "教室";
+                case 2:
+                    return "商店管理员";
+                case 3:
+                    return "图书管理员";
+                case 4:
+                    return "总管理员";
+            }
+            return null;
+        }
     }
 
     public Person(String lecturerECN) {
