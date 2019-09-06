@@ -21,16 +21,19 @@ public class courseSelectForStu extends JPanel{
 
 
     private JPanel panel;
-    private JPanel panel1;
+    private JPanel coursepanel;
+    private JPanel selectpanel;
     private JPanel coursepanel1;
     private JSplitPane splitPane;
     private JPanel selectpanel1;
     private JPanel coursepanel2;
     private JPanel selectpanel2;
     private JLabel label;
+    private JComboBox term;
 
     private Person user;
     private Course course;
+    private Course course1;
     private ArrayList<Course>  courseList;
     /**
      * Launch the application.
@@ -43,7 +46,7 @@ public class courseSelectForStu extends JPanel{
     public courseSelectForStu(){
 
         String[] termlist=new String[] {"第一学期","第二学期"};
-        JComboBox term = new JComboBox(termlist) ;
+        term = new JComboBox(termlist) ;
         setLayout(new BorderLayout());
         add(term, BorderLayout.NORTH);
         panel = new JPanel();
@@ -97,7 +100,7 @@ public class courseSelectForStu extends JPanel{
         JButton jb;
         for(int i=0;i<number;i++){
             course=courseList.get(i);
-            if(course.getCourseSemester()=="19-20-1"){
+            if(course.getCourseSemester()=="2-1"){
                 jtf=new JTextField(course.getCourseNumber()+"    "+course.getCourseName()+"    "+course.getCourseSemester());
                 coursepanel1.add(jtf);
                 jb=new JButton("选择");
@@ -105,36 +108,82 @@ public class courseSelectForStu extends JPanel{
                     @Override
                     public void actionPerformed(ActionEvent e) {
                          panel.add(new JLabel(course.getCourseName()));
-
+                         f5();
                     }
                 });
                 selectpanel1.add(jb);
-                f5();
             }
-            else if(course.getCourseSemester()=="19-20-2"){
+            else if(course.getCourseSemester()=="2-2"){
                 jtf=new JTextField(course.getCourseNumber()+"    "+course.getCourseName()+"    "+course.getCourseSemester());
                 coursepanel2.add(jtf);
                 jb=new JButton("选择");
                 jb.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-
+                        panel.add(new JLabel(course.getCourseName()));
+                        int studentsNow=course.getEnrolledStudents();
+                        course.setEnrolledStudents(studentsNow++);
+                        f5();
                     }
                 });
                 selectpanel2.add(jb);
-                f5();
             }
         }
     }
     public void f5(){
-        panel1=new JPanel();
+        coursepanel=new JPanel();
+        selectpanel=new JPanel();
         courseList=user.getCourses();
-        Course course1=new Course();
+        JTextField textField;
+        JButton button;
         int number=courseList.size();
         for(int i=0;i<number;i++){
             course1=courseList.get(i);
-            if(){
-
+            if(term.getSelectedIndex()==0){
+                if(course1.getCourseSemester()=="2-1"){
+                    textField=new JTextField(course1.getCourseNumber()+"  "+course1.getCourseName());
+                    textField.setEditable(false);
+                    coursepanel.add(textField);
+                    button=new JButton("选择");
+                    if(course1.isConflict()){
+                        button.setEnabled(false);
+                        selectpanel.add(button);
+                    }
+                    else{
+                        button.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                panel.add(new JLabel(course.getCourseName()));
+                                int studentsNow=course1.getEnrolledStudents();
+                                course1.setEnrolledStudents(studentsNow++);
+                                f5();
+                            }
+                        });
+                    }
+                }
+            }
+            else{
+                if(course1.getCourseSemester()=="2-2"){
+                    textField=new JTextField(course1.getCourseNumber()+"  "+course1.getCourseName());
+                    textField.setEditable(false);
+                    coursepanel.add(textField);
+                    button=new JButton("选择");
+                    if(course1.isConflict()||course1.getEnrolledStudents()==course1.getMaximumStudents()){
+                        button.setEnabled(false);
+                        selectpanel.add(button);
+                    }
+                    else{
+                        button.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                panel.add(new JLabel(course.getCourseName()));
+                                int studentsNow=course1.getEnrolledStudents();
+                                course1.setEnrolledStudents(studentsNow++);
+                                f5();
+                            }
+                        });
+                    }
+                }
             }
         }
     }

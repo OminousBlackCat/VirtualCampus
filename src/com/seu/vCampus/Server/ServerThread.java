@@ -9,13 +9,9 @@ package com.seu.vCampus.Server;
 
 
 
-import com.seu.vCampus.util.Course;
-import com.seu.vCampus.util.Login;
-import com.seu.vCampus.util.Message;
+import com.seu.vCampus.util.*;
 import com.seu.vCampus.Database.DatabaseConnection;
 import com.seu.vCampus.Database.DatabaseActions;
-import com.seu.vCampus.util.Person;
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 import java.util.ArrayList;
 import javax.xml.crypto.Data;
@@ -45,8 +41,7 @@ public class ServerThread  extends Thread{
      * 输入的message对象与输出的message对象
      **/
     private Message msg;
-    private Connection conn = DatabaseConnection.getConn();
-    private DatabaseActions act = new DatabaseActions();
+    private DatabaseActions act = new DatabaseActions(DatabaseConnection.getConn());
 
     public ServerThread(Socket s){
         this.socket = s;
@@ -76,53 +71,92 @@ public class ServerThread  extends Thread{
                 System.out.println(msg.getECardNumber());
                 switch (msg.getType()){
                     case TYPE_LOGIN:
-                        act.validatePassword(conn, (Login) msg);
-                        System.out.println(msg.getType());
-                        oos.writeObject(msg);
+                        act.validatePassword((Login) msg);
                         break;
-                    case TYPE_FAIL:
-                        break;
-                    case TYPE_PERSON:
+                    case TYPE_QUERY_PERSON:
                         System.out.println("是获取基本信息mes，一卡通号是："+msg.getECardNumber());
-
-                        act.PersonMessageSend(conn,(Person)msg);
-                        System.out.println(msg.getType());
-
-                        oos.writeObject(msg);
+                        act.PersonMessageSend((Person)msg);
                         break;
                     case TYPE_DELETE_COURSE:
-                        act.deselectCourse(conn, (Course) msg);
-                        System.out.println(msg.getType());
-                        oos.writeObject(msg);
+                        System.out.println("是删除课程mes，一卡通号是："+msg.getECardNumber());
+                        act.deselectCourse((Course) msg);
                         break;
                     case TYPE_SELECT_COURSE:
-                        act.selectCourse(conn, (Course) msg);
-                        System.out.println(msg.getType());
+                        act.selectCourse((Course) msg);
                         break;
                     case TYPE_GET_COURSES_AVAILABLE: //Message must be a person object with the last
                         // element of courses list containing semester info.
                     {
                         int l = ((Person) msg).getCourses().size();
-                        String semester = ((Person) msg).getCourses().get(l).getCourseSemester();
-                        act.getCoursesAvailable(conn, (Person) msg, semester);
-                        System.out.println(msg.getType());
-                        oos.writeObject(msg);
+                        String semester = ((Person) msg).getCourses().get(l - 1).getCourseSemester();
+                        act.getCoursesAvailable((Person) msg, semester);
+                        break;
                     }
-                    case TYPE_GET_COURSES_SELECTED:
-                    {
+                    case TYPE_GET_COURSES_SELECTED: {
                         int l = ((Person) msg).getCourses().size();
-                        if(l != 0) {
-                            String semester = ((Person) msg).getCourses().get(l).getCourseSemester();
-                            act.getCoursesSelected(conn, (Person) msg, semester);
+                        if (l != 0) {
+                            String semester = ((Person) msg).getCourses().get(l-1).getCourseSemester();
+                            act.getCoursesSelected((Person) msg, semester);
+                        } else {
+                            act.getCoursesSelected((Person) msg);
                         }
-                        else {
-                            act.getCoursesSelected(conn, (Person) msg);
-                        }
-                        System.out.println(msg.getType());
-                        oos.writeObject(msg);
+                        break;
                     }
+                    case TYPE_GET_GRADES:
+                        act.getGrades((Person) msg);
+                        break;
+                    case TYPE_SET_GRADE:
+                        act.setGrade((Course) msg);
+                        break;
+                    case TYPE_GRADES_INPUT:
+                        act.gradesInput((Person) msg);
+                        break;
+                    case TYPE_GET_LECTURER_COURSES:
+                        act.getLecturerCourses((Person) msg);
+                        break;
+                    case TYPE_GET_ENROLLED_STUDENTS:
+                        act.getEnrolledStudents((Person) msg);
+                        break;
+                    case TYPE_ADD_COURSE:
+                        act.addCourse((Course) msg);
+                        break;
+                    case TYPE_QUERY_GOODS:
+                        act.getShopMessage((ShopManage) msg);
+                        break;
+                    case TYPE_ADD_GOODS:
+                        act.insertGoods((Goods)msg);
+                        break;
+                    case TYPE_DELETE_GOODS:
+                        act.deleteGoods((Goods)msg);
+                        break;
+                    case TYPE_QUERY_PERSON_MANAGE:
+                        act.getPersonManage((PersonManage)msg);
+                        break;
+                    case TYPE_RECHARGE_ECARD:
+                        act.ECardRecharge((BankBill)msg);
+                        break;
+                    case TYPE_QUERY_BANK_COUNT:
+                        act.getBankMessage((BankCount)msg);
+                        break;
+                    case TYPE_QUERY_BOOKS:
+                        act.getBookMessage((BookManage)msg);
+                        break;
+                    case TYPE_ADD_BOOK:
+                        act.insertBook((Book)msg);
+                        break;
+                    case TYPE_DELETE_BOOK:
+                        act.deleteBook((Book)msg);
+                        break;
+                    case TYPE_CHANGE_AVATAR:
+                        act.changeAvatar((Person)msg);
+                        break;
                 }
-            }
+
+                System.out.println(msg.getType());
+                oos.writeObject(msg);
+
+                }
+
 
         }catch (IOException | ClassNotFoundException ioe){
             ioe.printStackTrace();

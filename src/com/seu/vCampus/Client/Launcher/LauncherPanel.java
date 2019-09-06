@@ -1,5 +1,6 @@
-package com.seu.vCampus.Client;
+package com.seu.vCampus.Client.Launcher;
 
+import com.seu.vCampus.Client.Common;
 import com.seu.vCampus.Client.Home.Home;
 import com.seu.vCampus.util.Login;
 import com.seu.vCampus.util.Message;
@@ -81,55 +82,30 @@ public class LauncherPanel extends JPanel {
                 LoginMessage.setPassWord(String.valueOf(passWord.getPassword()));
                 LoginMessage.setECardNumber(ECardNumber.getText());
 
-                try{
-                    launcherData.getIo().SendMessages(LoginMessage);
-                }catch (Exception ioe){
-                    ioe.printStackTrace();
-                    JOptionPane.showMessageDialog(null,"网络连接异常",
-                            "错误",JOptionPane.ERROR_MESSAGE);
-                    Login.setEnabled(true);
-                    return;
-                }
-
-                try{
-                    LoginMessage = (Login)launcherData.getIo().ReceiveMessage();
-                }catch (IOException ioe){
-                    JOptionPane.showMessageDialog(null,"网络连接异常",
-                            "错误",JOptionPane.ERROR_MESSAGE);
-                    Login.setEnabled(true);
-                    return;
-                }
+                launcherData.getIo().SendMessages(LoginMessage);
+                LoginMessage = (Login)launcherData.getIo().ReceiveMessage();
 
                 if(LoginMessage.getType() == Message.MESSAGE_TYPE.TYPE_SUCCESS){
                     launcherData.setLogin(true);
                     Person user = new Person();
-                    user.setType(Message.MESSAGE_TYPE.TYPE_PERSON);
+                    user.setType(Message.MESSAGE_TYPE.TYPE_QUERY_PERSON);
                     user.setECardNumber(ECardNumber.getText());
-                    try {
-                        launcherData.getIo().SendMessages(user);
-                    }catch (Exception e1){
-                        e1.printStackTrace();
-                        JOptionPane.showMessageDialog(null,"网络连接异常",
-                                "错误",JOptionPane.ERROR_MESSAGE);
-                        Login.setEnabled(true);
-                        return;
-                    }
-                    try{
-                        user = (Person)launcherData.getIo().ReceiveMessage();
-                        System.out.println(user.getName()+user.getStudentNumber());
+                    launcherData.getIo().SendMessages(user);
+                    user = (Person)launcherData.getIo().ReceiveMessage();
+                    System.out.println(user.getName()+user.getStudentNumber());
+
+
+                    if(user.getType() == Message.MESSAGE_TYPE.TYPE_SUCCESS){
                         launcherData.setBasicInformation(user);
                         new Home();
-
-
-
-                    }catch (Exception e2){
-                        e2.printStackTrace();
+                    }
+                    if(user.getType() == Message.MESSAGE_TYPE.TYPE_FAIL){
                         JOptionPane.showMessageDialog(null,"网络连接异常",
                                 "错误",JOptionPane.ERROR_MESSAGE);
                         Login.setEnabled(true);
                     }
-
-                }else {
+                }
+                else {
                     JOptionPane.showMessageDialog(null,"用户名或密码错误",
                             "错误",JOptionPane.ERROR_MESSAGE);
                     Login.setEnabled(true);

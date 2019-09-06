@@ -20,6 +20,7 @@ public class Course extends Message{
     private int maximumStudents;
     private int enrolledStudents;
     private int courseGrade;
+    private boolean isConflict;
 
     /**
      *Initialize Message type as null, since the specific action to be performed is unknown.
@@ -27,9 +28,18 @@ public class Course extends Message{
     public Course(){
         this.Type = MESSAGE_TYPE.TYPE_NULL; //Default type
     }
+    public Course(String ecn, String courseNumber, int grade) {
+        this.setECardNumber(ecn);
+        this.setCourseNumber(courseNumber);
+        this.setCourseGrade(grade);
+    }
+
+    public Course(String semester) {
+        this.setCourseSemester(semester);
+    }
 
     /**
-     * Constructor for course selection use.
+     * Constructor for courses query use.
      * @param courseNumber Course Number
      * @param courseName Course Name
      * @param courseSemester Semester of this course
@@ -167,5 +177,13 @@ public class Course extends Message{
 
     public void setCourseGrade(int courseGrade) {
         this.courseGrade = courseGrade;
+    }
+
+    public boolean isConflict() {
+        return isConflict;
+    }
+
+    public void setConflict(boolean conflict) {
+        isConflict = conflict;
     }
 }
