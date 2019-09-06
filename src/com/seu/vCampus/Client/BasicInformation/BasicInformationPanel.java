@@ -4,6 +4,7 @@ import com.seu.vCampus.Client.Common;
 import com.seu.vCampus.util.Message;
 import com.seu.vCampus.util.Person;
 
+import javax.jws.soap.SOAPBinding;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -137,6 +138,13 @@ public class BasicInformationPanel extends JPanel {
          * @用户基本信息显示相关代码
          * */
         {
+            Sex = new JLabel();
+            UserName = new JLabel();
+            StudentNumber = new JLabel();
+            Group = new JLabel();
+            ECardNumber = new JLabel();
+            LendBookNumber = new JLabel();
+            ECardBalance = new JLabel();
             JLabel UserNameT = new JLabel("用户名：");
             JLabel StudentNumberT = new JLabel("学号：");
             JLabel SexT = new JLabel("性别：");
@@ -144,6 +152,8 @@ public class BasicInformationPanel extends JPanel {
             JLabel ECardNumberT = new JLabel("一卡通号：");
             JLabel LendBookNumberT = new JLabel("当前已借阅    本图书");
             JLabel ECardBalanceT = new JLabel("一卡通余额：");
+            System.out.println(userData.getUser().getAuthorityLevel());
+            System.out.println(userData.getUser().getSex());
             Sex.setText(userData.getUser().getSex());
             UserName.setText(userData.getUser().getName());
             StudentNumber.setText(userData.getUser().getStudentNumber());

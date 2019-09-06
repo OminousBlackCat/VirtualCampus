@@ -17,8 +17,14 @@ public class Person extends Message{
 
 
     public Person(){
+        this.ECardNumber = null;
+        this.Name = null;
         this.Type = MESSAGE_TYPE.TYPE_QUERY_PERSON;
         this.AuthorityLevel = USER_GROUP.GROUP_STUDENT;
+        this.Sex = "女";
+        this.StudentNumber = "000000";
+        this.LendBooksNumber = 0;
+        this.ECardBalance = 0.0;
         courses = new ArrayList<>();
         this.AvatarID = "1";
     }
