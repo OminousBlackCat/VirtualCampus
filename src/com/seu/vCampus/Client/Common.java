@@ -25,7 +25,7 @@ public class Common {
 
 /**
  * 在下方添加客户端所需要的信息
- * 例：显示基本细心需要一个Person对象
+ * 例：显示基本信息需要一个Person对象
  * 对应添加：private Person BasicInformationPanel
  * 并且生成对应的get与set函数
  * 事件响应函数处理输入输出流所传输的对象即为此对象
