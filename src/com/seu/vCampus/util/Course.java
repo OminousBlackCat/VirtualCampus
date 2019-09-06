@@ -21,6 +21,23 @@ public class Course extends Message{
     private int enrolledStudents;
     private int courseGrade;
     private boolean isConflict;
+    private boolean isExam;
+    private String examTime;
+    private String examPlace;
+
+    /**
+     * Constructor for query courses that have exams.
+     * @param courseNumber Course Number
+     * @param courseName Course Name
+     * @param courseSemester Course Semester
+     * @param courseLecturer Course Lecturer
+     */
+    public Course(String courseNumber, String courseName, String courseSemester, String courseLecturer) {
+        this.courseNumber = courseNumber;
+        this.courseName = courseName;
+        this.courseSemester = courseSemester;
+        this.courseLecturer = courseLecturer;
+    }
 
     /**
      *Initialize Message type as null, since the specific action to be performed is unknown.
@@ -28,6 +45,7 @@ public class Course extends Message{
     public Course(){
         this.Type = MESSAGE_TYPE.TYPE_NULL; //Default type
     }
+
     public Course(String ecn, String courseNumber, int grade) {
         this.setECardNumber(ecn);
         this.setCourseNumber(courseNumber);
@@ -87,6 +105,34 @@ public class Course extends Message{
         this.courseCredit = courseCredit;
         this.courseType = courseType;
         this.courseGrade = courseGrade;
+    }
+
+    /**
+     * Constructor for adding a new course
+     * @param courseNumber Course Number
+     * @param courseName Course Name
+     * @param courseSemester Semester of this course
+     * @param courseLecturer Lecturer
+     * @param coursePlace Classroom or lecture hall of course
+     * @param courseTime Time for course, should be formatted like '19-20-1'
+     * @param courseCredit Course credit
+     * @param courseType Type of course
+     * @param maximumStudents Maximum student capacity
+     * @param isExam Whether there will be an exam
+     */
+    public Course(String courseNumber, String courseName, String courseSemester, String courseLecturer,
+                  String coursePlace, String courseTime, String courseCredit, String courseType,
+                  int maximumStudents, boolean isExam) {
+        this.courseNumber = courseNumber;
+        this.courseName = courseName;
+        this.courseSemester = courseSemester;
+        this.courseLecturer = courseLecturer;
+        this.coursePlace = coursePlace;
+        this.courseTime = courseTime;
+        this.courseCredit = courseCredit;
+        this.courseType = courseType;
+        this.maximumStudents = maximumStudents;
+        this.isExam = isExam;
     }
 
     /**
@@ -188,4 +234,29 @@ public class Course extends Message{
     public void setConflict(boolean conflict) {
         isConflict = conflict;
     }
+
+    public String getExamTime() {
+        return examTime;
+    }
+
+    public void setExamTime(String examTime) {
+        this.examTime = examTime;
+    }
+
+    public boolean isExam() {
+        return isExam;
+    }
+
+    public void setExam(boolean exam) {
+        isExam = exam;
+    }
+
+    public String getExamPlace() {
+        return examPlace;
+    }
+
+    public void setExamPlace(String examPlace) {
+        this.examPlace = examPlace;
+    }
+
 }
