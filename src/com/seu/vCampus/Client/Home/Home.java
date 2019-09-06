@@ -37,8 +37,10 @@ public class Home extends JFrame{
 
     private Bank bankPanel;
     private BasicInformationPanel homePanel;
+    private courseSelectForStu coursePanelS;
     private Shop shopPanel;
     private MangerShop mangerShopPanel;
+
     private int skinNumber = 1;
 
 
@@ -201,7 +203,6 @@ public class Home extends JFrame{
         tabbedPane.setForeground(Color.WHITE);
 
         System.out.println(homeData.getUser().getAuthorityLevel());
-
         switch (homeData.getUser().getAuthorityLevel()){
             case GROUP_USER_MANAGER:
             {
@@ -213,8 +214,8 @@ public class Home extends JFrame{
                 JPanel panel_1 = new JPanel();
                 tabbedPane.addTab("图书", Library, panel_1, null);
 
-                courseSelectForStu panel_2 = new courseSelectForStu();
-                tabbedPane.addTab("选课", Edu, panel_2, null);
+                coursePanelS = new courseSelectForStu();
+                tabbedPane.addTab("选课", Edu, coursePanelS, null);
 
                 JPanel panel_3 = new JPanel();
                 tabbedPane.addTab("商店",Shop, shopPanel.getPanel(), null);
@@ -284,7 +285,9 @@ public class Home extends JFrame{
             public void run() {
                 try {
                     Common temp = Common.getInstance();
-                    temp.setUser(new Person());
+                    Person test = new Person();
+                    test.setAuthorityLevel(Person.USER_GROUP.GROUP_STUDENT);
+                    temp.setUser(test);
                     new Home();
                 } catch (Exception e) {
                     e.printStackTrace();

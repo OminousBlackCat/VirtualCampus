@@ -19,7 +19,13 @@ import com.seu.vCampus.util.Course;
 import com.seu.vCampus.util.Message;
 import com.seu.vCampus.util.Person;
 
-public class courseSelectForStu extends JPanel{
+public class courseSelectForStu extends JPanel {
+    public static void main(String[] args) {
+        JFrame jf = new JFrame();
+        courseSelectForStu jp = new courseSelectForStu();
+        jf.add(jp);
+        jf.setVisible(true);
+    }
 
 
     private JPanel panel;
@@ -37,7 +43,7 @@ public class courseSelectForStu extends JPanel{
     private Person user;
     private Course course;
     private Course course1;
-    private ArrayList<Course>  courseList;
+    private ArrayList<Course> courseList;
     /**
      * Launch the application.
      */
@@ -46,15 +52,18 @@ public class courseSelectForStu extends JPanel{
     /**
      * Create the application.
      */
+
     public void initialize(){
         coursedata = Common.getInstance();
-        courseList=coursedata.getUser().getCourses();
+        coursedata.getUser().setType(Message.MESSAGE_TYPE.TYPE_QUERY_PERSON);
+        coursedata.getIo().SendMessages(coursedata.getUser());
+        coursedata.setUser((Person)coursedata.getIo().ReceiveMessage());
     }
-    public void courseSelectForStu(){
-
+    public courseSelectForStu() {
         initialize();
-        String[] termlist=new String[] {"第一学期","第二学期"};
-        term = new JComboBox(termlist) ;
+        courseList = coursedata.getUser().getCourses();
+        String[] termlist = new String[]{"第一学期", "第二学期"};
+        term = new JComboBox(termlist);
         setLayout(new BorderLayout());
         add(term, BorderLayout.NORTH);
         panel = new JPanel();
@@ -73,9 +82,9 @@ public class courseSelectForStu extends JPanel{
         selectpanel1 = new JPanel();//第一学期选择按钮
         splitPane.setRightComponent(selectpanel1);
 
-        coursepanel2 =new JPanel();//第二学期可选课程
+        coursepanel2 = new JPanel();//第二学期可选课程
 
-        selectpanel2=new JPanel();//第二学期可选课程
+        selectpanel2 = new JPanel();//第二学期可选课程
         add(splitPane, BorderLayout.CENTER);
 
         term.addItemListener(new ItemListener(){//选择哪个学期
@@ -98,11 +107,10 @@ public class courseSelectForStu extends JPanel{
             }
 
         });
-
+        refresh();
     }
 
     public void refresh(){
-        courseList =user.getCourses();
         int number = courseList.size();
         JTextField jtf;
         JButton jb;
@@ -141,7 +149,6 @@ public class courseSelectForStu extends JPanel{
     public void f5(){
         coursepanel=new JPanel();
         selectpanel=new JPanel();
-        courseList=user.getCourses();
         JTextField textField;
         JButton button;
         int number=courseList.size();
@@ -195,8 +202,8 @@ public class courseSelectForStu extends JPanel{
             }
         }
     }
-    /**
-     * Initialize the contents of the frame.
-     */
+        /**
+         * Initialize the contents of the frame.
+         */
 
-}
+    }
