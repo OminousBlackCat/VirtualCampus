@@ -35,7 +35,7 @@ public class Common {
  * UI中添加刷新按钮，所有显示的JSwing控件均与此对象关联
  * 便形成MVC模式
  * */
-    private Person BasicInformation;
+    private Person User;
     private BankCount userCount;
     private BankBill userBill;
 
@@ -76,10 +76,10 @@ public class Common {
     }
     public boolean isLogin() { return isLogin; }
     public void setLogin(boolean login) { isLogin = login; }
-    public void setBasicInformation(Person basicInformation) {
-        BasicInformation = basicInformation;
+    public void setUser(Person user) {
+        User = user;
     }
-    public Person getBasicInformation() {
-        return BasicInformation;
+    public Person getUser() {
+        return User;
     }
 }
