@@ -162,12 +162,59 @@ public class BasicInformationPanel extends JPanel {
             LendBookNumber.setText(Integer.toString(userData.getUser().getLendBooksNumber()));
             ECardBalance.setText(Double.toString(userData.getUser().getECardBalance()));
 
-            UserNameT.setBounds(130,80,50,30);
-            UserName.setBounds(180,80,50,30);
+            UserNameT.setBounds(130,100,80,30);
+            UserName.setBounds(200,100,50,30);
+            UserNameT.setForeground(Color.WHITE);
+            UserName.setForeground(Color.cyan);
+            UserNameT.setFont(new Font("Microsoft Yahei", Font.BOLD,20));
+            UserName.setFont(new Font("Microsoft Yahei", Font.BOLD,20));
             add(UserName);
             add(UserNameT);
 
+            ECardNumberT.setBounds(340,100,100,30);
+            ECardNumber.setBounds(440,100,100,30);
+            ECardNumberT.setForeground(Color.WHITE);
+            ECardNumber.setForeground(Color.YELLOW);
+            ECardNumber.setFont(new Font("Microsoft Yahei", Font.BOLD,20));
+            ECardNumberT.setFont(new Font("Microsoft Yahei", Font.BOLD,20));
+            add(ECardNumber);
+            add(ECardNumberT);
 
+            StudentNumberT.setBounds(130,160,80,30);
+            StudentNumber.setBounds(200,160,80,30);
+            StudentNumberT.setForeground(Color.WHITE);
+            StudentNumber.setForeground(Color.cyan);
+            StudentNumberT.setFont(new Font("Microsoft Yahei", Font.BOLD,20));
+            StudentNumber.setFont(new Font("Microsoft Yahei", Font.BOLD,20));
+            add(StudentNumberT);
+            add(StudentNumber);
+
+            GroupT.setBounds(340,160,100,30);
+            Group.setBounds(440,160,100,30);
+            GroupT.setForeground(Color.WHITE);
+            Group.setForeground(Color.YELLOW);
+            GroupT.setFont(new Font("Microsoft Yahei", Font.BOLD,20));
+            Group.setFont(new Font("Microsoft Yahei", Font.BOLD,20));
+            add(Group);
+            add(GroupT);
+
+            ECardBalanceT.setBounds(200,220,150,30);
+            ECardBalance.setBounds(350,220,100,30);
+            ECardBalanceT.setForeground(Color.GREEN);
+            ECardBalance.setForeground(Color.RED);
+            ECardBalanceT.setFont(new Font("Microsoft Yahei", Font.BOLD,25));
+            ECardBalance.setFont(new Font("Microsoft Yahei", Font.BOLD,25));
+            add(ECardBalanceT);
+            add(ECardBalance);
+
+            LendBookNumberT.setBounds(180,280,300,30);
+            LendBookNumber.setBounds(310,280,60,30);
+            LendBookNumberT.setForeground(Color.GREEN);
+            LendBookNumber.setForeground(Color.RED);
+            LendBookNumberT.setFont(new Font("Microsoft Yahei", Font.BOLD,25));
+            LendBookNumber.setFont(new Font("Microsoft Yahei", Font.BOLD,25));
+            add(LendBookNumberT);
+            add(LendBookNumber);
 
 
         }
