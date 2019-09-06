@@ -12,10 +12,7 @@ package com.seu.vCampus.Client;
 
 
 import com.seu.vCampus.IO.ClientIO;
-import com.seu.vCampus.util.BankBill;
-import com.seu.vCampus.util.BankCount;
-import com.seu.vCampus.util.Person;
-import com.seu.vCampus.util.ShopManage;
+import com.seu.vCampus.util.*;
 
 
 public class Common {
@@ -38,8 +35,8 @@ public class Common {
     private Person BasicInformation;
     private BankCount userCount;
     private BankBill userBill;
-
-    private ShopManage shopInfomation;
+    private ShopManage shopInformation;
+    private BookManage bookInformation;
 
 
 
@@ -82,7 +79,14 @@ public class Common {
     public void setBasicInformation(Person basicInformation) {
         BasicInformation = basicInformation;
     }
-    public Person getBasicInformation() {
-        return BasicInformation;
-    }
+    public void setUserBill(BankBill UserBill) { userBill = UserBill; }
+    public void setUserCount(BankCount UserCount) { userCount = UserCount; }
+    public void setShopInformation(ShopManage ShopInfomation) { shopInformation = ShopInfomation; }
+    public void setBookInformation(BookManage BookInfomation) { bookInformation = BookInfomation; }
+
+    public Person getBasicInformation() { return BasicInformation; }
+    public BankBill getUserBill() { return userBill; }
+    public BankCount getUserCount() { return userCount; }
+    public ShopManage getShopInformation() { return shopInformation; }
+    public BookManage getBookInformation() { return bookInformation; }
 }
