@@ -44,19 +44,30 @@ public class Home extends JFrame{
     private int skinNumber = 1;
 
 
+    private void LoadCommon(){
+        homeData = Common.getInstance();
+
+
+
+    }
+
+
     private void initialize() {
         InitGlobalFont(new Font("Microsoft Yahei", Font.BOLD, 17));
-        homePanel = new BasicInformationPanel();
+        LoadCommon();
+
+
+        homePanel = new BasicInformationPanel("01");
         bankPanel = new Bank();
         shopPanel = new Shop();
         mangerShopPanel = new MangerShop();
-        homeData = Common.getInstance();
+
 
 
         setBounds(200, 200, 1200, 864);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
-        getContentPane().setBackground(Color.DARK_GRAY);
+        getContentPane().setBackground(new Color(63,87,123));
 
 
         JLabel Icon = new JLabel(TitleIcon);
@@ -148,6 +159,17 @@ public class Home extends JFrame{
             }
         });
 
+
+        JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.LEFT);
+        tabbedPane.setBackground(Color.BLACK);
+        tabbedPane.setBounds(0, 64, 1200, 800);
+        getContentPane().add(tabbedPane);
+
+
+        BasicInformationPanel basicInformation = new BasicInformationPanel("01");  //*****
+        tabbedPane.addTab("主页",Home,basicInformation,null);
+        tabbedPane.setForeground(Color.WHITE);
+
         JLabel skin = new JLabel("换肤");
         skin.setBounds(400,8,50,50);
         skin.setForeground(Color.WHITE);
@@ -170,37 +192,29 @@ public class Home extends JFrame{
                 switch (skinNumber){
                     case 1:
                         getContentPane().setBackground(new Color(63,87,123));
-                        homePanel.ChangeBackGround("01");
+                        homePanel = new BasicInformationPanel("01");
+                        tabbedPane.setComponentAt(0,homePanel);
                         break;
                     case 2:
                         getContentPane().setBackground(Color.BLACK);
-                        homePanel.ChangeBackGround("02");
+                        homePanel = new BasicInformationPanel("02");
+                        tabbedPane.setComponentAt(0,homePanel);
                         break;
                     case 3:
                         getContentPane().setBackground(new Color(85,20,0));
-                        homePanel.ChangeBackGround("03");
+                        homePanel = new BasicInformationPanel("03");
+                        tabbedPane.setComponentAt(0,homePanel);
                         break;
                     case 4:
                         getContentPane().setBackground(new Color(0,70,40));
-                        homePanel.ChangeBackGround("04");
+                        homePanel = new BasicInformationPanel("04");
+                        tabbedPane.setComponentAt(0,homePanel);
                         skinNumber = 0;
                         break;
                 }
             }
         });
 
-
-
-
-        JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.LEFT);
-        tabbedPane.setBackground(Color.BLACK);
-        tabbedPane.setBounds(0, 64, 1200, 800);
-        getContentPane().add(tabbedPane);
-
-
-        BasicInformationPanel basicInformation = new BasicInformationPanel();  //*****
-        tabbedPane.addTab("主页",Home,basicInformation,null);
-        tabbedPane.setForeground(Color.WHITE);
 
         System.out.println(homeData.getUser().getAuthorityLevel());
         switch (homeData.getUser().getAuthorityLevel()){
