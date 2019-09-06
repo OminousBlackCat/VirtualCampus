@@ -13,9 +13,13 @@ import java.util.Date;
 import java.util.Enumeration;
 import javax.swing.Timer;
 
+import com.seu.vCampus.Client.Bank.Bank;
 import com.seu.vCampus.Client.BasicInformation.BasicInformationPanel;
 import com.seu.vCampus.Client.Common;
-import com.seu.vCampus.Client.Home.courseSelect;
+import com.seu.vCampus.Client.Shop.MangerShop;
+import com.seu.vCampus.Client.Shop.Shop;
+import com.seu.vCampus.Client.courseSelect.courseSelectForStu;
+import com.seu.vCampus.Client.courseSelect.courseSelectForT;
 import com.seu.vCampus.util.Person;
 
 
@@ -30,48 +34,26 @@ public class Home extends JFrame{
     private static ImageIcon Bank = new ImageIcon("src/icon/left/Bank.png");
     private static ImageIcon Edu = new ImageIcon("src/icon/left/school.png");
     private static ImageIcon UserImage = new ImageIcon("src/icon/left/user.png");
-    private JLabel Title;
 
-    /**
-     * Launch the application.
-     */
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    Common temp = Common.getInstance();
-                    temp.setBasicInformation(new Person());
-                    new Home();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
+    private Bank bankPanel;
+    private BasicInformationPanel homePanel;
+    private Shop shopPanel;
+    private MangerShop mangerShopPanel;
 
-    /**
-     * Create the application.
-     */
-    public Home() {
 
-        this.setUndecorated(true);
-        initialize();
-    }
-
-    /**
-     * Initialize the contents of the frame.
-     */
     private void initialize() {
         InitGlobalFont(new Font("Microsoft Yahei", Font.BOLD, 17));
+        homePanel = new BasicInformationPanel();
+        bankPanel = new Bank();
+        shopPanel = new Shop();
+        mangerShopPanel = new MangerShop();
         homeData = Common.getInstance();
-
 
 
         setBounds(200, 200, 1200, 864);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
         getContentPane().setBackground(Color.DARK_GRAY);
-
 
 
         JLabel Icon = new JLabel(TitleIcon);
@@ -96,7 +78,7 @@ public class Home extends JFrame{
         });
         getContentPane().add(LogOut);
 
-        JLabel User = new JLabel("欢迎！"+homeData.getBasicInformation().getName());
+        JLabel User = new JLabel("欢迎！"+homeData.getUser().getName());
         User.setForeground(Color.WHITE);
         User.setBounds(890,8,100,50);
         getContentPane().add(User);
@@ -163,6 +145,23 @@ public class Home extends JFrame{
             }
         });
 
+        JLabel skin = new JLabel("换肤");
+        skin.setBounds(400,8,50,50);
+        skin.setForeground(Color.WHITE);
+        getContentPane().add(skin);
+        skin.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {skin.setForeground(Color.gray);
+            }
+        });
+        skin.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseExited(MouseEvent e) {
+                skin.setForeground(Color.WHITE);
+            }
+        });
+
+
 
 
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.LEFT);
@@ -175,9 +174,9 @@ public class Home extends JFrame{
         tabbedPane.addTab("主页",Home,basicInformation,null);
         tabbedPane.setForeground(Color.WHITE);
 
-        System.out.println(homeData.getBasicInformation().getAuthorityLevel());
+        System.out.println(homeData.getUser().getAuthorityLevel());
 
-        switch (homeData.getBasicInformation().getAuthorityLevel()){
+        switch (homeData.getUser().getAuthorityLevel()){
             case GROUP_USER_MANAGER:
             {
                 JPanel UserManager = new JPanel();
@@ -188,22 +187,22 @@ public class Home extends JFrame{
                 JPanel panel_1 = new JPanel();
                 tabbedPane.addTab("图书", Library, panel_1, null);
 
-                courseSelect panel_2 = new courseSelect();
+                courseSelectForStu panel_2 = new courseSelectForStu();
                 tabbedPane.addTab("选课", Edu, panel_2, null);
 
                 JPanel panel_3 = new JPanel();
-                tabbedPane.addTab("商店",Shop, panel_3, null);
+                tabbedPane.addTab("商店",Shop, shopPanel.getPanel(), null);
 
 
                 JPanel panel_4 = new JPanel();
-                tabbedPane.addTab("银行", Bank, panel_4, null);
+                tabbedPane.addTab("银行", Bank, bankPanel.getPanel(), null);
                 break;
             }
             case GROUP_TEACHER:{
                 JPanel panel_1 = new JPanel();
                 tabbedPane.addTab("图书馆", Library, panel_1, null);
 
-                courseSelect panel_2 = new courseSelect();
+                courseSelectForT panel_2 = new courseSelectForT();
                 tabbedPane.addTab("教务", Edu, panel_2, null);
 
                 JPanel panel_3 = new JPanel();
@@ -227,8 +226,6 @@ public class Home extends JFrame{
 
         }
 
-
-
         addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -245,11 +242,31 @@ public class Home extends JFrame{
             }
         });
 
-
         setVisible(true);
 
-
     }
+
+    public Home() {
+
+        this.setUndecorated(true);
+        initialize();
+    }
+
+
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    Common temp = Common.getInstance();
+                    temp.setUser(new Person());
+                    new Home();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
 
     private static void InitGlobalFont(Font font) {
         FontUIResource fontRes = new FontUIResource(font);

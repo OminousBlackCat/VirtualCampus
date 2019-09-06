@@ -1,4 +1,4 @@
-package com.seu.vCampus.Client.Home;
+package com.seu.vCampus.Client.courseSelect;
 
 import java.awt.EventQueue;
 
@@ -48,11 +48,11 @@ public class courseSelectForStu extends JPanel{
      */
     public void initialize(){
         coursedata = Common.getInstance();
-
+        courseList=coursedata.getUser().getCourses();
     }
     public void courseSelectForStu(){
 
-
+        initialize();
         String[] termlist=new String[] {"第一学期","第二学期"};
         term = new JComboBox(termlist) ;
         setLayout(new BorderLayout());
