@@ -137,8 +137,6 @@ public class BasicInformationPanel extends JPanel {
 
 
 
-
-
         BackGround.setBounds(0,0,1040,800);
         ChangeBackGround(index);
         BackGround.setIcon(BackGroundImage);

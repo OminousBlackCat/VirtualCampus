@@ -16,6 +16,7 @@ import javax.swing.Timer;
 import com.seu.vCampus.Client.Bank.Bank;
 import com.seu.vCampus.Client.BasicInformation.BasicInformationPanel;
 import com.seu.vCampus.Client.Common;
+import com.seu.vCampus.Client.Launcher.Launcher;
 import com.seu.vCampus.Client.Shop.MangerShop;
 import com.seu.vCampus.Client.Shop.Shop;
 import com.seu.vCampus.Client.courseSelect.courseSelectForStu;
@@ -39,14 +40,11 @@ public class Home extends JFrame{
     private BasicInformationPanel homePanel;
     private Shop shopPanel;
     private MangerShop mangerShopPanel;
-    private int skinNumber = 1;
+    private int skinNumber = 2;
 
 
     private void LoadCommon(){
         homeData = Common.getInstance();
-
-
-
     }
 
 
@@ -55,7 +53,7 @@ public class Home extends JFrame{
         LoadCommon();
 
 
-        homePanel = new BasicInformationPanel("01");
+        homePanel = new BasicInformationPanel("02");
         bankPanel = new Bank();
         shopPanel = new Shop();
         mangerShopPanel = new MangerShop();
@@ -65,7 +63,7 @@ public class Home extends JFrame{
         setBounds(200, 200, 1200, 864);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
-        getContentPane().setBackground(new Color(63,87,123));
+        getContentPane().setBackground(Color.BLACK);
 
 
         JLabel Icon = new JLabel(TitleIcon);
@@ -76,6 +74,14 @@ public class Home extends JFrame{
         JLabel LogOut  = new JLabel("注销");
         LogOut.setBounds(1000,8,50,50);
         LogOut.setForeground(Color.WHITE);
+        LogOut.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                dispose();
+                homeData.reset();
+                new Launcher();
+            }
+        });
         LogOut.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
@@ -92,13 +98,13 @@ public class Home extends JFrame{
 
         JLabel User = new JLabel("欢迎！"+homeData.getUser().getName());
         User.setForeground(Color.WHITE);
-        User.setBounds(890,8,100,50);
+        User.setBounds(850,8,150,50);
         getContentPane().add(User);
 
 
         JLabel Time = new JLabel();
         Date now = new Date();
-        Time.setBounds(580,8,300,50);
+        Time.setBounds(500,8,300,50);
         getContentPane().add(Time);
         Time.setForeground(Color.WHITE);
         Timer timer;
@@ -164,8 +170,7 @@ public class Home extends JFrame{
         getContentPane().add(tabbedPane);
 
 
-        BasicInformationPanel basicInformation = new BasicInformationPanel("01");  //*****
-        tabbedPane.addTab("主页",Home,basicInformation,null);
+        tabbedPane.addTab("主页",Home,homePanel,null);
         tabbedPane.setForeground(Color.WHITE);
 
         JLabel skin = new JLabel("换肤");
