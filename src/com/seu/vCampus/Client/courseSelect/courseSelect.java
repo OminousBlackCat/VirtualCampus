@@ -1,4 +1,4 @@
-package com.seu.vCampus.Client.Home;
+package com.seu.vCampus.Client.courseSelect;
 
 import java.awt.EventQueue;
 

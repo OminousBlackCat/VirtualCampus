@@ -17,15 +17,49 @@ import java.util.Date;
 public class DatabaseActions {
     private PreparedStatement stmt = null;
     private Connection conn;
+    private Exception PersonCoursesEmptyException;
 
     public DatabaseActions(Connection conn) {
         this.conn = conn;
     }
 
+    /**
+     * Compare the user-entered account and password with the ones in the database and modify the passed login object
+     * according to the compared result. If the account is not found or the password is not correct, then the login
+     * object's message type will be set to FAIL, otherwise SUCCESS.
+     *
+     * @param login Login message object
+     */
+    public void validatePassword(Login login) {
+        try {
+            String sql = "select*from Users where ECardNumber=?";
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, login.getECardNumber());
+            ResultSet res = stmt.executeQuery();
+
+            if (res.next()) {
+                String PW = res.getString("PassWord");
+                String AL = res.getString("AuthorityNumber");
+                if (PW.equals(login.getPassWord())) {
+                    login.setAuthorityLevel((short) Integer.parseInt(AL));
+                    login.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
+                } else login.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
+            } else {
+                login.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
+            }
+        } catch (SQLException | NumberFormatException e) {
+            e.printStackTrace();
+            login.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
+        }
+    }
 
     /*
       The following is written by Jamie Liu
       Database functions relating to courses and grades.
+     */
+
+    /*
+    THE FOLLOWING METHODS ARE FOR STUDENTS
      */
 
     /**
@@ -75,44 +109,15 @@ public class DatabaseActions {
                 String courseCredit = courseRes.getString("courseCredit");
                 int maxStuds = courseRes.getInt("maximumStudents");
                 int erdStuds = courseRes.getInt("enrolledStudents");
+                boolean isExam = courseRes.getBoolean("isExam");
                 cs.add(new Course(courseNumber,courseName,courseSemester,courseLecturer,coursePlace,courseTime,
-                        courseCredit,courseType,maxStuds,erdStuds));
+                        courseCredit,courseType,maxStuds,erdStuds,isExam));
             }
             person.setCourses(cs);
             person.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
         } catch (SQLException e) {
             e.printStackTrace();
             person.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
-        }
-    }
-
-    /**
-     * Compare the user-entered account and password with the ones in the database and modify the passed login object
-     * according to the compared result. If the account is not found or the password is not correct, then the login
-     * object's message type will be set to FAIL, otherwise SUCCESS.
-     *
-     * @param login Login message object
-     */
-    public void validatePassword(Login login) {
-        try {
-            String sql = "select*from Users where ECardNumber=?";
-            stmt = conn.prepareStatement(sql);
-            stmt.setString(1, login.getECardNumber());
-            ResultSet res = stmt.executeQuery();
-
-            if (res.next()) {
-                String PW = res.getString("PassWord");
-                String AL = res.getString("AuthorityNumber");
-                if (PW.equals(login.getPassWord())) {
-                    login.setAuthorityLevel((short) Integer.parseInt(AL));
-                    login.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
-                } else login.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
-            } else {
-                login.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
-            }
-        } catch (SQLException | NumberFormatException e) {
-            e.printStackTrace();
-            login.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
         }
     }
 
@@ -223,40 +228,40 @@ public class DatabaseActions {
 
     /**
      * Get all the courses taken by designated student at some semester.
-     * @param person Person, namely the student.
+     * @param student Person, namely the student.
      * @param semester Specify which semester to be retrieved.
      */
-    public void getCoursesSelected(Person person, String semester) {
+    public void getCoursesSelected(Person student, String semester) {
         String sql = "select * from Courses where exists (select * from CoursesSelected, Users where " +
                 "Courses.courseNumber = CoursesSelected.courseNumber and CoursesSelected.ECardNumber " +
                 "= Users.ECardNumber and Users.ECardNumber = ?) and Courses.courseSemester = ?";
-        setStudentCoursesList(sql,person,semester);
+        setStudentCoursesList(sql,student,semester);
     }
 
     /**
      * Get all the courses taken by designated student.
-     * @param person Person, namely the student.
+     * @param student Person, namely the student.
      */
-    public void getCoursesSelected(Person person) {
+    public void getCoursesSelected(Person student) {
         String sql = "select * from Courses where exists (select * from CoursesSelected, Users where " +
                 "Courses.courseNumber = CoursesSelected.courseNumber and CoursesSelected.ECardNumber " +
                 "= Users.ECardNumber and Users.ECardNumber = ?) ";
-        setStudentCoursesList(sql,person,"");
+        setStudentCoursesList(sql,student,"");
     }
 
     /**
      * Get all the courses available to (not full) and not selected by this student this semester.
-     * @param person Person object. Should contain ECardNumber.
+     * @param student Person object. Should contain ECardNumber.
      */
-    public void getCoursesAvailable(Person person, String semester) {
+    public void getCoursesAvailable(Person student, String semester) {
         String sql = "select * from Courses where not exists (select * from CoursesSelected, Users where " +
                 "Courses.courseNumber = CoursesSelected.courseNumber and CoursesSelected.ECardNumber " +
                 "= Users.ECardNumber and Users.ECardNumber = ?) and Courses.courseSemester = ? " +
                 "and Courses.enrolledStudents < Courses.maximumStudents";
-        setStudentCoursesList(sql,person,semester);
-        ArrayList<Course> cAvailable = person.getCourses();
-        getCoursesSelected(person,semester);
-        ArrayList<Course> cSelected = person.getCourses();
+        setStudentCoursesList(sql,student,semester);
+        ArrayList<Course> cAvailable = student.getCourses();
+        getCoursesSelected(student,semester);
+        ArrayList<Course> cSelected = student.getCourses();
         if(!cSelected.isEmpty()) {
             for (Course cA : cAvailable) {
                 for (Course cS : cSelected) {
@@ -267,21 +272,21 @@ public class DatabaseActions {
                 }
             }
         }
-        person.setCourses(cAvailable);
+        student.setCourses(cAvailable);
     }
 
     /**
      * Get the grades of the student.
-     * @param person Person object.
+     * @param student Person object.
      */
-    public void getGrades(Person person) {
+    public void getGrades(Person student) {
         ArrayList<Course> cs = new ArrayList<Course>();
         String sql = "SELECT Courses.*, CoursesSelected.* FROM Courses INNER JOIN CoursesSelected ON " +
                 "(CoursesSelected.courseNumber = Courses.courseNumber and CoursesSelected.EcardNumber = ? and " +
                 "CoursesSelected.grade is not null)";
         try {
             stmt = conn.prepareStatement(sql);
-            stmt.setString(1,person.getECardNumber());
+            stmt.setString(1,student.getECardNumber());
             ResultSet gradesRes = stmt.executeQuery();
             while (gradesRes.next()){
                 Course c = new Course(gradesRes.getString("courseNumber"),
@@ -291,42 +296,140 @@ public class DatabaseActions {
                         gradesRes.getString("courseType"),gradesRes.getInt("grade"));
                 cs.add(c);
             }
-            person.setCourses(cs);
-            person.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
+            student.setCourses(cs);
+            student.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
         } catch (SQLException e) {
             e.printStackTrace();
-            person.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
+            student.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
         }
     }
 
     /**
-     * Add a new course to the database.
-     * @param course Course object. Should contain all the information, with the ECardNumber being the lecturer's.
+     * Query course exam info. Can be used after having a course list.
+     * @param course Should contain course number.
      */
-    public void addCourse(Course course) {
-        try{
-            String sql = "insert into Courses (courseNumber, courseName, courseSemester, lecturerECardNumber," +
-                    "coursePlace, courseTime, maximumStudents, enrolledStudents, courseCredit, courseType," +
-                    "courseLecturer) values (?,?,?,?,?,?,?,?,?,?,?)";
+    public void getExamInfo(Course course) {
+        String sql = "SELECT * FROM Courses WHERE CourseNumber = ?";
+        try {
             stmt = conn.prepareStatement(sql);
             stmt.setString(1,course.getCourseNumber());
-            stmt.setString(2,course.getCourseName());
-            stmt.setString(3,course.getCourseSemester());
-            stmt.setString(4,course.getECardNumber());
-            stmt.setString(5,course.getCoursePlace());
-            stmt.setString(6,course.getCourseTime());
-            stmt.setInt(7,course.getMaximumStudents());
-            stmt.setInt(8,course.getEnrolledStudents());
-            stmt.setString(9,course.getCourseCredit());
-            stmt.setString(10,course.getCourseType());
-            stmt.setString(11,course.getCourseLecturer());
-            stmt.executeUpdate();
+            ResultSet cRes = stmt.executeQuery();
+            if(cRes.next()) {
+                course.setExamTime(cRes.getString("examTime"));
+                course.setExamPlace(cRes.getString("examPlace"));
+            }
             course.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
         } catch (SQLException e) {
-            e.printStackTrace();
             course.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
+            e.printStackTrace();
         }
     }
+
+    /*
+    THE FOLLOWING METHODS ARE FOR LECTURERS
+     */
+
+    /**
+     * Get the enrolled students of a course.
+     * @param lecturer Person Object. Must contain ECardNumber (of the teacher) and course number(Please store it in the
+     *               last element of the Person.courses list.)
+     *               When this action is performed, a list of courses that contain all the information you need will be
+     *               stored into the Person.courses list (the original courses list information will be overwritten).
+     */
+    public void getEnrolledStudents(Person lecturer) {
+        String sql = "SELECT Courses.*, CoursesSelected.* FROM Courses, CoursesSelected WHERE " +
+                "Courses.courseNumber = CoursesSelected.courseNumber AND Courses.courseNumber = ?";
+        int l = lecturer.getCourses().size();
+        String cN = lecturer.getCourses().get(l-1).getCourseNumber();
+        ArrayList<Course> cs = new ArrayList<Course>();
+
+        try{
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1,cN);
+            ResultSet cRes = stmt.executeQuery();
+            while (cRes.next()) {
+                Course c = new Course(cRes.getString("courseNumber"),cRes.getString("courseName"),
+                        cRes.getString("courseSemester"),cRes.getString("courseLecturer"),
+                        cRes.getString("coursePlace"),cRes.getString("courseTime"),
+                        cRes.getString("courseCredit"),cRes.getString("courseType"),
+                        cRes.getInt("maximumStudents"),cRes.getInt("enrolledStudents"),
+                        cRes.getBoolean("isExam"));
+                c.setECardNumber(cRes.getString("ECardNumber"));
+                cs.add(c);
+            }
+            lecturer.setCourses(cs);
+            lecturer.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            lecturer.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
+        }
+    }
+
+    /**
+     * Get the courses of the designated lecturer.
+     * @param lecturer Person object. Should contain ECardNumber of the lecturer. If the last item of Person.courses has
+     *               courseSemester info that is not empty string, the semester info will be included in the sql.
+     */
+    public void getLecturerCourses(Person lecturer) {
+        ArrayList<Course> cs = new ArrayList<Course>();
+        String sql;
+        try{
+            if (lecturer.getCourses() == null){
+                sql = "select * from Courses where lecturerECardNumber = ?";
+                stmt = conn.prepareStatement(sql);
+                stmt.setString(1,lecturer.getECardNumber());
+            }
+            else {
+                String semester = lecturer.getCourses().get(lecturer.getCourses().size() - 1).getCourseSemester();
+                sql = "select * from Courses where lecturerECardNumber = ? and courseSemester = ?";
+                stmt = conn.prepareStatement(sql);
+                stmt.setString(1, lecturer.getECardNumber());
+                stmt.setString(2, semester);
+            }
+
+            ResultSet cRes = stmt.executeQuery();
+            while (cRes.next()) {
+                cs.add(new Course(cRes.getString("courseNumber"),cRes.getString("courseName"),
+                        cRes.getString("courseSemester"), cRes.getString("courseLecturer"),
+                        cRes.getString("coursePlace"),cRes.getString("courseTime"),
+                        cRes.getString("courseCredit"),cRes.getString("courseType"),
+                        cRes.getInt("maximumStudents"),cRes.getInt("enrolledStudents"),
+                        cRes.getBoolean("isExam"),cRes.getBoolean("gradeAdded")));
+            }
+            lecturer.setCourses(cs);
+            lecturer.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
+        } catch (SQLException | NullPointerException e) {
+            e.printStackTrace();
+            lecturer.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
+        }
+
+    }
+
+    /**
+     * Give me a list of courses and I'll set all the grades in it to the database.
+     * @param lecturer Person object. It's list of courses should not be empty.
+     */
+    public void gradesInput(Person lecturer) {
+        try {
+            for (Course c : lecturer.getCourses()) {
+                if (!c.getECardNumber().isEmpty()) {
+                    setGrade(c);
+                    String sql = "UPDATE Courses SET gradeAdded WHERE courseNumber = ?";
+                    stmt = conn.prepareStatement(sql);
+                    stmt.setString(1,c.getCourseNumber());
+                    stmt.executeUpdate();
+                }
+            }
+            lecturer.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
+        }catch (NullPointerException | SQLException e) {
+            e.printStackTrace();
+            lecturer.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
+        }
+    }
+
+    /*
+    THE FOLLOWING METHODS ARE FOR ADMINISTRATORS
+     */
 
     /**
      * Set grade for one course of one student.
@@ -348,98 +451,126 @@ public class DatabaseActions {
     }
 
     /**
-     * Get the enrolled students of a course.
-     * @param person Person Object. Must contain ECardNumber (of the teacher) and course number(Please store it in the
-     *               last element of the Person.courses list.)
-     *               When this action is performed, a list of courses that contain all the information you need will be
-     *               stored into the Person.courses list (the original courses list information will be overwritten).
+     * Change maximum number of students.
+     * @param course Should contain capacity and course number info.
      */
-    public void getEnrolledStudents(Person person) {
-        String sql = "SELECT Courses.*, CoursesSelected.* FROM Courses, CoursesSelected WHERE " +
-                "Courses.courseNumber = CoursesSelected.courseNumber AND Courses.courseNumber = ?";
-        int l = person.getCourses().size();
-        String cN = person.getCourses().get(l-1).getCourseNumber();
-        ArrayList<Course> cs = new ArrayList<Course>();
-
-        try{
+    public void changeCourseCapacity(Course course) {
+        String sql = "UPDATE Courses SET maximumStudents = ? WHERE courseNumber = ?";
+        try {
             stmt = conn.prepareStatement(sql);
-            stmt.setString(1,cN);
-            ResultSet cRes = stmt.executeQuery();
-            while (cRes.next()) {
-                Course c = new Course(cRes.getString("courseNumber"),cRes.getString("courseName"),
-                        cRes.getString("courseSemester"),cRes.getString("courseLecturer"),
-                        cRes.getString("coursePlace"),cRes.getString("courseTime"),
-                        cRes.getString("courseCredit"),cRes.getString("courseType"),
-                        cRes.getInt("maximumStudents"),cRes.getInt("enrolledStudents"));
-                c.setECardNumber(cRes.getString("ECardNumber"));
-                cs.add(c);
-            }
-            person.setCourses(cs);
-            person.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            person.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
-        }
-    }
-
-    /**
-     * Get the courses of the designated lecturer.
-     * @param person Person object. Should contain ECardNumber of the lecturer. If the last item of Person.courses has
-     *               courseSemester info that is not empty string, the semester info will be included in the sql.
-     */
-    public void getLecturerCourses(Person person) {
-        ArrayList<Course> cs = new ArrayList<Course>();
-        String sql;
-        try{
-            if (person.getCourses() == null){
-                sql = "select * from Courses where lecturerECardNumber = ?";
-                stmt = conn.prepareStatement(sql);
-                stmt.setString(1,person.getECardNumber());
+            stmt.setInt(1,course.getMaximumStudents());
+            stmt.setString(2,course.getCourseNumber());
+            if(stmt.executeUpdate() != 0) {
+                course.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
             }
             else {
-                String semester = person.getCourses().get(person.getCourses().size() - 1).getCourseSemester();
-                sql = "select * from Courses where lecturerECardNumber = ? and courseSemester = ?";
-                stmt = conn.prepareStatement(sql);
-                stmt.setString(1, person.getECardNumber());
-                stmt.setString(2, semester);
+                course.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
             }
-
-            ResultSet cRes = stmt.executeQuery();
-            while (cRes.next()) {
-                cs.add(new Course(cRes.getString("courseNumber"),cRes.getString("courseName"),
-                        cRes.getString("courseSemester"), cRes.getString("courseLecturer"),
-                        cRes.getString("coursePlace"),cRes.getString("courseTime"),
-                        cRes.getString("courseCredit"),cRes.getString("courseType"),
-                        cRes.getInt("maximumStudents"),cRes.getInt("enrolledStudents")));
-            }
-            person.setCourses(cs);
-            person.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
-        } catch (SQLException | NullPointerException e) {
+        } catch (SQLException e) {
+            course.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
             e.printStackTrace();
-            person.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
         }
-
     }
 
     /**
-     * Give me a list of courses and I'll set all the grades in it to the database.
-     * @param person Person object. It's list of courses should not be empty.
+     * Add a new course to the database.
+     * @param course Course object. Should contain all the information, with the ECardNumber being the lecturer's.
      */
-    public void gradesInput(Person person) {
-        try {
-            for (Course c : person.getCourses()) {
-                if (!c.getECardNumber().isEmpty()) {
-                    setGrade(c);
-                }
-            }
-            person.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
-        }catch (NullPointerException e) {
+    public void addCourse(Course course) {
+        try{
+            String sql = "insert into Courses (courseNumber, courseName, courseSemester, lecturerECardNumber," +
+                    "coursePlace, courseTime, maximumStudents, enrolledStudents, courseCredit, courseType," +
+                    "courseLecturer, isExam) values (?,?,?,?,?,?,?,?,?,?,?,?)";
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1,course.getCourseNumber());
+            stmt.setString(2,course.getCourseName());
+            stmt.setString(3,course.getCourseSemester());
+            stmt.setString(4,course.getECardNumber());
+            stmt.setString(5,course.getCoursePlace());
+            stmt.setString(6,course.getCourseTime());
+            stmt.setInt(7,course.getMaximumStudents());
+            stmt.setInt(8,course.getEnrolledStudents());
+            stmt.setString(9,course.getCourseCredit());
+            stmt.setString(10,course.getCourseType());
+            stmt.setString(11,course.getCourseLecturer());
+            stmt.setBoolean(12,course.isExam());
+            stmt.executeUpdate();
+            course.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
+        } catch (SQLException e) {
             e.printStackTrace();
-            person.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
+            course.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
         }
     }
 
-    /*
+    /**
+     * Query courses that are examinable, in order to set exam info.
+     * @param admin Should contain semester info. in the tail of admin.courses
+     */
+    public void getCoursesForExam(Person admin) {
+        String sql = "SELECT * FROM Courses WHERE isExam AND courseSemester = ?";
+        String semester;
+        try{
+            if(admin.getCourses().isEmpty()) {
+                throw PersonCoursesEmptyException;
+            }
+            else {
+                ArrayList<Course> cs = new ArrayList<Course>();
+                semester = admin.getCourses().get(admin.getCourses().size() - 1).getCourseSemester();
+                stmt = conn.prepareStatement(sql);
+                stmt.setString(1,semester);
+                ResultSet coursesRes = stmt.executeQuery();
+                while (coursesRes.next()) {
+                    cs.add(new Course(coursesRes.getString("courseNumber"),
+                            coursesRes.getString("courseName"),
+                            coursesRes.getString("courseSemester"),
+                            coursesRes.getString("courseLecturer")
+                            ));
+                }
+                admin.setCourses(cs);
+                admin.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
+            }
+        } catch (Exception e) {
+            admin.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Set exam time for a course.
+     * @param course Should have course number and exam time and place info.
+     */
+    public void addExam(Course course) {
+        String sql = "UPDATE Courses SET examTime = ?, examPlace = ?  WHERE courseNumber = ?";
+        try{
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1,course.getCourseTime());
+            stmt.setString(2,course.getExamPlace());
+            stmt.setString(3,course.getCourseNumber());
+            if(stmt.executeUpdate() != 0) {
+                course.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
+            }
+            else {
+                course.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
+            }
+
+        } catch (SQLException e) {
+            course.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Set exam info. in batches
+     * @param admin List should not be empty.
+     */
+    public void ExamsInput(Person admin) {
+        for (Course c : admin.getCourses()) {
+            addExam(c);
+            admin.setType(c.getType());
+        }
+    }
+
+    /*-
     The following is written by mbh.
     Database functions relating to bank and shop.
      */

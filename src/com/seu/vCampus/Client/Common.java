@@ -32,11 +32,12 @@ public class Common {
  * UI中添加刷新按钮，所有显示的JSwing控件均与此对象关联
  * 便形成MVC模式
  * */
-    private Person BasicInformation;
+    private Person User;
     private BankCount userCount;
     private BankBill userBill;
     private ShopManage shopInformation;
     private BookManage bookInformation;
+
 
 
 
@@ -56,12 +57,8 @@ public class Common {
 
 
 
-    public ClientIO getIo() {
-        return io;
-    }
-    public void setIo(ClientIO io) {
-        this.io = io;
-    }
+    public ClientIO getIo() { return io; }
+    public void setIo(ClientIO io) { this.io = io; }
     public String getIpAddress() {
         return ipAddress;
     }
@@ -76,17 +73,19 @@ public class Common {
     }
     public boolean isLogin() { return isLogin; }
     public void setLogin(boolean login) { isLogin = login; }
-    public void setBasicInformation(Person basicInformation) {
-        BasicInformation = basicInformation;
+    public void setUser(Person user) {
+        User = user;
     }
     public void setUserBill(BankBill UserBill) { userBill = UserBill; }
     public void setUserCount(BankCount UserCount) { userCount = UserCount; }
-    public void setShopInformation(ShopManage ShopInfomation) { shopInformation = ShopInfomation; }
-    public void setBookInformation(BookManage BookInfomation) { bookInformation = BookInfomation; }
+    public void setShopInformation(ShopManage ShopInformation) { shopInformation = ShopInformation; }
+    public void setBookInformation(BookManage BookInformation) { bookInformation = BookInformation; }
 
-    public Person getBasicInformation() { return BasicInformation; }
     public BankBill getUserBill() { return userBill; }
     public BankCount getUserCount() { return userCount; }
     public ShopManage getShopInformation() { return shopInformation; }
     public BookManage getBookInformation() { return bookInformation; }
+    public Person getUser() {
+        return User;
+    }
 }
