@@ -109,8 +109,9 @@ public class DatabaseActions {
                 String courseCredit = courseRes.getString("courseCredit");
                 int maxStuds = courseRes.getInt("maximumStudents");
                 int erdStuds = courseRes.getInt("enrolledStudents");
+                boolean isExam = courseRes.getBoolean("isExam");
                 cs.add(new Course(courseNumber,courseName,courseSemester,courseLecturer,coursePlace,courseTime,
-                        courseCredit,courseType,maxStuds,erdStuds));
+                        courseCredit,courseType,maxStuds,erdStuds,isExam));
             }
             person.setCourses(cs);
             person.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
@@ -303,6 +304,27 @@ public class DatabaseActions {
         }
     }
 
+    /**
+     * Query course exam info. Can be used after having a course list.
+     * @param course Should contain course number.
+     */
+    public void getExamInfo(Course course) {
+        String sql = "SELECT * FROM Courses WHERE CourseNumber = ?";
+        try {
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1,course.getCourseNumber());
+            ResultSet cRes = stmt.executeQuery();
+            if(cRes.next()) {
+                course.setExamTime(cRes.getString("examTime"));
+                course.setExamPlace(cRes.getString("examPlace"));
+            }
+            course.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
+        } catch (SQLException e) {
+            course.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
+            e.printStackTrace();
+        }
+    }
+
     /*
     THE FOLLOWING METHODS ARE FOR LECTURERS
      */
@@ -330,7 +352,8 @@ public class DatabaseActions {
                         cRes.getString("courseSemester"),cRes.getString("courseLecturer"),
                         cRes.getString("coursePlace"),cRes.getString("courseTime"),
                         cRes.getString("courseCredit"),cRes.getString("courseType"),
-                        cRes.getInt("maximumStudents"),cRes.getInt("enrolledStudents"));
+                        cRes.getInt("maximumStudents"),cRes.getInt("enrolledStudents"),
+                        cRes.getBoolean("isExam"));
                 c.setECardNumber(cRes.getString("ECardNumber"));
                 cs.add(c);
             }
@@ -370,7 +393,8 @@ public class DatabaseActions {
                         cRes.getString("courseSemester"), cRes.getString("courseLecturer"),
                         cRes.getString("coursePlace"),cRes.getString("courseTime"),
                         cRes.getString("courseCredit"),cRes.getString("courseType"),
-                        cRes.getInt("maximumStudents"),cRes.getInt("enrolledStudents")));
+                        cRes.getInt("maximumStudents"),cRes.getInt("enrolledStudents"),
+                        cRes.getBoolean("isExam"),cRes.getBoolean("gradeAdded")));
             }
             lecturer.setCourses(cs);
             lecturer.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
@@ -379,6 +403,28 @@ public class DatabaseActions {
             lecturer.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
         }
 
+    }
+
+    /**
+     * Give me a list of courses and I'll set all the grades in it to the database.
+     * @param lecturer Person object. It's list of courses should not be empty.
+     */
+    public void gradesInput(Person lecturer) {
+        try {
+            for (Course c : lecturer.getCourses()) {
+                if (!c.getECardNumber().isEmpty()) {
+                    setGrade(c);
+                    String sql = "UPDATE Courses SET gradeAdded WHERE courseNumber = ?";
+                    stmt = conn.prepareStatement(sql);
+                    stmt.setString(1,c.getCourseNumber());
+                    stmt.executeUpdate();
+                }
+            }
+            lecturer.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
+        }catch (NullPointerException | SQLException e) {
+            e.printStackTrace();
+            lecturer.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
+        }
     }
 
     /*
@@ -401,24 +447,6 @@ public class DatabaseActions {
         } catch (SQLException e) {
             e.printStackTrace();
             course.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
-        }
-    }
-
-    /**
-     * Give me a list of courses and I'll set all the grades in it to the database.
-     * @param lecturer Person object. It's list of courses should not be empty.
-     */
-    public void gradesInput(Person lecturer) {
-        try {
-            for (Course c : lecturer.getCourses()) {
-                if (!c.getECardNumber().isEmpty()) {
-                    setGrade(c);
-                }
-            }
-            lecturer.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
-        }catch (NullPointerException e) {
-            e.printStackTrace();
-            lecturer.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
         }
     }
 
@@ -542,7 +570,7 @@ public class DatabaseActions {
         }
     }
 
-    /*
+    /*-
     The following is written by mbh.
     Database functions relating to bank and shop.
      */

@@ -22,11 +22,12 @@ public class Course extends Message{
     private int courseGrade;
     private boolean isConflict;
     private boolean isExam;
+    private boolean gradeAdded;
     private String examTime;
     private String examPlace;
 
     /**
-     * Constructor for query courses that have exams.
+     * Constructor for querying courses that have exams.
      * @param courseNumber Course Number
      * @param courseName Course Name
      * @param courseSemester Course Semester
@@ -72,7 +73,7 @@ public class Course extends Message{
     public Course(String courseNumber, String courseName, String courseSemester,
                   String courseLecturer, String coursePlace, String courseTime,
                   String courseCredit, String courseType, int maximumStudents,
-                  int enrolledStudents) {
+                  int enrolledStudents, boolean isExam) {
         this.Type = MESSAGE_TYPE.TYPE_NULL;
         this.courseNumber = courseNumber;
         this.courseName = courseName;
@@ -84,6 +85,7 @@ public class Course extends Message{
         this.courseType = courseType;
         this.maximumStudents = maximumStudents;
         this.enrolledStudents = enrolledStudents;
+        this.isExam = isExam;
     }
 
     /**
@@ -133,6 +135,26 @@ public class Course extends Message{
         this.courseType = courseType;
         this.maximumStudents = maximumStudents;
         this.isExam = isExam;
+    }
+
+    /**
+     * Constructor for querying courses for lecturers.
+     */
+    public Course(String courseNumber, String courseName, String courseSemester, String courseLecturer,
+                  String coursePlace, String courseTime, String courseCredit, String courseType,
+                  int maximumStudents, int enrolledStudents, boolean isExam, boolean gradeAdded) {
+        this.courseNumber = courseNumber;
+        this.courseName = courseName;
+        this.courseSemester = courseSemester;
+        this.courseLecturer = courseLecturer;
+        this.coursePlace = coursePlace;
+        this.courseTime = courseTime;
+        this.courseCredit = courseCredit;
+        this.courseType = courseType;
+        this.maximumStudents = maximumStudents;
+        this.enrolledStudents = enrolledStudents;
+        this.isExam = isExam;
+        this.gradeAdded = gradeAdded;
     }
 
     /**
