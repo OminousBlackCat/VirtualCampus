@@ -27,7 +27,7 @@ public class Home extends JFrame{
 
     private Common homeData;
     private static Point origin = new Point();
-    private static ImageIcon TitleIcon = new ImageIcon("src/icon/cheen.png");
+    private static ImageIcon TitleIcon = new ImageIcon("src/icon/head/logo.png");
     private static ImageIcon Home = new ImageIcon("src/icon/left/Home.png");
     private static ImageIcon Library = new ImageIcon("src/icon/left/library.png");
     private static ImageIcon Shop = new ImageIcon("src/icon/left/shop.png");
@@ -59,7 +59,6 @@ public class Home extends JFrame{
     public Home() {
 
         this.setUndecorated(true);
-        this.setAlwaysOnTop(true);
         initialize();
     }
 
@@ -79,14 +78,8 @@ public class Home extends JFrame{
 
 
 
-        Title = new JLabel("虚拟校园");
-        Title.setBounds(60,25,80,20);
-        Title.setForeground(Color.WHITE);
-        getContentPane().add(Title);
         JLabel Icon = new JLabel(TitleIcon);
-
-
-        Icon.setBounds(10,10,50,50);
+        Icon.setBounds(10,0,350,64);
         getContentPane().add(Icon);
 
 
