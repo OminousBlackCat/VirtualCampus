@@ -4,12 +4,9 @@ import javax.swing.*;
 import javax.swing.plaf.FontUIResource;
 
 import java.awt.*;
-<<<<<<< HEAD
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class Home {
-=======
 import java.awt.event.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -23,7 +20,6 @@ import com.seu.vCampus.util.Person;
 
 
 public class Home extends JFrame{
->>>>>>> fc662e3ac7dfaeebd46ebda78842b1bf77426d92
 
     private Common homeData;
     private static Point origin = new Point();
@@ -169,7 +165,6 @@ public class Home extends JFrame{
 
 
 
-
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.LEFT);
         tabbedPane.setBackground(Color.BLACK);
         tabbedPane.setBounds(0, 64, 1200, 800);
@@ -196,40 +191,9 @@ public class Home extends JFrame{
                 courseSelect panel_2 = new courseSelect();
                 tabbedPane.addTab("选课", Edu, panel_2, null);
 
-<<<<<<< HEAD
-        JPanel panel = new JPanel();
-        ImageIcon image=new ImageIcon("C:\\Users\\Fly\\Desktop\\111.png");
-        image.setImage(image.getImage().getScaledInstance(80, 80, 100));
-        tabbedPane.addTab("学生信息", null, panel, null);
-=======
->>>>>>> fc662e3ac7dfaeebd46ebda78842b1bf77426d92
-
                 JPanel panel_3 = new JPanel();
                 tabbedPane.addTab("商店",Shop, panel_3, null);
 
-<<<<<<< HEAD
-        courseSelectForStu panel_2 = new courseSelectForStu();
-        tabbedPane.addTab("", null, panel_2, null);
-
-        tabbedPane.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                p(e);
-            }
-            private  void p(MouseEvent e){
-                for (int i = 0; i < tabbedPane.getTabCount(); i++) {
-                    Rectangle rect = tabbedPane.getBoundsAt(i);
-                    if (rect.contains(e.getX(), e.getY())) {
-                        if(i==2)
-                            panel_2.refresh();
-                    }
-                }
-            }
-        }
-
-        );
-=======
 
                 JPanel panel_4 = new JPanel();
                 tabbedPane.addTab("银行", Bank, panel_4, null);
@@ -241,8 +205,6 @@ public class Home extends JFrame{
 
                 courseSelect panel_2 = new courseSelect();
                 tabbedPane.addTab("教务", Edu, panel_2, null);
->>>>>>> fc662e3ac7dfaeebd46ebda78842b1bf77426d92
-
 
                 JPanel panel_3 = new JPanel();
                 tabbedPane.addTab("商店",Shop, panel_3, null);

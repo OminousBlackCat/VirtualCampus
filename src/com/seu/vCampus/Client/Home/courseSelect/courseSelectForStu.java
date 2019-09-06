@@ -14,7 +14,9 @@ import java.awt.GridBagConstraints;
 import java.awt.BorderLayout;
 import java.util.ArrayList;
 
+import com.seu.vCampus.Client.Common;
 import com.seu.vCampus.util.Course;
+import com.seu.vCampus.util.Message;
 import com.seu.vCampus.util.Person;
 
 public class courseSelectForStu extends JPanel{
@@ -31,6 +33,7 @@ public class courseSelectForStu extends JPanel{
     private JLabel label;
     private JComboBox term;
 
+    private Common coursedata;
     private Person user;
     private Course course;
     private Course course1;
@@ -43,7 +46,12 @@ public class courseSelectForStu extends JPanel{
     /**
      * Create the application.
      */
-    public courseSelectForStu(){
+    public void initialize(){
+        coursedata = Common.getInstance();
+
+    }
+    public void courseSelectForStu(){
+
 
         String[] termlist=new String[] {"第一学期","第二学期"};
         term = new JComboBox(termlist) ;
