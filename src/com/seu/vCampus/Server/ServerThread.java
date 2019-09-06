@@ -63,22 +63,22 @@ public class ServerThread  extends Thread{
             is = socket.getInputStream();          //获得socket的输入流
             os = socket.getOutputStream();         //获得socket的输出流
 
-            while (true){
+            while (true) {
                 bis = new BufferedInputStream(is);     //构建缓冲输入流
                 ois = new ObjectInputStream(bis);      //反序列化获得对象
                 oos = new ObjectOutputStream(os);      //
                 msg = (Message) ois.readObject();   //获得Message对象
                 System.out.println(msg.getECardNumber());
-                switch (msg.getType()){
+                switch (msg.getType()) {
                     case TYPE_LOGIN:
                         act.validatePassword((Login) msg);
                         break;
                     case TYPE_QUERY_PERSON:
-                        System.out.println("是获取基本信息mes，一卡通号是："+msg.getECardNumber());
-                        act.PersonMessageSend((Person)msg);
+                        System.out.println("是获取基本信息mes，一卡通号是：" + msg.getECardNumber());
+                        act.PersonMessageSend((Person) msg);
                         break;
                     case TYPE_DELETE_COURSE:
-                        System.out.println("是删除课程mes，一卡通号是："+msg.getECardNumber());
+                        System.out.println("是删除课程mes，一卡通号是：" + msg.getECardNumber());
                         act.deselectCourse((Course) msg);
                         break;
                     case TYPE_SELECT_COURSE:
@@ -95,7 +95,7 @@ public class ServerThread  extends Thread{
                     case TYPE_GET_COURSES_SELECTED: {
                         int l = ((Person) msg).getCourses().size();
                         if (l != 0) {
-                            String semester = ((Person) msg).getCourses().get(l-1).getCourseSemester();
+                            String semester = ((Person) msg).getCourses().get(l - 1).getCourseSemester();
                             act.getCoursesSelected((Person) msg, semester);
                         } else {
                             act.getCoursesSelected((Person) msg);
@@ -124,41 +124,39 @@ public class ServerThread  extends Thread{
                         act.getShopMessage((ShopManage) msg);
                         break;
                     case TYPE_ADD_GOODS:
-                        act.insertGoods((Goods)msg);
+                        act.insertGoods((Goods) msg);
                         break;
                     case TYPE_DELETE_GOODS:
-                        act.deleteGoods((Goods)msg);
+                        act.deleteGoods((Goods) msg);
                         break;
                     case TYPE_QUERY_PERSON_MANAGE:
-                        act.getPersonManage((PersonManage)msg);
+                        act.getPersonManage((PersonManage) msg);
                         break;
                     case TYPE_RECHARGE_ECARD:
-                        act.ECardRecharge((BankBill)msg);
+                        act.ECardRecharge((BankBill) msg);
                         break;
                     case TYPE_QUERY_BANK_COUNT:
-                        act.getBankMessage((BankCount)msg);
-<<<<<<< HEAD
-=======
+                        act.getBankMessage((BankCount) msg);
                         break;
                     case TYPE_QUERY_BOOKS:
-                        act.getBookMessage((BookManage)msg);
+                        act.getBookMessage((BookManage) msg);
                         break;
                     case TYPE_ADD_BOOK:
-                        act.insertBook((Book)msg);
+                        act.insertBook((Book) msg);
                         break;
                     case TYPE_DELETE_BOOK:
-                        act.deleteBook((Book)msg);
+                        act.deleteBook((Book) msg);
                         break;
                     case TYPE_CHANGE_AVATAR:
-                        act.changeAvatar((Person)msg);
->>>>>>> 89418970b98ac0dc5c4e3a149ca023e552af0290
+                        act.changeAvatar((Person) msg);
                         break;
                 }
 
                 System.out.println(msg.getType());
                 oos.writeObject(msg);
 
-                }
+            }
+        }
 
 
         catch (IOException | ClassNotFoundException ioe){

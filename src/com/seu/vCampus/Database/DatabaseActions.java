@@ -515,11 +515,8 @@ public class DatabaseActions {
         }
     }
 
-<<<<<<< HEAD
-    public  PersonManage  getPersonManage(PersonManage PM){
-=======
+
     public  PersonManage  getPersonManage(PersonManage PM){         //获取所有用户的信息
->>>>>>> 89418970b98ac0dc5c4e3a149ca023e552af0290
         try {
             Statement st = conn.createStatement();
             ResultSet res = st.executeQuery("select *from Users");
