@@ -618,6 +618,7 @@ public class DatabaseActions {
         }
     }
 
+
     public  PersonManage  getPersonManage(PersonManage PM){         //获取所有用户的信息
         try {
             Statement st = conn.createStatement();
@@ -727,18 +728,18 @@ public class DatabaseActions {
 
                 sql="select*from BankCount FULL INNER JOIN BankBill ON " +    //取两表以一卡通为准的交集
                         "(BankCount.ECardNumber =BankBill.ECardNumber" +
-                        " and where BankBill.ECardNumber=?)";
+                        " and BankBill.ECardNumber=?)";
                 stmt=conn.prepareStatement(sql);
                 stmt.setString(1,bankCountUsers.getECardNumber());
                 ResultSet Res=stmt.executeQuery();
 
                 while(Res.next()){
-                    boolean Type=res.getBoolean("Type");
+                    String Type=res.getString("State");
                     String BA=res.getString("Amount");
                     String TransactionTime=res.getString("TransactionTime");
                     Date BD=res.getDate("TransactionTime");
 
-                    temp.setBillType(Type? BankBill.BILL_TYPE.TYPE_EXPENDITURE: BankBill.BILL_TYPE.TYPE_INCOME);
+                    temp.setBillType(Type=="支出"? BankBill.BILL_TYPE.TYPE_EXPENDITURE: BankBill.BILL_TYPE.TYPE_INCOME);
                     temp.setBillDate(BD);
                     temp.setBillAmount(Double.parseDouble(BA));
                     bankCountUsers.addBill(temp);
@@ -784,10 +785,10 @@ public class DatabaseActions {
                 stmt.setDouble(1,BB);
                 stmt.setString(2,bankBill.getECardNumber());
 
-                sql="insert into BankBill(ECardNumber,Type,Amount,TransactionTime) value (?,?,?,?)";
+                sql="insert into BankBill(ECardNumber,State,Amount,TransactionTime) value (?,?,?,?)";
                 stmt=conn.prepareStatement(sql);
                 stmt.setString(1,bankBill.getECardNumber());
-                stmt.setBoolean(2,true);
+                stmt.setString(2,"支出");
                 stmt.setDouble(3,bankBill.getBillAmount());
                 stmt.setDate(4, (java.sql.Date) bankBill.getBillDate());
 
@@ -844,7 +845,7 @@ public class DatabaseActions {
             sql.setString(1,book.getBID() );
             sql.setString(2, book.getName());
             sql.setString(3, book.getAuthor());
-            sql.setBoolean(4, book.isLent());
+            sql.setString(4, (book.isLent()?"借出":"在库"));
             sql.setDate(5, (java.sql.Date) book.getLendDate());
             sql.setShort(6,book.getLendDays());
             sql.executeUpdate();
@@ -885,7 +886,7 @@ public class DatabaseActions {
                     String sql = "UPDATE Books set lendDays=?,isLent=?,ECardNumber=? where BID=?";
                     stmt = conn.prepareStatement(sql);
                     stmt.setShort(1, (short) 0);
-                    stmt.setBoolean(2,false);
+                    stmt.setString(2,"在库");
                     stmt.setString(3, "");
                     stmt.setString(4,book.getBID());
                     book.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
@@ -895,7 +896,7 @@ public class DatabaseActions {
                     String sql = "UPDATE Books set lendDays=?,isLent=?,ECardNumber=? where BID=?";
                     stmt = conn.prepareStatement(sql);
                     stmt.setShort(1, (short) 30);
-                    stmt.setBoolean(2,true);
+                    stmt.setString(2,"借出");
                     stmt.setString(3, book.getECardNumber());
                     stmt.setString(4,book.getBID());
                     book.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
