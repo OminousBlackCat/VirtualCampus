@@ -68,7 +68,8 @@ public class LauncherPanel extends JPanel {
                 Login.setEnabled(false);
                 try{
                     launcherData.startIO();
-                }catch (Exception ex){
+                }
+                catch (Exception ex){
                     ex.printStackTrace();
                     JOptionPane.showMessageDialog(null,"连接超时",
                             "错误",JOptionPane.ERROR_MESSAGE);

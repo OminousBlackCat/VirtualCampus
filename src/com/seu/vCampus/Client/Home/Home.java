@@ -4,6 +4,9 @@ import javax.swing.*;
 import javax.swing.plaf.FontUIResource;
 
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import java.awt.event.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -15,6 +18,8 @@ import com.seu.vCampus.Client.BasicInformation.BasicInformationPanel;
 import com.seu.vCampus.Client.Common;
 import com.seu.vCampus.Client.Shop.MangerShop;
 import com.seu.vCampus.Client.Shop.Shop;
+import com.seu.vCampus.Client.courseSelect.courseSelectForStu;
+import com.seu.vCampus.Client.courseSelect.courseSelectForT;
 import com.seu.vCampus.util.Person;
 
 
@@ -209,11 +214,6 @@ public class Home extends JFrame{
         });
 
 
-
-
-
-
-
         System.out.println(homeData.getUser().getAuthorityLevel());
 
         switch (homeData.getUser().getAuthorityLevel()){
@@ -227,9 +227,8 @@ public class Home extends JFrame{
                 JPanel panel_1 = new JPanel();
                 tabbedPane.addTab("图书", Library, panel_1, null);
 
-                courseSelect panel_2 = new courseSelect();
+                courseSelectForStu panel_2 = new courseSelectForStu();
                 tabbedPane.addTab("选课", Edu, panel_2, null);
-
 
                 JPanel panel_3 = new JPanel();
                 tabbedPane.addTab("商店",Shop, shopPanel.getPanel(), null);
@@ -243,9 +242,8 @@ public class Home extends JFrame{
                 JPanel panel_1 = new JPanel();
                 tabbedPane.addTab("图书馆", Library, panel_1, null);
 
-                courseSelect panel_2 = new courseSelect();
+                courseSelectForT panel_2 = new courseSelectForT();
                 tabbedPane.addTab("教务", Edu, panel_2, null);
-
 
                 JPanel panel_3 = new JPanel();
                 tabbedPane.addTab("商店",Shop, panel_3, null);
