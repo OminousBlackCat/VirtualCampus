@@ -1,5 +1,8 @@
 package com.seu.vCampus.Client.Library;
 
+import com.seu.vCampus.Client.Common;
+import com.seu.vCampus.util.Book;
+
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -22,6 +25,7 @@ public class StuLib {
                 int selectedRow=Stutable.getSelectedRow();
                 if(selectedRow!=-1){
                     SModel.setValueAt(30,selectedRow,4);
+
                 }
             }
         });
@@ -37,7 +41,7 @@ public class StuLib {
             }
         });
     }
-
+    private Common BookData;
     public JPanel LibMPanel;
     private JTabbedPane LibtabbedPane;
     private JPanel LibBPanel;
@@ -51,6 +55,7 @@ public class StuLib {
     private JScrollPane StuScrollPane;
     private JScrollPane LibScrollPane;
     private TableRowSorter <DefaultTableModel> sorter;
+    private final short KeepDays=30;
     private static String[] StutableHeader = {"Name of Book",
             "Author",
             "类型",
@@ -69,7 +74,6 @@ public class StuLib {
             return false;
         }
     };
-
     protected static DefaultTableModel LModel=new DefaultTableModel(null,LibtableHeader){
         @Override
         public boolean isCellEditable(int row, int column){
@@ -79,15 +83,32 @@ public class StuLib {
 
     private void createUIComponents() {
         // TODO: place custom component creation code here
+        //Initialize S&L Model
+        BookData=Common.getInstance();
+        int Blistsize=BookData.getBookInformation().getBookList().size();
+        int cnt=0;
+        String NUser=BookData.getUser().getECardNumber();
+        while(cnt<=Blistsize){
+            Book NBook=BookData.getBookInformation().getBookList().get(cnt);
+            LModel.setValueAt(NBook.getName(),cnt,0);
+            LModel.setValueAt(NBook.getAuthor(),cnt,1);
+            //LModel.setValueAt(type,cnt,2);
+            LModel.setValueAt(NBook.getBID(),cnt,3);
+            if(NBook.isLent()){
+                LModel.setValueAt("已被借阅",cnt,4);
+            }
+            String NEcard=NBook.getECardNumber();
+            if(NEcard==NUser){
+                SModel.setValueAt(NBook.getName(),cnt,0);
+                SModel.setValueAt(NBook.getAuthor(),cnt,1);
+                //LModel.setValueAt(type,cnt,2);
+                SModel.setValueAt(NBook.getBID(),cnt,3);
+                SModel.setValueAt(KeepDays-NBook.getLendDays(),cnt,4);
+            }
+            cnt++;
+        }
 
-        Object[] Data1 = {"How to play dota2", "Maou", "游戏", 222, 5};
-        Object[] Data2=  {"How to play guitar", "Sora", "音乐", 444, 27};
-        Object[] Data3= {"How to play csgo", "Maou", "白给", 111, false};
-
-        SModel.addRow(Data1);
-        SModel.addRow(Data2);
         Stutable=new JTable(SModel);
-        LModel.addRow(Data3);
         Libtable=new JTable(LModel);
 
         //Create a table with a sorter.

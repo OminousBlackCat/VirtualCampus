@@ -1,5 +1,8 @@
 package com.seu.vCampus.Client.Library;
 
+import com.seu.vCampus.Client.Common;
+import com.seu.vCampus.util.Book;
+
 import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.table.DefaultTableModel;
@@ -14,12 +17,26 @@ public class AdminLib{
     private JButton AddBookButton;
     private JTextField FilterField;
     protected JTable AdminLibTable;
-    protected static DefaultTableModel AModel;
-    private String[] columnNames= {"Name of Book",
+    private Common ABookData;
+    private static String[] columnNames= {"Name of Book",
             "Author",
             "类型",
             "ISBN"
     };
+
+    protected static DefaultTableModel AModel = new DefaultTableModel(null,columnNames){
+        @Override
+        public boolean isCellEditable(int row, int column){
+            //Note that the data/cell address is constant,
+            //no matter where the cell appears onscreen.
+            if (column == 3) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    };
+
     private TableRowSorter<DefaultTableModel> sorter;
     public AdminLib() {
         AddBookButton.addMouseListener(new MouseAdapter() {
@@ -35,7 +52,20 @@ public class AdminLib{
                 super.mouseClicked(e);
                 int selectedRow=AdminLibTable.getSelectedRow();
                 if(selectedRow!=-1){
-                    AModel.removeRow(selectedRow);
+                    int Blistsize=ABookData.getBookInformation().getBookList().size();
+                    int cnt=0;
+                    boolean find=false;
+                    while(cnt<=Blistsize){
+                        Book NBook=ABookData.getBookInformation().getBookList().get(cnt);
+                        if(AModel.getValueAt(selectedRow,3)==NBook.getBID()){
+                            find=true;
+                            //delete book
+                            AModel.removeRow(selectedRow);
+                            break;
+                        }
+                        cnt++;
+                    }
+
                 }
             }
         });
@@ -60,15 +90,23 @@ public class AdminLib{
 
     private void createUIComponents() {
         // TODO: place custom component creation code here
-        AModel = new DefaultTableModel(null,columnNames);
-
+        //Initialize AModel
+        ABookData=Common.getInstance();
+        int Blistsize=ABookData.getBookInformation().getBookList().size();
+        int cnt=0;
+        while(cnt<=Blistsize){
+            Book NBook=ABookData.getBookInformation().getBookList().get(cnt);
+            AModel.setValueAt(NBook.getName(),cnt,0);
+            AModel.setValueAt(NBook.getAuthor(),cnt,1);
+            //LModel.setValueAt(type,cnt,2);
+            AModel.setValueAt(NBook.getBID(),cnt,3);
+            cnt++;
+        }
 
         //Create a table with a sorter.
         sorter = new TableRowSorter<DefaultTableModel>(AModel);
         AdminLibTable = new JTable(AModel);
         AdminLibTable.setRowSorter(sorter);
-        AdminLibTable.setPreferredScrollableViewportSize(new Dimension(1000, 500));
-        AdminLibTable.setFillsViewportHeight(true);
 
         //For the purposes of this example, better to have a single
         //selection.
