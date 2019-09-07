@@ -754,7 +754,7 @@ public class DatabaseActions {
                 String BB=res.getString("BankBalance");
                 bankCountUsers.setBankBalance(Double.parseDouble(BB));
 
-                sql="select*from BankCount FULL INNER JOIN BankBill ON " +    //取两表以一卡通为准的交集
+                sql="select*from BankCount INNER JOIN BankBill ON " +    //取两表以一卡通为准的交集
                         "(BankCount.ECardNumber =BankBill.ECardNumber" +
                         " and BankBill.ECardNumber=?)";
                 stmt=conn.prepareStatement(sql);
