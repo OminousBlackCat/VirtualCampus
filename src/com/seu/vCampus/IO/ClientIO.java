@@ -52,6 +52,7 @@ public class ClientIO {
             bis = new BufferedInputStream(is);     //构建缓冲输入流
             ois = new ObjectInputStream(bis);      //反序列化获得对象
             rtn = (Message) ois.readObject();   //获得message对象
+            System.out.println(rtn.getType()+rtn.getECardNumber());
             return  rtn;
         }catch (Exception e){
             e.printStackTrace();

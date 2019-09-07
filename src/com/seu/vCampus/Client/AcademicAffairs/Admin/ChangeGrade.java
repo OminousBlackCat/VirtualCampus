@@ -1,4 +1,4 @@
-package com.seu.vCampus.Client.courseSelect;
+package com.seu.vCampus.Client.AcademicAffairs.Admin;
 
 import javax.swing.*;
 import java.awt.*;
@@ -6,13 +6,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
 
-public class setGrades extends JFrame {
+public class ChangeGrade extends JFrame {
 
     private JTextField textField;
     private JTextField textField_1;
     private JTextField textField_2;
 
-    public setGrades(){
+    public ChangeGrade(){
         setBounds(100, 100, 436, 484);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 

@@ -47,6 +47,10 @@ public class Common {
         this.ipAddress = "10.203.197.88";
         this.Port = 8000;
         this.isLogin = false;
+        User = new Person();
+        userCount = new BankCount();
+        shopInformation = new ShopManage();
+        bookInformation = new BookManage();
     }
 
     public void startIO()throws Exception{

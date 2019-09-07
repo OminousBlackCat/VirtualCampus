@@ -22,11 +22,7 @@
             <constraints>
               <tabbedpane title="MyBooks"/>
             </constraints>
-            <properties>
-              <foreground color="-1"/>
-              <inheritsPopupMenu value="false"/>
-              <opaque value="false"/>
-            </properties>
+            <properties/>
             <border type="none"/>
             <children>
               <component id="c1ae5" class="javax.swing.JButton" binding="ReturnButton">
@@ -57,12 +53,8 @@
                     <properties>
                       <autoCreateColumnsFromModel value="true"/>
                       <autoCreateRowSorter value="true"/>
-                      <background color="-12434878"/>
                       <fillsViewportHeight value="true"/>
-                      <foreground color="-1"/>
-                      <opaque value="false"/>
                       <rowHeight value="30"/>
-                      <selectionForeground color="-10987432"/>
                     </properties>
                   </component>
                 </children>

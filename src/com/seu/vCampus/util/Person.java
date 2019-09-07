@@ -50,7 +50,7 @@ public class Person extends Message{
                 case 0:
                     return "学生";
                 case 1:
-                    return "教室";
+                    return "教师";
                 case 2:
                     return "商店管理员";
                 case 3:
