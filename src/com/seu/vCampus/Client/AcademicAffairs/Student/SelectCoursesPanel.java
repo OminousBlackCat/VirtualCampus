@@ -13,11 +13,10 @@ import com.seu.vCampus.Client.Common;
 import com.seu.vCampus.util.Course;
 import com.seu.vCampus.util.Message;
 import com.seu.vCampus.util.Person;
-import javafx.scene.layout.FlowPane;
 
 public class SelectCoursesPanel extends JPanel {
     private final FlowLayout flow = new FlowLayout();
-    private CoursesSelectedPanel selectedPanel;
+    private CoursesSelectedPanel coursesSelectedPanel1;
     private JPanel coursepanel;
     private JPanel selectpanel;
     private JPanel coursepanel1;
@@ -59,33 +58,23 @@ public class SelectCoursesPanel extends JPanel {
         this.term = new JComboBox<>(termList);
         this.setLayout(new BorderLayout());
         this.add(term, BorderLayout.NORTH);
-        this.selectedPanel = new CoursesSelectedPanel(flow,true);
-
-        this.label = new JLabel("已选课程");
-        this.selectedPanel.add(label);
-        this.add(selectedPanel, BorderLayout.WEST);//已选课程列表
-
+        this.coursesSelectedPanel1 = new CoursesSelectedPanel(flow,true,"19-20-1");
         this.splitPane = new JSplitPane();
         this.splitPane.setDividerLocation(250);
-
         coursepanel1 = new JPanel();//第一学期可选课程
-        splitPane.setLeftComponent(coursepanel1);
-
+        splitPane.setLeftComponent(coursesSelectedPanel1);
         selectpanel1 = new JPanel();//第一学期选择按钮
         splitPane.setRightComponent(selectpanel1);
-
         coursepanel2 = new JPanel();//第二学期可选课程
-
         selectpanel2 = new JPanel();//第二学期可选课程
-        add(splitPane, BorderLayout.CENTER);
-
+        this.add(splitPane, BorderLayout.CENTER);
         term.addItemListener(new ItemListener(){//选择哪个学期
             public void itemStateChanged(ItemEvent e) {
-                if(e.getStateChange()==ItemEvent.SELECTED)
+                if(e.getStateChange() == ItemEvent.SELECTED)
                 {
                     if(term.getSelectedIndex()==0)
                     {
-                        splitPane.setLeftComponent(coursepanel1);
+                        splitPane.setLeftComponent(coursesSelectedPanel1);
                         splitPane.setRightComponent(selectpanel1);
                         splitPane.setDividerLocation(250);
                     }
@@ -99,15 +88,14 @@ public class SelectCoursesPanel extends JPanel {
             }
 
         });
-        refresh();
     }
 
     public void refresh(){
         int number = courseList.size();
         JTextField jtf;
         JButton jb;
-        for(int i=0;i<number;i++){
-            course= student.getCourses().get(i);
+        for(int i=0 ; i<number; i++){
+            course = student.getCourses().get(i);
             if(course.getCourseSemester()=="19-20-1"){
                 jtf=new JTextField(course.getCourseNumber()+"    "+course.getCourseName()+"    "+course.getCourseSemester());
                 jtf.setEditable(false);
@@ -116,7 +104,7 @@ public class SelectCoursesPanel extends JPanel {
                 jb.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        selectedPanel.add(new JLabel(course.getCourseName()));
+                        coursesSelectedPanel1.add(new JLabel(course.getCourseName()));
                         f5();
                     }
                 });
@@ -130,7 +118,7 @@ public class SelectCoursesPanel extends JPanel {
                 jb.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        selectedPanel.add(new JLabel(course.getCourseName()));
+                        coursesSelectedPanel1.add(new JLabel(course.getCourseName()));
                         f5();
                     }
                 });
@@ -160,7 +148,7 @@ public class SelectCoursesPanel extends JPanel {
                         button.addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
-                                selectedPanel.add(new JLabel(course.getCourseName()));
+                                coursesSelectedPanel1.add(new JLabel(course.getCourseName()));
                                 f5();
                             }
                         });
@@ -181,7 +169,7 @@ public class SelectCoursesPanel extends JPanel {
                         button.addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
-                                selectedPanel.add(new JLabel(course.getCourseName()));
+                                coursesSelectedPanel1.add(new JLabel(course.getCourseName()));
                                 f5();
                             }
                         });
@@ -190,8 +178,5 @@ public class SelectCoursesPanel extends JPanel {
             }
         }
     }
-    /**
-     * Initialize the contents of the frame.
-     */
 
 }

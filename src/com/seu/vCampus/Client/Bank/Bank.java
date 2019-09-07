@@ -1,11 +1,8 @@
 package com.seu.vCampus.Client.Bank;
 
-import javax.naming.directory.SearchResult;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.DateFormat;
@@ -19,22 +16,21 @@ import com.seu.vCampus.Client.Common;
 import com.seu.vCampus.util.BankBill;
 import com.seu.vCampus.util.BankCount;
 import com.seu.vCampus.util.Message;
-import com.sun.javafx.property.adapter.JavaBeanQuickAccessor;
-import jdk.nashorn.internal.scripts.JO;
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
+
+
 
 public class Bank {
     private JPanel bankPanel;
     private JTextField money;
     private JPasswordField password;
-    private JLabel yue;
-    private JLabel zhanghao;
-    private JLabel Yyue;
-    private JLabel Yzhanghao;
-    private JLabel EcardNumber;
-    private JLabel EcardBalance;
-    private JLabel UserNumber;
     private JLabel BankBalance;
+    private JLabel UserNumber;
+    private JLabel ECardBalance;
+    private JLabel ECardNumber;
+    private JLabel label1;
+    private JLabel label2;
+    private JLabel label3;
+    private JLabel label4;
     private JLabel RechargeMoney;
     private JLabel Password;
     private JButton charge;
@@ -92,10 +88,10 @@ public class Bank {
 
     private void initialization() {
 
-        Yzhanghao.setText(bankData.getUser().getECardNumber());
-        Yyue.setText(Double.toString(bankData.getUser().getECardBalance()));
-        zhanghao.setText(bankData.getUserCount().getCounterNumber());
-        yue.setText(Double.toString(bankData.getUserCount().getBankBalance()));
+        ECardNumber.setText(bankData.getUser().getECardNumber());
+        BankBalance.setText(Double.toString(bankData.getUserCount().getBankBalance()));
+        UserNumber.setText(bankData.getUserCount().getCounterNumber());
+        ECardBalance.setText(Double.toString(bankData.getUser().getECardBalance()));
 
     }
 
@@ -139,22 +135,22 @@ public class Bank {
         panel1.setLayout(new GridLayoutManager(12, 9, new Insets(0, 0, 0, 0), -1, -1));
         panel1.setBackground(new Color(-8355712));
         bankPanel.add(panel1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-        EcardNumber = new JLabel();
-        EcardNumber.setForeground(new Color(-1));
-        EcardNumber.setText("一卡通账号：");
-        panel1.add(EcardNumber, new GridConstraints(0, 5, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        EcardBalance = new JLabel();
-        EcardBalance.setForeground(new Color(-1));
-        EcardBalance.setText("一卡通余额：");
-        panel1.add(EcardBalance, new GridConstraints(2, 5, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        UserNumber = new JLabel();
-        UserNumber.setForeground(new Color(-1));
-        UserNumber.setText("银行卡账号：");
-        panel1.add(UserNumber, new GridConstraints(4, 5, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        BankBalance = new JLabel();
-        BankBalance.setForeground(new Color(-1));
-        BankBalance.setText("银行卡余额：");
-        panel1.add(BankBalance, new GridConstraints(6, 5, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        label1 = new JLabel();
+        label1.setForeground(new Color(-1));
+        label1.setText("一卡通账号：");
+        panel1.add(label1, new GridConstraints(0, 5, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        label2 = new JLabel();
+        label2.setForeground(new Color(-1));
+        label2.setText("一卡通余额：");
+        panel1.add(label2, new GridConstraints(2, 5, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        label3 = new JLabel();
+        label3.setForeground(new Color(-1));
+        label3.setText("银行卡账号：");
+        panel1.add(label3, new GridConstraints(4, 5, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        label4 = new JLabel();
+        label4.setForeground(new Color(-1));
+        label4.setText("银行卡余额：");
+        panel1.add(label4, new GridConstraints(6, 5, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         RechargeMoney = new JLabel();
         RechargeMoney.setForeground(new Color(-1));
         RechargeMoney.setText("充值金额：");
@@ -163,22 +159,22 @@ public class Bank {
         Password.setForeground(new Color(-1));
         Password.setText("充值密码：");
         panel1.add(Password, new GridConstraints(10, 5, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        Yzhanghao = new JLabel();
-        Yzhanghao.setForeground(new Color(-1));
-        Yzhanghao.setText("Label");
-        panel1.add(Yzhanghao, new GridConstraints(0, 6, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        Yyue = new JLabel();
-        Yyue.setForeground(new Color(-1));
-        Yyue.setText("Label");
-        panel1.add(Yyue, new GridConstraints(2, 6, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        zhanghao = new JLabel();
-        zhanghao.setForeground(new Color(-1));
-        zhanghao.setText("Label");
-        panel1.add(zhanghao, new GridConstraints(4, 6, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        yue = new JLabel();
-        yue.setForeground(new Color(-1));
-        yue.setText("Label");
-        panel1.add(yue, new GridConstraints(6, 6, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        ECardNumber = new JLabel();
+        ECardNumber.setForeground(new Color(-1));
+        ECardNumber.setText("Label");
+        panel1.add(ECardNumber, new GridConstraints(0, 6, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        ECardBalance = new JLabel();
+        ECardBalance.setForeground(new Color(-1));
+        ECardBalance.setText("Label");
+        panel1.add(ECardBalance, new GridConstraints(2, 6, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        UserNumber = new JLabel();
+        UserNumber.setForeground(new Color(-1));
+        UserNumber.setText("Label");
+        panel1.add(UserNumber, new GridConstraints(4, 6, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        BankBalance = new JLabel();
+        BankBalance.setForeground(new Color(-1));
+        BankBalance.setText("Label");
+        panel1.add(BankBalance, new GridConstraints(6, 6, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         money = new JTextField();
         panel1.add(money, new GridConstraints(8, 6, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         password = new JPasswordField();

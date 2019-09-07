@@ -25,6 +25,8 @@ public class Message implements java.io.Serializable{
         TYPE_SET_GRADE,
         TYPE_GRADES_INPUT,
         TYPE_ADD_COURSE,
+        TYPE_QUERY_EXAMINABLE_COURSES,
+        TYPE_INPUT_EXAMS,
         TYPE_QUERY_BANK_COUNT,
         TYPE_RECHARGE_ECARD,
         TYPE_QUERY_GOODS,

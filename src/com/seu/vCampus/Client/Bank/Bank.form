@@ -18,7 +18,7 @@
         </properties>
         <border type="none"/>
         <children>
-          <component id="35db7" class="javax.swing.JLabel" binding="EcardNumber">
+          <component id="35db7" class="javax.swing.JLabel" binding="label1">
             <constraints>
               <grid row="0" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -27,7 +27,7 @@
               <text value="一卡通账号："/>
             </properties>
           </component>
-          <component id="39d67" class="javax.swing.JLabel" binding="EcardBalance">
+          <component id="39d67" class="javax.swing.JLabel" binding="label2">
             <constraints>
               <grid row="2" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -36,7 +36,7 @@
               <text value="一卡通余额："/>
             </properties>
           </component>
-          <component id="33856" class="javax.swing.JLabel" binding="UserNumber">
+          <component id="33856" class="javax.swing.JLabel" binding="label3">
             <constraints>
               <grid row="4" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -45,7 +45,7 @@
               <text value="银行卡账号："/>
             </properties>
           </component>
-          <component id="d84c4" class="javax.swing.JLabel" binding="BankBalance">
+          <component id="d84c4" class="javax.swing.JLabel" binding="label4">
             <constraints>
               <grid row="6" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -72,7 +72,7 @@
               <text value="充值密码："/>
             </properties>
           </component>
-          <component id="881bb" class="javax.swing.JLabel" binding="Yzhanghao">
+          <component id="881bb" class="javax.swing.JLabel" binding="ECardNumber">
             <constraints>
               <grid row="0" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -81,7 +81,7 @@
               <text value="Label"/>
             </properties>
           </component>
-          <component id="199d" class="javax.swing.JLabel" binding="Yyue">
+          <component id="199d" class="javax.swing.JLabel" binding="ECardBalance">
             <constraints>
               <grid row="2" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -90,7 +90,7 @@
               <text value="Label"/>
             </properties>
           </component>
-          <component id="2f478" class="javax.swing.JLabel" binding="zhanghao">
+          <component id="2f478" class="javax.swing.JLabel" binding="UserNumber">
             <constraints>
               <grid row="4" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -99,7 +99,7 @@
               <text value="Label"/>
             </properties>
           </component>
-          <component id="a980f" class="javax.swing.JLabel" binding="yue">
+          <component id="a980f" class="javax.swing.JLabel" binding="BankBalance">
             <constraints>
               <grid row="6" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>

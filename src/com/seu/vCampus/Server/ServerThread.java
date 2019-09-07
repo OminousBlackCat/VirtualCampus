@@ -13,12 +13,8 @@ import com.seu.vCampus.util.*;
 import com.seu.vCampus.Database.DatabaseConnection;
 import com.seu.vCampus.Database.DatabaseActions;
 
-import java.util.ArrayList;
-import javax.xml.crypto.Data;
-import java.sql.Connection;
 import java.net.Socket;
 import java.io.*;
-import java.sql.SQLException;
 
 
 public class ServerThread  extends Thread{
@@ -119,6 +115,12 @@ public class ServerThread  extends Thread{
                         break;
                     case TYPE_ADD_COURSE:
                         act.addCourse((Course) msg);
+                        break;
+                    case TYPE_QUERY_EXAMINABLE_COURSES:
+                        act.getCoursesForExam((Person) msg);
+                        break;
+                    case TYPE_INPUT_EXAMS:
+                        act.examsInput((Person) msg);
                         break;
                     case TYPE_QUERY_GOODS:
                         act.getShopMessage((ShopManage) msg);

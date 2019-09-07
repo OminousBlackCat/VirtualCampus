@@ -83,7 +83,7 @@ public class Home extends JFrame{
 
         homePanel = new BasicInformationPanel("01");
         bankPanel = new Bank();
-        shopPanel = new Shop();
+//        shopPanel = new Shop();
         mangerShopPanel = new MangerShop();
 
 
@@ -268,9 +268,9 @@ public class Home extends JFrame{
 
                 coursePanelS = new SelectCoursesPanel();
                 tabbedPane.addTab("选课", Edu, coursePanelS, null);
-
-                JPanel panel_3 = new JPanel();
-                tabbedPane.addTab("商店",Shop, shopPanel.getPanel(), null);
+//
+//                JPanel panel_3 = new JPanel();
+//                tabbedPane.addTab("商店",Shop, shopPanel.getPanel(), null);
 
 
                 JPanel panel_4 = new JPanel();
