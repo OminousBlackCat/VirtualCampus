@@ -758,6 +758,8 @@ public class DatabaseActions {
                 bankCountUsers.setBankBalance(Double.parseDouble(BB));
                 String CN = res.getString("CounterNumber");
                 bankCountUsers.setCounterNumber(CN);
+                String PW = res.getString("CountPassword");
+                bankCountUsers.setBankPassword(PW);
 
                 sql="select * from BankCount INNER JOIN BankBill ON (BankCount.ECardNumber =BankBill.ECardNumber and BankBill.ECardNumber=?)";
                 stmt=conn.prepareStatement(sql);
