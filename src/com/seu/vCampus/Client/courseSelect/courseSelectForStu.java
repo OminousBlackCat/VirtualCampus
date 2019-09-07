@@ -143,8 +143,6 @@ public class courseSelectForStu extends JPanel {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         panel.add(new JLabel(course.getCourseName()));
-                        int studentsNow=course.getEnrolledStudents();
-                        course.setEnrolledStudents(studentsNow++);
                         f5();
                     }
                 });
@@ -175,8 +173,6 @@ public class courseSelectForStu extends JPanel {
                             @Override
                             public void actionPerformed(ActionEvent e) {
                                 panel.add(new JLabel(course.getCourseName()));
-                                int studentsNow=course1.getEnrolledStudents();
-                                course1.setEnrolledStudents(studentsNow++);
                                 f5();
                             }
                         });
@@ -198,8 +194,6 @@ public class courseSelectForStu extends JPanel {
                             @Override
                             public void actionPerformed(ActionEvent e) {
                                 panel.add(new JLabel(course.getCourseName()));
-                                int studentsNow=course1.getEnrolledStudents();
-                                course1.setEnrolledStudents(studentsNow++);
                                 f5();
                             }
                         });
