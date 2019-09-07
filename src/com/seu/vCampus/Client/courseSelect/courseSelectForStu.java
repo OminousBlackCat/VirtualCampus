@@ -121,9 +121,10 @@ public class courseSelectForStu extends JPanel {
         JTextField jtf;
         JButton jb;
         for(int i=0;i<number;i++){
-            course=courseList.get(i);
+            course=user.getCourses().get(i);
             if(course.getCourseSemester()=="19-20-1"){
                 jtf=new JTextField(course.getCourseNumber()+"    "+course.getCourseName()+"    "+course.getCourseSemester());
+                jtf.setEditable(false);
                 coursepanel1.add(jtf);
                 jb=new JButton("选择");
                 jb.addActionListener(new ActionListener() {
@@ -137,6 +138,7 @@ public class courseSelectForStu extends JPanel {
             }
             else if(course.getCourseSemester()=="19-20-2"){
                 jtf=new JTextField(course.getCourseNumber()+"    "+course.getCourseName()+"    "+course.getCourseSemester());
+                jtf.setEditable(false);
                 coursepanel2.add(jtf);
                 jb=new JButton("选择");
                 jb.addActionListener(new ActionListener() {
