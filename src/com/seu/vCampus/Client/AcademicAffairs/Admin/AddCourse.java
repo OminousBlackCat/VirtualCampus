@@ -1,17 +1,13 @@
-package com.seu.vCampus.Client.courseSelect;
+package com.seu.vCampus.Client.AcademicAffairs.Admin;
 
 import com.seu.vCampus.util.Course;
-
-import java.awt.EventQueue;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.Document;
 
-public class addCourse {
+public class AddCourse {
     private JFrame frame;
     private JTextField textField;
     private JTextField textField_1;
@@ -32,7 +28,7 @@ public class addCourse {
     private String courseCredit;
     private String courseType;
     private int maximumStudents;
-    public addCourse() {
+    public AddCourse() {
         initialize();
     }
 

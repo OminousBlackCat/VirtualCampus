@@ -21,9 +21,10 @@ import com.seu.vCampus.Client.Library.AdminLib;
 import com.seu.vCampus.Client.Library.StuLib;
 import com.seu.vCampus.Client.Shop.MangerShop;
 import com.seu.vCampus.Client.Shop.Shop;
-import com.seu.vCampus.Client.courseSelect.courseSelectForStu;
-import com.seu.vCampus.Client.courseSelect.courseSelectForT;
 import com.seu.vCampus.util.*;
+import com.seu.vCampus.Client.AcademicAffairs.Student.SelectCourses;
+import com.seu.vCampus.Client.AcademicAffairs.Teacher.InputGrades;
+import com.seu.vCampus.util.Person;
 
 
 public class Home extends JFrame{
@@ -41,7 +42,7 @@ public class Home extends JFrame{
     private JTabbedPane tabbedPane;
     private Bank bankPanel;
     private BasicInformationPanel homePanel;
-    private courseSelectForStu coursePanelS;
+    private com.seu.vCampus.Client.AcademicAffairs.Student.SelectCourses coursePanelS;
     private Shop shopPanel;
     private MangerShop mangerShopPanel;
 
@@ -266,7 +267,7 @@ public class Home extends JFrame{
             case GROUP_STUDENT:{
                 tabbedPane.addTab("图书", Library, new StuLib().LibMPanel, null);
 
-                coursePanelS = new courseSelectForStu();
+                coursePanelS = new SelectCourses();
                 tabbedPane.addTab("选课", Edu, coursePanelS, null);
 
                 JPanel panel_3 = new JPanel();
@@ -281,7 +282,7 @@ public class Home extends JFrame{
                 JPanel panel_1 = new JPanel();
                 tabbedPane.addTab("图书馆", Library, panel_1, null);
 
-                courseSelectForT panel_2 = new courseSelectForT();
+                InputGrades panel_2 = new InputGrades();
                 tabbedPane.addTab("教务", Edu, panel_2, null);
 
                 JPanel panel_3 = new JPanel();
