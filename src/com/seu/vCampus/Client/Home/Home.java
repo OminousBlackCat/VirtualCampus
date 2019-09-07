@@ -17,6 +17,8 @@ import com.seu.vCampus.Client.Bank.Bank;
 import com.seu.vCampus.Client.BasicInformation.BasicInformationPanel;
 import com.seu.vCampus.Client.Common;
 import com.seu.vCampus.Client.Launcher.Launcher;
+import com.seu.vCampus.Client.Library.AdminLib;
+import com.seu.vCampus.Client.Library.StuLib;
 import com.seu.vCampus.Client.Shop.MangerShop;
 import com.seu.vCampus.Client.Shop.Shop;
 import com.seu.vCampus.Client.courseSelect.courseSelectForStu;
@@ -235,8 +237,7 @@ public class Home extends JFrame{
                 break;
             }
             case GROUP_STUDENT:{
-                JPanel panel_1 = new JPanel();
-                tabbedPane.addTab("图书", Library, panel_1, null);
+                tabbedPane.addTab("图书", Library, new StuLib().LibMPanel, null);
 
                 coursePanelS = new courseSelectForStu();
                 tabbedPane.addTab("选课", Edu, coursePanelS, null);
@@ -265,8 +266,7 @@ public class Home extends JFrame{
                 break;
             }
             case GROUP_LIBRARY_MANAGER:{
-                JPanel LibraryManager = new JPanel();
-                tabbedPane.addTab("图书管理",Library,LibraryManager,null);
+                tabbedPane.addTab("图书管理",Library,new AdminLib().AdminLibMPanel,null);
                 break;
             }
             case GROUP_SHOP_MANAGER:{
