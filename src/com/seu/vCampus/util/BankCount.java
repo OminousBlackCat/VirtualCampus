@@ -27,4 +27,5 @@ public class BankCount extends Message {
     public void addBill(BankBill bill){
         this.CountBill.add(bill);
     }
+    public List<BankBill> getCountBill() { return CountBill; }
 }

@@ -9,10 +9,7 @@ import com.seu.vCampus.util.Person;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 
 
 public class LauncherPanel extends JPanel {
@@ -22,6 +19,7 @@ public class LauncherPanel extends JPanel {
     private JButton Login;
     private JButton config;
     private Common launcherData;
+    private JLabel exit;
 
     public LauncherPanel(){
         setBorder(new EmptyBorder(5,5,5,5));
@@ -29,36 +27,60 @@ public class LauncherPanel extends JPanel {
         launcherData = Common.getInstance();
 
 
+        exit = new JLabel("X");
+        exit.setForeground(Color.WHITE);
+        exit.setBounds(470,7,20,20);
+        add(exit);
+        exit.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                System.exit(0);
+            }
+        });
+        exit.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                exit.setForeground(Color.gray);
+            }
+        });
+        exit.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseExited(MouseEvent e) {
+                exit.setForeground(Color.WHITE);
+            }
+        });
 
         Login = new JButton("登录");
         Login.setEnabled(true);
-        Login.setBounds(150,200,100,30);
+        Login.setBounds(265,270,100,30);
+        Login.setBackground(new Color(0,153,68));
         add(Login);
 
         config = new JButton("配置");
-        config.setBounds(40,200,100,30);
+        config.setBounds(130,270,100,30);
+        config.setBackground(new Color(137,81,161));
         config.setEnabled(true);
         add(config);
 
         ECardNumber = new JTextField();
-        ECardNumber.setBounds(90,40,150,25);
+        ECardNumber.setBounds(200,180,150,25);
         add(ECardNumber);
         JLabel cardNumber = new JLabel("一卡通号：");
-        cardNumber.setBounds(20,40,80,25);
+        cardNumber.setBounds(130,180,80,25);
         add(cardNumber);
 
         passWord = new JPasswordField();
-        passWord.setBounds(90,100,150,25);
+        passWord.setBounds(200,230,150,25);
         add(passWord);
         JLabel psw = new JLabel("密码：");
-        psw.setBounds(20,100,80,25);
+        psw.setBounds(130,230,80,25);
         add(psw);
 
         JLabel IPLabel = new JLabel("服务端IP："+launcherData.getIpAddress());
-        IPLabel.setBounds(70,150,150,30);
+        IPLabel.setBounds(160,140,200,30);
         add(IPLabel);
 
-        ImageIcon image = new ImageIcon("src/BackGroundImage/Launcher.jpg");
+        ImageIcon image = new ImageIcon("src/BackGroundImage/Launcher.png");
         setBackground(image);
 
         Login.addActionListener(new ActionListener() {

@@ -17,8 +17,15 @@ public class Person extends Message{
 
 
     public Person(){
+        this.ECardNumber = "null";
+        this.Name = "null";
         this.Type = MESSAGE_TYPE.TYPE_QUERY_PERSON;
         this.AuthorityLevel = USER_GROUP.GROUP_STUDENT;
+        this.Sex = "女";
+        this.StudentNumber = "000000";
+        this.LendBooksNumber = 0;
+        this.ECardBalance = 0.0;
+        courses = new ArrayList<>();
         this.AvatarID = "1";
     }
 
@@ -38,8 +45,21 @@ public class Person extends Message{
         public int valueOf(){
             return value;
         }
-
-
+        public String toString(){
+            switch (value){
+                case 0:
+                    return "学生";
+                case 1:
+                    return "教室";
+                case 2:
+                    return "商店管理员";
+                case 3:
+                    return "图书管理员";
+                case 4:
+                    return "总管理员";
+            }
+            return null;
+        }
     }
 
     public Person(String lecturerECN) {
