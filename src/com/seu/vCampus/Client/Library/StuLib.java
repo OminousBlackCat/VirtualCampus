@@ -40,6 +40,16 @@ public class StuLib {
                 }
             }
         });
+        borrowButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                int selectedRow=Libtable.getSelectedRow();
+                if(selectedRow!=-1){
+                    LModel.removeRow(selectedRow);
+                }
+            }
+        });
     }
     private Common BookData;
     public JPanel LibMPanel;
