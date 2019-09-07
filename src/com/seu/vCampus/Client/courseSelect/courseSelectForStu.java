@@ -55,13 +55,16 @@ public class courseSelectForStu extends JPanel {
 
     public void initialize(){
         coursedata = Common.getInstance();
-        coursedata.getUser().setType(Message.MESSAGE_TYPE.TYPE_GET_COURSES_AVAILABLE);
+        user=new Person();
+        course=new Course();
+        courseList=new ArrayList<>();
         user.setECardNumber(coursedata.getUser().getECardNumber());
         course.setCourseSemester("19-20-1");
         courseList.add(course);
         user.setCourses(courseList);
+        user.setType(Message.MESSAGE_TYPE.TYPE_GET_COURSES_AVAILABLE);
         coursedata.getIo().SendMessages(user);
-        coursedata.setUser((Person)coursedata.getIo().ReceiveMessage());
+        user= (Person)coursedata.getIo().ReceiveMessage();
     }
     public courseSelectForStu() {
         initialize();
