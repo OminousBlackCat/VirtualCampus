@@ -674,9 +674,11 @@ public class DatabaseActions {
 
                 PM.addUser(temp);
             }
+            PM.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
             return PM;
         }catch (SQLException e){
             e.printStackTrace();
+            PM.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
             return PM;
         }
     }
@@ -686,9 +688,10 @@ public class DatabaseActions {
         try {
             Statement st = conn.createStatement();
             ResultSet res = st.executeQuery("select *from Goods");
-            Goods temp = new Goods();
+
 
             while (res.next()) {
+                Goods temp = new Goods();
                 String ID = res.getString("GID");
                 String GN = res.getString("goodsName");
                 String GP = res.getString("Price");
@@ -701,11 +704,12 @@ public class DatabaseActions {
 
                 SM.addGoods(temp);
             }
-
+            SM.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
             return SM;
         }catch (SQLException E)
         {
             E.printStackTrace();
+            SM.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
             return  SM;
         }
     }
@@ -743,37 +747,43 @@ public class DatabaseActions {
 
     public BankCount getBankMessage(BankCount bankCountUsers) {              //传输银行客户信息
         try {
-            BankBill temp=new BankBill();
-            String sql = "select*from BankCount where ECardNumber=? and CountPassword=?";
+
+            String sql = "select*from BankCount where ECardNumber=?";
             this.stmt = conn.prepareStatement(sql);
             stmt.setString(1, bankCountUsers.getECardNumber());
-            stmt.setString(2,bankCountUsers.getBankPassword());
             ResultSet res = stmt.executeQuery();
 
             if(res.next()){
                 String BB=res.getString("BankBalance");
                 bankCountUsers.setBankBalance(Double.parseDouble(BB));
+                String CN = res.getString("CounterNumber");
+                bankCountUsers.setCounterNumber(CN);
+
 
                 sql="select*from BankCount INNER JOIN BankBill ON " +    //取两表以一卡通为准的交集
                         "(BankCount.ECardNumber =BankBill.ECardNumber" +
                         " and BankBill.ECardNumber=?)";
                 stmt=conn.prepareStatement(sql);
+                System.out.println(bankCountUsers.getECardNumber());
                 stmt.setString(1,bankCountUsers.getECardNumber());
                 ResultSet Res=stmt.executeQuery();
 
                 while(Res.next()){
-                    String Type=res.getString("State");
-                    String BA=res.getString("Amount");
-                    String TransactionTime=res.getString("TransactionTime");
-                    Date BD=res.getDate("TransactionTime");
+                    BankBill temp=new BankBill();
+                    String Type=Res.getString("State");
+                    String BA=Res.getString("Amount");
+                    Date BD=Res.getDate("TransactionTime");
+
 
                     temp.setBillType(Type=="支出"? BankBill.BILL_TYPE.TYPE_EXPENDITURE: BankBill.BILL_TYPE.TYPE_INCOME);
                     temp.setBillDate(BD);
                     temp.setBillAmount(Double.parseDouble(BA));
+
                     bankCountUsers.addBill(temp);
                 }
 
             }
+            bankCountUsers.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
             return bankCountUsers;
 
         }catch (SQLException E){
@@ -838,9 +848,10 @@ public class DatabaseActions {
         try{
             Statement st=conn.createStatement();
             ResultSet res=st.executeQuery("select *from Books");
-            Book temp=new Book();
+
 
             while(res.next()){
+                Book temp=new Book();
                 String BID=res.getString("BID");
                 String BN=res.getString("bookName");
                 String Auth=res.getString("Author");
@@ -859,9 +870,11 @@ public class DatabaseActions {
 
                 bookManage.AddBook(temp);
             }
+            bookManage.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
             return bookManage;
         }catch (SQLException E){
             E.printStackTrace();
+            bookManage.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
             return bookManage;
         }
     }
