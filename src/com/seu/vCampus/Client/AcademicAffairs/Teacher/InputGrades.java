@@ -6,7 +6,6 @@ import com.seu.vCampus.util.Message;
 import com.seu.vCampus.util.Person;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -29,8 +28,8 @@ public class InputGrades extends JPanel {
         courseList=new ArrayList<>();
         user.setECardNumber(commondata.getUser().getECardNumber());
         user.setType(Message.MESSAGE_TYPE.TYPE_GET_LECTURER_COURSES);
-        commondata.getIo().SendMessages(user);
-        user=(Person)commondata.getIo().ReceiveMessage();
+        commondata.getIO().SendMessages(user);
+        user=(Person)commondata.getIO().ReceiveMessage();
     }
     public InputGrades(){
         initialize();
@@ -64,8 +63,8 @@ public class InputGrades extends JPanel {
                     students.add(course);
                     user.setType(Message.MESSAGE_TYPE.TYPE_GET_ENROLLED_STUDENTS);
                     user.setCourses(students);
-                    commondata.getIo().SendMessages(user);
-                    user=(Person)commondata.getIo().ReceiveMessage();
+                    commondata.getIO().SendMessages(user);
+                    user=(Person)commondata.getIO().ReceiveMessage();
                 }
             }
         });
