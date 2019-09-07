@@ -64,7 +64,7 @@ public class Common {
 
 
 
-    public ClientIO getIo() { return io; }
+    public ClientIO getIO() { return io; }
     public void setIo(ClientIO io) { this.io = io; }
     public String getIpAddress() {
         return ipAddress;

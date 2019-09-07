@@ -103,9 +103,9 @@ public class LauncherPanel extends JPanel {
                 LoginMessage.setPassWord(String.valueOf(passWord.getPassword()));
                 LoginMessage.setECardNumber(ECardNumber.getText());
 
-                launcherData.getIo().SendMessages(LoginMessage);
+                launcherData.getIO().SendMessages(LoginMessage);
                 try {
-                    LoginMessage = (Login)launcherData.getIo().ReceiveMessage();
+                    LoginMessage = (Login)launcherData.getIO().ReceiveMessage();
                 }catch (Exception e2){
                     e2.printStackTrace();
                     JOptionPane.showMessageDialog(null,"连接超时",
@@ -120,8 +120,8 @@ public class LauncherPanel extends JPanel {
                     Person user = new Person();
                     user.setType(Message.MESSAGE_TYPE.TYPE_QUERY_PERSON);
                     user.setECardNumber(ECardNumber.getText());
-                    launcherData.getIo().SendMessages(user);
-                    user = (Person)launcherData.getIo().ReceiveMessage();
+                    launcherData.getIO().SendMessages(user);
+                    user = (Person)launcherData.getIO().ReceiveMessage();
                     System.out.println(user.getName()+user.getStudentNumber());
 
 
