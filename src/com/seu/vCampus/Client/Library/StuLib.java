@@ -38,6 +38,7 @@ public class StuLib {
                 int selectedRow = Stutable.getSelectedRow();
                 if (selectedRow != -1) {
                     SModel.removeRow(selectedRow);
+
                 }
             }
         });
@@ -68,6 +69,7 @@ public class StuLib {
             "ISBN",
             "借阅情况"
     };
+
     protected static DefaultTableModel SModel = new DefaultTableModel(null, StutableHeader) {
         @Override
         public boolean isCellEditable(int row, int column) {
