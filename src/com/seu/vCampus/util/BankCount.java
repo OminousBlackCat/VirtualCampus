@@ -6,9 +6,15 @@ import java.util.List;
 public class BankCount extends Message {
     private double BankBalance;
     private String BankPassword;
+    private String CounterNumber;
     private List<BankBill> CountBill;
 
-    public BankCount() { this.Type = MESSAGE_TYPE.TYPE_NULL; this.CountBill = new ArrayList<>();
+    public BankCount() {
+        this.BankBalance = 0.0;
+        this.BankPassword = "";
+        this.CounterNumber = "";
+        this.Type = MESSAGE_TYPE.TYPE_NULL;
+        this.CountBill = new ArrayList<>();
     }
 
     public double getBankBalance() {
@@ -28,4 +34,12 @@ public class BankCount extends Message {
         this.CountBill.add(bill);
     }
     public List<BankBill> getCountBill() { return CountBill; }
+
+    public String getCounterNumber() {
+        return CounterNumber;
+    }
+
+    public void setCounterNumber(String counterNumber) {
+        CounterNumber = counterNumber;
+    }
 }

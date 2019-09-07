@@ -1,16 +1,11 @@
-package com.seu.vCampus.Client.courseSelect;
-
-import java.awt.EventQueue;
+package com.seu.vCampus.Client.AcademicAffairs.Student;
 
 import javax.swing.*;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
 import java.awt.BorderLayout;
 import java.util.ArrayList;
 
@@ -19,15 +14,7 @@ import com.seu.vCampus.util.Course;
 import com.seu.vCampus.util.Message;
 import com.seu.vCampus.util.Person;
 
-public class courseSelectForStu extends JPanel {
-    public static void main(String[] args) {
-        JFrame jf = new JFrame();
-        courseSelectForStu jp = new courseSelectForStu();
-        jf.add(jp);
-        jf.setVisible(true);
-    }
-
-
+public class SelectCourses extends JPanel {
     private JPanel panel;
     private JPanel coursepanel;
     private JPanel selectpanel;
@@ -59,7 +46,7 @@ public class courseSelectForStu extends JPanel {
 //        coursedata.getIo().SendMessages(coursedata.getUser());
 //        coursedata.setUser((Person)coursedata.getIo().ReceiveMessage());
     }
-    public courseSelectForStu() {
+    public SelectCourses() {
         initialize();
         courseList = coursedata.getUser().getCourses();
         String[] termlist = new String[]{"第一学期", "第二学期"};

@@ -32,23 +32,75 @@ public class Bank {
     private JTable bankBill;
     private Common bankData;
 
+
     public Bank() {
+        bankData = Common.getInstance();
+
+        Object[] col = {"编号", "状态", "金额", "日期"};
+        Object[][] data = null;
+        int size = bankData.getUserCount().getCountBill().size();
+        int counter = 0;
+        while (counter < size) {
+            bankBill.getModel().setValueAt(counter + 1, counter + 1, 0);
+            bankBill.getModel().setValueAt(bankData.getUserCount().getCountBill().get(counter).getBillType(), counter + 1, 1);
+            bankBill.getModel().setValueAt(bankData.getUserCount().getCountBill().get(counter).getBillAmount(), counter + 1, 2);
+            bankBill.getModel().setValueAt(bankData.getUserCount().getCountBill().get(counter).getBillDate(), counter + 1, 3);
+            counter++;
+        }
 
 
-        charge.addActionListener(new ActionListener() {
-            /**
-             * Invoked when an action occurs.
-             *
-             * @param e
-             */
+        charge.addMouseListener(new MouseAdapter() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void mouseClicked(MouseEvent e) {
+                if (bankData.getUserCount().getBankPassword().equals(password.getText())) {
+                    if (bankData.getUserCount().getBankBalance() >= Double.parseDouble(money.getText())) {
+                        double temp = bankData.getUserCount().getBankBalance() - Double.parseDouble(money.getText());
+                        double Etemp = bankData.getUser().getECardBalance() + Double.parseDouble(money.getText());
+                        bankData.getUserCount().setBankBalance(temp);
+                        bankData.getUser().setECardBalance(Etemp);
+                    } else {
+                        JFrame jf = new JFrame("银行卡余额不足！");
+                        Container c = jf.getContentPane();
+                        JLabel jl = new JLabel("警告");
+                        jl.setHorizontalAlignment(SwingConstants.CENTER);
+                        c.add(jl);
+                        jf.setVisible(true);
+                        jf.setSize(200, 150);
+                        jf.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+                    }
+                } else {
+                    JFrame jf = new JFrame("银行卡密码错误！");
+                    Container c = jf.getContentPane();
+                    JLabel jl = new JLabel("警告");
+                    jl.setHorizontalAlignment(SwingConstants.CENTER);
+                    c.add(jl);
+                    jf.setVisible(true);
+                    jf.setSize(200, 150);
+                    jf.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+                }
 
             }
         });
     }
 
-    private void initialization(){
+    private void initialization() {
+
+        Object[] col = {"编号", "状态", "金额", "日期"};
+        Object[][] data = null;
+        int size = bankData.getUserCount().getCountBill().size();
+        int counter = 0;
+        while (counter < size) {
+            bankBill.getModel().setValueAt(counter + 1, counter + 1, 0);
+            bankBill.getModel().setValueAt(bankData.getUserCount().getCountBill().get(counter).getBillType(), counter + 1, 1);
+            bankBill.getModel().setValueAt(bankData.getUserCount().getCountBill().get(counter).getBillAmount(), counter + 1, 2);
+            bankBill.getModel().setValueAt(bankData.getUserCount().getCountBill().get(counter).getBillDate(), counter + 1, 3);
+            counter++;
+        }
+
+        Yzhanghao.setText(bankData.getUser().getECardNumber());
+        Yyue.setText(Double.toString(bankData.getUser().getECardBalance()));
+        zhanghao.setText(bankData.getUserCount().getCounterNumber());
+        yue.setText(Double.toString(bankData.getUserCount().getBankBalance()));
 
     }
 
@@ -154,6 +206,7 @@ public class Bank {
         panel1.add(spacer14, new GridConstraints(7, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         final Spacer spacer15 = new Spacer();
         panel1.add(spacer15, new GridConstraints(9, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        initialization();
     }
 
     /**

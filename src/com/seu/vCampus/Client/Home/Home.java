@@ -17,10 +17,13 @@ import com.seu.vCampus.Client.Bank.Bank;
 import com.seu.vCampus.Client.BasicInformation.BasicInformationPanel;
 import com.seu.vCampus.Client.Common;
 import com.seu.vCampus.Client.Launcher.Launcher;
+import com.seu.vCampus.Client.Library.AdminLib;
+import com.seu.vCampus.Client.Library.StuLib;
 import com.seu.vCampus.Client.Shop.MangerShop;
 import com.seu.vCampus.Client.Shop.Shop;
-import com.seu.vCampus.Client.courseSelect.courseSelectForStu;
-import com.seu.vCampus.Client.courseSelect.courseSelectForT;
+import com.seu.vCampus.util.*;
+import com.seu.vCampus.Client.AcademicAffairs.Student.SelectCourses;
+import com.seu.vCampus.Client.AcademicAffairs.Teacher.InputGrades;
 import com.seu.vCampus.util.Person;
 
 
@@ -39,11 +42,11 @@ public class Home extends JFrame{
     private JTabbedPane tabbedPane;
     private Bank bankPanel;
     private BasicInformationPanel homePanel;
-    private courseSelectForStu coursePanelS;
+    private com.seu.vCampus.Client.AcademicAffairs.Student.SelectCourses coursePanelS;
     private Shop shopPanel;
     private MangerShop mangerShopPanel;
 
-    private int skinNumber = 2;
+    private int skinNumber = 1;
 
 
     private void LoadCommon(){
@@ -56,16 +59,39 @@ public class Home extends JFrame{
         LoadCommon();
 
 
-        homePanel = new BasicInformationPanel("02");
+        homePanel = new BasicInformationPanel("01");
         bankPanel = new Bank();
         shopPanel = new Shop();
         mangerShopPanel = new MangerShop();
+
+        {
+            String ECard = homeData.getUser().getECardNumber();
+            System.out.println(ECard);
+            homeData.getShopInformation().setECardNumber(ECard);
+            homeData.getBookInformation().setECardNumber(ECard);
+            homeData.getUserCount().setECardNumber(ECard);
+
+
+            homeData.getBookInformation().setType(Message.MESSAGE_TYPE.TYPE_QUERY_BOOKS);
+            homeData.getIo().SendMessages(homeData.getBookInformation());
+            homeData.setBookInformation((BookManage)homeData.getIo().ReceiveMessage());
+
+            homeData.getUserCount().setType(Message.MESSAGE_TYPE.TYPE_QUERY_BANK_COUNT);
+            homeData.getIo().SendMessages(homeData.getUserCount());
+            homeData.setUserCount((BankCount)homeData.getIo().ReceiveMessage());
+            System.out.println(homeData.getUserCount().getBankBalance());
+
+            homeData.getShopInformation().setType(Message.MESSAGE_TYPE.TYPE_QUERY_GOODS);
+            homeData.getIo().SendMessages(homeData.getShopInformation());
+            homeData.setShopInformation((ShopManage)homeData.getIo().ReceiveMessage());
+
+        }
 
 
         setBounds(200, 200, 1200, 864);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
-        getContentPane().setBackground(Color.BLACK);
+        getContentPane().setBackground(new Color(63, 87, 123));
 
         /**
          * @此处代码块用来初始化Home的顶部与侧部装饰元素
@@ -170,7 +196,7 @@ public class Home extends JFrame{
 
 
             tabbedPane = new JTabbedPane(JTabbedPane.LEFT);
-            tabbedPane.setBackground(Color.BLACK);
+            tabbedPane.setBackground(new Color(63, 87, 123));
             tabbedPane.setBounds(0, 64, 1200, 800);
             getContentPane().add(tabbedPane);
 
@@ -201,21 +227,25 @@ public class Home extends JFrame{
                     switch (skinNumber) {
                         case 1:
                             getContentPane().setBackground(new Color(63, 87, 123));
+                            tabbedPane.setBackground(new Color(63, 87, 123));
                             homePanel = new BasicInformationPanel("01");
                             tabbedPane.setComponentAt(0, homePanel);
                             break;
                         case 2:
                             getContentPane().setBackground(Color.BLACK);
+                            tabbedPane.setBackground(Color.BLACK);
                             homePanel = new BasicInformationPanel("02");
                             tabbedPane.setComponentAt(0, homePanel);
                             break;
                         case 3:
                             getContentPane().setBackground(new Color(85, 20, 0));
+                            tabbedPane.setBackground(new Color(85, 20, 0));
                             homePanel = new BasicInformationPanel("03");
                             tabbedPane.setComponentAt(0, homePanel);
                             break;
                         case 4:
                             getContentPane().setBackground(new Color(0, 70, 40));
+                            tabbedPane.setBackground(new Color(0, 70, 40));
                             homePanel = new BasicInformationPanel("04");
                             tabbedPane.setComponentAt(0, homePanel);
                             skinNumber = 0;
@@ -235,10 +265,9 @@ public class Home extends JFrame{
                 break;
             }
             case GROUP_STUDENT:{
-                JPanel panel_1 = new JPanel();
-                tabbedPane.addTab("图书", Library, panel_1, null);
+                tabbedPane.addTab("图书", Library, new StuLib().LibMPanel, null);
 
-                coursePanelS = new courseSelectForStu();
+                coursePanelS = new SelectCourses();
                 tabbedPane.addTab("选课", Edu, coursePanelS, null);
 
                 JPanel panel_3 = new JPanel();
@@ -253,20 +282,19 @@ public class Home extends JFrame{
                 JPanel panel_1 = new JPanel();
                 tabbedPane.addTab("图书馆", Library, panel_1, null);
 
-                courseSelectForT panel_2 = new courseSelectForT();
+                InputGrades panel_2 = new InputGrades();
                 tabbedPane.addTab("教务", Edu, panel_2, null);
 
                 JPanel panel_3 = new JPanel();
-                tabbedPane.addTab("商店",Shop, panel_3, null);
+                tabbedPane.addTab("商店",Shop, shopPanel.getPanel(), null);
 
 
                 JPanel panel_4 = new JPanel();
-                tabbedPane.addTab("银行", Bank, panel_4, null);
+                tabbedPane.addTab("银行", Bank, bankPanel.getPanel(), null);
                 break;
             }
             case GROUP_LIBRARY_MANAGER:{
-                JPanel LibraryManager = new JPanel();
-                tabbedPane.addTab("图书管理",Library,LibraryManager,null);
+                tabbedPane.addTab("图书管理",Library,new AdminLib().AdminLibMPanel,null);
                 break;
             }
             case GROUP_SHOP_MANAGER:{
