@@ -44,7 +44,7 @@ public class Common {
     }
 
     private Common(){
-        this.ipAddress = "10.203.197.88";
+        this.ipAddress = "10.203.162.249";
         this.Port = 8000;
         this.isLogin = false;
     }

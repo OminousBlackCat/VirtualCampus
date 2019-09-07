@@ -55,13 +55,16 @@ public class courseSelectForStu extends JPanel {
 
     public void initialize(){
         coursedata = Common.getInstance();
-        coursedata.getUser().setType(Message.MESSAGE_TYPE.TYPE_QUERY_PERSON);
-        coursedata.getIo().SendMessages(coursedata.getUser());
+        coursedata.getUser().setType(Message.MESSAGE_TYPE.TYPE_GET_COURSES_AVAILABLE);
+        user.setECardNumber(coursedata.getUser().getECardNumber());
+        course.setCourseSemester("19-20-1");
+        courseList.add(course);
+        user.setCourses(courseList);
+        coursedata.getIo().SendMessages(user);
         coursedata.setUser((Person)coursedata.getIo().ReceiveMessage());
     }
     public courseSelectForStu() {
         initialize();
-        courseList = coursedata.getUser().getCourses();
         String[] termlist = new String[]{"第一学期", "第二学期"};
         term = new JComboBox(termlist);
         setLayout(new BorderLayout());
@@ -116,7 +119,7 @@ public class courseSelectForStu extends JPanel {
         JButton jb;
         for(int i=0;i<number;i++){
             course=courseList.get(i);
-            if(course.getCourseSemester()=="2-1"){
+            if(course.getCourseSemester()=="19-20-1"){
                 jtf=new JTextField(course.getCourseNumber()+"    "+course.getCourseName()+"    "+course.getCourseSemester());
                 coursepanel1.add(jtf);
                 jb=new JButton("选择");
@@ -129,7 +132,7 @@ public class courseSelectForStu extends JPanel {
                 });
                 selectpanel1.add(jb);
             }
-            else if(course.getCourseSemester()=="2-2"){
+            else if(course.getCourseSemester()=="19-20-2"){
                 jtf=new JTextField(course.getCourseNumber()+"    "+course.getCourseName()+"    "+course.getCourseSemester());
                 coursepanel2.add(jtf);
                 jb=new JButton("选择");
@@ -155,7 +158,7 @@ public class courseSelectForStu extends JPanel {
         for(int i=0;i<number;i++){
             course1=courseList.get(i);
             if(term.getSelectedIndex()==0){
-                if(course1.getCourseSemester()=="2-1"){
+                if(course1.getCourseSemester()=="19-20-1"){
                     textField=new JTextField(course1.getCourseNumber()+"  "+course1.getCourseName());
                     textField.setEditable(false);
                     coursepanel.add(textField);
@@ -178,7 +181,7 @@ public class courseSelectForStu extends JPanel {
                 }
             }
             else{
-                if(course1.getCourseSemester()=="2-2"){
+                if(course1.getCourseSemester()=="19-20-2"){
                     textField=new JTextField(course1.getCourseNumber()+"  "+course1.getCourseName());
                     textField.setEditable(false);
                     coursepanel.add(textField);
