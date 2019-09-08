@@ -13,10 +13,10 @@ import java.awt.image.ImagingOpException;
 public class MainShop {
 
     private Common ShopData;
-    /*private ProductPage ProductLife;
+    private ProductPage ProductLife;
     private ProductPage ProductComputer;
     private ProductPage ProductStudy;
-    private ProductPage ProductFood;*/
+    private ProductPage ProductFood;
     private static ImageIcon ShopLife = new ImageIcon("src/icon/ShopLife.png");
     private static ImageIcon ShopStudy = new ImageIcon("src/icon/ShopStudy.png");
     private static ImageIcon ShopComputer = new ImageIcon("src/icon/ShopComputer.png");
@@ -227,10 +227,10 @@ public class MainShop {
     private void createUIComponents() {
         // TODO: place custom component creation code here
         tabbedPane1 = new JTabbedPane();
-        ProductPage ProductLife = new ProductPage();
-        ProductPage ProductStudy = new ProductPage();
-        ProductPage ProductComputer = new ProductPage();
-        ProductPage ProductFood = new ProductPage();
+        ProductLife = new ProductPage();
+        ProductStudy = new ProductPage();
+        ProductComputer = new ProductPage();
+        ProductFood = new ProductPage();
         tabbedPane1.addTab("生活用品", ShopLife, ProductLife.getMainPanel(), "本页面将展示各类生活用品供同学们选择");
         tabbedPane1.addTab("教材工具", ShopStudy, ProductStudy.getMainPanel(), "本页面将展示各类教材工具供同学们选择");
         tabbedPane1.addTab("电子配件", ShopComputer, ProductComputer.getMainPanel(), "本页面将展示各类电子配件供同学们选择");
