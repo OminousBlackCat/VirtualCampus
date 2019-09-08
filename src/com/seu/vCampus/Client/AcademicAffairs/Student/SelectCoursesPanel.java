@@ -28,6 +28,7 @@ public class SelectCoursesPanel extends JPanel {
     private ArrayList<Course> courseList;
     private Vector rowData;
     private Vector rowVec;
+    private CoursesTable coursesTable;
     /**
      * Initialize the application panel.
      */
@@ -126,8 +127,10 @@ public class SelectCoursesPanel extends JPanel {
             public void mouseClicked(MouseEvent e) {
                 if(e.getClickCount()==2){
                     int row =((JTable)e.getSource()).rowAtPoint(e.getPoint());
-                    String coursenumber=(String)defaultModel.getValueAt(row,0);
+                    String courseTime=(String)defaultModel.getValueAt(row,4);
+                    String courseName=(String)defaultModel.getValueAt(row,1);
                     Confirm confirm=new Confirm();
+                    coursesTable.addCourse(courseTime,courseName);
                 }
             }
 
