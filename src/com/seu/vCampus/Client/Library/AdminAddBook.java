@@ -24,6 +24,7 @@ public class AdminAddBook {
     private JTextField TypeText;
     private JLabel TypeLable;
     private Common AABookData;
+
     public AdminAddBook() {
         ApplyButton.addMouseListener(new MouseAdapter() {
             @Override
