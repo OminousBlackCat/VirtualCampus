@@ -4,9 +4,11 @@ import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
 import com.seu.vCampus.Client.Common;
+import com.seu.vCampus.util.Goods;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class ProductPage extends Component {
 
@@ -49,6 +51,24 @@ public class ProductPage extends Component {
     private JLabel label0;
     private JPanel panel1;
 
+    private Goods GoodsA;
+    private Goods GoodsB;
+    private Goods GoodsC;
+    private ArrayList<Goods> thisClassGoodsList;
+    private int index;
+
+    public void initialize(){
+        PageUp.setEnabled(false);
+        PageDown.setEnabled(true);
+
+        index = 0;
+
+    }
+
+
+    public void setThisClassGoodsList(ArrayList<Goods> thisClassGoodsList) {
+        this.thisClassGoodsList = thisClassGoodsList;
+    }
 
     private void createUIComponents() {
         // TODO: place custom component creation code here

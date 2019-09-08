@@ -14,6 +14,8 @@ package com.seu.vCampus.Client;
 import com.seu.vCampus.IO.ClientIO;
 import com.seu.vCampus.util.*;
 
+import java.util.ArrayList;
+
 
 public class Common {
 
@@ -37,6 +39,7 @@ public class Common {
     private BankBill userBill;
     private ShopManage shopInformation;
     private BookManage bookInformation;
+    private ArrayList<Goods> ShoppingList;
 
 
     public static Common getInstance(){
@@ -51,6 +54,7 @@ public class Common {
         userCount = new BankCount();
         shopInformation = new ShopManage();
         bookInformation = new BookManage();
+        ShoppingList = new ArrayList<>();
     }
 
     public void startIO()throws Exception{
@@ -98,5 +102,15 @@ public class Common {
     public BookManage getBookInformation() { return bookInformation; }
     public Person getUser() {
         return User;
+    }
+    public ArrayList getShoppingList() {return ShoppingList;}
+    public void addGoodsIntoList(Goods add){
+        ShoppingList.add(add);
+    }
+    public void deleteGoods(Goods delete){
+        for(int i = 0;i<ShoppingList.size();i++){
+            if(delete.getGoodsNumber().equals(ShoppingList.get(i).getGoodsNumber()))
+                ShoppingList.remove(i);
+        }
     }
 }
