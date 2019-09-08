@@ -768,10 +768,18 @@ public class DatabaseActions {
         try{
             int counter=0;
             while(counter<SM.getGoods().size()) {
-                String sql = "UPDATE Goods set Stock=? where GID=?";
-                stmt = conn.prepareStatement(sql);
-                stmt.setShort(1, SM.getGoods().get(counter).getGoodsStock());
-                stmt.setString(2, SM.getGoods().get(counter).getECardNumber());
+                String sql = "select*from Goods where GID=?";
+                this.stmt = conn.prepareStatement(sql);
+                stmt.setString(1, SM.getGoods().get(counter).getGoodsNumber());
+                ResultSet res = stmt.executeQuery();
+
+                if(res.next()){
+                    Short stock=res.getShort("Stock");
+                    sql = "UPDATE Goods set Stock=? where GID=?";
+                    stmt = conn.prepareStatement(sql);
+                    stmt.setShort(1, (short) (stock-SM.getGoods().get(counter).getGoodsStock()));
+                    stmt.setString(2, SM.getGoods().get(counter).getGoodsNumber());
+                }
                 counter++;
             }
             SM.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);

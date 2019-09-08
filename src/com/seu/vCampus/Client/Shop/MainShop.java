@@ -121,10 +121,18 @@ public class MainShop {
                     JOptionPane.showMessageDialog(null, "支付密码错误", "错误", JOptionPane.ERROR_MESSAGE);
             }
         });
+        initialization();
     }
 
     public void initialization() {
-
+        ECardBalance.setText(Double.toString(ShopData.getUser().getECardBalance()));
+        double cost=0;
+        int counter=0;
+        while(counter<ShopData.getShoppingList().size()){
+            cost+=ShopData.getShoppingList().get(counter).getGoodsPrice()*ShopData.getShoppingList().get(counter).getGoodsStock();
+            counter++;
+        }
+        TotalCost.setText(Double.toString(cost));
     }
 
     public static void main(String args[]) {
@@ -161,6 +169,7 @@ public class MainShop {
             counter++;
         }
         goodsTable=new JTable(ShopListModel);
+
     }
 
     /**
