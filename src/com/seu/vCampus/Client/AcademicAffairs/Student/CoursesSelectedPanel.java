@@ -1,19 +1,22 @@
 package com.seu.vCampus.Client.AcademicAffairs.Student;
 
+import com.seu.vCampus.Client.AcademicAffairs.Utils.TableUtils;
 import com.seu.vCampus.Client.Common;
 import com.seu.vCampus.util.Course;
 import com.seu.vCampus.util.Message;
 import com.seu.vCampus.util.Person;
 
 import javax.swing.*;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Enumeration;
 
 public class CoursesSelectedPanel extends JPanel {
     private Common studentData;
 
-    public CoursesSelectedPanel(LayoutManager layout, boolean isDoubleBuffered) {
-        super(layout, isDoubleBuffered);
+    public CoursesSelectedPanel() {
         studentData = Common.getInstance();
         Person student = new Person();
         student.setECardNumber(studentData.getUser().getECardNumber());
@@ -39,18 +42,19 @@ public class CoursesSelectedPanel extends JPanel {
                 else data[i][8] = "否";
             }
             JTable coursesTable = new JTable(data,columnNames);
-            coursesTable.setAutoResizeMode(5);
-            coursesTable.setFocusable(false);
-            coursesTable.setRowSelectionAllowed(true);
+            coursesTable.setLayout(new BorderLayout());
+            coursesTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+            TableUtils.FitTableColumns(coursesTable);
+            coursesTable.setFont(new Font("楷体",Font.PLAIN,14));
             JScrollPane scrollPane = new JScrollPane(coursesTable);
-            coursesTable.setFillsViewportHeight(true);
-            this.add(coursesTable);
+            setLayout(new BorderLayout());
+            add(scrollPane, BorderLayout.CENTER);
+            this.setVisible(true);
         }
 
     }
 
-    public CoursesSelectedPanel(LayoutManager layout, boolean isDoubleBuffered, String semester) {
-        super(layout, isDoubleBuffered);
+    public CoursesSelectedPanel(String semester) {
         studentData = Common.getInstance();
         Person student = new Person();
         student.setECardNumber(studentData.getUser().getECardNumber());
@@ -80,12 +84,14 @@ public class CoursesSelectedPanel extends JPanel {
                 else data[i][7] = "否";
             }
             JTable coursesTable = new JTable(data,columnNames);
-            coursesTable.setAutoResizeMode(5);
-            coursesTable.setFocusable(false);
-            coursesTable.setRowSelectionAllowed(true);
+            coursesTable.setLayout(new BorderLayout());
+            coursesTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+            TableUtils.FitTableColumns(coursesTable);
             JScrollPane scrollPane = new JScrollPane(coursesTable);
-            coursesTable.setFillsViewportHeight(true);
-            this.add(coursesTable);
+            coursesTable.setFont(new Font("楷体",Font.PLAIN,14));
+            setLayout(new BorderLayout());
+            add(scrollPane, BorderLayout.CENTER);
+            this.setVisible(true);
         }
     }
 }
