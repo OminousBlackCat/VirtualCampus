@@ -45,21 +45,21 @@ public class AdminAddBook {
                 }
                 if (!find) {
                     Object[] data = {
-                            BNameText.getText(), AuthorText.getText(), TypeText.getText(),addIsbn
+                            BNameText.getText(), AuthorText.getText(), TypeText.getText(), addIsbn
                     };
                     AdminLib.AModel.addRow(data);
-                    Book nBook= new Book();
+                    Book nBook = new Book();
                     nBook.setName(BNameText.getText());
                     nBook.setAuthor(AuthorText.getText());
                     nBook.setBID(addIsbn);
                     AABookData.getBookInformation().AddBook(nBook);
                     nBook.setType(Message.MESSAGE_TYPE.TYPE_ADD_BOOK);
                     AABookData.getIO().SendMessages(nBook);
-                    nBook = (Book)AABookData.getIO().ReceiveMessage();
-                    if(nBook.getType()== Message.MESSAGE_TYPE.TYPE_SUCCESS){
-                        JOptionPane.showMessageDialog(null, "数据库操作成功", "成功", JOptionPane.INFORMATION_MESSAGE);
-                    }else {
-                        JOptionPane.showMessageDialog(null, "数据库操作失败", "错误", JOptionPane.ERROR_MESSAGE);
+                    nBook = (Book) AABookData.getIO().ReceiveMessage();
+                    if (nBook.getType() == Message.MESSAGE_TYPE.TYPE_SUCCESS) {
+                        JOptionPane.showMessageDialog(null, "添加图书数据库操作成功", "成功", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "添加图书数据库操作失败", "错误", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }
@@ -135,4 +135,5 @@ public class AdminAddBook {
     public JComponent $$$getRootComponent$$$() {
         return AddMPanel;
     }
+
 }

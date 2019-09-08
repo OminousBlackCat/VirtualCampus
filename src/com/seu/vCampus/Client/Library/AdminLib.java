@@ -3,6 +3,9 @@ package com.seu.vCampus.Client.Library;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
+import com.seu.vCampus.Client.Common;
+import com.seu.vCampus.util.Book;
+import com.seu.vCampus.util.Message;
 
 import javax.swing.*;
 import javax.swing.event.*;
@@ -24,9 +27,9 @@ public class AdminLib {
             "类型",
             "ISBN"
     };
-    protected static DefaultTableModel AModel = new DefaultTableModel(null,columnNames){
+    protected static DefaultTableModel AModel = new DefaultTableModel(null, columnNames) {
         @Override
-        public boolean isCellEditable(int row, int column){
+        public boolean isCellEditable(int row, int column) {
             //Note that the data/cell address is constant,
             //no matter where the cell appears onscreen.
             if (column == 3) {
@@ -36,8 +39,8 @@ public class AdminLib {
             }
         }
     };
-
     private TableRowSorter<DefaultTableModel> sorter;
+    private Common ABookData;
 
     public AdminLib() {
         $$$setupUI$$$();
@@ -53,14 +56,23 @@ public class AdminLib {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 int viewRow = AdminLibTable.getSelectedRow();
-                int modelRow=-1;
+                int modelRow = -1;
                 if (viewRow < 0) {
                     //Selection got filtered away.
                 } else {
                     modelRow = AdminLibTable.convertRowIndexToModel(viewRow);
                 }
                 if (modelRow != -1) {
+                    Book NBook = ABookData.getBookInformation().getBookList().get(modelRow);
                     AModel.removeRow(modelRow);
+                    NBook.setType(Message.MESSAGE_TYPE.TYPE_DELETE_BOOK);
+                    ABookData.getIO().SendMessages(NBook);
+                    NBook = (Book) ABookData.getIO().ReceiveMessage();
+                    if (NBook.getType() == Message.MESSAGE_TYPE.TYPE_SUCCESS) {
+                        JOptionPane.showMessageDialog(null, "删除图书数据库操作成功", "成功", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "删除图书数据库操作失败", "错误", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
                 /**
                  * delete
@@ -88,8 +100,15 @@ public class AdminLib {
 
     private void createUIComponents() {
         // TODO: place custom component creation code here
-        AModel = new DefaultTableModel(null, columnNames);
-
+        ABookData = Common.getInstance();
+        int Blistsize = ABookData.getBookInformation().getBookList().size();
+        int cnt = 0;
+        while (cnt <= Blistsize) {
+            Book NBook = ABookData.getBookInformation().getBookList().get(cnt);
+            Object[] newRow = {NBook.getName(), NBook.getAuthor(), "Undecided", NBook.getBID()};
+            AModel.addRow(newRow);
+            cnt++;
+        }
 
         //Create a table with a sorter.
         sorter = new TableRowSorter<DefaultTableModel>(AModel);
@@ -159,4 +178,5 @@ public class AdminLib {
     public JComponent $$$getRootComponent$$$() {
         return AdminLibMPanel;
     }
+
 }

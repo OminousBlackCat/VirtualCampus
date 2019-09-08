@@ -20,9 +20,9 @@ import com.seu.vCampus.Client.Launcher.Launcher;
 import com.seu.vCampus.Client.Library.AdminLib;
 import com.seu.vCampus.Client.Library.StuLib;
 import com.seu.vCampus.Client.Shop.MangerShop;
-import com.seu.vCampus.Client.Shop.Shop;
 import com.seu.vCampus.Client.AcademicAffairs.Student.SelectCoursesPanel;
 import com.seu.vCampus.Client.AcademicAffairs.Teacher.InputGrades;
+import com.seu.vCampus.Client.Shop.MainShop;
 import com.seu.vCampus.util.*;
 
 
@@ -42,7 +42,7 @@ public class Home extends JFrame{
     private Bank bankPanel;
     private BasicInformationPanel homePanel;
     private SelectCoursesPanel coursePanelS;
-    private Shop shopPanel;
+    private MainShop mainShopPanel;
     private MangerShop mangerShopPanel;
 
     private int skinNumber = 1;
@@ -56,6 +56,8 @@ public class Home extends JFrame{
     private void initialize() {
         InitGlobalFont(new Font("Microsoft Yahei", Font.BOLD, 17));
         LoadCommon();
+
+
 
 
         {
@@ -83,7 +85,7 @@ public class Home extends JFrame{
 
         homePanel = new BasicInformationPanel("01");
         bankPanel = new Bank();
-//        shopPanel = new Shop();
+        MainShop  shopPanel = new MainShop();
         mangerShopPanel = new MangerShop();
 
 
@@ -268,9 +270,14 @@ public class Home extends JFrame{
 
                 coursePanelS = new SelectCoursesPanel();
                 tabbedPane.addTab("选课", Edu, coursePanelS, null);
+
+
+                JPanel panel_3 = new JPanel();
+                tabbedPane.addTab("商店",Shop, mainShopPanel.getPanel(), null);
+
 //
 //                JPanel panel_3 = new JPanel();
-//                tabbedPane.addTab("商店",Shop, shopPanel.getPanel(), null);
+
 
 
                 JPanel panel_4 = new JPanel();
@@ -285,7 +292,7 @@ public class Home extends JFrame{
                 tabbedPane.addTab("教务", Edu, panel_2, null);
 
                 JPanel panel_3 = new JPanel();
-                tabbedPane.addTab("商店",Shop, shopPanel.getPanel(), null);
+                tabbedPane.addTab("商店",Shop, mainShopPanel.getPanel(), null);
 
 
                 JPanel panel_4 = new JPanel();
