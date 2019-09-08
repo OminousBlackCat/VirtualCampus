@@ -288,4 +288,12 @@ public class Course extends Message{
         this.studentName = studentName;
     }
 
+    public boolean isGradeAdded() {
+        return gradeAdded;
+    }
+
+    public void setGradeAdded(boolean gradeAdded) {
+        this.gradeAdded = gradeAdded;
+    }
+
 }
