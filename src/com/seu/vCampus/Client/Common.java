@@ -103,7 +103,7 @@ public class Common {
     public Person getUser() {
         return User;
     }
-    public ArrayList getShoppingList() {return ShoppingList;}
+    public ArrayList<Goods> getShoppingList() {return ShoppingList;}
     public void addGoodsIntoList(Goods add){
         ShoppingList.add(add);
     }

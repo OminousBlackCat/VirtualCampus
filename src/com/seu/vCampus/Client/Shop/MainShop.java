@@ -8,10 +8,10 @@ import com.seu.vCampus.util.Goods;
 
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.ImagingOpException;
 
 public class MainShop {
 
@@ -43,7 +43,7 @@ public class MainShop {
     private JLabel label2;
     private JPanel SearchResult;
     private JPanel ShoppingTrolley;
-    private JTable table1;
+    private JTable goodsTable;
     private JButton CleanButton;
     private JButton DeleteButton;
     private JButton PayBillButton;
@@ -56,6 +56,14 @@ public class MainShop {
     private JPanel SearchPanel;
     private JPanel ShoppingCart;
     private JPanel PayBill;
+
+    private static String[] header = {"编号", "名称", "价格", "数量"};
+    private static DefaultTableModel ShopListModel = new DefaultTableModel(null, header) {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false;
+        }
+    };
 
     public MainShop() {
 
@@ -86,8 +94,31 @@ public class MainShop {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(searchGoods.getGoodsStock()>=Short.parseShort(ResulttextField.getText())){
-
-                }
+                    searchGoods.setGoodsStock(Short.parseShort(ResulttextField.getText()));
+                    ShopData.getShoppingList().add(searchGoods);
+                }else
+                    JOptionPane.showMessageDialog(null, "商品库存不足", "错误", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+        CleanButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ShopData.getShoppingList().clear();
+            }
+        });
+        PayBillButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(PaytextField.getText().equals(ShopData.getUserCount().getBankPassword())){
+                    Double ECB=Double.parseDouble(ECardBalance.getText());
+                    Double Total=Double.parseDouble(TotalCost.getText());
+                    if(ECB>=Total){
+                        ShopData.getUser().setECardBalance(ECB-Total);
+                        ShopData.getShoppingList().clear();
+                    }else
+                        JOptionPane.showMessageDialog(null, "一卡通余额不足", "错误", JOptionPane.ERROR_MESSAGE);
+                }else
+                    JOptionPane.showMessageDialog(null, "支付密码错误", "错误", JOptionPane.ERROR_MESSAGE);
             }
         });
     }
@@ -111,6 +142,7 @@ public class MainShop {
 
     private void createUIComponents() {
         // TODO: place custom component creation code here
+        ShopData = Common.getInstance();
         tabbedPane1 = new JTabbedPane();
         ProductPage ProductLife = new ProductPage();
         ProductPage ProductStudy = new ProductPage();
@@ -121,6 +153,14 @@ public class MainShop {
         tabbedPane1.addTab("电子配件", ShopComputer, ProductComputer.getMainPanel(), "本页面将展示各类电子配件供同学们选择");
         tabbedPane1.addTab("零食饮料", ShopFood, ProductFood.getMainPanel(), "本页面将展示各类零食饮料供同学们选择");
 
+        int counter=0;
+        while(counter<ShopData.getShoppingList().size()){
+            Object[] TempData={counter+1,ShopData.getShoppingList().get(counter).getGoodsNumber(),ShopData.getShoppingList().get(counter).getGoodsPrice()
+            ,ShopData.getShoppingList().get(counter).getGoodsStock()};
+            ShopListModel.addRow(TempData);
+            counter++;
+        }
+        goodsTable=new JTable(ShopListModel);
     }
 
     /**
@@ -214,8 +254,8 @@ public class MainShop {
         ShoppingCart.setLayout(new GridLayoutManager(2, 2, new Insets(0, 0, 0, 0), -1, -1));
         ShoppingCart.setBackground(new Color(-8355712));
         ShoppingTrolley.add(ShoppingCart, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-        table1 = new JTable();
-        ShoppingCart.add(table1, new GridConstraints(0, 0, 2, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
+        goodsTable = new JTable();
+        ShoppingCart.add(goodsTable, new GridConstraints(0, 0, 2, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
         CleanButton = new JButton();
         CleanButton.setBackground(new Color(-14672351));
         CleanButton.setForeground(new Color(-1));
