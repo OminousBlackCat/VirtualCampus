@@ -7,6 +7,7 @@ import com.seu.vCampus.Client.Common;
 import com.seu.vCampus.util.Book;
 import com.seu.vCampus.util.Message;
 
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -23,19 +24,22 @@ public class AdminAddBook {
     private JPanel AddMPanel;
     private JTextField TypeText;
     private JLabel TypeLable;
+
     private Common AABookData;
+
 
     public AdminAddBook() {
         ApplyButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+
                 AABookData = Common.getInstance();
                 int Blistsize = AABookData.getBookInformation().getBookList().size();
                 int cnt = 0;
                 String addIsbn = ISBNText.getText();
                 boolean find = false;
-                while (cnt <= Blistsize) {
+                while (cnt < Blistsize) {
                     Book NBook = AABookData.getBookInformation().getBookList().get(cnt);
                     if (addIsbn.equals(NBook.getECardNumber())) {
                         find = true;
@@ -135,5 +139,6 @@ public class AdminAddBook {
     public JComponent $$$getRootComponent$$$() {
         return AddMPanel;
     }
+
 
 }

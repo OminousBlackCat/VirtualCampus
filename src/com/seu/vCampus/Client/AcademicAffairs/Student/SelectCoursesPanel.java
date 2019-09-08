@@ -58,9 +58,9 @@ public class SelectCoursesPanel extends JPanel {
         this.term = new JComboBox<>(termList);
         this.setLayout(new BorderLayout());
         this.add(term, BorderLayout.NORTH);
-        this.coursesSelectedPanel1 = new CoursesSelectedPanel(flow,true,"19-20-1");
+        coursesSelectedPanel1 = new CoursesSelectedPanel("19-20-1");
         this.splitPane = new JSplitPane();
-        this.splitPane.setDividerLocation(250);
+        this.splitPane.setDividerLocation(500);
         coursepanel1 = new JPanel();//第一学期可选课程
         splitPane.setLeftComponent(coursesSelectedPanel1);
         selectpanel1 = new JPanel();//第一学期选择按钮

@@ -3,7 +3,6 @@ package com.seu.vCampus.IO;
 
 import com.seu.vCampus.util.Message;
 
-
 import javax.swing.*;
 import java.net.InetSocketAddress;
 import java.net.Socket;
@@ -12,7 +11,7 @@ import java.net.UnknownHostException;
 
 public class ClientIO {
 
-    private static final short TimeOut = 3000;
+
     private String IPAddress;
     private int Port;
     private Socket socket;

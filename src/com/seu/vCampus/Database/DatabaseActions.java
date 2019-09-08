@@ -901,7 +901,7 @@ public class DatabaseActions {
                 temp.setBID(BID);
                 temp.setName(BN);
                 temp.setAuthor(Auth);
-                temp.setLent(isLent=="在库"?false:true);
+                temp.setLent(isLent.equals("在库")?false:true);
                 temp.setLendDate(lD);
                 temp.setLendDays(lday);
                 temp.setECardNumber(ECN);
@@ -942,7 +942,7 @@ public class DatabaseActions {
             this.stmt=conn.prepareStatement(sql);
             stmt.setString(1,book.getBID());
             stmt.executeUpdate();
-
+            book.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
         }catch (SQLException E)
         {
             E.printStackTrace();

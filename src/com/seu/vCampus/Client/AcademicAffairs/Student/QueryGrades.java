@@ -1,4 +1,6 @@
 package com.seu.vCampus.Client.AcademicAffairs.Student;
 
-public class QueryGrades {
+import javax.swing.*;
+
+public class QueryGrades extends JPanel {
 }
