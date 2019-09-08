@@ -3,6 +3,7 @@ package com.seu.vCampus.Client.Library;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
+import com.seu.vCampus.Client.Common;
 
 import javax.swing.*;
 import javax.swing.event.*;
@@ -19,11 +20,22 @@ public class AdminLib {
     private JButton AddBookButton;
     private JTextField FilterField;
     protected JTable AdminLibTable;
-    protected static DefaultTableModel AModel;
-    private String[] columnNames = {"Name of Book",
+    private static String[] columnNames = {"Name of Book",
             "Author",
             "类型",
             "ISBN"
+    };
+    protected static DefaultTableModel AModel = new DefaultTableModel(null,columnNames){
+        @Override
+        public boolean isCellEditable(int row, int column){
+            //Note that the data/cell address is constant,
+            //no matter where the cell appears onscreen.
+            if (column == 3) {
+                return false;
+            } else {
+                return true;
+            }
+        }
     };
     private TableRowSorter<DefaultTableModel> sorter;
 
@@ -40,10 +52,19 @@ public class AdminLib {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                int selectedRow = AdminLibTable.getSelectedRow();
-                if (selectedRow != -1) {
-                    AModel.removeRow(selectedRow);
+                int viewRow = AdminLibTable.getSelectedRow();
+                int modelRow=-1;
+                if (viewRow < 0) {
+                    //Selection got filtered away.
+                } else {
+                    modelRow = AdminLibTable.convertRowIndexToModel(viewRow);
                 }
+                if (modelRow != -1) {
+                    AModel.removeRow(modelRow);
+                }
+                /**
+                 * big bug
+                 */
             }
         });
     }

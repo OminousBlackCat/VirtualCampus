@@ -3,7 +3,8 @@ package com.seu.vCampus.Client.Library;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
-
+import com.seu.vCampus.Client.Common;
+import com.seu.vCampus.util.Book;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -28,6 +29,7 @@ public class StuLib {
                 int selectedRow = Stutable.getSelectedRow();
                 if (selectedRow != -1) {
                     SModel.setValueAt(30, selectedRow, 4);
+
                 }
             }
         });
@@ -37,8 +39,45 @@ public class StuLib {
                 super.mouseClicked(e);
                 int selectedRow = Stutable.getSelectedRow();
                 if (selectedRow != -1) {
-                    SModel.removeRow(selectedRow);
+                    Object NIsbn=Stutable.getValueAt(selectedRow,3);
+                    int Blistsize=BookData.getBookInformation().getBookList().size();
+                    int cnt=0;
+                    while(cnt<=Blistsize){
+                        Book NBook=BookData.getBookInformation().getBookList().get(cnt);
+                        Object NBid=NBook.getBID();
+                        if(NIsbn.equals(NBid)){
+                            SModel.removeRow(selectedRow);
+                            LModel.setValueAt(false,cnt,4);
+                            NBook.setLent(false);
+                        }
+                        cnt++;
+                    }
 
+                }
+            }
+        });
+        borrowButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                int viewRow = Libtable.getSelectedRow();
+                int modelRow=-1;
+                if (viewRow < 0) {
+                    //Selection got filtered away.
+                } else {
+                    modelRow = Libtable.convertRowIndexToModel(viewRow);
+                }
+                if (modelRow != -1) {
+                    Book NBook=BookData.getBookInformation().getBookList().get(modelRow);
+                    LModel.setValueAt(true,modelRow,4);
+                    Object[] newRow={LModel.getValueAt(modelRow,0),
+                            LModel.getValueAt(modelRow,1),
+                            LModel.getValueAt(modelRow,2),
+                            LModel.getValueAt(modelRow,3),
+                            30
+                    };
+                    SModel.addRow(newRow);
+                    NBook.setLent(true);
                 }
             }
         });
@@ -57,10 +96,10 @@ public class StuLib {
     private JScrollPane StuScrollPane;
     private JScrollPane LibScrollPane;
     private TableRowSorter<DefaultTableModel> sorter;
-    private static String[] StutableHeader = {"Name of Book",
-            "Author",
-            "类型",
-            "ISBN",
+    private static String[] StutableHeader = {"Name of Book",//0
+            "Author",//1
+            "类型",//2
+            "ISBN",//3
             "剩余借阅天数"
     };
     private static String[] LibtableHeader = {"Name of Book",
@@ -84,17 +123,31 @@ public class StuLib {
         }
     };
 
+    private Common BookData;
+
     private void createUIComponents() {
         // TODO: place custom component creation code here
+        BookData=Common.getInstance();
+        int Blistsize=BookData.getBookInformation().getBookList().size();
+        int cnt=0;
+        while(cnt<=Blistsize){
+            Book NBook=BookData.getBookInformation().getBookList().get(cnt);
+            Object[] newRow={NBook.getName(),NBook.getAuthor(),"Undecided",NBook.getBID(),NBook.isLent()};
+            /**LModel.setValueAt(NBook.getName(),cnt,0);
+            LModel.setValueAt(NBook.getAuthor(),cnt,1);
+            //LModel.setValueAt(type,cnt,2);
+            LModel.setValueAt(NBook.getBID(),cnt,3);
+             isLent()   4*/
+            LModel.addRow(newRow);
+            String NEcard=NBook.getECardNumber();
+            String NUser=BookData.getUser().getECardNumber();
+            if(NEcard.equals(NUser)){
+                SModel.addRow(newRow);
+            }
+            cnt++;
+        }
 
-        Object[] Data1 = {"How to play dota2", "Maou", "游戏", 222, 5};
-        Object[] Data2 = {"How to play guitar", "Sora", "音乐", 444, 27};
-        Object[] Data3 = {"How to play csgo", "Maou", "白给", 111, false};
-
-        SModel.addRow(Data1);
-        SModel.addRow(Data2);
         Stutable = new JTable(SModel);
-        LModel.addRow(Data3);
         Libtable = new JTable(LModel);
 
         //Create a table with a sorter.
