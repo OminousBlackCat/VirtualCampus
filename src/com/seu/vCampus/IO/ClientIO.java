@@ -2,8 +2,6 @@ package com.seu.vCampus.IO;
 
 
 import com.seu.vCampus.util.Message;
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
-
 
 import javax.swing.*;
 import java.net.InetSocketAddress;
@@ -12,6 +10,7 @@ import java.io.*;
 import java.net.UnknownHostException;
 
 public class ClientIO {
+
 
     private String IPAddress;
     private int Port;
