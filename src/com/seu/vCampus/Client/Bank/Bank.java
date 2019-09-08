@@ -229,4 +229,5 @@ public class Bank {
     public JComponent $$$getRootComponent$$$() {
         return bankPanel;
     }
+
 }

@@ -80,6 +80,7 @@ public class MainShop {
         ShopData = Common.getInstance();
         tabbedPane1.setIconAt(tabbedPane1.indexOfComponent(Search), ShopSearch);
         tabbedPane1.setIconAt(tabbedPane1.indexOfComponent(ShoppingTrolley), ShoppingT);
+        SearchResult.setVisible(false);
 
         Searchbutton.addActionListener(new ActionListener() {
             @Override
@@ -87,8 +88,10 @@ public class MainShop {
                 int counter = 0;
                 while (counter < ShopData.getShopInformation().getGoods().size()) {
                     if (SearchtextField.getText().equals(ShopData.getShopInformation().getGoods().get(counter).getGoodsNumber())) {
+                        SearchResult.setVisible(true);
                         Name0.setText(ShopData.getShopInformation().getGoods().get(counter).getGoodsName());
                         Picture0.setIcon(new ImageIcon("src/icon/ProductPicture/" + ShopData.getShopInformation().getGoods().get(counter).getGoodsNumber() + ".png"));
+                        Picture0.setText("");
                         Price0.setText(Double.toString(ShopData.getShopInformation().getGoods().get(counter).getGoodsPrice()));
                         searchGoods = ShopData.getShopInformation().getGoods().get(counter);
                         SearchResult.setVisible(true);
@@ -378,4 +381,5 @@ public class MainShop {
     public JComponent $$$getRootComponent$$$() {
         return basis;
     }
+
 }
