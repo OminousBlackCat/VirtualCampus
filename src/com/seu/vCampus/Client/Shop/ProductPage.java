@@ -69,16 +69,17 @@ public class ProductPage extends Component {
         thisClassGoodsList = set;
         shopData = Common.getInstance();
         $$$setupUI$$$();
+        initialize();
         PageDown.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 index += 3;
-                if (index < thisClassGoodsList.size()) {
+                if (index + 3 < thisClassGoodsList.size()) {
                     LoadGoods(3);
                     PageUp.setEnabled(true);
                     PageDown.setEnabled(true);
                 } else {
-                    LoadGoods(thisClassGoodsList.size() + 3 - index);
+                    LoadGoods(thisClassGoodsList.size() - index);
                     PageDown.setEnabled(false);
                     PageUp.setEnabled(true);
                 }
@@ -88,7 +89,7 @@ public class ProductPage extends Component {
             @Override
             public void actionPerformed(ActionEvent e) {
                 index -= 3;
-                if (index == 3) {
+                if (index == 0) {
                     initialize();
                 } else {
                     LoadGoods(3);
@@ -149,7 +150,7 @@ public class ProductPage extends Component {
         PageUp.setEnabled(false);
         PageDown.setEnabled(true);
 
-        index = 3;
+        index = 0;
         if (thisClassGoodsList.size() >= 3) {
             LoadGoods(3);
         } else {
@@ -161,15 +162,18 @@ public class ProductPage extends Component {
         switch (x) {
             case 1:
                 LoadGoodsA();
+                LoadGoodsB(false);
+                LoadGoodsC(false);
                 break;
             case 2:
                 LoadGoodsA();
-                LoadGoodsB();
+                LoadGoodsB(true);
+                LoadGoodsC(false);
                 break;
             case 3:
                 LoadGoodsA();
-                LoadGoodsB();
-                LoadGoodsC();
+                LoadGoodsB(true);
+                LoadGoodsC(true);
                 break;
 
         }
@@ -183,21 +187,39 @@ public class ProductPage extends Component {
         Picture1.setIcon(IconA);
     }
 
-    public void LoadGoodsB() {
-        GoodsB = thisClassGoodsList.get(index + 1);
-        Name2.setText(GoodsB.getGoodsName());
-        Price2.setText(Double.toString(GoodsB.getGoodsPrice()));
-        IconB = new ImageIcon("src/icon/ProductPicture/" + GoodsB.getPictureNumber() + ".png");
-        Picture2.setIcon(IconB);
-
+    public void LoadGoodsB(boolean isLoad) {
+        if (isLoad) {
+            Name2.setVisible(true);
+            Price2.setVisible(true);
+            AddButton2.setVisible(true);
+            GoodsB = thisClassGoodsList.get(index + 1);
+            Name2.setText(GoodsB.getGoodsName());
+            Price2.setText(Double.toString(GoodsB.getGoodsPrice()));
+            IconB = new ImageIcon("src/icon/ProductPicture/" + GoodsB.getPictureNumber() + ".png");
+            Picture2.setIcon(IconB);
+        } else {
+            Name2.setVisible(false);
+            Price2.setVisible(false);
+            AddButton2.setVisible(false);
+        }
     }
 
-    public void LoadGoodsC() {
-        GoodsC = thisClassGoodsList.get(index + 2);
-        Name3.setText(GoodsC.getGoodsName());
-        Price3.setText(Double.toString(GoodsC.getGoodsPrice()));
-        IconC = new ImageIcon("src/icon/ProductPicture/" + GoodsC.getPictureNumber() + ".png");
-        Picture3.setIcon(IconC);
+    public void LoadGoodsC(boolean isLoad) {
+        if (isLoad) {
+            Name3.setVisible(true);
+            Price3.setVisible(true);
+            AddButton3.setVisible(true);
+            GoodsC = thisClassGoodsList.get(index + 2);
+            Name3.setText(GoodsC.getGoodsName());
+            Price3.setText(Double.toString(GoodsC.getGoodsPrice()));
+            IconC = new ImageIcon("src/icon/ProductPicture/" + GoodsC.getPictureNumber() + ".png");
+            Picture3.setIcon(IconC);
+        } else {
+            Name3.setVisible(false);
+            Price3.setVisible(false);
+            AddButton3.setVisible(false);
+        }
+
     }
 
     public void setThisClassGoodsList(ArrayList<Goods> thisClassGoodsList) {

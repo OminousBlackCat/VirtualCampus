@@ -156,7 +156,7 @@ public class MainShop {
 
         for (int i = 0; i < ShopData.getShopInformation().getGoods().size(); i++) {
             Goods temp = ShopData.getShopInformation().getGoods().get(i);
-            switch (temp.getGoodsNumber().indexOf(0)) {
+            switch (temp.getGoodsNumber().charAt(0)) {
                 case '1':
                     Life.add(temp);
                     break;
