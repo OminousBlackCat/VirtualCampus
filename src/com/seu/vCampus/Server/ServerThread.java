@@ -152,6 +152,15 @@ public class ServerThread  extends Thread{
                     case TYPE_CHANGE_AVATAR:
                         act.changeAvatar((Person) msg);
                         break;
+                    case TYPE_LEND_BOOK:
+                        act.updateLendDate((Book)msg,2);
+                        break;
+                    case TYPE_RENEWAL_BOOK:
+                        act.updateLendDate((Book)msg,0);
+                        break;
+                    case TYPE_RETURN_BOOK:
+                        act.updateLendDate((Book)msg,1);
+                        break;
                 }
 
                 System.out.println(msg.getType());
