@@ -6,7 +6,6 @@ import com.seu.vCampus.util.Message;
 import com.seu.vCampus.util.Person;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -17,21 +16,24 @@ import java.util.Vector;
 public class InputGrades extends JPanel {
 
     private Person user;
-    private Common commondata;
+    private Common commonData;
     private Course course;
     private ArrayList<Course> courseList;
     private ArrayList<Course> students;
-    Vector<String> courseName;
+    private Vector<String> courseName;
+
     public void initialize(){
-        commondata=Common.getInstance();
-        user=new Person();
-        course=new Course();
-        courseList=new ArrayList<>();
-        user.setECardNumber(commondata.getUser().getECardNumber());
+        commonData = Common.getInstance();
+        user = new Person();
+        course = new Course();
+        courseList = new ArrayList<>();
+        user.setECardNumber(commonData.getUser().getECardNumber());
+        user.setCourses(courseList);
         user.setType(Message.MESSAGE_TYPE.TYPE_GET_LECTURER_COURSES);
-        commondata.getIo().SendMessages(user);
-        user=(Person)commondata.getIo().ReceiveMessage();
+        commonData.getIO().SendMessages(user);
+        user = (Person) commonData.getIO().ReceiveMessage();
     }
+
     public InputGrades(){
         initialize();
 
@@ -64,15 +66,15 @@ public class InputGrades extends JPanel {
                     students.add(course);
                     user.setType(Message.MESSAGE_TYPE.TYPE_GET_ENROLLED_STUDENTS);
                     user.setCourses(students);
-                    commondata.getIo().SendMessages(user);
-                    user=(Person)commondata.getIo().ReceiveMessage();
+                    commonData.getIO().SendMessages(user);
+                    user=(Person) commonData.getIO().ReceiveMessage();
                 }
             }
         });
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //弹出学生成绩窗口
+                setGrades_T set=new setGrades_T(user);//弹出学生成绩窗口
             }
         });
     }

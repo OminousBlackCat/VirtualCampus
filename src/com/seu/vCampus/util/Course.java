@@ -25,6 +25,7 @@ public class Course extends Message{
     private boolean gradeAdded;
     private String examTime;
     private String examPlace;
+    private String studentName;
 
     /**
      * Constructor for querying courses that have exams.
@@ -277,6 +278,14 @@ public class Course extends Message{
 
     public void setExamPlace(String examPlace) {
         this.examPlace = examPlace;
+    }
+
+    public String getStudentName() {
+        return studentName;
+    }
+
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
     }
 
 }

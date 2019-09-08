@@ -4,7 +4,6 @@ import com.seu.vCampus.Client.Common;
 import com.seu.vCampus.util.Message;
 import com.seu.vCampus.util.Person;
 
-import javax.jws.soap.SOAPBinding;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -108,8 +107,8 @@ public class BasicInformationPanel extends JPanel {
                     userData.getUser().setAvatarID(Integer.toString(next));
                     System.out.println(userData.getUser().getAvatarID());
                     userData.getUser().setType(Message.MESSAGE_TYPE.TYPE_CHANGE_AVATAR);
-                    userData.getIo().SendMessages(userData.getUser());
-                    userData.setUser((Person) userData.getIo().ReceiveMessage());
+                    userData.getIO().SendMessages(userData.getUser());
+                    userData.setUser((Person) userData.getIO().ReceiveMessage());
                     System.out.println(userData.getUser().getType());
                     if (userData.getUser().getType() == Message.MESSAGE_TYPE.TYPE_SUCCESS) {
                         CancelAvatar.setVisible(false);

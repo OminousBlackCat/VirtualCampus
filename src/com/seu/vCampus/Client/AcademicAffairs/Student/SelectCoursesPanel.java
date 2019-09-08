@@ -1,12 +1,12 @@
 package com.seu.vCampus.Client.AcademicAffairs.Student;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
-import java.awt.BorderLayout;
 import java.util.ArrayList;
 
 import com.seu.vCampus.Client.Common;
@@ -14,8 +14,9 @@ import com.seu.vCampus.util.Course;
 import com.seu.vCampus.util.Message;
 import com.seu.vCampus.util.Person;
 
-public class SelectCourses extends JPanel {
-    private JPanel panel;
+public class SelectCoursesPanel extends JPanel {
+    private final FlowLayout flow = new FlowLayout();
+    private CoursesSelectedPanel coursesSelectedPanel1;
     private JPanel coursepanel;
     private JPanel selectpanel;
     private JPanel coursepanel1;
@@ -24,23 +25,18 @@ public class SelectCourses extends JPanel {
     private JPanel coursepanel2;
     private JPanel selectpanel2;
     private JLabel label;
-    private JComboBox term;
+    private JComboBox<String> term;
 
-    private Common coursedata;
-    private Person user;
+    private Common StudentData;
+    private Person student;
     private Course course;
-    private Course course1;
     private ArrayList<Course> courseList;
-    /**
-     * Launch the application.
-     */
-
 
     /**
-     * Create the application.
+     * Initialize the application panel.
      */
-
     public void initialize(){
+<<<<<<< HEAD:src/com/seu/vCampus/Client/AcademicAffairs/Student/SelectCourses.java
         coursedata = Common.getInstance();
         user=new Person();
         course=new Course();
@@ -68,25 +64,47 @@ public class SelectCourses extends JPanel {
         splitPane = new JSplitPane();
         splitPane.setDividerLocation(250);
 
+=======
+        StudentData = Common.getInstance();
+        student = new Person();
+        student.setECardNumber(StudentData.getUser().getECardNumber());
+        course = new Course();
+        course.setCourseSemester("19-20-1");
+        courseList = new ArrayList<Course>();
+        courseList.add(course);
+        student.setCourses(courseList);
+        student.setType(Message.MESSAGE_TYPE.TYPE_GET_COURSES_AVAILABLE);
+        StudentData.getIO().SendMessages(student);
+        student = (Person) StudentData.getIO().ReceiveMessage();
+    }
+>>>>>>> 0e86d86406cc307f00768c5ea794d203908e7f9c:src/com/seu/vCampus/Client/AcademicAffairs/Student/SelectCoursesPanel.java
 
+    /**
+     * Constructor
+     */
+    public SelectCoursesPanel() {
+        initialize();
+        String[] termList = new String[]{"第一学期", "第二学期"};
+        this.term = new JComboBox<>(termList);
+        this.setLayout(new BorderLayout());
+        this.add(term, BorderLayout.NORTH);
+        this.coursesSelectedPanel1 = new CoursesSelectedPanel(flow,true,"19-20-1");
+        this.splitPane = new JSplitPane();
+        this.splitPane.setDividerLocation(250);
         coursepanel1 = new JPanel();//第一学期可选课程
-        splitPane.setLeftComponent(coursepanel1);
-
+        splitPane.setLeftComponent(coursesSelectedPanel1);
         selectpanel1 = new JPanel();//第一学期选择按钮
         splitPane.setRightComponent(selectpanel1);
-
         coursepanel2 = new JPanel();//第二学期可选课程
-
         selectpanel2 = new JPanel();//第二学期可选课程
-        add(splitPane, BorderLayout.CENTER);
-
+        this.add(splitPane, BorderLayout.CENTER);
         term.addItemListener(new ItemListener(){//选择哪个学期
             public void itemStateChanged(ItemEvent e) {
-                if(e.getStateChange()==ItemEvent.SELECTED)
+                if(e.getStateChange() == ItemEvent.SELECTED)
                 {
                     if(term.getSelectedIndex()==0)
                     {
-                        splitPane.setLeftComponent(coursepanel1);
+                        splitPane.setLeftComponent(coursesSelectedPanel1);
                         splitPane.setRightComponent(selectpanel1);
                         splitPane.setDividerLocation(250);
                     }
@@ -100,15 +118,19 @@ public class SelectCourses extends JPanel {
             }
 
         });
-        refresh();
     }
 
     public void refresh(){
         int number = courseList.size();
         JTextField jtf;
         JButton jb;
+<<<<<<< HEAD:src/com/seu/vCampus/Client/AcademicAffairs/Student/SelectCourses.java
         for(int i=0;i<number;i++){
             course=user.getCourses().get(i);
+=======
+        for(int i=0 ; i<number; i++){
+            course = student.getCourses().get(i);
+>>>>>>> 0e86d86406cc307f00768c5ea794d203908e7f9c:src/com/seu/vCampus/Client/AcademicAffairs/Student/SelectCoursesPanel.java
             if(course.getCourseSemester()=="19-20-1"){
                 jtf=new JTextField(course.getCourseNumber()+"    "+course.getCourseName()+"    "+course.getCourseSemester());
                 jtf.setEditable(false);
@@ -117,8 +139,8 @@ public class SelectCourses extends JPanel {
                 jb.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                         panel.add(new JLabel(course.getCourseName()));
-                         f5();
+                        coursesSelectedPanel1.add(new JLabel(course.getCourseName()));
+                        f5();
                     }
                 });
                 selectpanel1.add(jb);
@@ -131,7 +153,11 @@ public class SelectCourses extends JPanel {
                 jb.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
+<<<<<<< HEAD:src/com/seu/vCampus/Client/AcademicAffairs/Student/SelectCourses.java
                         panel.add(new JLabel(course.getCourseName()));
+=======
+                        coursesSelectedPanel1.add(new JLabel(course.getCourseName()));
+>>>>>>> 0e86d86406cc307f00768c5ea794d203908e7f9c:src/com/seu/vCampus/Client/AcademicAffairs/Student/SelectCoursesPanel.java
                         f5();
                     }
                 });
@@ -146,10 +172,14 @@ public class SelectCourses extends JPanel {
         JButton button;
         int number=courseList.size();
         for(int i=0;i<number;i++){
-            course1=courseList.get(i);
+            Course course1 = courseList.get(i);
             if(term.getSelectedIndex()==0){
                 if(course1.getCourseSemester()=="19-20-1"){
+<<<<<<< HEAD:src/com/seu/vCampus/Client/AcademicAffairs/Student/SelectCourses.java
                     textField=new JTextField(course1.getCourseNumber()+"  "+course1.getCourseName());
+=======
+                    textField=new JTextField(course1.getCourseNumber()+"  "+ course1.getCourseName());
+>>>>>>> 0e86d86406cc307f00768c5ea794d203908e7f9c:src/com/seu/vCampus/Client/AcademicAffairs/Student/SelectCoursesPanel.java
                     textField.setEditable(false);
                     coursepanel.add(textField);
                     button=new JButton("选择");
@@ -161,7 +191,11 @@ public class SelectCourses extends JPanel {
                         button.addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
+<<<<<<< HEAD:src/com/seu/vCampus/Client/AcademicAffairs/Student/SelectCourses.java
                                 panel.add(new JLabel(course.getCourseName()));
+=======
+                                coursesSelectedPanel1.add(new JLabel(course.getCourseName()));
+>>>>>>> 0e86d86406cc307f00768c5ea794d203908e7f9c:src/com/seu/vCampus/Client/AcademicAffairs/Student/SelectCoursesPanel.java
                                 f5();
                             }
                         });
@@ -170,11 +204,15 @@ public class SelectCourses extends JPanel {
             }
             else{
                 if(course1.getCourseSemester()=="19-20-2"){
+<<<<<<< HEAD:src/com/seu/vCampus/Client/AcademicAffairs/Student/SelectCourses.java
                     textField=new JTextField(course1.getCourseNumber()+"  "+course1.getCourseName());
+=======
+                    textField=new JTextField(course1.getCourseNumber()+"  "+ course1.getCourseName());
+>>>>>>> 0e86d86406cc307f00768c5ea794d203908e7f9c:src/com/seu/vCampus/Client/AcademicAffairs/Student/SelectCoursesPanel.java
                     textField.setEditable(false);
                     coursepanel.add(textField);
                     button=new JButton("选择");
-                    if(course1.isConflict()||course1.getEnrolledStudents()==course1.getMaximumStudents()){
+                    if(course1.isConflict()|| course1.getEnrolledStudents()== course1.getMaximumStudents()){
                         button.setEnabled(false);
                         selectpanel.add(button);
                     }
@@ -182,7 +220,11 @@ public class SelectCourses extends JPanel {
                         button.addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
+<<<<<<< HEAD:src/com/seu/vCampus/Client/AcademicAffairs/Student/SelectCourses.java
                                 panel.add(new JLabel(course.getCourseName()));
+=======
+                                coursesSelectedPanel1.add(new JLabel(course.getCourseName()));
+>>>>>>> 0e86d86406cc307f00768c5ea794d203908e7f9c:src/com/seu/vCampus/Client/AcademicAffairs/Student/SelectCoursesPanel.java
                                 f5();
                             }
                         });
@@ -191,8 +233,5 @@ public class SelectCourses extends JPanel {
             }
         }
     }
-        /**
-         * Initialize the contents of the frame.
-         */
 
-    }
+}
