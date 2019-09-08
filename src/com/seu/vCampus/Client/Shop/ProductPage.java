@@ -10,11 +10,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-<<<<<<< HEAD
-=======
+
 import java.awt.event.ComponentAdapter;
 import java.util.ArrayList;
->>>>>>> 2214fc02b99b2fa54989a41944959acc42324a8c
 
 public class ProductPage extends Component {
     /*获取商品信息*/
@@ -60,7 +58,7 @@ public class ProductPage extends Component {
     private JLabel label0;
     private JPanel panel1;
 
-<<<<<<< HEAD
+
     public ProductPage(int Index){
         InitialIndex = Index;
         PageCounter = 1;
@@ -111,11 +109,10 @@ public class ProductPage extends Component {
 
 
 
-=======
+
     private ImageIcon IconA;
     private ImageIcon IconB;
     private ImageIcon IconC;
->>>>>>> 2214fc02b99b2fa54989a41944959acc42324a8c
 
     private Goods GoodsA;
     private Goods GoodsB;
@@ -240,6 +237,7 @@ public class ProductPage extends Component {
         Price1.setText(Double.toString(GoodsA.getGoodsPrice()));
         IconA = new ImageIcon("src/icon/ProductPicture/" + GoodsA.getPictureNumber() + ".png");
         Picture1.setIcon(IconA);
+        Picture1.setText("");
     }
 
     public void LoadGoodsB() {
@@ -248,7 +246,7 @@ public class ProductPage extends Component {
         Price2.setText(Double.toString(GoodsB.getGoodsPrice()));
         IconB = new ImageIcon("src/icon/ProductPicture/" + GoodsB.getPictureNumber() + ".png");
         Picture2.setIcon(IconB);
-
+        Picture2.setText("");
     }
 
     public void LoadGoodsC() {
@@ -257,6 +255,7 @@ public class ProductPage extends Component {
         Price3.setText(Double.toString(GoodsC.getGoodsPrice()));
         IconC = new ImageIcon("src/icon/ProductPicture/" + GoodsC.getPictureNumber() + ".png");
         Picture3.setIcon(IconC);
+        Picture3.setText("");
     }
 
     public void setThisClassGoodsList(ArrayList<Goods> thisClassGoodsList) {
