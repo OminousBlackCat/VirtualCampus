@@ -256,11 +256,31 @@ public class DatabaseActions {
     public void getCoursesAvailable(Person student, String semester) {
         String sql = "select * from Courses where not exists (select * from CoursesSelected, Users where " +
                 "Courses.courseNumber = CoursesSelected.courseNumber and CoursesSelected.ECardNumber " +
-                "= Users.ECardNumber and Users.ECardNumber = ?) and Courses.courseSemester = ? " +
-                "and Courses.enrolledStudents < Courses.maximumStudents";
+                "= Users.ECardNumber and Users.ECardNumber = ?) and Courses.courseSemester = ?";
         setStudentCoursesList(sql,student,semester);
         ArrayList<Course> cAvailable = student.getCourses();
         getCoursesSelected(student,semester);
+        ArrayList<Course> cSelected = student.getCourses();
+        if(!cSelected.isEmpty()) {
+            for (Course cA : cAvailable) {
+                for (Course cS : cSelected) {
+                    if (isConflicted(cS,cA)) {
+                        cA.setConflict(true);
+                        break;
+                    }
+                }
+            }
+        }
+        student.setCourses(cAvailable);
+    }
+
+    public void getCoursesAvailable(Person student) {
+        String sql = "select * from Courses where not exists (select * from CoursesSelected, Users where " +
+                "Courses.courseNumber = CoursesSelected.courseNumber and CoursesSelected.ECardNumber " +
+                "= Users.ECardNumber and Users.ECardNumber = ?)";
+        setStudentCoursesList(sql,student,"");
+        ArrayList<Course> cAvailable = student.getCourses();
+        getCoursesSelected(student);
         ArrayList<Course> cSelected = student.getCourses();
         if(!cSelected.isEmpty()) {
             for (Course cA : cAvailable) {

@@ -20,8 +20,8 @@ import com.seu.vCampus.Client.Common;
 import com.seu.vCampus.Client.Launcher.Launcher;
 import com.seu.vCampus.Client.Library.AdminLib;
 import com.seu.vCampus.Client.Library.StuLib;
+import com.seu.vCampus.Client.Shop.MainShop;
 import com.seu.vCampus.Client.Shop.MangerShop;
-import com.seu.vCampus.Client.Shop.Shop;
 import com.seu.vCampus.util.*;
 
 
@@ -43,8 +43,7 @@ public class Home extends JFrame{
     private com.seu.vCampus.Client.AcademicAffairs.Admin.MainPanel adminMainPanel;
     private com.seu.vCampus.Client.AcademicAffairs.Teacher.MainPanel teacherMainPanel;
     private StudentAcademicMainPanel studentStudentAcademicMainPanel;
-    private Shop shopPanel;
-    private SelectCoursesPanel coursePanelS;
+    private MainShop shopPanel;
     private MainShop mainShopPanel;
     private MangerShop mangerShopPanel;
 

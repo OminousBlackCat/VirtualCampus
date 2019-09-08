@@ -83,18 +83,24 @@ public class ServerThread  extends Thread{
                     case TYPE_GET_COURSES_AVAILABLE: //Message must be a person object with the last
                         // element of courses list containing semester info.
                     {
-                        int l = ((Person) msg).getCourses().size();
-                        String semester = ((Person) msg).getCourses().get(l - 1).getCourseSemester();
-                        act.getCoursesAvailable((Person) msg, semester);
+                        if(((Person) msg).getCourses().isEmpty()) {
+                            act.getCoursesAvailable((Person) msg);
+                        }
+                        else{
+                            int l = ((Person) msg).getCourses().size();
+                            String semester = ((Person) msg).getCourses().get(l - 1).getCourseSemester();
+                            act.getCoursesAvailable((Person) msg, semester);
+                        }
                         break;
                     }
                     case TYPE_GET_COURSES_SELECTED: {
-                        int l = ((Person) msg).getCourses().size();
-                        if (l != 0) {
+                        if(((Person) msg).getCourses().isEmpty()) {
+                            act.getCoursesSelected((Person) msg);
+                        }
+                        else {
+                            int l = ((Person) msg).getCourses().size();
                             String semester = ((Person) msg).getCourses().get(l - 1).getCourseSemester();
                             act.getCoursesSelected((Person) msg, semester);
-                        } else {
-                            act.getCoursesSelected((Person) msg);
                         }
                         break;
                     }

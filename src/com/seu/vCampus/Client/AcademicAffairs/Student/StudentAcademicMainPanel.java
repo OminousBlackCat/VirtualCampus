@@ -2,14 +2,12 @@ package com.seu.vCampus.Client.AcademicAffairs.Student;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class StudentAcademicMainPanel extends JPanel {
 
     public StudentAcademicMainPanel() {
         this.setLayout(new BorderLayout());
-        JPanel selectCoursesPanel = new SelectCoursesPanel();
+        JPanel selectCoursesPanel = new CourseSelectionHallPanel();
         JPanel coursesSelectedPanel = new CoursesSelectedPanel();
         JPanel coursesTablePanel = new CoursesTable();
         JPanel queryExamsPanel = new QueryExams();
