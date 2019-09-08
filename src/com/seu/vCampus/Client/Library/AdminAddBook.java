@@ -57,9 +57,9 @@ public class AdminAddBook {
                     AABookData.getIO().SendMessages(nBook);
                     nBook = (Book)AABookData.getIO().ReceiveMessage();
                     if(nBook.getType()== Message.MESSAGE_TYPE.TYPE_SUCCESS){
-                        JOptionPane.showMessageDialog(null, "数据库操作成功", "成功", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "添加图书数据库操作成功", "成功", JOptionPane.INFORMATION_MESSAGE);
                     }else {
-                        JOptionPane.showMessageDialog(null, "数据库操作失败", "错误", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "添加图书数据库操作失败", "错误", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }
