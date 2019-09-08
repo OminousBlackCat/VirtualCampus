@@ -5,6 +5,7 @@ public class Goods extends Message{
     protected String goodsName;
     protected double goodsPrice;
     protected short  goodsStock;
+    protected String pictureNumber;
 
     public Goods(){this.Type = MESSAGE_TYPE.TYPE_NULL;}
 
@@ -24,6 +25,8 @@ public class Goods extends Message{
         this.goodsStock = goodsStock;
     }
 
+    public void setPictureNumber(String pictureNumber) { this.pictureNumber = pictureNumber; }
+
     public String getGoodsNumber() {
         return goodsNumber;
     }
@@ -39,4 +42,6 @@ public class Goods extends Message{
     public short getGoodsStock() {
         return goodsStock;
     }
+
+    public String getPictureNumber() { return pictureNumber; }
 }
