@@ -78,7 +78,7 @@ public class ProductPage extends Component {
                     PageUp.setEnabled(true);
                     PageDown.setEnabled(true);
                 } else {
-                    LoadGoods(thisClassGoodsList.size()+3-index);
+                    LoadGoods(thisClassGoodsList.size() + 3 - index);
                     PageDown.setEnabled(false);
                     PageUp.setEnabled(true);
                 }
@@ -88,9 +88,9 @@ public class ProductPage extends Component {
             @Override
             public void actionPerformed(ActionEvent e) {
                 index -= 3;
-                if(index == 3){
+                if (index == 3) {
                     initialize();
-                }else {
+                } else {
                     LoadGoods(3);
                     PageUp.setEnabled(true);
                     PageDown.setEnabled(true);
@@ -105,10 +105,10 @@ public class ProductPage extends Component {
                 addThisGoods.setGoodsName(GoodsA.getGoodsName());
                 addThisGoods.setGoodsPrice(GoodsA.getGoodsPrice());
                 addThisGoods.setGoodsStock(Short.parseShort(textField1.getText()));
-                GoodsA.setGoodsStock((short)(GoodsA.getGoodsStock() - Short.parseShort(textField1.getText())));
+                GoodsA.setGoodsStock((short) (GoodsA.getGoodsStock() - Short.parseShort(textField1.getText())));
                 shopData.getShoppingList().add(addThisGoods);
-                JOptionPane.showMessageDialog(null,"添加"+addThisGoods.getGoodsName()+"成功亲~请前往购物车查看~",
-                "成功！",JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "添加" + addThisGoods.getGoodsName() + "成功亲~请前往购物车查看~",
+                        "成功！", JOptionPane.INFORMATION_MESSAGE);
                 textField1.setText("");
             }
         });
@@ -120,10 +120,10 @@ public class ProductPage extends Component {
                 addThisGoods.setGoodsName(GoodsB.getGoodsName());
                 addThisGoods.setGoodsPrice(GoodsB.getGoodsPrice());
                 addThisGoods.setGoodsStock(Short.parseShort(textField2.getText()));
-                GoodsB.setGoodsStock((short)(GoodsB.getGoodsStock() - Short.parseShort(textField2.getText())));
+                GoodsB.setGoodsStock((short) (GoodsB.getGoodsStock() - Short.parseShort(textField2.getText())));
                 shopData.getShoppingList().add(addThisGoods);
-                JOptionPane.showMessageDialog(null,"添加"+addThisGoods.getGoodsName()+"成功亲~请前往购物车查看~",
-                        "成功！",JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "添加" + addThisGoods.getGoodsName() + "成功亲~请前往购物车查看~",
+                        "成功！", JOptionPane.INFORMATION_MESSAGE);
                 textField1.setText("");
             }
         });
@@ -136,10 +136,10 @@ public class ProductPage extends Component {
                 addThisGoods.setGoodsName(GoodsC.getGoodsName());
                 addThisGoods.setGoodsPrice(GoodsC.getGoodsPrice());
                 addThisGoods.setGoodsStock(Short.parseShort(textField3.getText()));
-                GoodsC.setGoodsStock((short)(GoodsC.getGoodsStock() - Short.parseShort(textField3.getText())));
+                GoodsC.setGoodsStock((short) (GoodsC.getGoodsStock() - Short.parseShort(textField3.getText())));
                 shopData.getShoppingList().add(addThisGoods);
-                JOptionPane.showMessageDialog(null,"添加"+addThisGoods.getGoodsName()+"成功亲~请前往购物车查看~",
-                        "成功！",JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "添加" + addThisGoods.getGoodsName() + "成功亲~请前往购物车查看~",
+                        "成功！", JOptionPane.INFORMATION_MESSAGE);
                 textField3.setText("");
             }
         });
