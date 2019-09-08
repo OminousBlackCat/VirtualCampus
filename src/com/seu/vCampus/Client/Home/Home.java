@@ -44,6 +44,8 @@ public class Home extends JFrame{
     private com.seu.vCampus.Client.AcademicAffairs.Teacher.MainPanel teacherMainPanel;
     private StudentAcademicMainPanel studentStudentAcademicMainPanel;
     private Shop shopPanel;
+    private SelectCoursesPanel coursePanelS;
+    private MainShop mainShopPanel;
     private MangerShop mangerShopPanel;
 
     private int skinNumber = 1;
@@ -57,6 +59,13 @@ public class Home extends JFrame{
     private void initialize() {
         InitGlobalFont(new Font("Microsoft Yahei", Font.BOLD, 17));
         LoadCommon();
+
+
+
+        homePanel = new BasicInformationPanel("01");
+        bankPanel = new Bank();
+        mainShopPanel = new MainShop();
+        mangerShopPanel = new MangerShop();
 
 
         {
@@ -84,7 +93,7 @@ public class Home extends JFrame{
 
         homePanel = new BasicInformationPanel("01");
         bankPanel = new Bank();
-//        shopPanel = new Shop();
+  //      MainShop  shopPanel = new MainShop();
         mangerShopPanel = new MangerShop();
 
 
@@ -268,9 +277,13 @@ public class Home extends JFrame{
                 tabbedPane.addTab("图书", Library, new StuLib().LibMPanel, null);
                 studentStudentAcademicMainPanel = new StudentAcademicMainPanel();
                 tabbedPane.addTab("教务", Edu, studentStudentAcademicMainPanel, null);
+
+
+                JPanel panel_3 = new JPanel();
+                tabbedPane.addTab("商店",Shop, mainShopPanel.getPanel(), null);
 //
 //                JPanel panel_3 = new JPanel();
-//                tabbedPane.addTab("商店",Shop, shopPanel.getPanel(), null);
+
 
 
                 JPanel panel_4 = new JPanel();
@@ -285,7 +298,7 @@ public class Home extends JFrame{
                 tabbedPane.addTab("教务", Edu, teacherMainPanel, null);
 
                 JPanel panel_3 = new JPanel();
-                tabbedPane.addTab("商店",Shop, shopPanel.getPanel(), null);
+                tabbedPane.addTab("商店",Shop, mainShopPanel.getPanel(), null);
 
 
                 JPanel panel_4 = new JPanel();
