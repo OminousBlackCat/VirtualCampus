@@ -13,7 +13,6 @@ import java.net.UnknownHostException;
 
 public class ClientIO {
 
-    private static final short TimeOut = 3000;
     private String IPAddress;
     private int Port;
     private Socket socket;
