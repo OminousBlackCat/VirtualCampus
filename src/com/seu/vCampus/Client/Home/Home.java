@@ -58,11 +58,6 @@ public class Home extends JFrame{
         LoadCommon();
 
 
-        homePanel = new BasicInformationPanel("01");
-        bankPanel = new Bank();
-        shopPanel = new Shop();
-        mangerShopPanel = new MangerShop();
-
         {
             String ECard = homeData.getUser().getECardNumber();
             System.out.println(ECard);
@@ -78,13 +73,18 @@ public class Home extends JFrame{
             homeData.getUserCount().setType(Message.MESSAGE_TYPE.TYPE_QUERY_BANK_COUNT);
             homeData.getIO().SendMessages(homeData.getUserCount());
             homeData.setUserCount((BankCount)homeData.getIO().ReceiveMessage());
-            System.out.println(homeData.getUserCount().getBankBalance());
+            System.out.println(homeData.getUserCount().getBankPassword());
 
             homeData.getShopInformation().setType(Message.MESSAGE_TYPE.TYPE_QUERY_GOODS);
             homeData.getIO().SendMessages(homeData.getShopInformation());
             homeData.setShopInformation((ShopManage)homeData.getIO().ReceiveMessage());
 
         }
+
+        homePanel = new BasicInformationPanel("01");
+        bankPanel = new Bank();
+//        shopPanel = new Shop();
+        mangerShopPanel = new MangerShop();
 
 
         setBounds(200, 200, 1200, 864);
@@ -268,9 +268,9 @@ public class Home extends JFrame{
 
                 coursePanelS = new SelectCoursesPanel();
                 tabbedPane.addTab("选课", Edu, coursePanelS, null);
-
-                JPanel panel_3 = new JPanel();
-                tabbedPane.addTab("商店",Shop, shopPanel.getPanel(), null);
+//
+//                JPanel panel_3 = new JPanel();
+//                tabbedPane.addTab("商店",Shop, shopPanel.getPanel(), null);
 
 
                 JPanel panel_4 = new JPanel();
