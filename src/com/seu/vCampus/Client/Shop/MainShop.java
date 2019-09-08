@@ -82,6 +82,14 @@ public class MainShop {
                 }
             }
         });
+        AddButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(searchGoods.getGoodsStock()>=Short.parseShort(ResulttextField.getText())){
+
+                }
+            }
+        });
     }
 
     public void initialization() {
