@@ -5,6 +5,7 @@ import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
 import com.seu.vCampus.Client.Common;
 import com.seu.vCampus.util.Goods;
+import com.seu.vCampus.util.ShopManage;
 
 
 import javax.swing.*;
@@ -12,6 +13,9 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.ImagingOpException;
+import java.util.ArrayList;
+
 
 public class MainShop {
 
@@ -75,17 +79,18 @@ public class MainShop {
         Searchbutton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int counter=0;
-                while(counter<ShopData.getShopInformation().getGoods().size()){
-                    if(SearchtextField.getText().equals(ShopData.getShopInformation().getGoods().get(counter).getGoodsNumber())){
+                int counter = 0;
+                while (counter < ShopData.getShopInformation().getGoods().size()) {
+                    if (SearchtextField.getText().equals(ShopData.getShopInformation().getGoods().get(counter).getGoodsNumber())) {
                         Name0.setText(ShopData.getShopInformation().getGoods().get(counter).getGoodsName());
-                        Picture0.setIcon(new ImageIcon("src/icon/ProductPicture/"+ShopData.getShopInformation().getGoods().get(counter).getGoodsNumber()+".png"));
+                        Picture0.setIcon(new ImageIcon("src/icon/ProductPicture/" + ShopData.getShopInformation().getGoods().get(counter).getGoodsNumber() + ".png"));
                         Price0.setText(Double.toString(ShopData.getShopInformation().getGoods().get(counter).getGoodsPrice()));
-                        searchGoods=ShopData.getShopInformation().getGoods().get(counter);
+                        searchGoods = ShopData.getShopInformation().getGoods().get(counter);
+                        SearchResult.setVisible(true);
                         break;
                     }
                 }
-                if(counter==ShopData.getShopInformation().getGoods().size()){
+                if (counter == ShopData.getShopInformation().getGoods().size()) {
                     JOptionPane.showMessageDialog(null, "未找到匹配商品", "错误", JOptionPane.ERROR_MESSAGE);
                 }
             }
@@ -93,10 +98,10 @@ public class MainShop {
         AddButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(searchGoods.getGoodsStock()>=Short.parseShort(ResulttextField.getText())){
+                if (searchGoods.getGoodsStock() >= Short.parseShort(ResulttextField.getText())) {
                     searchGoods.setGoodsStock(Short.parseShort(ResulttextField.getText()));
                     ShopData.getShoppingList().add(searchGoods);
-                }else
+                } else
                     JOptionPane.showMessageDialog(null, "商品库存不足", "错误", JOptionPane.ERROR_MESSAGE);
             }
         });
@@ -109,15 +114,15 @@ public class MainShop {
         PayBillButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(PaytextField.getText().equals(ShopData.getUserCount().getBankPassword())){
-                    Double ECB=Double.parseDouble(ECardBalance.getText());
-                    Double Total=Double.parseDouble(TotalCost.getText());
-                    if(ECB>=Total){
-                        ShopData.getUser().setECardBalance(ECB-Total);
+                if (PaytextField.getText().equals(ShopData.getUserCount().getBankPassword())) {
+                    Double ECB = Double.parseDouble(ECardBalance.getText());
+                    Double Total = Double.parseDouble(TotalCost.getText());
+                    if (ECB >= Total) {
+                        ShopData.getUser().setECardBalance(ECB - Total);
                         ShopData.getShoppingList().clear();
-                    }else
+                    } else
                         JOptionPane.showMessageDialog(null, "一卡通余额不足", "错误", JOptionPane.ERROR_MESSAGE);
-                }else
+                } else
                     JOptionPane.showMessageDialog(null, "支付密码错误", "错误", JOptionPane.ERROR_MESSAGE);
             }
         });
@@ -133,6 +138,7 @@ public class MainShop {
             counter++;
         }
         TotalCost.setText(Double.toString(cost));
+        SearchResult.setVisible(false);
     }
 
     public static void main(String args[]) {
@@ -152,25 +158,51 @@ public class MainShop {
         // TODO: place custom component creation code here
         ShopData = Common.getInstance();
         tabbedPane1 = new JTabbedPane();
-        ProductPage ProductLife = new ProductPage();
-        ProductPage ProductStudy = new ProductPage();
-        ProductPage ProductComputer = new ProductPage();
-        ProductPage ProductFood = new ProductPage();
+
+        ArrayList<Goods> Life = new ArrayList<>();
+        ArrayList<Goods> Study = new ArrayList<>();
+        ArrayList<Goods> Computer = new ArrayList<>();
+        ArrayList<Goods> Food = new ArrayList<>();
+
+        for (int i = 0; i < ShopData.getShopInformation().getGoods().size(); i++) {
+            Goods temp = ShopData.getShopInformation().getGoods().get(i);
+            switch (temp.getGoodsNumber().indexOf(0)) {
+                case '1':
+                    Life.add(temp);
+                    break;
+                case '2':
+                    Study.add(temp);
+                    break;
+                case '3':
+                    Computer.add(temp);
+                    break;
+                case '4':
+                    Food.add(temp);
+                    break;
+            }
+        }
+
+        ProductPage ProductLife = new ProductPage(Life);
+        ProductPage ProductStudy = new ProductPage(Study);
+        ProductPage ProductComputer = new ProductPage(Computer);
+        ProductPage ProductFood = new ProductPage(Food);
         tabbedPane1.addTab("生活用品", ShopLife, ProductLife.getMainPanel(), "本页面将展示各类生活用品供同学们选择");
         tabbedPane1.addTab("教材工具", ShopStudy, ProductStudy.getMainPanel(), "本页面将展示各类教材工具供同学们选择");
         tabbedPane1.addTab("电子配件", ShopComputer, ProductComputer.getMainPanel(), "本页面将展示各类电子配件供同学们选择");
         tabbedPane1.addTab("零食饮料", ShopFood, ProductFood.getMainPanel(), "本页面将展示各类零食饮料供同学们选择");
 
-        int counter=0;
-        while(counter<ShopData.getShoppingList().size()){
-            Object[] TempData={counter+1,ShopData.getShoppingList().get(counter).getGoodsNumber(),ShopData.getShoppingList().get(counter).getGoodsPrice()
-            ,ShopData.getShoppingList().get(counter).getGoodsStock()};
+
+        int counter = 0;
+        while (counter < ShopData.getShoppingList().size()) {
+            Object[] TempData = {counter + 1, ShopData.getShoppingList().get(counter).getGoodsNumber(), ShopData.getShoppingList().get(counter).getGoodsPrice()
+                    , ShopData.getShoppingList().get(counter).getGoodsStock()};
             ShopListModel.addRow(TempData);
             counter++;
         }
         goodsTable=new JTable(ShopListModel);
 
     }
+
 
     /**
      * Method generated by IntelliJ IDEA GUI Designer
@@ -228,7 +260,7 @@ public class MainShop {
         Picture0 = new JLabel();
         Picture0.setForeground(new Color(-1));
         Picture0.setText("商品图片");
-        SearchResult.add(Picture0, new GridConstraints(0, 0, 1, 3, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        SearchResult.add(Picture0, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         Name0 = new JLabel();
         Name0.setForeground(new Color(-1));
         Name0.setText("商品名称");
@@ -263,7 +295,6 @@ public class MainShop {
         ShoppingCart.setLayout(new GridLayoutManager(2, 2, new Insets(0, 0, 0, 0), -1, -1));
         ShoppingCart.setBackground(new Color(-8355712));
         ShoppingTrolley.add(ShoppingCart, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-        goodsTable = new JTable();
         ShoppingCart.add(goodsTable, new GridConstraints(0, 0, 2, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
         CleanButton = new JButton();
         CleanButton.setBackground(new Color(-14672351));
@@ -316,6 +347,4 @@ public class MainShop {
     public JComponent $$$getRootComponent$$$() {
         return basis;
     }
-
-
 }

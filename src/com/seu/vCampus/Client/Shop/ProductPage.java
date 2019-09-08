@@ -8,6 +8,9 @@ import com.seu.vCampus.util.Goods;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
 import java.util.ArrayList;
 
 public class ProductPage extends Component {
@@ -51,20 +54,151 @@ public class ProductPage extends Component {
     private JLabel label0;
     private JPanel panel1;
 
+    private ImageIcon IconA;
+    private ImageIcon IconB;
+    private ImageIcon IconC;
+
     private Goods GoodsA;
     private Goods GoodsB;
     private Goods GoodsC;
     private ArrayList<Goods> thisClassGoodsList;
     private int index;
+    private Common shopData;
 
-    public void initialize(){
+    public ProductPage(ArrayList<Goods> set) {
+        thisClassGoodsList = set;
+        shopData = Common.getInstance();
+        $$$setupUI$$$();
+        PageDown.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                index += 3;
+                if (index < thisClassGoodsList.size()) {
+                    LoadGoods(3);
+                    PageUp.setEnabled(true);
+                    PageDown.setEnabled(true);
+                } else {
+                    LoadGoods(thisClassGoodsList.size() + 3 - index);
+                    PageDown.setEnabled(false);
+                    PageUp.setEnabled(true);
+                }
+            }
+        });
+        PageUp.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                index -= 3;
+                if (index == 3) {
+                    initialize();
+                } else {
+                    LoadGoods(3);
+                    PageUp.setEnabled(true);
+                    PageDown.setEnabled(true);
+                }
+            }
+        });
+        AddButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Goods addThisGoods = new Goods();
+                addThisGoods.setGoodsNumber(GoodsA.getGoodsNumber());
+                addThisGoods.setGoodsName(GoodsA.getGoodsName());
+                addThisGoods.setGoodsPrice(GoodsA.getGoodsPrice());
+                addThisGoods.setGoodsStock(Short.parseShort(textField1.getText()));
+                GoodsA.setGoodsStock((short) (GoodsA.getGoodsStock() - Short.parseShort(textField1.getText())));
+                shopData.getShoppingList().add(addThisGoods);
+                JOptionPane.showMessageDialog(null, "添加" + addThisGoods.getGoodsName() + "成功亲~请前往购物车查看~",
+                        "成功！", JOptionPane.INFORMATION_MESSAGE);
+                textField1.setText("");
+            }
+        });
+        AddButton2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Goods addThisGoods = new Goods();
+                addThisGoods.setGoodsNumber(GoodsB.getGoodsNumber());
+                addThisGoods.setGoodsName(GoodsB.getGoodsName());
+                addThisGoods.setGoodsPrice(GoodsB.getGoodsPrice());
+                addThisGoods.setGoodsStock(Short.parseShort(textField2.getText()));
+                GoodsB.setGoodsStock((short) (GoodsB.getGoodsStock() - Short.parseShort(textField2.getText())));
+                shopData.getShoppingList().add(addThisGoods);
+                JOptionPane.showMessageDialog(null, "添加" + addThisGoods.getGoodsName() + "成功亲~请前往购物车查看~",
+                        "成功！", JOptionPane.INFORMATION_MESSAGE);
+                textField1.setText("");
+            }
+        });
+
+        AddButton3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Goods addThisGoods = new Goods();
+                addThisGoods.setGoodsNumber(GoodsC.getGoodsNumber());
+                addThisGoods.setGoodsName(GoodsC.getGoodsName());
+                addThisGoods.setGoodsPrice(GoodsC.getGoodsPrice());
+                addThisGoods.setGoodsStock(Short.parseShort(textField3.getText()));
+                GoodsC.setGoodsStock((short) (GoodsC.getGoodsStock() - Short.parseShort(textField3.getText())));
+                shopData.getShoppingList().add(addThisGoods);
+                JOptionPane.showMessageDialog(null, "添加" + addThisGoods.getGoodsName() + "成功亲~请前往购物车查看~",
+                        "成功！", JOptionPane.INFORMATION_MESSAGE);
+                textField3.setText("");
+            }
+        });
+    }
+
+    public void initialize() {
         PageUp.setEnabled(false);
         PageDown.setEnabled(true);
 
-        index = 0;
+        index = 3;
+        if (thisClassGoodsList.size() >= 3) {
+            LoadGoods(3);
+        } else {
+            LoadGoods(thisClassGoodsList.size());
+        }
+    }
+
+    private void LoadGoods(int x) {
+        switch (x) {
+            case 1:
+                LoadGoodsA();
+                break;
+            case 2:
+                LoadGoodsA();
+                LoadGoodsB();
+                break;
+            case 3:
+                LoadGoodsA();
+                LoadGoodsB();
+                LoadGoodsC();
+                break;
+
+        }
+    }
+
+    public void LoadGoodsA() {
+        GoodsA = thisClassGoodsList.get(index);
+        Name1.setText(GoodsA.getGoodsName());
+        Price1.setText(Double.toString(GoodsA.getGoodsPrice()));
+        IconA = new ImageIcon("src/icon/ProductPicture/" + GoodsA.getPictureNumber() + ".png");
+        Picture1.setIcon(IconA);
+    }
+
+    public void LoadGoodsB() {
+        GoodsB = thisClassGoodsList.get(index + 1);
+        Name2.setText(GoodsB.getGoodsName());
+        Price2.setText(Double.toString(GoodsB.getGoodsPrice()));
+        IconB = new ImageIcon("src/icon/ProductPicture/" + GoodsB.getPictureNumber() + ".png");
+        Picture2.setIcon(IconB);
 
     }
 
+    public void LoadGoodsC() {
+        GoodsC = thisClassGoodsList.get(index + 2);
+        Name3.setText(GoodsC.getGoodsName());
+        Price3.setText(Double.toString(GoodsC.getGoodsPrice()));
+        IconC = new ImageIcon("src/icon/ProductPicture/" + GoodsC.getPictureNumber() + ".png");
+        Picture3.setIcon(IconC);
+    }
 
     public void setThisClassGoodsList(ArrayList<Goods> thisClassGoodsList) {
         this.thisClassGoodsList = thisClassGoodsList;
@@ -77,13 +211,6 @@ public class ProductPage extends Component {
 
     public JPanel getMainPanel() {
         return panel1;
-    }
-
-    {
-// GUI initializer generated by IntelliJ IDEA GUI Designer
-// >>> IMPORTANT!! <<<
-// DO NOT EDIT OR ADD ANY CODE HERE!
-        $$$setupUI$$$();
     }
 
     /**
