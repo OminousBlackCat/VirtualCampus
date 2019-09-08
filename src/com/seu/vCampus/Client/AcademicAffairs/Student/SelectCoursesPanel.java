@@ -36,35 +36,7 @@ public class SelectCoursesPanel extends JPanel {
      * Initialize the application panel.
      */
     public void initialize(){
-<<<<<<< HEAD:src/com/seu/vCampus/Client/AcademicAffairs/Student/SelectCourses.java
-        coursedata = Common.getInstance();
-        user=new Person();
-        course=new Course();
-        courseList=new ArrayList<>();
-        user.setECardNumber(coursedata.getUser().getECardNumber());
-        course.setCourseSemester("19-20-1");
-        courseList.add(course);
-        user.setCourses(courseList);
-        user.setType(Message.MESSAGE_TYPE.TYPE_GET_COURSES_AVAILABLE);
-        coursedata.getIo().SendMessages(user);
-        user= (Person)coursedata.getIo().ReceiveMessage();
-    }
-    public SelectCourses() {
-        initialize();
-        String[] termlist = new String[]{"第一学期", "第二学期"};
-        term = new JComboBox(termlist);
-        setLayout(new BorderLayout());
-        add(term, BorderLayout.NORTH);
-        panel = new JPanel();
 
-        label = new JLabel("\u5DF2\u9009\u8BFE\u7A0B");
-        panel.add(label);
-        add(panel, BorderLayout.WEST);//已选课程列表
-
-        splitPane = new JSplitPane();
-        splitPane.setDividerLocation(250);
-
-=======
         StudentData = Common.getInstance();
         student = new Person();
         student.setECardNumber(StudentData.getUser().getECardNumber());
@@ -77,7 +49,6 @@ public class SelectCoursesPanel extends JPanel {
         StudentData.getIO().SendMessages(student);
         student = (Person) StudentData.getIO().ReceiveMessage();
     }
->>>>>>> 0e86d86406cc307f00768c5ea794d203908e7f9c:src/com/seu/vCampus/Client/AcademicAffairs/Student/SelectCoursesPanel.java
 
     /**
      * Constructor
@@ -124,13 +95,8 @@ public class SelectCoursesPanel extends JPanel {
         int number = courseList.size();
         JTextField jtf;
         JButton jb;
-<<<<<<< HEAD:src/com/seu/vCampus/Client/AcademicAffairs/Student/SelectCourses.java
-        for(int i=0;i<number;i++){
-            course=user.getCourses().get(i);
-=======
         for(int i=0 ; i<number; i++){
             course = student.getCourses().get(i);
->>>>>>> 0e86d86406cc307f00768c5ea794d203908e7f9c:src/com/seu/vCampus/Client/AcademicAffairs/Student/SelectCoursesPanel.java
             if(course.getCourseSemester()=="19-20-1"){
                 jtf=new JTextField(course.getCourseNumber()+"    "+course.getCourseName()+"    "+course.getCourseSemester());
                 jtf.setEditable(false);
@@ -153,11 +119,7 @@ public class SelectCoursesPanel extends JPanel {
                 jb.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-<<<<<<< HEAD:src/com/seu/vCampus/Client/AcademicAffairs/Student/SelectCourses.java
-                        panel.add(new JLabel(course.getCourseName()));
-=======
                         coursesSelectedPanel1.add(new JLabel(course.getCourseName()));
->>>>>>> 0e86d86406cc307f00768c5ea794d203908e7f9c:src/com/seu/vCampus/Client/AcademicAffairs/Student/SelectCoursesPanel.java
                         f5();
                     }
                 });
@@ -175,11 +137,8 @@ public class SelectCoursesPanel extends JPanel {
             Course course1 = courseList.get(i);
             if(term.getSelectedIndex()==0){
                 if(course1.getCourseSemester()=="19-20-1"){
-<<<<<<< HEAD:src/com/seu/vCampus/Client/AcademicAffairs/Student/SelectCourses.java
                     textField=new JTextField(course1.getCourseNumber()+"  "+course1.getCourseName());
-=======
                     textField=new JTextField(course1.getCourseNumber()+"  "+ course1.getCourseName());
->>>>>>> 0e86d86406cc307f00768c5ea794d203908e7f9c:src/com/seu/vCampus/Client/AcademicAffairs/Student/SelectCoursesPanel.java
                     textField.setEditable(false);
                     coursepanel.add(textField);
                     button=new JButton("选择");
@@ -191,11 +150,7 @@ public class SelectCoursesPanel extends JPanel {
                         button.addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
-<<<<<<< HEAD:src/com/seu/vCampus/Client/AcademicAffairs/Student/SelectCourses.java
-                                panel.add(new JLabel(course.getCourseName()));
-=======
                                 coursesSelectedPanel1.add(new JLabel(course.getCourseName()));
->>>>>>> 0e86d86406cc307f00768c5ea794d203908e7f9c:src/com/seu/vCampus/Client/AcademicAffairs/Student/SelectCoursesPanel.java
                                 f5();
                             }
                         });
@@ -204,11 +159,8 @@ public class SelectCoursesPanel extends JPanel {
             }
             else{
                 if(course1.getCourseSemester()=="19-20-2"){
-<<<<<<< HEAD:src/com/seu/vCampus/Client/AcademicAffairs/Student/SelectCourses.java
                     textField=new JTextField(course1.getCourseNumber()+"  "+course1.getCourseName());
-=======
                     textField=new JTextField(course1.getCourseNumber()+"  "+ course1.getCourseName());
->>>>>>> 0e86d86406cc307f00768c5ea794d203908e7f9c:src/com/seu/vCampus/Client/AcademicAffairs/Student/SelectCoursesPanel.java
                     textField.setEditable(false);
                     coursepanel.add(textField);
                     button=new JButton("选择");
@@ -220,11 +172,7 @@ public class SelectCoursesPanel extends JPanel {
                         button.addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
-<<<<<<< HEAD:src/com/seu/vCampus/Client/AcademicAffairs/Student/SelectCourses.java
-                                panel.add(new JLabel(course.getCourseName()));
-=======
                                 coursesSelectedPanel1.add(new JLabel(course.getCourseName()));
->>>>>>> 0e86d86406cc307f00768c5ea794d203908e7f9c:src/com/seu/vCampus/Client/AcademicAffairs/Student/SelectCoursesPanel.java
                                 f5();
                             }
                         });

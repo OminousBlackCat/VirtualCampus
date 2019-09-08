@@ -1,11 +1,15 @@
 package com.seu.vCampus.Client.AcademicAffairs.Teacher;
 
+import com.seu.vCampus.Client.Common;
 import com.seu.vCampus.util.Course;
+import com.seu.vCampus.util.Message;
 import com.seu.vCampus.util.Person;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.text.Document;
@@ -18,14 +22,18 @@ import java.util.Vector;
 
 public class setGrades_T extends JFrame {
 
+    private JScrollPane jScrollPane;
     private JTable table;
     private DefaultTableModel defaultModel;
+    private Common commondata;
     private Person user;
     private Course course;
     private ArrayList<Course> courses;
     private Vector rowData;
     private Vector vecRow;
-    private JButton jb;
+    private int row;
+    private int col;
+
     public void getinf(){
         vecRow=new Vector();
         courses=user.getCourses();
@@ -35,12 +43,7 @@ public class setGrades_T extends JFrame {
             course=courses.get(i);
             rowData.add(course.getECardNumber());
             rowData.add(course.getStudentName());
-            if(course.getCourseGrade()==0){
-                rowData.add(course.getCourseGrade());
-            }
-            else
-                rowData.add(0);
-            if(course)
+            if(course.isGradeAdded())
                 rowData.add(course.getCourseGrade());
             else
                 rowData.add("请输入");
@@ -52,15 +55,11 @@ public class setGrades_T extends JFrame {
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        JPanel panel = new JPanel();
-        getContentPane().add(panel, BorderLayout.CENTER);
-        panel.setLayout(new BorderLayout());
 
         Vector columnNames=new Vector();
         columnNames.add("一卡通");
         columnNames.add("学生姓名");
         columnNames.add("成绩");
-        columnNames.add("输入");
 
         getinf();//获取学生信息
         defaultModel=new DefaultTableModel(vecRow,columnNames);
@@ -74,28 +73,30 @@ public class setGrades_T extends JFrame {
             }
         };
 
-        JTextField jtf=new JTextField();
-        Document doc=jtf.getDocument();
-        doc.addDocumentListener(new DocumentListener() {
+        table.getModel().addTableModelListener(new TableModelListener() {//成绩修改
             @Override
-            public void insertUpdate(DocumentEvent e) {
-
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-
+            public void tableChanged(TableModelEvent e) {
+                int number=e.getFirstRow();
+                courses.get(number).setCourseGrade((Integer) table.getValueAt(number,2));
             }
         });
-        TableColumn d=table.getColumn("输入");
-        DefaultCellEditor dce=new DefaultCellEditor(jtf);
-        d.setCellEditor(dce);
 
-        panel.add(table,BorderLayout.CENTER);
+
+        jScrollPane.setLayout(new BorderLayout());
+        jScrollPane.add(table,BorderLayout.CENTER);
+        JButton jb=new JButton("确定");
+        jb.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                user.setCourses(courses);
+                user.setType(Message.MESSAGE_TYPE.TYPE_GRADES_INPUT);
+                commondata.getIO().SendMessages(user);
+                user=(Person)commondata.getIO().ReceiveMessage();
+                System.exit(0);
+            }
+        });
+
+        getContentPane().add(jScrollPane, BorderLayout.CENTER);
+
     }
 }
