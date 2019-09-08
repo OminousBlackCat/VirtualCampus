@@ -64,6 +64,8 @@ public class Home extends JFrame{
         InitGlobalFont(new Font("Microsoft Yahei", Font.BOLD, 17));
         LoadCommon();
 
+
+
         {
             String ECard = homeData.getUser().getECardNumber();
             System.out.println(ECard);
@@ -89,6 +91,7 @@ public class Home extends JFrame{
 
         homePanel = new BasicInformationPanel("01");
         bankPanel = new Bank();
+        MainShop  shopPanel = new MainShop();
         mainShopPanel = new MainShop();
         mangerShopPanel = new MangerShop();
 

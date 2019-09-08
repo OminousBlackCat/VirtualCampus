@@ -4,19 +4,23 @@ import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
 import com.seu.vCampus.Client.Common;
+import com.seu.vCampus.util.Goods;
 
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.ImagingOpException;
 
 public class MainShop {
 
     private Common ShopData;
-    /*private ProductPage ProductLife;
+    private ProductPage ProductLife;
     private ProductPage ProductComputer;
     private ProductPage ProductStudy;
-    private ProductPage ProductFood;*/
+    private ProductPage ProductFood;
+    private Goods searchGoods;
     private static ImageIcon ShopLife = new ImageIcon("src/icon/ShopLife.png");
     private static ImageIcon ShopStudy = new ImageIcon("src/icon/ShopStudy.png");
     private static ImageIcon ShopComputer = new ImageIcon("src/icon/ShopComputer.png");
@@ -60,6 +64,24 @@ public class MainShop {
         tabbedPane1.setIconAt(tabbedPane1.indexOfComponent(Search), ShopSearch);
         tabbedPane1.setIconAt(tabbedPane1.indexOfComponent(ShoppingTrolley), ShoppingT);
 
+        Searchbutton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int counter=0;
+                while(counter<ShopData.getShopInformation().getGoods().size()){
+                    if(SearchtextField.getText().equals(ShopData.getShopInformation().getGoods().get(counter).getGoodsNumber())){
+                        Name0.setText(ShopData.getShopInformation().getGoods().get(counter).getGoodsName());
+                        Picture0.setIcon(new ImageIcon("src/icon/ProductPicture/"+ShopData.getShopInformation().getGoods().get(counter).getGoodsNumber()+".png"));
+                        Price0.setText(Double.toString(ShopData.getShopInformation().getGoods().get(counter).getGoodsPrice()));
+                        searchGoods=ShopData.getShopInformation().getGoods().get(counter);
+                        break;
+                    }
+                }
+                if(counter==ShopData.getShopInformation().getGoods().size()){
+                    JOptionPane.showMessageDialog(null, "未找到匹配商品", "错误", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
     }
 
     public void initialization() {
@@ -237,4 +259,6 @@ public class MainShop {
     public JComponent $$$getRootComponent$$$() {
         return basis;
     }
+
+
 }

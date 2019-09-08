@@ -647,6 +647,20 @@ public class DatabaseActions {
             p.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
         }
     }
+    public void updatePerson(Person p){                                  //修改个人信息
+        try{
+            String sql = "UPDATE Users set ECardBalance=?,LendBooksNumber=? where ECardNumber=?";
+            stmt = conn.prepareStatement(sql);
+            stmt.setDouble(1, p.getECardBalance());
+            stmt.setShort(2, p.getLendBooksNumber());
+            stmt.setString(3,p.getECardNumber());
+
+            p.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
+        }catch (SQLException e) {
+            e.printStackTrace();
+            p.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
+        }
+    }
 
 
     public  PersonManage  getPersonManage(PersonManage PM){         //获取所有用户的信息
@@ -698,11 +712,13 @@ public class DatabaseActions {
                 String GN = res.getString("goodsName");
                 String GP = res.getString("Price");
                 String St = res.getString("Stock");
+                String PN = res.getString("pictureNumber");
 
                 temp.setGoodsNumber(ID);
                 temp.setGoodsName(GN);
                 temp.setGoodsPrice(Double.parseDouble(GP));
                 temp.setGoodsStock((short) Integer.parseInt(St));
+                temp.setPictureNumber(PN);
 
                 SM.addGoods(temp);
             }
@@ -732,18 +748,36 @@ public class DatabaseActions {
 
     public void insertGoods(Goods g) {      //添加某个新商品
         try{
-            PreparedStatement sql = conn.prepareStatement("insert into Goods(GID,goodsName,Price,Stock)" +
-                    "values(?,?,?,?)");
+            PreparedStatement sql = conn.prepareStatement("insert into Goods(GID,goodsName,Price,Stock,pictureNumber)" +
+                    "values(?,?,?,?,?)");
             sql.setString(1, g.getGoodsNumber());
             sql.setString(2, g.getGoodsName());
             sql.setString(3, Double.toString(g.getGoodsPrice()));
             sql.setString(4, Integer.toString(g.getGoodsStock()));
+            sql.setString(5, g.getPictureNumber());
             sql.executeUpdate();
             g.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
         }catch (SQLException E)
         {
             E.printStackTrace();
             g.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
+        }
+    }
+
+    public void updateGoods(ShopManage SM){                          //修改商品库存
+        try{
+            int counter=0;
+            while(counter<SM.getGoods().size()) {
+                String sql = "UPDATE Goods set Stock=? where GID=?";
+                stmt = conn.prepareStatement(sql);
+                stmt.setShort(1, SM.getGoods().get(counter).getGoodsStock());
+                stmt.setString(2, SM.getGoods().get(counter).getECardNumber());
+                counter++;
+            }
+            SM.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
+        }catch (SQLException e) {
+            e.printStackTrace();
+            SM.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
         }
     }
 
@@ -763,7 +797,10 @@ public class DatabaseActions {
                 String PW = res.getString("CountPassword");
                 bankCountUsers.setBankPassword(PW);
 
-                sql="select * from BankCount INNER JOIN BankBill ON (BankCount.ECardNumber =BankBill.ECardNumber and BankBill.ECardNumber=?)";
+
+                sql="select*from BankCount INNER JOIN BankBill ON " +    //取两表以一卡通为准的交集
+                        "(BankCount.ECardNumber =BankBill.ECardNumber" +
+                        " and BankBill.ECardNumber=?)";
                 stmt=conn.prepareStatement(sql);
                 System.out.println(bankCountUsers.getECardNumber());
                 stmt.setString(1,bankCountUsers.getECardNumber());
