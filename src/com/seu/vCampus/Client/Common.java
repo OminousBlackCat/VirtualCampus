@@ -15,6 +15,7 @@ import com.seu.vCampus.IO.ClientIO;
 import com.seu.vCampus.util.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class Common {
@@ -103,7 +104,7 @@ public class Common {
     public Person getUser() {
         return User;
     }
-    public ArrayList getShoppingList() {return ShoppingList;}
+    public ArrayList<Goods> getShoppingList() {return ShoppingList;}
     public void addGoodsIntoList(Goods add){
         ShoppingList.add(add);
     }
