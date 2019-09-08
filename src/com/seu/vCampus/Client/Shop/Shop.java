@@ -265,42 +265,21 @@ public class Shop {
         panel1.setToolTipText("");
         main = new JTabbedPane();
         main.setBackground(new Color(-8355712));
-<<<<<<< HEAD
-=======
         main.setEnabled(true);
->>>>>>> 5b92fb1879a9fab9317bfabcd47eba3410c7f081
         main.setForeground(new Color(-1));
         main.setTabPlacement(1);
         panel1.add(main, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, new Dimension(1200, 800), null, 0, false));
         search = new JPanel();
         search.setLayout(new GridLayoutManager(1, 2, new Insets(0, 0, 0, 0), -1, -1));
         search.setBackground(new Color(-8355712));
-<<<<<<< HEAD
-        main.addTab("搜索界面", search);
-<<<<<<< HEAD
-        search2 = new JPanel();
-        search2.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
-        search.add(search2, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-        table1 = new JTable();
-        search2.add(table1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
-        search1 = new JPanel();
-        search1.setLayout(new GridLayoutManager(3, 3, new Insets(0, 0, 0, 0), -1, -1));
-=======
-=======
         main.addTab("搜索界面", new ImageIcon(getClass().getResource("/icon/ShopSearch.jpg")), search);
->>>>>>> 0e86d86406cc307f00768c5ea794d203908e7f9c
         search1 = new JPanel();
         search1.setLayout(new GridLayoutManager(3, 4, new Insets(0, 0, 0, 0), -1, -1));
->>>>>>> 5b92fb1879a9fab9317bfabcd47eba3410c7f081
         search1.setBackground(new Color(-8355712));
         search.add(search1, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         labels = new JLabel();
         labels.setForeground(new Color(-1));
-<<<<<<< HEAD
-        labels.setText("请输入你要搜索的商品信息：");
-=======
         labels.setText("请输入你要搜索的商品BID：");
->>>>>>> 5b92fb1879a9fab9317bfabcd47eba3410c7f081
         search1.add(labels, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         searchtextField = new JTextField();
         search1.add(searchtextField, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
@@ -321,8 +300,6 @@ public class Shop {
         search1.add(spacer5, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         final Spacer spacer6 = new Spacer();
         search1.add(spacer6, new GridConstraints(2, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
-<<<<<<< HEAD
-=======
         final Spacer spacer7 = new Spacer();
         search1.add(spacer7, new GridConstraints(1, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
         final Spacer spacer8 = new Spacer();
@@ -362,7 +339,6 @@ public class Shop {
         label0.setForeground(new Color(-1));
         label0.setText("元");
         SearchResult.add(label0, new GridConstraints(2, 3, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
->>>>>>> 5b92fb1879a9fab9317bfabcd47eba3410c7f081
         life = new JPanel();
         life.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
         main.addTab("生活用品", new ImageIcon(getClass().getResource("/icon/ShopLife.png")), life);
@@ -374,21 +350,6 @@ public class Shop {
         Product1.setLayout(new GridLayoutManager(4, 4, new Insets(0, 0, 0, 0), -1, -1));
         Product1.setBackground(new Color(-8355712));
         lifedesign.add(Product1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-<<<<<<< HEAD
-        Plabel11 = new JLabel();
-        Plabel11.setText("商品图片");
-        Product1.add(Plabel11, new GridConstraints(0, 0, 1, 4, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        Nlabel12 = new JLabel();
-        Nlabel12.setForeground(new Color(-1));
-        Nlabel12.setText("商品名称");
-        Product1.add(Nlabel12, new GridConstraints(1, 0, 1, 4, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        Mlabel13 = new JLabel();
-        Mlabel13.setForeground(new Color(-1));
-        Mlabel13.setHorizontalAlignment(10);
-        Mlabel13.setHorizontalTextPosition(11);
-        Mlabel13.setText("商品价格");
-        Product1.add(Mlabel13, new GridConstraints(2, 0, 1, 3, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-=======
         Picture1 = new JLabel();
         Picture1.setText("商品图片");
         Product1.add(Picture1, new GridConstraints(0, 0, 1, 4, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
@@ -402,7 +363,6 @@ public class Shop {
         Price1.setHorizontalTextPosition(11);
         Price1.setText("商品价格");
         Product1.add(Price1, new GridConstraints(2, 0, 1, 3, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
->>>>>>> 5b92fb1879a9fab9317bfabcd47eba3410c7f081
         label14 = new JLabel();
         label14.setForeground(new Color(-1));
         label14.setText("购入数量：");
@@ -414,13 +374,8 @@ public class Shop {
         Product1.add(addbutton1, new GridConstraints(3, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         textField1 = new JTextField();
         Product1.add(textField1, new GridConstraints(3, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
-<<<<<<< HEAD
-        final Spacer spacer7 = new Spacer();
-        Product1.add(spacer7, new GridConstraints(3, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
-=======
         final Spacer spacer11 = new Spacer();
         Product1.add(spacer11, new GridConstraints(3, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
->>>>>>> 5b92fb1879a9fab9317bfabcd47eba3410c7f081
         label15 = new JLabel();
         label15.setForeground(new Color(-1));
         label15.setText("元");
@@ -429,19 +384,6 @@ public class Shop {
         Product2.setLayout(new GridLayoutManager(4, 4, new Insets(0, 0, 0, 0), -1, -1));
         Product2.setBackground(new Color(-8355712));
         lifedesign.add(Product2, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-<<<<<<< HEAD
-        Plabel21 = new JLabel();
-        Plabel21.setText("商品图片");
-        Product2.add(Plabel21, new GridConstraints(0, 0, 1, 4, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        Nlabel22 = new JLabel();
-        Nlabel22.setForeground(new Color(-1));
-        Nlabel22.setText("商品名称");
-        Product2.add(Nlabel22, new GridConstraints(1, 0, 1, 4, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        Mlabel23 = new JLabel();
-        Mlabel23.setForeground(new Color(-1));
-        Mlabel23.setText("商品价格");
-        Product2.add(Mlabel23, new GridConstraints(2, 0, 1, 3, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-=======
         Picture2 = new JLabel();
         Picture2.setText("商品图片");
         Product2.add(Picture2, new GridConstraints(0, 0, 1, 4, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
@@ -453,7 +395,6 @@ public class Shop {
         Price2.setForeground(new Color(-1));
         Price2.setText("商品价格");
         Product2.add(Price2, new GridConstraints(2, 0, 1, 3, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
->>>>>>> 5b92fb1879a9fab9317bfabcd47eba3410c7f081
         label24 = new JLabel();
         label24.setForeground(new Color(-1));
         label24.setText("购入数量：");
@@ -465,13 +406,8 @@ public class Shop {
         addbutton2.setForeground(new Color(-1));
         addbutton2.setText("添加");
         Product2.add(addbutton2, new GridConstraints(3, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-<<<<<<< HEAD
-        final Spacer spacer8 = new Spacer();
-        Product2.add(spacer8, new GridConstraints(3, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
-=======
         final Spacer spacer12 = new Spacer();
         Product2.add(spacer12, new GridConstraints(3, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
->>>>>>> 5b92fb1879a9fab9317bfabcd47eba3410c7f081
         label25 = new JLabel();
         label25.setForeground(new Color(-1));
         label25.setText("元");
@@ -480,30 +416,17 @@ public class Shop {
         Product3.setLayout(new GridLayoutManager(4, 4, new Insets(0, 0, 0, 0), -1, -1));
         Product3.setBackground(new Color(-8355712));
         lifedesign.add(Product3, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-<<<<<<< HEAD
-        Plabel31 = new JLabel();
-        Plabel31.setText("商品图片");
-        Product3.add(Plabel31, new GridConstraints(0, 0, 1, 4, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-=======
         Picture3 = new JLabel();
         Picture3.setText("商品图片");
         Product3.add(Picture3, new GridConstraints(0, 0, 1, 4, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
->>>>>>> 5b92fb1879a9fab9317bfabcd47eba3410c7f081
         label34 = new JLabel();
         label34.setForeground(new Color(-1));
         label34.setText("购入数量：");
         Product3.add(label34, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-<<<<<<< HEAD
-        Nlabel32 = new JLabel();
-        Nlabel32.setForeground(new Color(-1));
-        Nlabel32.setText("商品名称");
-        Product3.add(Nlabel32, new GridConstraints(1, 0, 1, 4, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-=======
         Name3 = new JLabel();
         Name3.setForeground(new Color(-1));
         Name3.setText("商品名称");
         Product3.add(Name3, new GridConstraints(1, 0, 1, 4, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
->>>>>>> 5b92fb1879a9fab9317bfabcd47eba3410c7f081
         textField3 = new JTextField();
         Product3.add(textField3, new GridConstraints(3, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         addbutton3 = new JButton();
@@ -511,28 +434,16 @@ public class Shop {
         addbutton3.setForeground(new Color(-1));
         addbutton3.setText("添加");
         Product3.add(addbutton3, new GridConstraints(3, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-<<<<<<< HEAD
-        final Spacer spacer9 = new Spacer();
-        Product3.add(spacer9, new GridConstraints(3, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
-=======
         final Spacer spacer13 = new Spacer();
         Product3.add(spacer13, new GridConstraints(3, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
->>>>>>> 5b92fb1879a9fab9317bfabcd47eba3410c7f081
         label35 = new JLabel();
         label35.setForeground(new Color(-1));
         label35.setText("元");
         Product3.add(label35, new GridConstraints(2, 3, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-<<<<<<< HEAD
-        Mlabel33 = new JLabel();
-        Mlabel33.setForeground(new Color(-1));
-        Mlabel33.setText("商品价格");
-        Product3.add(Mlabel33, new GridConstraints(2, 0, 1, 3, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-=======
         Price3 = new JLabel();
         Price3.setForeground(new Color(-1));
         Price3.setText("商品价格");
         Product3.add(Price3, new GridConstraints(2, 0, 1, 3, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
->>>>>>> 5b92fb1879a9fab9317bfabcd47eba3410c7f081
         switch1 = new JPanel();
         switch1.setLayout(new GridLayoutManager(3, 6, new Insets(0, 0, 0, 0), -1, -1));
         switch1.setBackground(new Color(-8355712));
@@ -555,19 +466,10 @@ public class Shop {
         changepage1.setForeground(new Color(-1));
         changepage1.setText("上一页");
         switch1.add(changepage1, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-<<<<<<< HEAD
-        final Spacer spacer10 = new Spacer();
-        switch1.add(spacer10, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
-        final Spacer spacer11 = new Spacer();
-        switch1.add(spacer11, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
-=======
         final Spacer spacer14 = new Spacer();
         switch1.add(spacer14, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
         final Spacer spacer15 = new Spacer();
         switch1.add(spacer15, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
-<<<<<<< HEAD
->>>>>>> 5b92fb1879a9fab9317bfabcd47eba3410c7f081
-=======
         final Spacer spacer16 = new Spacer();
         switch1.add(spacer16, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         final Spacer spacer17 = new Spacer();
@@ -592,7 +494,6 @@ public class Shop {
         switch1.add(spacer26, new GridConstraints(0, 5, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         final Spacer spacer27 = new Spacer();
         switch1.add(spacer27, new GridConstraints(2, 5, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
->>>>>>> 0e86d86406cc307f00768c5ea794d203908e7f9c
         study = new JPanel();
         study.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
         main.addTab("教材工具", new ImageIcon(getClass().getResource("/icon/ShopStudy.png")), study);
@@ -604,21 +505,6 @@ public class Shop {
         product4.setLayout(new GridLayoutManager(4, 4, new Insets(0, 0, 0, 0), -1, -1));
         product4.setBackground(new Color(-8355712));
         studydesign.add(product4, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-<<<<<<< HEAD
-        Plabel41 = new JLabel();
-        Plabel41.setText("商品图片");
-        product4.add(Plabel41, new GridConstraints(0, 0, 1, 4, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        Nlabel42 = new JLabel();
-        Nlabel42.setForeground(new Color(-1));
-        Nlabel42.setText("商品名称");
-        product4.add(Nlabel42, new GridConstraints(1, 0, 1, 4, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        Mlabel43 = new JLabel();
-        Mlabel43.setForeground(new Color(-1));
-        Mlabel43.setHorizontalAlignment(10);
-        Mlabel43.setHorizontalTextPosition(11);
-        Mlabel43.setText("商品价格");
-        product4.add(Mlabel43, new GridConstraints(2, 0, 1, 3, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-=======
         Picture4 = new JLabel();
         Picture4.setText("商品图片");
         product4.add(Picture4, new GridConstraints(0, 0, 1, 4, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
@@ -632,7 +518,6 @@ public class Shop {
         Price4.setHorizontalTextPosition(11);
         Price4.setText("商品价格");
         product4.add(Price4, new GridConstraints(2, 0, 1, 3, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
->>>>>>> 5b92fb1879a9fab9317bfabcd47eba3410c7f081
         label44 = new JLabel();
         label44.setForeground(new Color(-1));
         label44.setText("购入数量：");
@@ -644,18 +529,8 @@ public class Shop {
         product4.add(addbutton4, new GridConstraints(3, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         textField4 = new JTextField();
         product4.add(textField4, new GridConstraints(3, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
-<<<<<<< HEAD
-<<<<<<< HEAD
-        final Spacer spacer12 = new Spacer();
-        product4.add(spacer12, new GridConstraints(3, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
-=======
-        final Spacer spacer16 = new Spacer();
-        product4.add(spacer16, new GridConstraints(3, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
->>>>>>> 5b92fb1879a9fab9317bfabcd47eba3410c7f081
-=======
         final Spacer spacer28 = new Spacer();
         product4.add(spacer28, new GridConstraints(3, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
->>>>>>> 0e86d86406cc307f00768c5ea794d203908e7f9c
         label45 = new JLabel();
         label45.setForeground(new Color(-1));
         label45.setText("元");
@@ -664,19 +539,6 @@ public class Shop {
         product5.setLayout(new GridLayoutManager(4, 4, new Insets(0, 0, 0, 0), -1, -1));
         product5.setBackground(new Color(-8355712));
         studydesign.add(product5, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-<<<<<<< HEAD
-        Plabel51 = new JLabel();
-        Plabel51.setText("商品图片");
-        product5.add(Plabel51, new GridConstraints(0, 0, 1, 4, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        Nlabel52 = new JLabel();
-        Nlabel52.setForeground(new Color(-1));
-        Nlabel52.setText("商品名称");
-        product5.add(Nlabel52, new GridConstraints(1, 0, 1, 4, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        Mlabel53 = new JLabel();
-        Mlabel53.setForeground(new Color(-1));
-        Mlabel53.setText("商品价格");
-        product5.add(Mlabel53, new GridConstraints(2, 0, 1, 3, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-=======
         Picture5 = new JLabel();
         Picture5.setText("商品图片");
         product5.add(Picture5, new GridConstraints(0, 0, 1, 4, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
@@ -688,7 +550,6 @@ public class Shop {
         Price5.setForeground(new Color(-1));
         Price5.setText("商品价格");
         product5.add(Price5, new GridConstraints(2, 0, 1, 3, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
->>>>>>> 5b92fb1879a9fab9317bfabcd47eba3410c7f081
         label54 = new JLabel();
         label54.setForeground(new Color(-1));
         label54.setText("购入数量：");
@@ -700,18 +561,8 @@ public class Shop {
         addbutton5.setForeground(new Color(-1));
         addbutton5.setText("添加");
         product5.add(addbutton5, new GridConstraints(3, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-<<<<<<< HEAD
-<<<<<<< HEAD
-        final Spacer spacer13 = new Spacer();
-        product5.add(spacer13, new GridConstraints(3, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
-=======
-        final Spacer spacer17 = new Spacer();
-        product5.add(spacer17, new GridConstraints(3, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
->>>>>>> 5b92fb1879a9fab9317bfabcd47eba3410c7f081
-=======
         final Spacer spacer29 = new Spacer();
         product5.add(spacer29, new GridConstraints(3, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
->>>>>>> 0e86d86406cc307f00768c5ea794d203908e7f9c
         label55 = new JLabel();
         label55.setForeground(new Color(-1));
         label55.setText("元");
@@ -720,29 +571,13 @@ public class Shop {
         product6.setLayout(new GridLayoutManager(4, 4, new Insets(0, 0, 0, 0), -1, -1));
         product6.setBackground(new Color(-8355712));
         studydesign.add(product6, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-<<<<<<< HEAD
-        Plabel61 = new JLabel();
-        Plabel61.setText("商品图片");
-        product6.add(Plabel61, new GridConstraints(0, 0, 1, 4, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-=======
         Picture6 = new JLabel();
         Picture6.setText("商品图片");
         product6.add(Picture6, new GridConstraints(0, 0, 1, 4, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
->>>>>>> 5b92fb1879a9fab9317bfabcd47eba3410c7f081
         label64 = new JLabel();
         label64.setForeground(new Color(-1));
         label64.setText("购入数量：");
         product6.add(label64, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-<<<<<<< HEAD
-        Mlabel63 = new JLabel();
-        Mlabel63.setForeground(new Color(-1));
-        Mlabel63.setText("商品价格");
-        product6.add(Mlabel63, new GridConstraints(2, 0, 1, 3, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        Nlabel62 = new JLabel();
-        Nlabel62.setForeground(new Color(-1));
-        Nlabel62.setText("商品名称");
-        product6.add(Nlabel62, new GridConstraints(1, 0, 1, 4, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-=======
         Price6 = new JLabel();
         Price6.setForeground(new Color(-1));
         Price6.setText("商品价格");
@@ -751,7 +586,6 @@ public class Shop {
         Name6.setForeground(new Color(-1));
         Name6.setText("商品名称");
         product6.add(Name6, new GridConstraints(1, 0, 1, 4, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
->>>>>>> 5b92fb1879a9fab9317bfabcd47eba3410c7f081
         textField6 = new JTextField();
         product6.add(textField6, new GridConstraints(3, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         addbutton6 = new JButton();
@@ -759,18 +593,8 @@ public class Shop {
         addbutton6.setForeground(new Color(-1));
         addbutton6.setText("添加");
         product6.add(addbutton6, new GridConstraints(3, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-<<<<<<< HEAD
-<<<<<<< HEAD
-        final Spacer spacer14 = new Spacer();
-        product6.add(spacer14, new GridConstraints(3, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
-=======
-        final Spacer spacer18 = new Spacer();
-        product6.add(spacer18, new GridConstraints(3, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
->>>>>>> 5b92fb1879a9fab9317bfabcd47eba3410c7f081
-=======
         final Spacer spacer30 = new Spacer();
         product6.add(spacer30, new GridConstraints(3, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
->>>>>>> 0e86d86406cc307f00768c5ea794d203908e7f9c
         label65 = new JLabel();
         label65.setForeground(new Color(-1));
         label65.setText("元");
@@ -797,19 +621,6 @@ public class Shop {
         cahngepage3.setForeground(new Color(-1));
         cahngepage3.setText("上一页");
         switch2.add(cahngepage3, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-<<<<<<< HEAD
-<<<<<<< HEAD
-        final Spacer spacer15 = new Spacer();
-        switch2.add(spacer15, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
-        final Spacer spacer16 = new Spacer();
-        switch2.add(spacer16, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
-=======
-        final Spacer spacer19 = new Spacer();
-        switch2.add(spacer19, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
-        final Spacer spacer20 = new Spacer();
-        switch2.add(spacer20, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
->>>>>>> 5b92fb1879a9fab9317bfabcd47eba3410c7f081
-=======
         final Spacer spacer31 = new Spacer();
         switch2.add(spacer31, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
         final Spacer spacer32 = new Spacer();
@@ -838,7 +649,6 @@ public class Shop {
         switch2.add(spacer43, new GridConstraints(0, 5, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         final Spacer spacer44 = new Spacer();
         switch2.add(spacer44, new GridConstraints(2, 5, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
->>>>>>> 0e86d86406cc307f00768c5ea794d203908e7f9c
         computer = new JPanel();
         computer.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
         main.addTab("电子配件", new ImageIcon(getClass().getResource("/icon/ShopComputer.png")), computer);
@@ -850,18 +660,6 @@ public class Shop {
         product7.setLayout(new GridLayoutManager(4, 4, new Insets(0, 0, 0, 0), -1, -1));
         product7.setBackground(new Color(-8355712));
         computerdesign.add(product7, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-<<<<<<< HEAD
-        Nlabel72 = new JLabel();
-        Nlabel72.setForeground(new Color(-1));
-        Nlabel72.setText("商品名称");
-        product7.add(Nlabel72, new GridConstraints(1, 0, 1, 4, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        Mlabel73 = new JLabel();
-        Mlabel73.setForeground(new Color(-1));
-        Mlabel73.setHorizontalAlignment(10);
-        Mlabel73.setHorizontalTextPosition(11);
-        Mlabel73.setText("商品价格");
-        product7.add(Mlabel73, new GridConstraints(2, 0, 1, 3, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-=======
         Name7 = new JLabel();
         Name7.setForeground(new Color(-1));
         Name7.setText("商品名称");
@@ -872,7 +670,6 @@ public class Shop {
         Price7.setHorizontalTextPosition(11);
         Price7.setText("商品价格");
         product7.add(Price7, new GridConstraints(2, 0, 1, 3, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
->>>>>>> 5b92fb1879a9fab9317bfabcd47eba3410c7f081
         label74 = new JLabel();
         label74.setForeground(new Color(-1));
         label74.setText("购入数量：");
@@ -884,48 +681,19 @@ public class Shop {
         product7.add(addbutton7, new GridConstraints(3, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         textField7 = new JTextField();
         product7.add(textField7, new GridConstraints(3, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
-<<<<<<< HEAD
-<<<<<<< HEAD
-        final Spacer spacer17 = new Spacer();
-        product7.add(spacer17, new GridConstraints(3, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
-=======
-        final Spacer spacer21 = new Spacer();
-        product7.add(spacer21, new GridConstraints(3, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
->>>>>>> 5b92fb1879a9fab9317bfabcd47eba3410c7f081
-=======
         final Spacer spacer45 = new Spacer();
         product7.add(spacer45, new GridConstraints(3, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
->>>>>>> 0e86d86406cc307f00768c5ea794d203908e7f9c
         label75 = new JLabel();
         label75.setForeground(new Color(-1));
         label75.setText("元");
         product7.add(label75, new GridConstraints(2, 3, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-<<<<<<< HEAD
-        Plabel71 = new JLabel();
-        Plabel71.setText("商品图片");
-        product7.add(Plabel71, new GridConstraints(0, 0, 1, 4, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-=======
         Picture7 = new JLabel();
         Picture7.setText("商品图片");
         product7.add(Picture7, new GridConstraints(0, 0, 1, 4, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
->>>>>>> 5b92fb1879a9fab9317bfabcd47eba3410c7f081
         product8 = new JPanel();
         product8.setLayout(new GridLayoutManager(4, 4, new Insets(0, 0, 0, 0), -1, -1));
         product8.setBackground(new Color(-8355712));
         computerdesign.add(product8, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-<<<<<<< HEAD
-        Plabel81 = new JLabel();
-        Plabel81.setText("商品图片");
-        product8.add(Plabel81, new GridConstraints(0, 0, 1, 4, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        Nlabel82 = new JLabel();
-        Nlabel82.setForeground(new Color(-1));
-        Nlabel82.setText("商品名称");
-        product8.add(Nlabel82, new GridConstraints(1, 0, 1, 4, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        Mlabel83 = new JLabel();
-        Mlabel83.setForeground(new Color(-1));
-        Mlabel83.setText("商品价格");
-        product8.add(Mlabel83, new GridConstraints(2, 0, 1, 3, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-=======
         Picture8 = new JLabel();
         Picture8.setText("商品图片");
         product8.add(Picture8, new GridConstraints(0, 0, 1, 4, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
@@ -937,7 +705,6 @@ public class Shop {
         Price8.setForeground(new Color(-1));
         Price8.setText("商品价格");
         product8.add(Price8, new GridConstraints(2, 0, 1, 3, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
->>>>>>> 5b92fb1879a9fab9317bfabcd47eba3410c7f081
         label84 = new JLabel();
         label84.setForeground(new Color(-1));
         label84.setText("购入数量：");
@@ -949,18 +716,8 @@ public class Shop {
         addbutton8.setForeground(new Color(-1));
         addbutton8.setText("添加");
         product8.add(addbutton8, new GridConstraints(3, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-<<<<<<< HEAD
-<<<<<<< HEAD
-        final Spacer spacer18 = new Spacer();
-        product8.add(spacer18, new GridConstraints(3, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
-=======
-        final Spacer spacer22 = new Spacer();
-        product8.add(spacer22, new GridConstraints(3, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
->>>>>>> 5b92fb1879a9fab9317bfabcd47eba3410c7f081
-=======
         final Spacer spacer46 = new Spacer();
         product8.add(spacer46, new GridConstraints(3, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
->>>>>>> 0e86d86406cc307f00768c5ea794d203908e7f9c
         final JLabel label5 = new JLabel();
         label5.setForeground(new Color(-1));
         label5.setText("元");
@@ -969,30 +726,17 @@ public class Shop {
         product9.setLayout(new GridLayoutManager(4, 4, new Insets(0, 0, 0, 0), -1, -1));
         product9.setBackground(new Color(-8355712));
         computerdesign.add(product9, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-<<<<<<< HEAD
-        Plabel91 = new JLabel();
-        Plabel91.setText("商品图片");
-        product9.add(Plabel91, new GridConstraints(0, 0, 1, 4, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-=======
         Picture9 = new JLabel();
         Picture9.setText("商品图片");
         product9.add(Picture9, new GridConstraints(0, 0, 1, 4, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
->>>>>>> 5b92fb1879a9fab9317bfabcd47eba3410c7f081
         label94 = new JLabel();
         label94.setForeground(new Color(-1));
         label94.setText("购入数量：");
         product9.add(label94, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-<<<<<<< HEAD
-        Mlabel93 = new JLabel();
-        Mlabel93.setForeground(new Color(-1));
-        Mlabel93.setText("商品价格");
-        product9.add(Mlabel93, new GridConstraints(2, 0, 1, 3, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-=======
         Price9 = new JLabel();
         Price9.setForeground(new Color(-1));
         Price9.setText("商品价格");
         product9.add(Price9, new GridConstraints(2, 0, 1, 3, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
->>>>>>> 5b92fb1879a9fab9317bfabcd47eba3410c7f081
         textField9 = new JTextField();
         product9.add(textField9, new GridConstraints(3, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         addbutton9 = new JButton();
@@ -1000,33 +744,16 @@ public class Shop {
         addbutton9.setForeground(new Color(-1));
         addbutton9.setText("添加");
         product9.add(addbutton9, new GridConstraints(3, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-<<<<<<< HEAD
-<<<<<<< HEAD
-        final Spacer spacer19 = new Spacer();
-        product9.add(spacer19, new GridConstraints(3, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
-=======
-        final Spacer spacer23 = new Spacer();
-        product9.add(spacer23, new GridConstraints(3, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
->>>>>>> 5b92fb1879a9fab9317bfabcd47eba3410c7f081
-=======
         final Spacer spacer47 = new Spacer();
         product9.add(spacer47, new GridConstraints(3, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
->>>>>>> 0e86d86406cc307f00768c5ea794d203908e7f9c
         label95 = new JLabel();
         label95.setForeground(new Color(-1));
         label95.setText("元");
         product9.add(label95, new GridConstraints(2, 3, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-<<<<<<< HEAD
-        Nlabel92 = new JLabel();
-        Nlabel92.setForeground(new Color(-1));
-        Nlabel92.setText("商品名称");
-        product9.add(Nlabel92, new GridConstraints(1, 0, 1, 4, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-=======
         Name9 = new JLabel();
         Name9.setForeground(new Color(-1));
         Name9.setText("商品名称");
         product9.add(Name9, new GridConstraints(1, 0, 1, 4, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
->>>>>>> 5b92fb1879a9fab9317bfabcd47eba3410c7f081
         switch3 = new JPanel();
         switch3.setLayout(new GridLayoutManager(2, 5, new Insets(0, 0, 0, 0), -1, -1));
         switch3.setBackground(new Color(-8355712));
@@ -1049,24 +776,10 @@ public class Shop {
         changepage5.setForeground(new Color(-1));
         changepage5.setText("上一页");
         switch3.add(changepage5, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-<<<<<<< HEAD
-<<<<<<< HEAD
-        final Spacer spacer20 = new Spacer();
-        switch3.add(spacer20, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
-        final Spacer spacer21 = new Spacer();
-        switch3.add(spacer21, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
-=======
-        final Spacer spacer24 = new Spacer();
-        switch3.add(spacer24, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
-        final Spacer spacer25 = new Spacer();
-        switch3.add(spacer25, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
->>>>>>> 5b92fb1879a9fab9317bfabcd47eba3410c7f081
-=======
         final Spacer spacer48 = new Spacer();
         switch3.add(spacer48, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
         final Spacer spacer49 = new Spacer();
         switch3.add(spacer49, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
->>>>>>> 0e86d86406cc307f00768c5ea794d203908e7f9c
         food = new JPanel();
         food.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
         main.addTab("零食饮料", new ImageIcon(getClass().getResource("/icon/ShopFood.png")), food);
@@ -1078,21 +791,6 @@ public class Shop {
         product10.setLayout(new GridLayoutManager(4, 4, new Insets(0, 0, 0, 0), -1, -1));
         product10.setBackground(new Color(-8355712));
         fooddesign.add(product10, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-<<<<<<< HEAD
-        Plabel101 = new JLabel();
-        Plabel101.setText("商品图片");
-        product10.add(Plabel101, new GridConstraints(0, 0, 1, 4, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        Nlabel102 = new JLabel();
-        Nlabel102.setForeground(new Color(-1));
-        Nlabel102.setText("商品名称");
-        product10.add(Nlabel102, new GridConstraints(1, 0, 1, 4, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        Mlabel103 = new JLabel();
-        Mlabel103.setForeground(new Color(-1));
-        Mlabel103.setHorizontalAlignment(10);
-        Mlabel103.setHorizontalTextPosition(11);
-        Mlabel103.setText("商品价格");
-        product10.add(Mlabel103, new GridConstraints(2, 0, 1, 3, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-=======
         Picture10 = new JLabel();
         Picture10.setText("商品图片");
         product10.add(Picture10, new GridConstraints(0, 0, 1, 4, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
@@ -1106,7 +804,6 @@ public class Shop {
         Price10.setHorizontalTextPosition(11);
         Price10.setText("商品价格");
         product10.add(Price10, new GridConstraints(2, 0, 1, 3, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
->>>>>>> 5b92fb1879a9fab9317bfabcd47eba3410c7f081
         label104 = new JLabel();
         label104.setForeground(new Color(-1));
         label104.setText("购入数量：");
@@ -1118,18 +815,8 @@ public class Shop {
         product10.add(addbutton10, new GridConstraints(3, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         textField10 = new JTextField();
         product10.add(textField10, new GridConstraints(3, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
-<<<<<<< HEAD
-<<<<<<< HEAD
-        final Spacer spacer22 = new Spacer();
-        product10.add(spacer22, new GridConstraints(3, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
-=======
-        final Spacer spacer26 = new Spacer();
-        product10.add(spacer26, new GridConstraints(3, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
->>>>>>> 5b92fb1879a9fab9317bfabcd47eba3410c7f081
-=======
         final Spacer spacer50 = new Spacer();
         product10.add(spacer50, new GridConstraints(3, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
->>>>>>> 0e86d86406cc307f00768c5ea794d203908e7f9c
         label105 = new JLabel();
         label105.setForeground(new Color(-1));
         label105.setText("元");
@@ -1138,19 +825,6 @@ public class Shop {
         product11.setLayout(new GridLayoutManager(4, 4, new Insets(0, 0, 0, 0), -1, -1));
         product11.setBackground(new Color(-8355712));
         fooddesign.add(product11, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-<<<<<<< HEAD
-        Plabel111 = new JLabel();
-        Plabel111.setText("商品图片");
-        product11.add(Plabel111, new GridConstraints(0, 0, 1, 3, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        Nlabel112 = new JLabel();
-        Nlabel112.setForeground(new Color(-1));
-        Nlabel112.setText("商品名称");
-        product11.add(Nlabel112, new GridConstraints(1, 0, 1, 4, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        Mlabel113 = new JLabel();
-        Mlabel113.setForeground(new Color(-1));
-        Mlabel113.setText("商品价格");
-        product11.add(Mlabel113, new GridConstraints(2, 0, 1, 3, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-=======
         Picture11 = new JLabel();
         Picture11.setText("商品图片");
         product11.add(Picture11, new GridConstraints(0, 0, 1, 3, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
@@ -1162,7 +836,6 @@ public class Shop {
         Price13.setForeground(new Color(-1));
         Price13.setText("商品价格");
         product11.add(Price13, new GridConstraints(2, 0, 1, 3, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
->>>>>>> 5b92fb1879a9fab9317bfabcd47eba3410c7f081
         label114 = new JLabel();
         label114.setForeground(new Color(-1));
         label114.setText("购入数量：");
@@ -1178,45 +851,19 @@ public class Shop {
         label115.setForeground(new Color(-1));
         label115.setText("元");
         product11.add(label115, new GridConstraints(2, 3, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-<<<<<<< HEAD
-<<<<<<< HEAD
-        final Spacer spacer23 = new Spacer();
-        product11.add(spacer23, new GridConstraints(3, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
-=======
-        final Spacer spacer27 = new Spacer();
-        product11.add(spacer27, new GridConstraints(3, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
->>>>>>> 5b92fb1879a9fab9317bfabcd47eba3410c7f081
-=======
         final Spacer spacer51 = new Spacer();
         product11.add(spacer51, new GridConstraints(3, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
->>>>>>> 0e86d86406cc307f00768c5ea794d203908e7f9c
         product12 = new JPanel();
         product12.setLayout(new GridLayoutManager(4, 4, new Insets(0, 0, 0, 0), -1, -1));
         product12.setBackground(new Color(-8355712));
         fooddesign.add(product12, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-<<<<<<< HEAD
-        Plabel121 = new JLabel();
-        Plabel121.setText("商品图片");
-        product12.add(Plabel121, new GridConstraints(0, 0, 1, 4, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-=======
         Picture12 = new JLabel();
         Picture12.setText("商品图片");
         product12.add(Picture12, new GridConstraints(0, 0, 1, 4, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
->>>>>>> 5b92fb1879a9fab9317bfabcd47eba3410c7f081
         label124 = new JLabel();
         label124.setForeground(new Color(-1));
         label124.setText("购入数量：");
         product12.add(label124, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-<<<<<<< HEAD
-        Mlabel123 = new JLabel();
-        Mlabel123.setForeground(new Color(-1));
-        Mlabel123.setText("商品价格");
-        product12.add(Mlabel123, new GridConstraints(2, 0, 1, 3, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        Nlabel122 = new JLabel();
-        Nlabel122.setForeground(new Color(-1));
-        Nlabel122.setText("商品名称");
-        product12.add(Nlabel122, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-=======
         Price12 = new JLabel();
         Price12.setForeground(new Color(-1));
         Price12.setText("商品价格");
@@ -1225,7 +872,6 @@ public class Shop {
         Name12.setForeground(new Color(-1));
         Name12.setText("商品名称");
         product12.add(Name12, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
->>>>>>> 5b92fb1879a9fab9317bfabcd47eba3410c7f081
         textField12 = new JTextField();
         product12.add(textField12, new GridConstraints(3, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         addbutton12 = new JButton();
@@ -1237,18 +883,8 @@ public class Shop {
         label125.setForeground(new Color(-1));
         label125.setText("元");
         product12.add(label125, new GridConstraints(2, 3, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-<<<<<<< HEAD
-<<<<<<< HEAD
-        final Spacer spacer24 = new Spacer();
-        product12.add(spacer24, new GridConstraints(3, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
-=======
-        final Spacer spacer28 = new Spacer();
-        product12.add(spacer28, new GridConstraints(3, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
->>>>>>> 5b92fb1879a9fab9317bfabcd47eba3410c7f081
-=======
         final Spacer spacer52 = new Spacer();
         product12.add(spacer52, new GridConstraints(3, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
->>>>>>> 0e86d86406cc307f00768c5ea794d203908e7f9c
         switch4 = new JPanel();
         switch4.setLayout(new GridLayoutManager(2, 5, new Insets(0, 0, 0, 0), -1, -1));
         switch4.setBackground(new Color(-8355712));
@@ -1271,24 +907,10 @@ public class Shop {
         changepage7.setForeground(new Color(-1));
         changepage7.setText("上一页");
         switch4.add(changepage7, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-<<<<<<< HEAD
-<<<<<<< HEAD
-        final Spacer spacer25 = new Spacer();
-        switch4.add(spacer25, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
-        final Spacer spacer26 = new Spacer();
-        switch4.add(spacer26, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
-=======
-        final Spacer spacer29 = new Spacer();
-        switch4.add(spacer29, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
-        final Spacer spacer30 = new Spacer();
-        switch4.add(spacer30, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
->>>>>>> 5b92fb1879a9fab9317bfabcd47eba3410c7f081
-=======
         final Spacer spacer53 = new Spacer();
         switch4.add(spacer53, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
         final Spacer spacer54 = new Spacer();
         switch4.add(spacer54, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
->>>>>>> 0e86d86406cc307f00768c5ea794d203908e7f9c
         bill = new JPanel();
         bill.setLayout(new GridLayoutManager(1, 3, new Insets(0, 0, 0, 0), -1, -1));
         bill.setBackground(new Color(-8355712));
@@ -1306,24 +928,6 @@ public class Shop {
         delete.setBackground(new Color(-14672351));
         delete.setForeground(new Color(-1));
         delete.setText("删除选中项");
-<<<<<<< HEAD
-        list.add(delete, new GridConstraints(3, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-<<<<<<< HEAD
-        final Spacer spacer27 = new Spacer();
-        list.add(spacer27, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
-        final Spacer spacer28 = new Spacer();
-        list.add(spacer28, new GridConstraints(4, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
-        final Spacer spacer29 = new Spacer();
-        list.add(spacer29, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
-=======
-        final Spacer spacer31 = new Spacer();
-        list.add(spacer31, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
-        final Spacer spacer32 = new Spacer();
-        list.add(spacer32, new GridConstraints(4, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
-        final Spacer spacer33 = new Spacer();
-        list.add(spacer33, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
->>>>>>> 5b92fb1879a9fab9317bfabcd47eba3410c7f081
-=======
         list.add(delete, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final Spacer spacer55 = new Spacer();
         list.add(spacer55, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
@@ -1331,7 +935,6 @@ public class Shop {
         list.add(spacer56, new GridConstraints(4, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         final Spacer spacer57 = new Spacer();
         list.add(spacer57, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
->>>>>>> 0e86d86406cc307f00768c5ea794d203908e7f9c
         billtopay = new JPanel();
         billtopay.setLayout(new GridLayoutManager(4, 6, new Insets(0, 0, 0, 0), -1, -1));
         billtopay.setBackground(new Color(-8355712));
@@ -1363,51 +966,6 @@ public class Shop {
         Yleft.setForeground(new Color(-1));
         Yleft.setText("Label");
         billtopay.add(Yleft, new GridConstraints(1, 1, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-<<<<<<< HEAD
-<<<<<<< HEAD
-        final Spacer spacer30 = new Spacer();
-        billtopay.add(spacer30, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
-        final Spacer spacer31 = new Spacer();
-        billtopay.add(spacer31, new GridConstraints(3, 1, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
-        final Spacer spacer32 = new Spacer();
-        billtopay.add(spacer32, new GridConstraints(3, 4, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
-        final Spacer spacer33 = new Spacer();
-        billtopay.add(spacer33, new GridConstraints(0, 4, 2, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
-        final Spacer spacer34 = new Spacer();
-        billtopay.add(spacer34, new GridConstraints(0, 2, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
-        final Spacer spacer35 = new Spacer();
-        billtopay.add(spacer35, new GridConstraints(2, 5, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
-        final Spacer spacer36 = new Spacer();
-        billtopay.add(spacer36, new GridConstraints(1, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
-        final Spacer spacer37 = new Spacer();
-        billtopay.add(spacer37, new GridConstraints(0, 5, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
-        final Spacer spacer38 = new Spacer();
-        billtopay.add(spacer38, new GridConstraints(1, 5, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
-        final Spacer spacer39 = new Spacer();
-        billtopay.add(spacer39, new GridConstraints(3, 5, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
-=======
-        final Spacer spacer34 = new Spacer();
-        billtopay.add(spacer34, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
-        final Spacer spacer35 = new Spacer();
-        billtopay.add(spacer35, new GridConstraints(3, 1, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
-        final Spacer spacer36 = new Spacer();
-        billtopay.add(spacer36, new GridConstraints(3, 4, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
-        final Spacer spacer37 = new Spacer();
-        billtopay.add(spacer37, new GridConstraints(0, 4, 2, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
-        final Spacer spacer38 = new Spacer();
-        billtopay.add(spacer38, new GridConstraints(0, 2, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
-        final Spacer spacer39 = new Spacer();
-        billtopay.add(spacer39, new GridConstraints(2, 5, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
-        final Spacer spacer40 = new Spacer();
-        billtopay.add(spacer40, new GridConstraints(1, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
-        final Spacer spacer41 = new Spacer();
-        billtopay.add(spacer41, new GridConstraints(0, 5, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
-        final Spacer spacer42 = new Spacer();
-        billtopay.add(spacer42, new GridConstraints(1, 5, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
-        final Spacer spacer43 = new Spacer();
-        billtopay.add(spacer43, new GridConstraints(3, 5, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
->>>>>>> 5b92fb1879a9fab9317bfabcd47eba3410c7f081
-=======
         final Spacer spacer58 = new Spacer();
         billtopay.add(spacer58, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         final Spacer spacer59 = new Spacer();
@@ -1430,7 +988,6 @@ public class Shop {
         billtopay.add(spacer67, new GridConstraints(3, 5, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         table1 = new JTable();
         bill.add(table1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
->>>>>>> 0e86d86406cc307f00768c5ea794d203908e7f9c
     }
 
     /**
@@ -1439,4 +996,5 @@ public class Shop {
     public JComponent $$$getRootComponent$$$() {
         return panel1;
     }
+
 }

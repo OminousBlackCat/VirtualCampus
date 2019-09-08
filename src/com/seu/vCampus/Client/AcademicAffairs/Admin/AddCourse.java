@@ -6,6 +6,7 @@ import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.Document;
+import java.util.ArrayList;
 
 public class AddCourse {
     private JFrame frame;
@@ -18,6 +19,7 @@ public class AddCourse {
     private JTextField textField_6;
     private JTextField textField_7;
 
+    private ArrayList <Course> courses;
     private Course course;
     private String courseNumber;
     private String courseName;
