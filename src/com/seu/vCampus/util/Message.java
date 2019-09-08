@@ -36,6 +36,9 @@ public class Message implements java.io.Serializable{
         TYPE_DELETE_BOOK,
         TYPE_QUERY_BOOKS,
         TYPE_CHANGE_AVATAR,
+        TYPE_RENEWAL_BOOK,
+        TYPE_RETURN_BOOK,
+        TYPE_LEND_BOOK,
         ;
     }
 

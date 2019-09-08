@@ -1,14 +1,23 @@
 package com.seu.vCampus.Client.Bank;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
 import com.seu.vCampus.Client.Common;
+import com.seu.vCampus.util.BankBill;
+import com.seu.vCampus.util.BankCount;
+import com.seu.vCampus.util.Message;
+
+
 
 public class Bank {
     private JPanel bankPanel;
@@ -27,89 +36,92 @@ public class Bank {
     private JButton charge;
     private JTable bankBill;
     private Common bankData;
+    private static String[] header = {"编号", "状态", "金额", "日期"};
+    private static DefaultTableModel bankBillModel = new DefaultTableModel(null, header) {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false;
+        }
+    };
 
 
     public Bank() {
-        bankData = Common.getInstance();
-
-        Object[] col = {"编号", "状态", "金额", "日期"};
-        Object[][] data = null;
-        int size = bankData.getUserCount().getCountBill().size();
-        int counter = 0;
-        while (counter < size) {
-            bankBill.getModel().setValueAt(counter + 1, counter + 1, 0);
-            bankBill.getModel().setValueAt(bankData.getUserCount().getCountBill().get(counter).getBillType(), counter + 1, 1);
-            bankBill.getModel().setValueAt(bankData.getUserCount().getCountBill().get(counter).getBillAmount(), counter + 1, 2);
-            bankBill.getModel().setValueAt(bankData.getUserCount().getCountBill().get(counter).getBillDate(), counter + 1, 3);
-            counter++;
-        }
-
-
+        $$$setupUI$$$();
         charge.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (bankData.getUserCount().getBankPassword().equals(password.getText())) {
+                System.out.println(password.getPassword());
+                System.out.println(bankData.getUserCount().getBankPassword());
+                if (bankData.getUserCount().getBankPassword().equals(String.valueOf(password.getPassword()))) {
                     if (bankData.getUserCount().getBankBalance() >= Double.parseDouble(money.getText())) {
                         double temp = bankData.getUserCount().getBankBalance() - Double.parseDouble(money.getText());
                         double Etemp = bankData.getUser().getECardBalance() + Double.parseDouble(money.getText());
                         bankData.getUserCount().setBankBalance(temp);
                         bankData.getUser().setECardBalance(Etemp);
+                        BankBill thisBill = new BankBill();
+                        thisBill.setBillAmount(Double.parseDouble(money.getText()));
+                        thisBill.setBillDate(new Date());
+                        thisBill.setBillType(BankBill.BILL_TYPE.TYPE_EXPENDITURE);
+                        thisBill.setType(Message.MESSAGE_TYPE.TYPE_RECHARGE_ECARD);
+                        bankData.getUserCount().addBill(thisBill);
+                        bankData.getIO().SendMessages(thisBill);
+
+                        DateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+                        String tempDate = format1.format(thisBill.getBillDate());
+
+                        Object[] TempData = {bankData.getUserCount().getCountBill().size(), thisBill.getBillTypeString(),
+                                thisBill.getBillAmount(), tempDate};
+                        bankBillModel.addRow(TempData);
+                        initialization();
                     } else {
-                        JFrame jf = new JFrame("银行卡余额不足！");
-                        Container c = jf.getContentPane();
-                        JLabel jl = new JLabel("警告");
-                        jl.setHorizontalAlignment(SwingConstants.CENTER);
-                        c.add(jl);
-                        jf.setVisible(true);
-                        jf.setSize(200, 150);
-                        jf.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+                        JOptionPane.showMessageDialog(null, "银行卡余额不足！！！！", "错误", JOptionPane.ERROR_MESSAGE);
                     }
                 } else {
-                    JFrame jf = new JFrame("银行卡密码错误！");
-                    Container c = jf.getContentPane();
-                    JLabel jl = new JLabel("警告");
-                    jl.setHorizontalAlignment(SwingConstants.CENTER);
-                    c.add(jl);
-                    jf.setVisible(true);
-                    jf.setSize(200, 150);
-                    jf.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+                    JOptionPane.showMessageDialog(null, "密码错误！！！", "错误", JOptionPane.ERROR_MESSAGE);
                 }
 
             }
         });
+        initialization();
+
     }
 
     private void initialization() {
 
-        Object[] col = {"编号", "状态", "金额", "日期"};
-        Object[][] data = null;
-        int size = bankData.getUserCount().getCountBill().size();
-        int counter = 0;
-        while (counter < size) {
-            bankBill.getModel().setValueAt(counter + 1, counter + 1, 0);
-            bankBill.getModel().setValueAt(bankData.getUserCount().getCountBill().get(counter).getBillType(), counter + 1, 1);
-            bankBill.getModel().setValueAt(bankData.getUserCount().getCountBill().get(counter).getBillAmount(), counter + 1, 2);
-            bankBill.getModel().setValueAt(bankData.getUserCount().getCountBill().get(counter).getBillDate(), counter + 1, 3);
-            counter++;
-        }
-
         ECardNumber.setText(bankData.getUser().getECardNumber());
-        BankBalance.setText(Double.toString(bankData.getUser().getECardBalance()));
+        BankBalance.setText(Double.toString(bankData.getUserCount().getBankBalance()));
         UserNumber.setText(bankData.getUserCount().getCounterNumber());
-        ECardBalance.setText(Double.toString(bankData.getUserCount().getBankBalance()));
+        ECardBalance.setText(Double.toString(bankData.getUser().getECardBalance()));
 
+    }
+
+
+
+    {
+// GUI initializer generated by IntelliJ IDEA GUI Designer
+// >>> IMPORTANT!! <<<
+// DO NOT EDIT OR ADD ANY CODE HERE!
     }
 
     public JPanel getPanel() {
         return bankPanel;
     }
 
-    {
-// GUI initializer generated by IntelliJ IDEA GUI Designer
-// >>> IMPORTANT!! <<<
-// DO NOT EDIT OR ADD ANY CODE HERE!
-        $$$setupUI$$$();
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
+        bankData = Common.getInstance();
+        int counter = 0;
+        while (counter < bankData.getUserCount().getCountBill().size()) {
+            Object[] TempData = {counter + 1, bankData.getUserCount().getCountBill().get(counter).getBillTypeString(),
+                    bankData.getUserCount().getCountBill().get(counter).getBillAmount(), bankData.getUserCount().getCountBill().get(counter).getBillDate()};
+            bankBillModel.addRow(TempData);
+            counter++;
+        }
+
+        bankBill = new JTable(bankBillModel);
+        bankPanel = new JPanel();
     }
+
 
     /**
      * Method generated by IntelliJ IDEA GUI Designer
@@ -119,93 +131,94 @@ public class Bank {
      * @noinspection ALL
      */
     private void $$$setupUI$$$() {
-        bankPanel = new JPanel();
+        createUIComponents();
         bankPanel.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
         final JPanel panel1 = new JPanel();
-        panel1.setLayout(new GridLayoutManager(12, 5, new Insets(0, 0, 0, 0), -1, -1));
+        panel1.setLayout(new GridLayoutManager(12, 9, new Insets(0, 0, 0, 0), -1, -1));
         panel1.setBackground(new Color(-8355712));
         bankPanel.add(panel1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         label1 = new JLabel();
         label1.setForeground(new Color(-1));
         label1.setText("一卡通账号：");
-        panel1.add(label1, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panel1.add(label1, new GridConstraints(0, 5, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         label2 = new JLabel();
         label2.setForeground(new Color(-1));
         label2.setText("一卡通余额：");
-        panel1.add(label2, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panel1.add(label2, new GridConstraints(2, 5, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         label3 = new JLabel();
         label3.setForeground(new Color(-1));
         label3.setText("银行卡账号：");
-        panel1.add(label3, new GridConstraints(4, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panel1.add(label3, new GridConstraints(4, 5, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         label4 = new JLabel();
         label4.setForeground(new Color(-1));
         label4.setText("银行卡余额：");
-        panel1.add(label4, new GridConstraints(6, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panel1.add(label4, new GridConstraints(6, 5, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         RechargeMoney = new JLabel();
         RechargeMoney.setForeground(new Color(-1));
         RechargeMoney.setText("充值金额：");
-        panel1.add(RechargeMoney, new GridConstraints(8, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panel1.add(RechargeMoney, new GridConstraints(8, 5, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         Password = new JLabel();
         Password.setForeground(new Color(-1));
         Password.setText("充值密码：");
-        panel1.add(Password, new GridConstraints(10, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panel1.add(Password, new GridConstraints(10, 5, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         ECardNumber = new JLabel();
         ECardNumber.setForeground(new Color(-1));
         ECardNumber.setText("Label");
-        panel1.add(ECardNumber, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panel1.add(ECardNumber, new GridConstraints(0, 6, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         ECardBalance = new JLabel();
         ECardBalance.setForeground(new Color(-1));
         ECardBalance.setText("Label");
-        panel1.add(ECardBalance, new GridConstraints(2, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panel1.add(ECardBalance, new GridConstraints(2, 6, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         UserNumber = new JLabel();
         UserNumber.setForeground(new Color(-1));
         UserNumber.setText("Label");
-        panel1.add(UserNumber, new GridConstraints(4, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panel1.add(UserNumber, new GridConstraints(4, 6, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         BankBalance = new JLabel();
         BankBalance.setForeground(new Color(-1));
         BankBalance.setText("Label");
-        panel1.add(BankBalance, new GridConstraints(6, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panel1.add(BankBalance, new GridConstraints(6, 6, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         money = new JTextField();
-        panel1.add(money, new GridConstraints(8, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        panel1.add(money, new GridConstraints(8, 6, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         password = new JPasswordField();
-        panel1.add(password, new GridConstraints(10, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        panel1.add(password, new GridConstraints(10, 6, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         charge = new JButton();
         charge.setBackground(new Color(-14672351));
         charge.setForeground(new Color(-1));
         charge.setText("充值");
-        panel1.add(charge, new GridConstraints(10, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panel1.add(charge, new GridConstraints(10, 7, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final Spacer spacer1 = new Spacer();
-        panel1.add(spacer1, new GridConstraints(10, 4, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
+        panel1.add(spacer1, new GridConstraints(10, 8, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
         final Spacer spacer2 = new Spacer();
-        panel1.add(spacer2, new GridConstraints(8, 3, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
+        panel1.add(spacer2, new GridConstraints(8, 7, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
         final Spacer spacer3 = new Spacer();
-        panel1.add(spacer3, new GridConstraints(6, 3, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
+        panel1.add(spacer3, new GridConstraints(6, 7, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
         final Spacer spacer4 = new Spacer();
-        panel1.add(spacer4, new GridConstraints(4, 3, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
+        panel1.add(spacer4, new GridConstraints(4, 7, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
         final Spacer spacer5 = new Spacer();
-        panel1.add(spacer5, new GridConstraints(2, 3, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
+        panel1.add(spacer5, new GridConstraints(2, 7, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
         final Spacer spacer6 = new Spacer();
-        panel1.add(spacer6, new GridConstraints(0, 3, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
+        panel1.add(spacer6, new GridConstraints(0, 7, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
         final Spacer spacer7 = new Spacer();
-        panel1.add(spacer7, new GridConstraints(11, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        panel1.add(spacer7, new GridConstraints(11, 5, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         final Spacer spacer8 = new Spacer();
-        panel1.add(spacer8, new GridConstraints(11, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        panel1.add(spacer8, new GridConstraints(11, 6, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         final Spacer spacer9 = new Spacer();
-        panel1.add(spacer9, new GridConstraints(11, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        panel1.add(spacer9, new GridConstraints(11, 7, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         final Spacer spacer10 = new Spacer();
-        panel1.add(spacer10, new GridConstraints(11, 4, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
-        bankBill = new JTable();
-        panel1.add(bankBill, new GridConstraints(0, 0, 12, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
+        panel1.add(spacer10, new GridConstraints(11, 8, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        bankBill.setAutoCreateRowSorter(true);
+        bankBill.setFillsViewportHeight(true);
+        panel1.add(bankBill, new GridConstraints(0, 0, 12, 5, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(186, 50), null, 0, false));
         final Spacer spacer11 = new Spacer();
-        panel1.add(spacer11, new GridConstraints(1, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        panel1.add(spacer11, new GridConstraints(1, 6, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         final Spacer spacer12 = new Spacer();
-        panel1.add(spacer12, new GridConstraints(3, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        panel1.add(spacer12, new GridConstraints(3, 6, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         final Spacer spacer13 = new Spacer();
-        panel1.add(spacer13, new GridConstraints(5, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        panel1.add(spacer13, new GridConstraints(5, 6, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         final Spacer spacer14 = new Spacer();
-        panel1.add(spacer14, new GridConstraints(7, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        panel1.add(spacer14, new GridConstraints(7, 6, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         final Spacer spacer15 = new Spacer();
-        panel1.add(spacer15, new GridConstraints(9, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        panel1.add(spacer15, new GridConstraints(9, 6, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
     }
 
     /**
