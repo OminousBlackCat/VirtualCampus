@@ -74,7 +74,7 @@ public class InputGrades extends JPanel {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //弹出学生成绩窗口
+                setGradesFrame set=new setGradesFrame(user);//弹出学生成绩窗口
             }
         });
     }
