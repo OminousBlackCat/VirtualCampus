@@ -23,10 +23,12 @@ public class AdminLib {
     private JTextField FilterField;
     protected JTable AdminLibTable;
     private static String[] columnNames = {"Name of Book",
+
             "Author",
             "类型",
             "ISBN"
     };
+
     protected static DefaultTableModel AModel = new DefaultTableModel(null, columnNames) {
         @Override
         public boolean isCellEditable(int row, int column) {
@@ -41,6 +43,7 @@ public class AdminLib {
     };
     private TableRowSorter<DefaultTableModel> sorter;
     private Common ABookData;
+
 
     public AdminLib() {
         $$$setupUI$$$();
@@ -100,10 +103,12 @@ public class AdminLib {
 
     private void createUIComponents() {
         // TODO: place custom component creation code here
+        AModel = new DefaultTableModel(null, columnNames);
+
         ABookData = Common.getInstance();
         int Blistsize = ABookData.getBookInformation().getBookList().size();
         int cnt = 0;
-        while (cnt <= Blistsize) {
+        while (cnt < Blistsize) {
             Book NBook = ABookData.getBookInformation().getBookList().get(cnt);
             Object[] newRow = {NBook.getName(), NBook.getAuthor(), "Undecided", NBook.getBID()};
             AModel.addRow(newRow);

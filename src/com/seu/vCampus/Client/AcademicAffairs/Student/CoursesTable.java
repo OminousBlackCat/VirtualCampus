@@ -1,4 +1,6 @@
 package com.seu.vCampus.Client.AcademicAffairs.Student;
 
-public class CoursesTable {
+import javax.swing.*;
+
+public class CoursesTable  extends JPanel {
 }
