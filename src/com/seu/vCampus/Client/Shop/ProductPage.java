@@ -10,11 +10,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-<<<<<<< HEAD
-=======
 import java.awt.event.ComponentAdapter;
 import java.util.ArrayList;
->>>>>>> 2214fc02b99b2fa54989a41944959acc42324a8c
 
 public class ProductPage extends Component {
     /*获取商品信息*/
@@ -60,26 +57,39 @@ public class ProductPage extends Component {
     private JLabel label0;
     private JPanel panel1;
 
-<<<<<<< HEAD
-    public ProductPage(int Index){
+
+    private ImageIcon IconA;
+    private ImageIcon IconB;
+    private ImageIcon IconC;
+
+    private Goods GoodsA;
+    private Goods GoodsB;
+    private Goods GoodsC;
+    private ArrayList<Goods> thisClassGoodsList;
+    private int index;
+    private Common shopData;
+
+
+    public ProductPage(int Index) {
         InitialIndex = Index;
         PageCounter = 1;
         /*获取商品数据*/
+        $$$setupUI$$$();
         ShopProduct = Common.getInstance();
         /*初始设定index1的商品*/
-        Picture1.setIcon(new ImageIcon("src/icon/ProductPicture/"+ShopProduct.getShopInformation().getGoods().get(InitialIndex).getGoodsNumber()+".png"));
+        Picture1.setIcon(new ImageIcon("src/icon/ProductPicture/" + ShopProduct.getShopInformation().getGoods().get(InitialIndex).getGoodsNumber() + ".png"));
         Name1.setText(ShopProduct.getShopInformation().getGoods().get(InitialIndex).getGoodsName());
         Price1.setText(Double.toString(ShopProduct.getShopInformation().getGoods().get(InitialIndex).getGoodsPrice()));
 
         /*初始设定index2的商品*/
-        Picture2.setIcon(new ImageIcon("src/icon/ProductPicture/"+ShopProduct.getShopInformation().getGoods().get(InitialIndex+1).getGoodsNumber()+".png"));
-        Name2.setText(ShopProduct.getShopInformation().getGoods().get(InitialIndex+1).getGoodsName());
-        Price2.setText(Double.toString(ShopProduct.getShopInformation().getGoods().get(InitialIndex+1).getGoodsPrice()));
+        Picture2.setIcon(new ImageIcon("src/icon/ProductPicture/" + ShopProduct.getShopInformation().getGoods().get(InitialIndex + 1).getGoodsNumber() + ".png"));
+        Name2.setText(ShopProduct.getShopInformation().getGoods().get(InitialIndex + 1).getGoodsName());
+        Price2.setText(Double.toString(ShopProduct.getShopInformation().getGoods().get(InitialIndex + 1).getGoodsPrice()));
 
         /*初始设定index3的商品*/
-        Picture3.setIcon(new ImageIcon("src/icon/ProductPicture/"+ShopProduct.getShopInformation().getGoods().get(InitialIndex+2).getGoodsNumber()+".png"));
-        Name3.setText(ShopProduct.getShopInformation().getGoods().get(InitialIndex+2).getGoodsName());
-        Price3.setText(Double.toString(ShopProduct.getShopInformation().getGoods().get(InitialIndex+2).getGoodsPrice()));
+        Picture3.setIcon(new ImageIcon("src/icon/ProductPicture/" + ShopProduct.getShopInformation().getGoods().get(InitialIndex + 2).getGoodsNumber() + ".png"));
+        Name3.setText(ShopProduct.getShopInformation().getGoods().get(InitialIndex + 2).getGoodsName());
+        Price3.setText(Double.toString(ShopProduct.getShopInformation().getGoods().get(InitialIndex + 2).getGoodsPrice()));
 
 
         Page.setText(Integer.toString(PageCounter));
@@ -111,21 +121,11 @@ public class ProductPage extends Component {
 
 
 
-=======
-    private ImageIcon IconA;
-    private ImageIcon IconB;
-    private ImageIcon IconC;
->>>>>>> 2214fc02b99b2fa54989a41944959acc42324a8c
 
-    private Goods GoodsA;
-    private Goods GoodsB;
-    private Goods GoodsC;
-    private ArrayList<Goods> thisClassGoodsList;
-    private int index;
-    private Common shopData;
 
     public ProductPage(ArrayList<Goods> set) {
         thisClassGoodsList = set;
+        $$$setupUI$$$();
         shopData = Common.getInstance();
         $$$setupUI$$$();
         initialize();
