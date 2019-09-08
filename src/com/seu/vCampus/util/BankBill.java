@@ -21,6 +21,13 @@ public class BankBill extends Message{
     public BILL_TYPE getBillType() {
         return BillType;
     }
+    public String getBillTypeString(){
+        if(this.getBillType()==BILL_TYPE.TYPE_EXPENDITURE){
+            return "支出";
+        }else {
+            return "收入";
+        }
+    }
 
     public double getBillAmount() {
         return BillAmount;

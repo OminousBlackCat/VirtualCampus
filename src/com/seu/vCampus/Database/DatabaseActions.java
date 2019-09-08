@@ -337,8 +337,9 @@ public class DatabaseActions {
      *               stored into the Person.courses list (the original courses list information will be overwritten).
      */
     public void getEnrolledStudents(Person lecturer) {
-        String sql = "SELECT Courses.*, CoursesSelected.* FROM Courses, CoursesSelected WHERE " +
-                "Courses.courseNumber = CoursesSelected.courseNumber AND Courses.courseNumber = ?";
+        String sql = "SELECT Courses.*, Users.ECardNumber, Users.userName FROM Courses, CoursesSelected, Users WHERE " +
+                "Courses.courseNumber = CoursesSelected.courseNumber AND CoursesSelected.ECardNumber" +
+                "= Users.ECardNumber AND Courses.courseNumber = ?";
         int l = lecturer.getCourses().size();
         String cN = lecturer.getCourses().get(l-1).getCourseNumber();
         ArrayList<Course> cs = new ArrayList<Course>();
@@ -355,6 +356,7 @@ public class DatabaseActions {
                         cRes.getInt("maximumStudents"),cRes.getInt("enrolledStudents"),
                         cRes.getBoolean("isExam"));
                 c.setECardNumber(cRes.getString("ECardNumber"));
+                c.setStudentName(cRes.getString("userName"));
                 cs.add(c);
             }
             lecturer.setCourses(cs);
@@ -374,7 +376,7 @@ public class DatabaseActions {
         ArrayList<Course> cs = new ArrayList<Course>();
         String sql;
         try{
-            if (lecturer.getCourses() == null){
+            if (lecturer.getCourses().isEmpty()){
                 sql = "select * from Courses where lecturerECardNumber = ?";
                 stmt = conn.prepareStatement(sql);
                 stmt.setString(1,lecturer.getECardNumber());
@@ -563,7 +565,7 @@ public class DatabaseActions {
      * Set exam info. in batches
      * @param admin List should not be empty.
      */
-    public void ExamsInput(Person admin) {
+    public void examsInput(Person admin) {
         for (Course c : admin.getCourses()) {
             addExam(c);
             admin.setType(c.getType());
@@ -758,6 +760,8 @@ public class DatabaseActions {
                 bankCountUsers.setBankBalance(Double.parseDouble(BB));
                 String CN = res.getString("CounterNumber");
                 bankCountUsers.setCounterNumber(CN);
+                String PW = res.getString("CountPassword");
+                bankCountUsers.setBankPassword(PW);
 
 
                 sql="select*from BankCount INNER JOIN BankBill ON " +    //取两表以一卡通为准的交集
