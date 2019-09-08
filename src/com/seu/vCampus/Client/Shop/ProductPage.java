@@ -59,52 +59,8 @@ public class ProductPage extends Component {
     private JPanel panel1;
 
 
-    public ProductPage(int Index){
-        InitialIndex = Index;
-        PageCounter = 1;
-        /*获取商品数据*/
-        ShopProduct = Common.getInstance();
-        /*初始设定index1的商品*/
-        Picture1.setIcon(new ImageIcon("src/icon/ProductPicture/"+ShopProduct.getShopInformation().getGoods().get(InitialIndex).getGoodsNumber()+".png"));
-        Name1.setText(ShopProduct.getShopInformation().getGoods().get(InitialIndex).getGoodsName());
-        Price1.setText(Double.toString(ShopProduct.getShopInformation().getGoods().get(InitialIndex).getGoodsPrice()));
-
-        /*初始设定index2的商品*/
-        Picture2.setIcon(new ImageIcon("src/icon/ProductPicture/"+ShopProduct.getShopInformation().getGoods().get(InitialIndex+1).getGoodsNumber()+".png"));
-        Name2.setText(ShopProduct.getShopInformation().getGoods().get(InitialIndex+1).getGoodsName());
-        Price2.setText(Double.toString(ShopProduct.getShopInformation().getGoods().get(InitialIndex+1).getGoodsPrice()));
-
-        /*初始设定index3的商品*/
-        Picture3.setIcon(new ImageIcon("src/icon/ProductPicture/"+ShopProduct.getShopInformation().getGoods().get(InitialIndex+2).getGoodsNumber()+".png"));
-        Name3.setText(ShopProduct.getShopInformation().getGoods().get(InitialIndex+2).getGoodsName());
-        Price3.setText(Double.toString(ShopProduct.getShopInformation().getGoods().get(InitialIndex+2).getGoodsPrice()));
 
 
-        Page.setText(Integer.toString(PageCounter));
-
-        PageUp.addActionListener(new ActionListener() {
-            /**
-             * Invoked when an action occurs.
-             *
-             * @param e
-             */
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
-        PageDown.addActionListener(new ActionListener() {
-            /**
-             * Invoked when an action occurs.
-             *
-             * @param e
-             */
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
-    }
 
 
 
