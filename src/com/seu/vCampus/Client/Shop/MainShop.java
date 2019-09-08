@@ -24,7 +24,10 @@ public class MainShop {
     private ProductPage ProductComputer;
     private ProductPage ProductStudy;
     private ProductPage ProductFood;
+<<<<<<< HEAD
+=======
     private Goods searchGoods;
+>>>>>>> 2214fc02b99b2fa54989a41944959acc42324a8c
     private static ImageIcon ShopLife = new ImageIcon("src/icon/ShopLife.png");
     private static ImageIcon ShopStudy = new ImageIcon("src/icon/ShopStudy.png");
     private static ImageIcon ShopComputer = new ImageIcon("src/icon/ShopComputer.png");
@@ -86,6 +89,7 @@ public class MainShop {
                         Picture0.setIcon(new ImageIcon("src/icon/ProductPicture/" + ShopData.getShopInformation().getGoods().get(counter).getGoodsNumber() + ".png"));
                         Price0.setText(Double.toString(ShopData.getShopInformation().getGoods().get(counter).getGoodsPrice()));
                         searchGoods = ShopData.getShopInformation().getGoods().get(counter);
+                        SearchResult.setVisible(true);
                         break;
                     }
                 }
@@ -125,10 +129,19 @@ public class MainShop {
                     JOptionPane.showMessageDialog(null, "支付密码错误", "错误", JOptionPane.ERROR_MESSAGE);
             }
         });
+        initialization();
     }
 
     public void initialization() {
-
+        ECardBalance.setText(Double.toString(ShopData.getUser().getECardBalance()));
+        double cost=0;
+        int counter=0;
+        while(counter<ShopData.getShoppingList().size()){
+            cost+=ShopData.getShoppingList().get(counter).getGoodsPrice()*ShopData.getShoppingList().get(counter).getGoodsStock();
+            counter++;
+        }
+        TotalCost.setText(Double.toString(cost));
+        SearchResult.setVisible(false);
     }
 
     public static void main(String args[]) {
@@ -189,7 +202,8 @@ public class MainShop {
             ShopListModel.addRow(TempData);
             counter++;
         }
-        goodsTable = new JTable(ShopListModel);
+        goodsTable=new JTable(ShopListModel);
+
     }
 
 
@@ -336,4 +350,34 @@ public class MainShop {
     public JComponent $$$getRootComponent$$$() {
         return basis;
     }
+<<<<<<< HEAD
+
+    public static void main(String args[]) {
+        MainShop mainShop = new MainShop();
+        JFrame frame = new JFrame();
+        frame.setBounds(500, 500, 1200, 800);
+        frame.setContentPane(mainShop.$$$getRootComponent$$$());
+        frame.setVisible(true);
+
+    }
+
+    public Component getPanel() {
+        return basis;
+    }
+
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
+        tabbedPane1 = new JTabbedPane();
+        ProductLife = new ProductPage();
+        ProductStudy = new ProductPage();
+        ProductComputer = new ProductPage();
+        ProductFood = new ProductPage();
+        tabbedPane1.addTab("生活用品", ShopLife, ProductLife.getMainPanel(), "本页面将展示各类生活用品供同学们选择");
+        tabbedPane1.addTab("教材工具", ShopStudy, ProductStudy.getMainPanel(), "本页面将展示各类教材工具供同学们选择");
+        tabbedPane1.addTab("电子配件", ShopComputer, ProductComputer.getMainPanel(), "本页面将展示各类电子配件供同学们选择");
+        tabbedPane1.addTab("零食饮料", ShopFood, ProductFood.getMainPanel(), "本页面将展示各类零食饮料供同学们选择");
+
+    }
+=======
+>>>>>>> 2214fc02b99b2fa54989a41944959acc42324a8c
 }
