@@ -86,6 +86,7 @@ public class MainShop {
                 while (counter < ShopData.getShopInformation().getGoods().size()) {
                     if (SearchtextField.getText().equals(ShopData.getShopInformation().getGoods().get(counter).getGoodsNumber())) {
                         SearchResult.setVisible(true);
+                        Picture0.setText("");
                         Name0.setText(ShopData.getShopInformation().getGoods().get(counter).getGoodsName());
                         Picture0.setIcon(new ImageIcon("src/icon/ProductPicture/" + ShopData.getShopInformation().getGoods().get(counter).getGoodsNumber() + ".png"));
                         Picture0.setText("");
