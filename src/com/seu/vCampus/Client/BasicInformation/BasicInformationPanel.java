@@ -200,7 +200,7 @@ public class BasicInformationPanel extends JPanel {
 
             ECardBalanceT.setBounds(200,220,150,30);
             ECardBalance.setBounds(350,220,100,30);
-            ECardBalanceT.setForeground(Color.GREEN);
+            ECardBalanceT.setForeground(Color.WHITE);
             ECardBalance.setForeground(Color.RED);
             ECardBalanceT.setFont(new Font("Microsoft Yahei", Font.BOLD,25));
             ECardBalance.setFont(new Font("Microsoft Yahei", Font.BOLD,25));
@@ -209,7 +209,7 @@ public class BasicInformationPanel extends JPanel {
 
             LendBookNumberT.setBounds(180,280,300,30);
             LendBookNumber.setBounds(310,280,60,30);
-            LendBookNumberT.setForeground(Color.GREEN);
+            LendBookNumberT.setForeground(Color.WHITE);
             LendBookNumber.setForeground(Color.RED);
             LendBookNumberT.setFont(new Font("Microsoft Yahei", Font.BOLD,25));
             LendBookNumber.setFont(new Font("Microsoft Yahei", Font.BOLD,25));

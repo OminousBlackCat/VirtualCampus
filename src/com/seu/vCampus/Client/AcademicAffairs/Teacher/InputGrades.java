@@ -1,4 +1,4 @@
-package com.seu.vCampus.Client.courseSelect;
+package com.seu.vCampus.Client.AcademicAffairs.Teacher;
 
 import com.seu.vCampus.Client.Common;
 import com.seu.vCampus.util.Course;
@@ -14,7 +14,7 @@ import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.Vector;
 
-public class courseSelectForT extends JPanel {
+public class InputGrades extends JPanel {
 
     private Person user;
     private Common commondata;
@@ -32,7 +32,7 @@ public class courseSelectForT extends JPanel {
         commondata.getIo().SendMessages(user);
         user=(Person)commondata.getIo().ReceiveMessage();
     }
-    public courseSelectForT(){
+    public InputGrades(){
         initialize();
 
         JLabel label = new JLabel("选择课程:");

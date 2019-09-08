@@ -1,11 +1,9 @@
-package com.seu.vCampus.Client.courseSelect;
-import com.seu.vCampus.Client.courseSelect.setGrades;
+package com.seu.vCampus.Client.AcademicAffairs.Admin;
 
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
-public class courseSelectForA extends JPanel{
+public class SelectCourses extends JPanel{
 
 
    public void courseSelectForA(){
@@ -16,6 +14,7 @@ public class courseSelectForA extends JPanel{
         JButton button = new JButton("添加课程");
         button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
+                AddCourse addCourse=new AddCourse();
             }
         });
         button.setBounds(155, 121, 113, 27);
@@ -32,7 +31,7 @@ public class courseSelectForA extends JPanel{
         JButton button_2 = new JButton("修改成绩");
         button_2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                setGrades setgrades=new setGrades();
+                ChangeGrade setgrades=new ChangeGrade();
                 setgrades.setVisible(true);
             }
         });

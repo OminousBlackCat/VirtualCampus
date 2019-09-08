@@ -1,4 +1,4 @@
-package com.seu.vCampus.Client.courseSelect;
+package com.seu.vCampus.Client.AcademicAffairs.Teacher;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
