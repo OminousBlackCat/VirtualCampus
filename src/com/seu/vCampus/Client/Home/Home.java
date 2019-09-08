@@ -21,7 +21,12 @@ import com.seu.vCampus.Client.Launcher.Launcher;
 import com.seu.vCampus.Client.Library.AdminLib;
 import com.seu.vCampus.Client.Library.StuLib;
 import com.seu.vCampus.Client.Shop.MangerShop;
-import com.seu.vCampus.Client.Shop.Shop;
+import com.seu.vCampus.Client.AcademicAffairs.Student.SelectCoursesPanel;
+import com.seu.vCampus.Client.AcademicAffairs.Teacher.InputGrades;
+import com.seu.vCampus.Client.AcademicAffairs.Student.SelectCoursesPanel;
+import com.seu.vCampus.Client.AcademicAffairs.Teacher.InputGrades;
+import com.seu.vCampus.Client.Shop.MainShop;
+
 import com.seu.vCampus.util.*;
 
 
@@ -43,7 +48,6 @@ public class Home extends JFrame{
     private com.seu.vCampus.Client.AcademicAffairs.Admin.MainPanel adminMainPanel;
     private com.seu.vCampus.Client.AcademicAffairs.Teacher.MainPanel teacherMainPanel;
     private StudentAcademicMainPanel studentStudentAcademicMainPanel;
-    private Shop shopPanel;
     private SelectCoursesPanel coursePanelS;
     private MainShop mainShopPanel;
     private MangerShop mangerShopPanel;
@@ -60,12 +64,6 @@ public class Home extends JFrame{
         InitGlobalFont(new Font("Microsoft Yahei", Font.BOLD, 17));
         LoadCommon();
 
-
-
-        homePanel = new BasicInformationPanel("01");
-        bankPanel = new Bank();
-        mainShopPanel = new MainShop();
-        mangerShopPanel = new MangerShop();
 
 
         {
@@ -93,7 +91,8 @@ public class Home extends JFrame{
 
         homePanel = new BasicInformationPanel("01");
         bankPanel = new Bank();
-  //      MainShop  shopPanel = new MainShop();
+        MainShop  shopPanel = new MainShop();
+        mainShopPanel = new MainShop();
         mangerShopPanel = new MangerShop();
 
 
@@ -281,8 +280,6 @@ public class Home extends JFrame{
 
                 JPanel panel_3 = new JPanel();
                 tabbedPane.addTab("商店",Shop, mainShopPanel.getPanel(), null);
-//
-//                JPanel panel_3 = new JPanel();
 
 
 
@@ -298,6 +295,7 @@ public class Home extends JFrame{
                 tabbedPane.addTab("教务", Edu, teacherMainPanel, null);
 
                 JPanel panel_3 = new JPanel();
+
                 tabbedPane.addTab("商店",Shop, mainShopPanel.getPanel(), null);
 
 
