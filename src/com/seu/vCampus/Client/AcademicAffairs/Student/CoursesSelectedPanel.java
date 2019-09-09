@@ -1,5 +1,7 @@
 package com.seu.vCampus.Client.AcademicAffairs.Student;
 
+import com.seu.vCampus.Client.AcademicAffairs.Utils.DeselectCourseButton;
+import com.seu.vCampus.Client.AcademicAffairs.Utils.TableButtonRender;
 import com.seu.vCampus.Client.AcademicAffairs.Utils.TableUtils;
 import com.seu.vCampus.Client.Common;
 import com.seu.vCampus.util.Course;
@@ -54,7 +56,7 @@ public class CoursesSelectedPanel extends JPanel {
 
     }
 
-    public CoursesSelectedPanel(String semester) {
+    public CoursesSelectedPanel(String semester,StudentAcademicMainPanel fatherPanel) {
         studentData = Common.getInstance();
         Person student = new Person();
         student.setECardNumber(studentData.getUser().getECardNumber());
@@ -69,24 +71,29 @@ public class CoursesSelectedPanel extends JPanel {
         if(student.getType() == Message.MESSAGE_TYPE.TYPE_SUCCESS) {
             System.out.println("SUCCESS");
             ArrayList<Course> courses = new ArrayList<Course>(student.getCourses());
-            String[] columnNames = {"课程编号", "课程名", "教师", "上课地点", "上课时间", "课程类型", "学分", "是否考试"};
-            Object[][] data = new Object[courses.size()][8];
+            String[] columnNames = {"课程编号", "课程名", "教师", "学期", "上课地点", "上课时间", "课程类型",
+                    "学分", "是否考试","操作"};
+            Object[][] data = new Object[courses.size()][10];
             for(int i = 0; i < courses.size(); i++) {
-                Course temp = courses.get(i);
-                data[i][0] = temp.getCourseNumber().split("-")[0];
-                data[i][1] = temp.getCourseName();
-                data[i][2] = temp.getCourseLecturer();
-                data[i][3] = temp.getCoursePlace();
-                data[i][4] = temp.getCourseTime();
-                data[i][5] = temp.getCourseType();
-                data[i][6] = temp.getCourseCredit();
-                if(temp.isExam()) data[i][7] = "是";
-                else data[i][7] = "否";
+                Course course = courses.get(i);
+                data[i][0] = course.getCourseNumber().split("-")[0];
+                data[i][1] = course.getCourseName();
+                data[i][2] = course.getCourseLecturer();
+                data[i][3] = course.getCourseSemester();
+                data[i][4] = course.getCoursePlace();
+                data[i][5] = course.getCourseTime();
+                data[i][6] = course.getCourseType();
+                data[i][7] = course.getCourseCredit();
+                if(c.isExam()) data[i][8] = "是";
+                else data[i][8] = "否";
+                data[i][9] = "退课";
             }
             JTable coursesTable = new JTable(data,columnNames);
             coursesTable.setLayout(new BorderLayout());
             coursesTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
             TableUtils.FitTableColumns(coursesTable);
+            coursesTable.getColumnModel().getColumn(9).setCellRenderer(new TableButtonRender());
+            coursesTable.getColumnModel().getColumn(9).setCellEditor(new DeselectCourseButton(coursesTable,fatherPanel));
             JScrollPane scrollPane = new JScrollPane(coursesTable);
             coursesTable.setFont(new Font("楷体",Font.PLAIN,14));
             setLayout(new BorderLayout());
