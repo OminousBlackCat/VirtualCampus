@@ -70,40 +70,40 @@ public class Home extends JFrame{
 
 
 
-        {
-            String ECard = homeData.getUser().getECardNumber();
-            System.out.println(ECard);
-            homeData.getShopInformation().setECardNumber(ECard);
-            homeData.getBookInformation().setECardNumber(ECard);
-            homeData.getUserCount().setECardNumber(ECard);
+//        {
+//            String ECard = homeData.getUser().getECardNumber();
+//            System.out.println(ECard);
+//            homeData.getShopInformation().setECardNumber(ECard);
+//            homeData.getBookInformation().setECardNumber(ECard);
+//            homeData.getUserCount().setECardNumber(ECard);
+//
+//
+//            homeData.getBookInformation().setType(Message.MESSAGE_TYPE.TYPE_QUERY_BOOKS);
+//            homeData.getIO().SendMessages(homeData.getBookInformation());
+//            homeData.setBookInformation((BookManage)homeData.getIO().ReceiveMessage());
+//
+//            homeData.getUserCount().setType(Message.MESSAGE_TYPE.TYPE_QUERY_BANK_COUNT);
+//            homeData.getIO().SendMessages(homeData.getUserCount());
+//            homeData.setUserCount((BankCount)homeData.getIO().ReceiveMessage());
+//            System.out.println(homeData.getUserCount().getBankPassword());
+//
+//            homeData.getShopInformation().setType(Message.MESSAGE_TYPE.TYPE_QUERY_GOODS);
+//            homeData.getIO().SendMessages(homeData.getShopInformation());
+//            homeData.setShopInformation((ShopManage)homeData.getIO().ReceiveMessage());
+//
+//        }
 
-
-            homeData.getBookInformation().setType(Message.MESSAGE_TYPE.TYPE_QUERY_BOOKS);
-            homeData.getIO().SendMessages(homeData.getBookInformation());
-            homeData.setBookInformation((BookManage)homeData.getIO().ReceiveMessage());
-
-            homeData.getUserCount().setType(Message.MESSAGE_TYPE.TYPE_QUERY_BANK_COUNT);
-            homeData.getIO().SendMessages(homeData.getUserCount());
-            homeData.setUserCount((BankCount)homeData.getIO().ReceiveMessage());
-            System.out.println(homeData.getUserCount().getBankPassword());
-
-            homeData.getShopInformation().setType(Message.MESSAGE_TYPE.TYPE_QUERY_GOODS);
-            homeData.getIO().SendMessages(homeData.getShopInformation());
-            homeData.setShopInformation((ShopManage)homeData.getIO().ReceiveMessage());
-
-        }
-
-
-        {
+//
+//        {
             homePanel = new BasicInformationPanel("01");
-            bankPanel = new Bank();
-            mainShopPanel = new MainShop();
-            mangerShopPanel = new MangerShop();
-            libraryPanel = new StuLib().LibMPanel;
-            libraryManager = new AdminLib();
-            teacherPanel = new TeacherMainPanel();
-            adminMainPanel = new AdminMainPanel();
-        }
+//            bankPanel = new Bank();
+//            mainShopPanel = new MainShop();
+//            mangerShopPanel = new MangerShop();
+//            libraryPanel = new StuLib().LibMPanel;
+//            libraryManager = new AdminLib();
+//            teacherPanel = new TeacherMainPanel();
+//            adminMainPanel = new AdminMainPanel();
+//        }
 
 
         setBounds(200, 200, 1200, 864);
@@ -274,61 +274,61 @@ public class Home extends JFrame{
         }
 
 
-        System.out.println(homeData.getUser().getAuthorityLevel());
-        switch (homeData.getUser().getAuthorityLevel()){
-            case GROUP_USER_MANAGER:
-            {
-                JPanel UserManager = new JPanel();
-                tabbedPane.addTab("用户管理",UserImage,UserManager,null);
-                break;
-            }
-            case GROUP_STUDENT:{
-                tabbedPane.addTab("图书", Library, libraryPanel, null);
-                studentStudentAcademicMainPanel = new StudentAcademicMainPanel();
-
-                tabbedPane.addTab("教务", Edu, sam, null);
-
-
-                JPanel panel_3 = new JPanel();
-                tabbedPane.addTab("商店",Shop, mainShopPanel.getPanel(), null);
-
-
-
-                JPanel panel_4 = new JPanel();
-                tabbedPane.addTab("银行", Bank, bankPanel.getPanel(), null);
-                break;
-            }
-            case GROUP_TEACHER:{
-                JPanel panel_1 = new JPanel();
-                tabbedPane.addTab("图书馆", Library, libraryPanel, null);
-
-
-                tabbedPane.addTab("教务", Edu, teacherPanel, null);
-
-                JPanel panel_3 = new JPanel();
-
-                tabbedPane.addTab("商店",Shop, mainShopPanel.getPanel(), null);
-
-
-                JPanel panel_4 = new JPanel();
-                tabbedPane.addTab("银行", Bank, bankPanel.getPanel(), null);
-                break;
-            }
-            case GROUP_LIBRARY_MANAGER:{
-                tabbedPane.addTab("图书管理",Library,libraryManager.getPanel(),null);
-                break;
-            }
-            case GROUP_SHOP_MANAGER:{
-                JPanel ShopManager = new JPanel();
-                tabbedPane.addTab("商品管理",Shop,ShopManager,null);
-                break;
-            }
-            case GROUP_ACADEMIC_MANAGER: {
-                tabbedPane.addTab("教务管理", Edu, adminMainPanel,null);
-                break;
-            }
-
-        }
+//        System.out.println(homeData.getUser().getAuthorityLevel());
+//        switch (homeData.getUser().getAuthorityLevel()){
+//            case GROUP_USER_MANAGER:
+//            {
+//                JPanel UserManager = new JPanel();
+//                tabbedPane.addTab("用户管理",UserImage,UserManager,null);
+//                break;
+//            }
+//            case GROUP_STUDENT:{
+//                tabbedPane.addTab("图书", Library, libraryPanel, null);
+//                studentStudentAcademicMainPanel = new StudentAcademicMainPanel();
+//
+//                tabbedPane.addTab("教务", Edu, studentStudentAcademicMainPanel, null);
+//
+//
+//                JPanel panel_3 = new JPanel();
+//                tabbedPane.addTab("商店",Shop, mainShopPanel.getPanel(), null);
+//
+//
+//
+//                JPanel panel_4 = new JPanel();
+//                tabbedPane.addTab("银行", Bank, bankPanel.getPanel(), null);
+//                break;
+//            }
+//            case GROUP_TEACHER:{
+//                JPanel panel_1 = new JPanel();
+//                tabbedPane.addTab("图书馆", Library, libraryPanel, null);
+//
+//
+//                tabbedPane.addTab("教务", Edu, teacherPanel, null);
+//
+//                JPanel panel_3 = new JPanel();
+//
+//                tabbedPane.addTab("商店",Shop, mainShopPanel.getPanel(), null);
+//
+//
+//                JPanel panel_4 = new JPanel();
+//                tabbedPane.addTab("银行", Bank, bankPanel.getPanel(), null);
+//                break;
+//            }
+//            case GROUP_LIBRARY_MANAGER:{
+//                tabbedPane.addTab("图书管理",Library,libraryManager.getPanel(),null);
+//                break;
+//            }
+//            case GROUP_SHOP_MANAGER:{
+//                JPanel ShopManager = new JPanel();
+//                tabbedPane.addTab("商品管理",Shop,ShopManager,null);
+//                break;
+//            }
+//            case GROUP_ACADEMIC_MANAGER: {
+//                tabbedPane.addTab("教务管理", Edu, adminMainPanel,null);
+//                break;
+//            }
+//
+//        }
 
 
         /***

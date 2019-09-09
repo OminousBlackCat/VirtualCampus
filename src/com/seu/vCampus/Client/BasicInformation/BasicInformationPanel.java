@@ -26,6 +26,11 @@ public class BasicInformationPanel extends JPanel {
     private JLabel Group;
     private JLabel LendBookNumber;
     private JLabel ECardBalance;
+    private JLabel Major;
+    private HTML newsA;
+    private HTML newsB;
+    private HTML newsC;
+    private HTML newsD;
     private static ImageIcon  BackGroundImage;
     private JLabel BackGround = new JLabel();
     private static final int AvatarNumber = 31;
@@ -46,7 +51,7 @@ public class BasicInformationPanel extends JPanel {
          * */
         {
             AvatarPanel = new JPanel();
-            AvatarPanel.setBounds(630, 80, 180, 180);
+            AvatarPanel.setBounds(690, 80, 180, 180);
             AvatarPanel.setBorder(BorderFactory.createLoweredBevelBorder());
             AvatarPanel.setBackground(Color.WHITE);
             Avatar = new JLabel();
@@ -60,21 +65,21 @@ public class BasicInformationPanel extends JPanel {
 
             CurrentAvatar = new JLabel("当前头像");
             CurrentAvatar.setForeground(Color.WHITE);
-            CurrentAvatar.setBounds(690, 270, 100, 20);
+            CurrentAvatar.setBounds(750, 270, 100, 20);
             add(CurrentAvatar);
             ChangeAvatar = new JButton("修改头像");
             ChangeAvatar.setBackground(Color.BLACK);
             ChangeAvatar.setForeground(Color.WHITE);
-            ChangeAvatar.setBounds(668, 300, 110, 40);
+            ChangeAvatar.setBounds(728, 300, 110, 40);
             add(ChangeAvatar);
             ConfirmAvatar = new JButton("保存");
             ConfirmAvatar.setForeground(Color.WHITE);
             ConfirmAvatar.setBackground(Color.pink);
-            ConfirmAvatar.setBounds(600, 300, 70, 40);
+            ConfirmAvatar.setBounds(660, 300, 70, 40);
             CancelAvatar = new JButton("取消");
             CancelAvatar.setForeground(Color.WHITE);
             CancelAvatar.setBackground(Color.ORANGE);
-            CancelAvatar.setBounds(770, 300, 70, 40);
+            CancelAvatar.setBounds(830, 300, 70, 40);
             add(CancelAvatar);
             add(ConfirmAvatar);
             CancelAvatar.setVisible(false);
@@ -144,13 +149,15 @@ public class BasicInformationPanel extends JPanel {
             ECardNumber = new JLabel();
             LendBookNumber = new JLabel();
             ECardBalance = new JLabel();
+            Major = new JLabel();
             JLabel UserNameT = new JLabel("用户名：");
             JLabel StudentNumberT = new JLabel("学号：");
-            JLabel SexT = new JLabel("性别：");
+            JLabel SexT = new JLabel("性   别：");
             JLabel GroupT = new JLabel("用户组：");
             JLabel ECardNumberT = new JLabel("一卡通号：");
-            JLabel LendBookNumberT = new JLabel("当前已借阅    本图书");
+            JLabel LendBookNumberT = new JLabel("已借阅图书数量：");
             JLabel ECardBalanceT = new JLabel("一卡通余额：");
+            JLabel MajorT = new JLabel("专业：");
             System.out.println(userData.getUser().getAuthorityLevel());
             System.out.println(userData.getUser().getSex());
             Sex.setText(userData.getUser().getSex());
@@ -158,11 +165,12 @@ public class BasicInformationPanel extends JPanel {
             StudentNumber.setText(userData.getUser().getStudentNumber());
             Group.setText(userData.getUser().getAuthorityLevel().toString());
             ECardNumber.setText(userData.getUser().getECardNumber());
-            LendBookNumber.setText(Integer.toString(userData.getUser().getLendBooksNumber()));
-            ECardBalance.setText(Double.toString(userData.getUser().getECardBalance()));
+            LendBookNumber.setText(Integer.toString(userData.getUser().getLendBooksNumber())+" 本");
+            ECardBalance.setText(Double.toString(userData.getUser().getECardBalance())+" 元");
+            Major.setText("计算机科学");
 
-            UserNameT.setBounds(130,100,80,30);
-            UserName.setBounds(200,100,50,30);
+            UserNameT.setBounds(100,100,80,30);
+            UserName.setBounds(170,100,50,30);
             UserNameT.setForeground(Color.WHITE);
             UserName.setForeground(Color.cyan);
             UserNameT.setFont(new Font("Microsoft Yahei", Font.BOLD,20));
@@ -170,17 +178,17 @@ public class BasicInformationPanel extends JPanel {
             add(UserName);
             add(UserNameT);
 
-            ECardNumberT.setBounds(340,100,100,30);
-            ECardNumber.setBounds(440,100,100,30);
+            ECardNumberT.setBounds(240,100,100,30);
+            ECardNumber.setBounds(330,100,100,30);
             ECardNumberT.setForeground(Color.WHITE);
-            ECardNumber.setForeground(Color.YELLOW);
+            ECardNumber.setForeground(Color.cyan);
             ECardNumber.setFont(new Font("Microsoft Yahei", Font.BOLD,20));
             ECardNumberT.setFont(new Font("Microsoft Yahei", Font.BOLD,20));
             add(ECardNumber);
             add(ECardNumberT);
 
-            StudentNumberT.setBounds(130,160,80,30);
-            StudentNumber.setBounds(200,160,80,30);
+            StudentNumberT.setBounds(400,100,80,30);
+            StudentNumber.setBounds(450,100,80,30);
             StudentNumberT.setForeground(Color.WHITE);
             StudentNumber.setForeground(Color.cyan);
             StudentNumberT.setFont(new Font("Microsoft Yahei", Font.BOLD,20));
@@ -188,8 +196,8 @@ public class BasicInformationPanel extends JPanel {
             add(StudentNumberT);
             add(StudentNumber);
 
-            GroupT.setBounds(340,160,100,30);
-            Group.setBounds(440,160,100,30);
+            GroupT.setBounds(100,140,100,30);
+            Group.setBounds(170,140,100,30);
             GroupT.setForeground(Color.WHITE);
             Group.setForeground(Color.YELLOW);
             GroupT.setFont(new Font("Microsoft Yahei", Font.BOLD,20));
@@ -197,8 +205,26 @@ public class BasicInformationPanel extends JPanel {
             add(Group);
             add(GroupT);
 
-            ECardBalanceT.setBounds(200,220,150,30);
-            ECardBalance.setBounds(350,220,100,30);
+            SexT.setBounds(240,140,100,30);
+            Sex.setBounds(310,140,100,30);
+            SexT.setForeground(Color.WHITE);
+            Sex.setForeground(Color.YELLOW);
+            SexT.setFont(new Font("Microsoft Yahei", Font.BOLD,20));
+            Sex.setFont(new Font("Microsoft Yahei", Font.BOLD,20));
+            add(Sex);
+            add(SexT);
+
+            MajorT.setBounds(400,140,80,30);
+            Major.setBounds(450,140,150,30);
+            MajorT.setForeground(Color.WHITE);
+            Major.setForeground(Color.YELLOW);
+            MajorT.setFont(new Font("Microsoft Yahei", Font.BOLD,20));
+            Major.setFont(new Font("Microsoft Yahei", Font.BOLD,20));
+            add(MajorT);
+            add(Major);
+
+            ECardBalanceT.setBounds(100,180,150,30);
+            ECardBalance.setBounds(250,180,100,30);
             ECardBalanceT.setForeground(Color.WHITE);
             ECardBalance.setForeground(Color.RED);
             ECardBalanceT.setFont(new Font("Microsoft Yahei", Font.BOLD,25));
@@ -206,14 +232,23 @@ public class BasicInformationPanel extends JPanel {
             add(ECardBalanceT);
             add(ECardBalance);
 
-            LendBookNumberT.setBounds(180,280,300,30);
-            LendBookNumber.setBounds(310,280,60,30);
+            LendBookNumberT.setBounds(100,220,300,30);
+            LendBookNumber.setBounds(300,220,60,30);
             LendBookNumberT.setForeground(Color.WHITE);
             LendBookNumber.setForeground(Color.RED);
             LendBookNumberT.setFont(new Font("Microsoft Yahei", Font.BOLD,25));
             LendBookNumber.setFont(new Font("Microsoft Yahei", Font.BOLD,25));
             add(LendBookNumberT);
             add(LendBookNumber);
+
+        }
+
+        {
+            newsA = new HTML("你好世界！","https://blackcatchen.blogspot.com/");
+
+            newsA.setBounds(400,400,220,30);
+            add(newsA);
+
 
 
         }

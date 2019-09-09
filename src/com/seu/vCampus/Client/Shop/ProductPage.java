@@ -23,7 +23,6 @@ public class ProductPage extends Component {
     private JPanel Product1;
     private JPanel Product2;
     private JPanel Product3;
-    private JPanel ChangePage;
 
     /*各个页面的按钮和文本框*/
     private JButton PageUp;
@@ -45,7 +44,6 @@ public class ProductPage extends Component {
     private JLabel Price1;
     private JLabel Price2;
     private JLabel Price3;
-    private JLabel Page;
 
     /*不需要再修改的固定文本标签*/
     private JLabel label11;
@@ -54,11 +52,13 @@ public class ProductPage extends Component {
     private JLabel label22;
     private JLabel label31;
     private JLabel label33;
-    private JLabel label0;
     private JPanel panel1;
     private JLabel Stock1;
     private JLabel Stock2;
     private JLabel Stock3;
+    private JPanel ChangePage;
+    private JLabel label0;
+    private JLabel Page;
 
     private ImageIcon IconA;
     private ImageIcon IconB;
@@ -301,7 +301,7 @@ public class ProductPage extends Component {
      */
     private void $$$setupUI$$$() {
         createUIComponents();
-        panel1.setLayout(new GridLayoutManager(2, 2, new Insets(0, 0, 0, 0), -1, -1));
+        panel1.setLayout(new GridLayoutManager(2, 3, new Insets(0, 0, 0, 0), -1, -1));
         panel1.setBackground(new Color(-8355712));
         Product1 = new JPanel();
         Product1.setLayout(new GridLayoutManager(5, 4, new Insets(0, 0, 0, 0), -1, -1));
@@ -340,46 +340,10 @@ public class ProductPage extends Component {
         Stock1.setForeground(new Color(-1));
         Stock1.setText("商品库存");
         Product1.add(Stock1, new GridConstraints(2, 0, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        Product3 = new JPanel();
-        Product3.setLayout(new GridLayoutManager(5, 4, new Insets(0, 0, 0, 0), -1, -1));
-        Product3.setBackground(new Color(-8355712));
-        panel1.add(Product3, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-        Picture3 = new JLabel();
-        Picture3.setText("商品图片");
-        Product3.add(Picture3, new GridConstraints(0, 0, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        Name3 = new JLabel();
-        Name3.setForeground(new Color(-1));
-        Name3.setText("商品名称");
-        Product3.add(Name3, new GridConstraints(1, 0, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        Price3 = new JLabel();
-        Price3.setForeground(new Color(-1));
-        Price3.setText("商品价格");
-        Product3.add(Price3, new GridConstraints(3, 0, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        label33 = new JLabel();
-        label33.setForeground(new Color(-1));
-        label33.setText("购入数量：");
-        Product3.add(label33, new GridConstraints(4, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        textField3 = new JTextField();
-        Product3.add(textField3, new GridConstraints(4, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
-        AddButton3 = new JButton();
-        AddButton3.setBackground(new Color(-14672351));
-        AddButton3.setForeground(new Color(-1));
-        AddButton3.setText("添加");
-        Product3.add(AddButton3, new GridConstraints(4, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        final Spacer spacer2 = new Spacer();
-        Product3.add(spacer2, new GridConstraints(4, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
-        label31 = new JLabel();
-        label31.setForeground(new Color(-1));
-        label31.setText("元");
-        Product3.add(label31, new GridConstraints(3, 3, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        Stock3 = new JLabel();
-        Stock3.setForeground(new Color(-1));
-        Stock3.setText("商品库存");
-        Product3.add(Stock3, new GridConstraints(2, 0, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         Product2 = new JPanel();
         Product2.setLayout(new GridLayoutManager(5, 4, new Insets(0, 0, 0, 0), -1, -1));
         Product2.setBackground(new Color(-8355712));
-        panel1.add(Product2, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        panel1.add(Product2, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         Picture2 = new JLabel();
         Picture2.setText("商品图片");
         Product2.add(Picture2, new GridConstraints(0, 0, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
@@ -404,8 +368,8 @@ public class ProductPage extends Component {
         AddButton2.setForeground(new Color(-1));
         AddButton2.setText("添加");
         Product2.add(AddButton2, new GridConstraints(4, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        final Spacer spacer3 = new Spacer();
-        Product2.add(spacer3, new GridConstraints(4, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
+        final Spacer spacer2 = new Spacer();
+        Product2.add(spacer2, new GridConstraints(4, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
         label21 = new JLabel();
         label21.setForeground(new Color(-1));
         label21.setText("元");
@@ -414,10 +378,46 @@ public class ProductPage extends Component {
         Stock2.setForeground(new Color(-1));
         Stock2.setText("商品库存");
         Product2.add(Stock2, new GridConstraints(2, 0, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        Product3 = new JPanel();
+        Product3.setLayout(new GridLayoutManager(5, 4, new Insets(0, 0, 0, 0), -1, -1));
+        Product3.setBackground(new Color(-8355712));
+        panel1.add(Product3, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        Picture3 = new JLabel();
+        Picture3.setText("商品图片");
+        Product3.add(Picture3, new GridConstraints(0, 0, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        Name3 = new JLabel();
+        Name3.setForeground(new Color(-1));
+        Name3.setText("商品名称");
+        Product3.add(Name3, new GridConstraints(1, 0, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        Price3 = new JLabel();
+        Price3.setForeground(new Color(-1));
+        Price3.setText("商品价格");
+        Product3.add(Price3, new GridConstraints(3, 0, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        label33 = new JLabel();
+        label33.setForeground(new Color(-1));
+        label33.setText("购入数量：");
+        Product3.add(label33, new GridConstraints(4, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        textField3 = new JTextField();
+        Product3.add(textField3, new GridConstraints(4, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        AddButton3 = new JButton();
+        AddButton3.setBackground(new Color(-14672351));
+        AddButton3.setForeground(new Color(-1));
+        AddButton3.setText("添加");
+        Product3.add(AddButton3, new GridConstraints(4, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final Spacer spacer3 = new Spacer();
+        Product3.add(spacer3, new GridConstraints(4, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
+        label31 = new JLabel();
+        label31.setForeground(new Color(-1));
+        label31.setText("元");
+        Product3.add(label31, new GridConstraints(3, 3, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        Stock3 = new JLabel();
+        Stock3.setForeground(new Color(-1));
+        Stock3.setText("商品库存");
+        Product3.add(Stock3, new GridConstraints(2, 0, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         ChangePage = new JPanel();
         ChangePage.setLayout(new GridLayoutManager(3, 6, new Insets(0, 0, 0, 0), -1, -1));
         ChangePage.setBackground(new Color(-8355712));
-        panel1.add(ChangePage, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        panel1.add(ChangePage, new GridConstraints(1, 0, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         PageUp = new JButton();
         PageUp.setBackground(new Color(-14672351));
         PageUp.setForeground(new Color(-1));
