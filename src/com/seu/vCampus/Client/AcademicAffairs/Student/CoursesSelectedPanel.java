@@ -54,6 +54,7 @@ public class CoursesSelectedPanel extends JPanel {
             setLayout(new BorderLayout());
             add(scrollPane, BorderLayout.CENTER);
             this.setVisible(true);
+
         }
 
     }

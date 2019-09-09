@@ -12,33 +12,38 @@ public class CoursesTable  extends JPanel {
         setLayout(null);
 
         JLabel label_1 = new JLabel("周一",JLabel.CENTER);
-        label_1.setBounds(80, 42, 130, 42);
+        label_1.setBounds(80, 42, 184, 42);
         label_1.setOpaque(true);
-        label_1.setBackground(Color.GREEN);
+        label_1.setForeground(Color.WHITE);
+        label_1.setBackground(Color.getHSBColor((float) 0.08, (float) 1, (float) 0.86));
         add(label_1);
 
         JLabel label_2 = new JLabel("周二",JLabel.CENTER);
-        label_2.setBounds(210, 42, 130, 42);
+        label_2.setBounds(264, 42, 184, 42);
         label_2.setOpaque(true);
-        label_2.setBackground(Color.GREEN);
+        label_2.setForeground(Color.WHITE);
+        label_2.setBackground(Color.getHSBColor((float) 0.167,(float)0.39, (float) 0.93));
         add(label_2);
 
         JLabel label_3 = new JLabel("周三",JLabel.CENTER);
-        label_3.setBounds(340, 42, 130, 42);
+        label_3.setBounds(448, 42, 184, 42);
         label_3.setOpaque(true);
-        label_3.setBackground(Color.GREEN);
+        label_3.setForeground(Color.WHITE);
+        label_3.setBackground(Color.getHSBColor((float)0.305,(float)0.64, (float) 0.93));
         add(label_3);
 
         JLabel label_4 = new JLabel("周四",JLabel.CENTER);
-        label_4.setBounds(470, 42, 130, 42);
+        label_4.setBounds(632, 42, 184, 42);
         label_4.setOpaque(true);
-        label_4.setBackground(Color.GREEN);
+        label_4.setForeground(Color.WHITE);
+        label_4.setBackground(Color.getHSBColor((float) 0.5,(float) 0.65, (float) 0.93));
         add(label_4);
 
         JLabel label_5 = new JLabel("周五",JLabel.CENTER);
-        label_5.setBounds(600, 42, 130, 42);
+        label_5.setBounds(816, 42, 184, 42);
         label_5.setOpaque(true);
-        label_5.setBackground(Color.GREEN);
+        label_5.setForeground(Color.WHITE);
+        label_5.setBackground(Color.getHSBColor((float)1.67,(float)0.39, (float) 0.96));
         add(label_5);
 
         JLabel label1 = new JLabel("1",JLabel.CENTER);
@@ -89,7 +94,6 @@ public class CoursesTable  extends JPanel {
         label12.setBounds(14, 690, 56, 55);
         add(label12);
 
-
     }
     public void addCourse(String CourseTime,String CourseName){
         String []time;
@@ -100,7 +104,8 @@ public class CoursesTable  extends JPanel {
             int l= Integer.parseInt(t[0]);
             int r= Integer.parseInt(t[1]);
             jLabel=new JLabel(CourseName,JLabel.CENTER);
-            jLabel.setBounds(80+130*(l-1),85+55*(r-1),130,55);
+            jLabel.setForeground(Color.WHITE);
+            jLabel.setBounds(80+184*(l-1),85+55*(r-1),184,55);
             jLabel.setOpaque(true);
             jLabel.setBackground(Color.GRAY);
             this.add(jLabel);
