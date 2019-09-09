@@ -3,6 +3,7 @@ package com.seu.vCampus.Client.Library;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
+
 import com.seu.vCampus.Client.Common;
 import com.seu.vCampus.util.Book;
 import com.seu.vCampus.util.Message;
@@ -16,6 +17,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.text.StyleContext;
+
 
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -38,14 +40,15 @@ public class StuLib {
                         Book NBook=BookData.getBookInformation().getBookList().get(cnt);
                         Object NBid=NBook.getBID();
                         if(NIsbn.equals(NBid)){
+
                             SModel.setValueAt(30, selectedRow, 4);
-                            NBook.setLendDays((short)0);
+                            NBook.setLendDays((short) 0);
                             NBook.setType(Message.MESSAGE_TYPE.TYPE_RENEWAL_BOOK);
                             BookData.getIO().SendMessages(NBook);
-                            NBook = (Book)BookData.getIO().ReceiveMessage();
-                            if(NBook.getType()== Message.MESSAGE_TYPE.TYPE_SUCCESS){
+                            NBook = (Book) BookData.getIO().ReceiveMessage();
+                            if (NBook.getType() == Message.MESSAGE_TYPE.TYPE_SUCCESS) {
                                 JOptionPane.showMessageDialog(null, "续借操作成功", "成功", JOptionPane.INFORMATION_MESSAGE);
-                            }else {
+                            } else {
                                 JOptionPane.showMessageDialog(null, "续借操作失败", "错误", JOptionPane.ERROR_MESSAGE);
                             }
                         }
@@ -67,15 +70,16 @@ public class StuLib {
                         Book NBook=BookData.getBookInformation().getBookList().get(cnt);
                         Object NBid=NBook.getBID();
                         if(NIsbn.equals(NBid)){
+
                             SModel.removeRow(selectedRow);
-                            LModel.setValueAt("在库",cnt,4);
+                            LModel.setValueAt("在库", cnt, 4);
                             NBook.setLent(false);
                             NBook.setType(Message.MESSAGE_TYPE.TYPE_RETURN_BOOK);
                             BookData.getIO().SendMessages(NBook);
-                            NBook = (Book)BookData.getIO().ReceiveMessage();
-                            if(NBook.getType()== Message.MESSAGE_TYPE.TYPE_SUCCESS){
+                            NBook = (Book) BookData.getIO().ReceiveMessage();
+                            if (NBook.getType() == Message.MESSAGE_TYPE.TYPE_SUCCESS) {
                                 JOptionPane.showMessageDialog(null, "还书操作成功", "成功", JOptionPane.INFORMATION_MESSAGE);
-                            }else {
+                            } else {
                                 JOptionPane.showMessageDialog(null, "还书操作失败", "错误", JOptionPane.ERROR_MESSAGE);
                             }
                         }
@@ -90,36 +94,41 @@ public class StuLib {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 int viewRow = Libtable.getSelectedRow();
-                int modelRow=-1;
+                int modelRow = -1;
                 if (viewRow < 0) {
                     //Selection got filtered away.
                 } else {
                     modelRow = Libtable.convertRowIndexToModel(viewRow);
                 }
                 if (modelRow != -1) {
-                    Book NBook=BookData.getBookInformation().getBookList().get(modelRow);
-                    LModel.setValueAt("已被借阅",modelRow,4);
-                    Object[] newRow={LModel.getValueAt(modelRow,0),
-                            LModel.getValueAt(modelRow,1),
-                            LModel.getValueAt(modelRow,2),
-                            LModel.getValueAt(modelRow,3),
+
+                    Book NBook = BookData.getBookInformation().getBookList().get(modelRow);
+                    if (NBook.isLent()) {
+                        JOptionPane.showMessageDialog(null, "这本书已经有主了", "错误", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                    LModel.setValueAt("已被借阅", modelRow, 4);
+                    Object[] newRow = {LModel.getValueAt(modelRow, 0),
+                            LModel.getValueAt(modelRow, 1),
+                            LModel.getValueAt(modelRow, 2),
+                            LModel.getValueAt(modelRow, 3),
                             30
                     };
                     SModel.addRow(newRow);
                     NBook.setLent(true);
                     NBook.setType(Message.MESSAGE_TYPE.TYPE_LEND_BOOK);
                     BookData.getIO().SendMessages(NBook);
-                    NBook = (Book)BookData.getIO().ReceiveMessage();
-                    if(NBook.getType()== Message.MESSAGE_TYPE.TYPE_SUCCESS){
+                    NBook = (Book) BookData.getIO().ReceiveMessage();
+                    if (NBook.getType() == Message.MESSAGE_TYPE.TYPE_SUCCESS) {
                         JOptionPane.showMessageDialog(null, "借书数据库操作成功", "成功", JOptionPane.INFORMATION_MESSAGE);
-                    }else {
+                    } else {
                         JOptionPane.showMessageDialog(null, "借书数据库操作失败", "错误", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }
         });
     }
-
+    private static ImageIcon MybookIcon = new ImageIcon("src/icon/left/library.png");
     public JPanel LibMPanel;
     private JTabbedPane LibtabbedPane;
     private JPanel LibBPanel;
@@ -134,6 +143,7 @@ public class StuLib {
     private JScrollPane LibScrollPane;
     private TableRowSorter<DefaultTableModel> sorter;
     private Common BookData;
+
     private static String[] StutableHeader = {"Name of Book",
             "Author",
             "类型",
@@ -146,6 +156,7 @@ public class StuLib {
             "ISBN",
             "借阅情况"
     };
+
 
     protected static DefaultTableModel SModel = new DefaultTableModel(null, StutableHeader) {
         @Override
@@ -171,22 +182,40 @@ public class StuLib {
 
     private void createUIComponents() {
         // TODO: place custom component creation code here
-        BookData=Common.getInstance();
-        int Blistsize=BookData.getBookInformation().getBookList().size();
-        int cnt=0;
-        while(cnt<Blistsize){
-            Book NBook=BookData.getBookInformation().getBookList().get(cnt);
-            Object[] newRow={NBook.getName(),NBook.getAuthor(),"Undecided",NBook.getBID()};
-            if(NBook.isLent()){
-                LModel.setValueAt("已被借阅",cnt,4);
-            }else{
-                LModel.setValueAt("在库",cnt,4);
+
+
+//<<<<<<<HEAD
+//
+//        Object[] Data1 = {"How to play dota2", "Maou", "游戏", 222, 5};
+//        Object[] Data2 = {"How to play guitar", "Sora", "音乐", 444, 27};
+//        Object[] Data3 = {"How to play csgo", "Maou", "白给", 111, false};
+//
+//        SModel.addRow(Data1);
+//        SModel.addRow(Data2);
+//        Stutable = new JTable(SModel);
+//        LModel.addRow(Data3);
+//=======
+        BookData = Common.getInstance();
+        int Blistsize = BookData.getBookInformation().getBookList().size();
+        int cnt = 0;
+        while (cnt < Blistsize) {
+
+            Book NBook = BookData.getBookInformation().getBookList().get(cnt);
+            Object[] newRow = {NBook.getName(), NBook.getAuthor(), "Undecided", NBook.getBID()};
+            LModel.addRow(newRow);
+            if (NBook.isLent()) {
+                LModel.setValueAt("已被借阅", cnt, 4);
+            } else {
+                LModel.setValueAt("在库", cnt, 4);
+
             }
-            String NEcard=NBook.getECardNumber();
-            String NUser=BookData.getUser().getECardNumber();
-            if(NEcard.equals(NUser)){
-                SModel.addRow(newRow);
-                SModel.setValueAt(30-NBook.getLendDays(), SModel.getRowCount(),4);
+            String NEcard = NBook.getECardNumber();
+            String NUser = BookData.getUser().getECardNumber();
+            if (NBook.isLent()) {
+                if (NEcard.equals(NUser)) {
+                    SModel.addRow(newRow);
+                    SModel.setValueAt(30 - NBook.getLendDays(), SModel.getRowCount(), 4);
+                }
             }
             cnt++;
         }
@@ -211,9 +240,11 @@ public class StuLib {
                     public void changedUpdate(DocumentEvent e) {
                         newFilter();
                     }
+
                     public void insertUpdate(DocumentEvent e) {
                         newFilter();
                     }
+
                     public void removeUpdate(DocumentEvent e) {
                         newFilter();
                     }
@@ -234,6 +265,11 @@ public class StuLib {
             return;
         }
         sorter.setRowFilter(rf);
+    }
+
+
+    public JPanel getPanel() {
+        return LibBPanel;
     }
 
     /**

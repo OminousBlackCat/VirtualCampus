@@ -7,6 +7,7 @@ import com.seu.vCampus.Client.Common;
 import com.seu.vCampus.util.Book;
 import com.seu.vCampus.util.Message;
 
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -23,19 +24,23 @@ public class AdminAddBook {
     private JPanel AddMPanel;
     private JTextField TypeText;
     private JLabel TypeLable;
+
     private Common AABookData;
+
 
     public AdminAddBook() {
         ApplyButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+
                 AABookData = Common.getInstance();
                 int Blistsize = AABookData.getBookInformation().getBookList().size();
                 int cnt = 0;
                 String addIsbn = ISBNText.getText();
                 boolean find = false;
-                while (cnt <Blistsize) {
+                while (cnt < Blistsize) {
+
                     Book NBook = AABookData.getBookInformation().getBookList().get(cnt);
                     if (addIsbn.equals(NBook.getECardNumber())) {
                         find = true;
@@ -45,20 +50,20 @@ public class AdminAddBook {
                 }
                 if (!find) {
                     Object[] data = {
-                            BNameText.getText(), AuthorText.getText(), TypeText.getText(),addIsbn
+                            BNameText.getText(), AuthorText.getText(), TypeText.getText(), addIsbn
                     };
                     AdminLib.AModel.addRow(data);
-                    Book nBook= new Book();
+                    Book nBook = new Book();
                     nBook.setName(BNameText.getText());
                     nBook.setAuthor(AuthorText.getText());
                     nBook.setBID(addIsbn);
                     AABookData.getBookInformation().AddBook(nBook);
                     nBook.setType(Message.MESSAGE_TYPE.TYPE_ADD_BOOK);
                     AABookData.getIO().SendMessages(nBook);
-                    nBook = (Book)AABookData.getIO().ReceiveMessage();
-                    if(nBook.getType()== Message.MESSAGE_TYPE.TYPE_SUCCESS){
+                    nBook = (Book) AABookData.getIO().ReceiveMessage();
+                    if (nBook.getType() == Message.MESSAGE_TYPE.TYPE_SUCCESS) {
                         JOptionPane.showMessageDialog(null, "添加图书数据库操作成功", "成功", JOptionPane.INFORMATION_MESSAGE);
-                    }else {
+                    } else {
                         JOptionPane.showMessageDialog(null, "添加图书数据库操作失败", "错误", JOptionPane.ERROR_MESSAGE);
                     }
                 }
@@ -135,4 +140,6 @@ public class AdminAddBook {
     public JComponent $$$getRootComponent$$$() {
         return AddMPanel;
     }
+
+
 }

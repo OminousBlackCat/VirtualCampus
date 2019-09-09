@@ -14,11 +14,12 @@ public class Message implements java.io.Serializable{
         TYPE_QUERY_PERSON_MANAGE,
         TYPE_SELECT_COURSE,
         TYPE_COURSE_STUDENTS_FULL,
-        TYPE_DELETE_COURSE,
+        TYPE_DESELECT_COURSE,
         TYPE_COURSE_CONFLICT,
         TYPE_COURSE_ALREADY_SELECTED,
         TYPE_GET_COURSES_AVAILABLE,
         TYPE_GET_COURSES_SELECTED,
+        TYPE_GET_WITHOUT_GRADES,
         TYPE_GET_GRADES,
         TYPE_GET_ENROLLED_STUDENTS,
         TYPE_GET_LECTURER_COURSES,
@@ -27,6 +28,8 @@ public class Message implements java.io.Serializable{
         TYPE_ADD_COURSE,
         TYPE_QUERY_EXAMINABLE_COURSES,
         TYPE_INPUT_EXAMS,
+        TYPE_GET_EXAM_INFO,
+        TYPE_GET_STUDENT_EXAMS_INFO,
         TYPE_QUERY_BANK_COUNT,
         TYPE_RECHARGE_ECARD,
         TYPE_QUERY_GOODS,
@@ -39,6 +42,7 @@ public class Message implements java.io.Serializable{
         TYPE_RENEWAL_BOOK,
         TYPE_RETURN_BOOK,
         TYPE_LEND_BOOK,
+        TYPE_UPDATE_USER,
         ;
     }
 

@@ -13,7 +13,7 @@ import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.Vector;
 
-public class InputGrades extends JPanel {
+public class InputGrades extends JFrame {
 
     private Person user;
     private Common commonData;
@@ -36,10 +36,12 @@ public class InputGrades extends JPanel {
 
     public InputGrades(){
         initialize();
-
+        setBounds(200,200,800,800);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(null);
         JLabel label = new JLabel("选择课程:");
         label.setBounds(59, 129, 72, 18);
-        add(label);
+        getContentPane().add(label);
 
         courseList=user.getCourses();
         int number=courseList.size();
@@ -49,12 +51,12 @@ public class InputGrades extends JPanel {
         }
         JComboBox comboBox = new JComboBox(courseName);
         comboBox.setBounds(161, 126, 106, 24);
-        add(comboBox);
+        getContentPane().add(comboBox);
 
 
         JButton button = new JButton("\u67E5\u8BE2");
         button.setBounds(112, 232, 113, 27);
-        add(button);
+        getContentPane().add(button);
 
         comboBox.addItemListener(new ItemListener() {
             @Override
@@ -74,7 +76,9 @@ public class InputGrades extends JPanel {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setGradesFrame set=new setGradesFrame(user);//弹出学生成绩窗口
+
+                setGradesFrame set = new setGradesFrame(user);//弹出学生成绩窗口
+
             }
         });
     }

@@ -1418,7 +1418,7 @@
                           <text value="商品名称"/>
                         </properties>
                       </component>
-                      <component id="d8f38" class="javax.swing.JLabel" binding="Price13">
+                      <component id="d8f38" class="javax.swing.JLabel" binding="Price11">
                         <constraints>
                           <grid row="2" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
                         </constraints>
@@ -1668,6 +1668,14 @@
                       <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
                     </constraints>
                   </vspacer>
+                  <component id="f6a3" class="javax.swing.JTable" binding="ShopList">
+                    <constraints>
+                      <grid row="0" column="0" row-span="5" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                        <preferred-size width="150" height="50"/>
+                      </grid>
+                    </constraints>
+                    <properties/>
+                  </component>
                 </children>
               </grid>
               <grid id="f9632" binding="billtopay" layout-manager="GridLayoutManager" row-count="4" column-count="6" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">

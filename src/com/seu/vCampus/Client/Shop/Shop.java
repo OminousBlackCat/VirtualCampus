@@ -4,15 +4,24 @@ import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
 import com.seu.vCampus.Client.Common;
+import com.seu.vCampus.util.BookManage;
+import com.seu.vCampus.util.Goods;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class Shop {
-    /*以下是所有panel*/
+
     private Common ShopData;
+    private ArrayList<Goods> live;
+    private ArrayList<Goods> edu;
+    private ArrayList<Goods> elec;
+    private ArrayList<Goods> junk;
+    private int index=0;
+    /*以下是所有panel*/
     private JTabbedPane main;
     private JPanel panel1;
     private JPanel life;
@@ -137,7 +146,7 @@ public class Shop {
     /*product11*/
     private JLabel Picture11;
     private JLabel Name11;
-    private JLabel Price13;
+    private JLabel Price11;
     private JTextField textField11;
     private JButton addbutton11;
 
@@ -208,26 +217,84 @@ public class Shop {
     private JLabel SearchPrice;
     private JLabel label0;
     private JLabel label00;
+    private JTable ShopList;
+
     private JTable table1;
 
+
     public Shop() {
+                SearchResult.setVisible(false);
+    }
 
-        SearchResult.setVisible(false);
 
+
+    public void initilize(){
+        int size=ShopData.getShopInformation().getGoods().size();
+        int counter=0;
+        while(counter<size){
+            switch (ShopData.getShopInformation().getGoods().get(counter).getGoodsNumber().indexOf(0)){
+                case '1':
+                    live.add(ShopData.getShopInformation().getGoods().get(counter));
+                    break;
+                case '2':
+                    edu.add(ShopData.getShopInformation().getGoods().get(counter));
+                    break;
+                case '3':
+                    elec.add(ShopData.getShopInformation().getGoods().get(counter));
+                    break;
+                case '4':
+                    junk.add(ShopData.getShopInformation().getGoods().get(counter));
+                    break;
+            }
+            counter++;
+        }
+        Name1.setText(Name1.getText()+live.get(0).getGoodsName());
+        Price1.setText(Price1.getText()+Double.toString(live.get(0).getGoodsPrice()));
+        Name2.setText(Name2.getText()+live.get(1).getGoodsName());
+        Price2.setText(Price2.getText()+Double.toString(live.get(1).getGoodsPrice()));
+        Name3.setText(Name3.getText()+live.get(2).getGoodsName());
+        Price3.setText(Price3.getText()+Double.toString(live.get(2).getGoodsPrice()));
+
+        Name4.setText(Name4.getText()+edu.get(0).getGoodsName());
+        Price4.setText(Picture4.getText()+Double.toString(edu.get(0).getGoodsPrice()));
+        Name5.setText(Name5.getText()+edu.get(1).getGoodsName());
+        Price5.setText(Price5.getText()+Double.toString(edu.get(1).getGoodsPrice()));
+        Name6.setText(Name6.getText()+edu.get(2).getGoodsName());
+        Price6.setText(Price6.getText()+Double.toString(edu.get(2).getGoodsPrice()));
+
+        Name7.setText(Name7.getText()+elec.get(0).getGoodsName());
+        Price7.setText(Price7.getText()+Double.toString(elec.get(0).getGoodsPrice()));
+        Name8.setText(Name8.getText()+elec.get(1).getGoodsName());
+        Price8.setText(Price8.getText()+Double.toString(elec.get(1).getGoodsPrice()));
+        Name9.setText(Name9.getText()+elec.get(2).getGoodsName());
+        Price9.setText(Price9.getText()+Double.toString(elec.get(2).getGoodsPrice()));
+
+        Name10.setText(Name10.getText()+junk.get(0).getGoodsName());
+        Price10.setText(Price10.getText()+Double.toString(junk.get(0).getGoodsPrice()));
+        Name11.setText(Name11.getText()+junk.get(1).getGoodsName());
+        Price11.setText(Price11.getText()+Double.toString(junk.get(1).getGoodsPrice()));
+        Name12.setText(Name12.getText()+junk.get(2).getGoodsName());
+        Price12.setText(Price2.getText()+Double.toString(junk.get(2).getGoodsPrice()));
     }
 
     private void AddProduct(){
-        /*用于添加产品
-        * 从数据中获得
-        * */
+
     }
 
-    private void refreash(){
-        /*用于刷新页面*/
+    private boolean refreash(ArrayList<Goods> goods){
+        if(goods.size()>index){
+            index+=3;
+            return true;
+        }else
+            return false;
     }
 
-    private void AddtoShoppingTrolley(){
-        /*用于把商品添加到购物车*/
+    private void AddtoShoppingTrolley(ArrayList<Goods> goods,int index,String goodsAmount){
+        if(goods.get(index).getGoodsStock()<Integer.parseInt(goodsAmount))
+            JOptionPane.showMessageDialog(null,"库存不足","错误",JOptionPane.ERROR_MESSAGE);
+        else{
+
+        }
     }
 
     public JPanel getPanel() {
@@ -832,10 +899,10 @@ public class Shop {
         Name11.setForeground(new Color(-1));
         Name11.setText("商品名称");
         product11.add(Name11, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        Price13 = new JLabel();
-        Price13.setForeground(new Color(-1));
-        Price13.setText("商品价格");
-        product11.add(Price13, new GridConstraints(2, 0, 1, 3, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        Price11 = new JLabel();
+        Price11.setForeground(new Color(-1));
+        Price11.setText("商品价格");
+        product11.add(Price11, new GridConstraints(2, 0, 1, 3, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         label114 = new JLabel();
         label114.setForeground(new Color(-1));
         label114.setText("购入数量：");
@@ -935,6 +1002,8 @@ public class Shop {
         list.add(spacer56, new GridConstraints(4, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         final Spacer spacer57 = new Spacer();
         list.add(spacer57, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        ShopList = new JTable();
+        list.add(ShopList, new GridConstraints(0, 0, 5, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
         billtopay = new JPanel();
         billtopay.setLayout(new GridLayoutManager(4, 6, new Insets(0, 0, 0, 0), -1, -1));
         billtopay.setBackground(new Color(-8355712));
