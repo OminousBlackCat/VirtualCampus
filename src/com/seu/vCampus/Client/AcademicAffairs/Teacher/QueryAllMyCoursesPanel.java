@@ -19,6 +19,11 @@ public class QueryAllMyCoursesPanel extends JPanel {
     private JTable table;
     private JScrollPane scrollPane;
     private ArrayList<String> semesters;
+
+    public JComboBox<String> getSemComboBox() {
+        return semComboBox;
+    }
+
     private JComboBox<String> semComboBox;
     private Common commonData;
     private Person user;
@@ -30,7 +35,7 @@ public class QueryAllMyCoursesPanel extends JPanel {
     private ArrayList<QuerySemesterCourses> qSCs;
     private QuerySemesterCourses onTop;
 
-    public QueryAllMyCoursesPanel(){
+    public QueryAllMyCoursesPanel(TeacherMainPanel tmP){
         setLayout(new BorderLayout());
         commonData = Common.getInstance();
         user = new Person();
@@ -54,7 +59,7 @@ public class QueryAllMyCoursesPanel extends JPanel {
             add(semComboBox,BorderLayout.NORTH);
             qSCs = new ArrayList<QuerySemesterCourses>();
             for (String s : semesters) {
-                qSCs.add(new QuerySemesterCourses(s));
+                qSCs.add(new QuerySemesterCourses(s,this,tmP));
             }
 
             onTop = qSCs.get(0);
