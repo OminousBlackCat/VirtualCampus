@@ -5,6 +5,8 @@ import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
 import com.seu.vCampus.Client.Common;
 import com.seu.vCampus.util.Goods;
+import com.seu.vCampus.util.Message;
+import com.seu.vCampus.util.Person;
 import com.seu.vCampus.util.ShopManage;
 
 
@@ -14,6 +16,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.ImagingOpException;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import static java.lang.Thread.sleep;
@@ -64,6 +67,7 @@ public class MainShop {
     private JPanel SearchPanel;
     private JPanel ShoppingCart;
     private JPanel PayBill;
+    private double SumOfMoney = 0;
 
     private static String[] header = {"编号", "名称", "价格", "数量"};
     private static DefaultTableModel ShopListModel = new DefaultTableModel(null, header) {
@@ -98,6 +102,7 @@ public class MainShop {
                         SearchResult.setVisible(true);
                         break;
                     }
+                    counter++;
                 }
                 if (counter == ShopData.getShopInformation().getGoods().size()) {
                     JOptionPane.showMessageDialog(null, "未找到匹配商品", "错误", JOptionPane.ERROR_MESSAGE);
@@ -108,8 +113,16 @@ public class MainShop {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (searchGoods.getGoodsStock() >= Short.parseShort(ResulttextField.getText())) {
-                    searchGoods.setGoodsStock(Short.parseShort(ResulttextField.getText()));
-                    ShopData.getShoppingList().add(searchGoods);
+                    Goods temp = new Goods();
+                    temp.setGoodsPrice(searchGoods.getGoodsPrice());
+                    temp.setGoodsStock(searchGoods.getGoodsStock());
+                    temp.setGoodsName(searchGoods.getGoodsName());
+                    temp.setGoodsNumber(searchGoods.getGoodsNumber());
+
+                    searchGoods.setGoodsStock((short) (searchGoods.getGoodsStock() - Short.parseShort(ResulttextField.getText())));
+                    ShopData.getShoppingList().add(temp);
+                    JOptionPane.showMessageDialog(null, "亲添加成功~", "成功", JOptionPane.INFORMATION_MESSAGE);
+                    ResulttextField.setText("");
                 } else
                     JOptionPane.showMessageDialog(null, "商品库存不足", "错误", JOptionPane.ERROR_MESSAGE);
             }
@@ -118,6 +131,9 @@ public class MainShop {
             @Override
             public void actionPerformed(ActionEvent e) {
                 ShopData.getShoppingList().clear();
+                SumOfMoney = 0;
+                TotalCost.setText("0元");
+
             }
         });
         PayBillButton.addActionListener(new ActionListener() {
@@ -125,10 +141,16 @@ public class MainShop {
             public void actionPerformed(ActionEvent e) {
                 if (PaytextField.getText().equals(ShopData.getUserCount().getBankPassword())) {
                     Double ECB = Double.parseDouble(ECardBalance.getText());
-                    Double Total = Double.parseDouble(TotalCost.getText());
-                    if (ECB >= Total) {
-                        ShopData.getUser().setECardBalance(ECB - Total);
+                    if (ECB >= SumOfMoney) {
+                        ShopData.getUser().setECardBalance(ECB - SumOfMoney);
+                        ShopData.getUser().setType(Message.MESSAGE_TYPE.TYPE_UPDATE_USER);
+                        ShopData.getIO().SendMessages(ShopData.getUser());
+                        ShopData.setUser((Person) ShopData.getIO().ReceiveMessage());
                         ShopData.getShoppingList().clear();
+                        ShopData.getShoppingList().clear();
+                        ResulttextField.setText("");
+                        PaytextField.setText("");
+                        JOptionPane.showMessageDialog(null, "支付成功呢亲", "压力马斯内", JOptionPane.INFORMATION_MESSAGE);
                     } else
                         JOptionPane.showMessageDialog(null, "一卡通余额不足", "错误", JOptionPane.ERROR_MESSAGE);
                 } else
@@ -160,10 +182,15 @@ public class MainShop {
                         Goods Temp = ShopData.getShoppingList().get(ShopData.getShoppingList().size() - 1);
                         Object[] tempData = {
                                 Temp.getGoodsNumber(), Temp.getGoodsName(), Temp.getGoodsPrice(), Temp.getGoodsStock()};
+                        SumOfMoney = SumOfMoney + Temp.getGoodsStock() * Temp.getGoodsPrice();
+                        TotalCost.setText(Double.toString(SumOfMoney) + "元");
                         ShopListModel.addRow(tempData);
                     }
                     if (flag != 0 && ShopData.getShoppingList().size() == 0) {
-                        break;
+                        for (int i = flag - 1; i >= 0; i--) {
+                            ShopListModel.removeRow(i);
+                        }
+                        flag = ShopData.getShoppingList().size();
                     }
                 }
             }
