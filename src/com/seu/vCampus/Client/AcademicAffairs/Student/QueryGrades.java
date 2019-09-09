@@ -40,6 +40,7 @@ public class QueryGrades extends JPanel {
                 coursesTable.setLayout(new BorderLayout());
                 coursesTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
                 TableUtils.FitTableColumns(coursesTable);
+                coursesTable.setDefaultEditor(Object.class, null);
                 coursesTable.setFont(new Font("微软雅黑",Font.PLAIN,16));
                 coursesTable.setRowHeight(30);
                 JScrollPane scrollPane = new JScrollPane(coursesTable);

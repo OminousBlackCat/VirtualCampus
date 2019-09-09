@@ -19,6 +19,11 @@ public class CourseSelectionHallPanel extends JPanel {
     private ArrayList<CoursesSelectedPanel> cSPs;
     private ArrayList<SelectCoursesPanel> scPs;
     private JLabel label;
+
+    public JComboBox<String> getSemComboBox() {
+        return semComboBox;
+    }
+
     private JComboBox<String> semComboBox;
 
     private Common StudentData;
@@ -66,8 +71,8 @@ public class CourseSelectionHallPanel extends JPanel {
             semComboBox = new JComboBox<String>(temp);
             add(semComboBox, BorderLayout.NORTH);
             for (String s : semesters) {
-                scPs.add(new SelectCoursesPanel(s,fatherPanel));
-                cSPs.add(new CoursesSelectedPanel(s,fatherPanel));
+                scPs.add(new SelectCoursesPanel(s,fatherPanel,this));
+                cSPs.add(new CoursesSelectedPanel(s,fatherPanel,this));
             }
 
             JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT,scPs.get(0),cSPs.get(0));

@@ -50,6 +50,7 @@ public class CoursesSelectedPanel extends JPanel {
             TableUtils.FitTableColumns(coursesTable);
             coursesTable.setFont(new Font("微软雅黑",Font.PLAIN,16));
             coursesTable.setRowHeight(30);
+            coursesTable.setDefaultEditor(Object.class, null);
             JScrollPane scrollPane = new JScrollPane(coursesTable);
             setLayout(new BorderLayout());
             add(scrollPane, BorderLayout.CENTER);
@@ -58,7 +59,7 @@ public class CoursesSelectedPanel extends JPanel {
 
     }
 
-    public CoursesSelectedPanel(String semester,StudentAcademicMainPanel fatherPanel) {
+    public CoursesSelectedPanel(String semester,StudentAcademicMainPanel grandPaPanel,CourseSelectionHallPanel fatherPanel) {
         studentData = Common.getInstance();
         Person student = new Person();
         student.setECardNumber(studentData.getUser().getECardNumber());
@@ -95,10 +96,11 @@ public class CoursesSelectedPanel extends JPanel {
             coursesTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
             TableUtils.FitTableColumns(coursesTable);
             coursesTable.getColumnModel().getColumn(9).setCellRenderer(new TableButtonRender());
-            coursesTable.getColumnModel().getColumn(9).setCellEditor(new DeselectCourseButton(coursesTable,fatherPanel));
+            coursesTable.getColumnModel().getColumn(9).setCellEditor(new DeselectCourseButton(coursesTable,grandPaPanel,fatherPanel));
             JScrollPane scrollPane = new JScrollPane(coursesTable);
             coursesTable.setFont(new Font("微软雅黑",Font.PLAIN,16));
             coursesTable.setRowHeight(30);
+            coursesTable.setDefaultEditor(Object.class, null);
             setLayout(new BorderLayout());
             add(scrollPane, BorderLayout.CENTER);
             this.setVisible(true);
