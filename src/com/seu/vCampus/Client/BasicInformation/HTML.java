@@ -8,6 +8,9 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class HTML extends JLabel {
 
@@ -15,10 +18,13 @@ public class HTML extends JLabel {
     private URL url;
     private Color color = Color.BLUE;
 
-    public HTML(String t,String URL){
+    public HTML(String t, String URL, Date date){
         super("<html>" + t + "</html>");
         text = t;
-        setText(text);
+
+        DateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+        String tempDate = format1.format(date);
+        setText(text+" /"+tempDate);
         setForeground(color);
         try {
             url = new URL(URL);

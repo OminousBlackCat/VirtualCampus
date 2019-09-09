@@ -41,6 +41,7 @@ public class Common {
     private ShopManage shopInformation;
     private BookManage bookInformation;
     private ArrayList<Goods> ShoppingList;
+    private NewsManage NewsList;
     private static final int MAX_LEND_BOOK = 10;
 
 
@@ -57,6 +58,7 @@ public class Common {
         shopInformation = new ShopManage();
         bookInformation = new BookManage();
         ShoppingList = new ArrayList<>();
+        NewsList = new NewsManage();
     }
 
     public void startIO()throws Exception{
@@ -116,6 +118,12 @@ public class Common {
         }
     }
 
+    public NewsManage getNewsList() {
+        return NewsList;
+    }
+    public void setNewsList(NewsManage newsList) {
+        NewsList = newsList;
+    }
     public static int getMaxLendBook() {
         return MAX_LEND_BOOK;
     }

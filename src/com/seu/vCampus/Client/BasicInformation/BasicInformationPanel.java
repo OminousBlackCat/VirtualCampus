@@ -2,6 +2,7 @@ package com.seu.vCampus.Client.BasicInformation;
 
 import com.seu.vCampus.Client.Common;
 import com.seu.vCampus.util.Message;
+import com.seu.vCampus.util.News;
 import com.seu.vCampus.util.Person;
 
 import javax.swing.*;
@@ -167,7 +168,7 @@ public class BasicInformationPanel extends JPanel {
             ECardNumber.setText(userData.getUser().getECardNumber());
             LendBookNumber.setText(Integer.toString(userData.getUser().getLendBooksNumber())+" 本");
             ECardBalance.setText(Double.toString(userData.getUser().getECardBalance())+" 元");
-            Major.setText("计算机科学");
+            Major.setText(userData.getUser().getMajor());
 
             UserNameT.setBounds(100,100,80,30);
             UserName.setBounds(170,100,50,30);
@@ -187,8 +188,8 @@ public class BasicInformationPanel extends JPanel {
             add(ECardNumber);
             add(ECardNumberT);
 
-            StudentNumberT.setBounds(400,100,80,30);
-            StudentNumber.setBounds(450,100,80,30);
+            StudentNumberT.setBounds(450,100,80,30);
+            StudentNumber.setBounds(500,100,80,30);
             StudentNumberT.setForeground(Color.WHITE);
             StudentNumber.setForeground(Color.cyan);
             StudentNumberT.setFont(new Font("Microsoft Yahei", Font.BOLD,20));
@@ -214,8 +215,8 @@ public class BasicInformationPanel extends JPanel {
             add(Sex);
             add(SexT);
 
-            MajorT.setBounds(400,140,80,30);
-            Major.setBounds(450,140,150,30);
+            MajorT.setBounds(450,140,80,30);
+            Major.setBounds(500,140,150,30);
             MajorT.setForeground(Color.WHITE);
             Major.setForeground(Color.YELLOW);
             MajorT.setFont(new Font("Microsoft Yahei", Font.BOLD,20));
@@ -224,7 +225,7 @@ public class BasicInformationPanel extends JPanel {
             add(Major);
 
             ECardBalanceT.setBounds(100,180,150,30);
-            ECardBalance.setBounds(250,180,100,30);
+            ECardBalance.setBounds(250,180,200,30);
             ECardBalanceT.setForeground(Color.WHITE);
             ECardBalance.setForeground(Color.RED);
             ECardBalanceT.setFont(new Font("Microsoft Yahei", Font.BOLD,25));
@@ -233,7 +234,7 @@ public class BasicInformationPanel extends JPanel {
             add(ECardBalance);
 
             LendBookNumberT.setBounds(100,220,300,30);
-            LendBookNumber.setBounds(300,220,60,30);
+            LendBookNumber.setBounds(300,220,200,30);
             LendBookNumberT.setForeground(Color.WHITE);
             LendBookNumber.setForeground(Color.RED);
             LendBookNumberT.setFont(new Font("Microsoft Yahei", Font.BOLD,25));
@@ -244,10 +245,30 @@ public class BasicInformationPanel extends JPanel {
         }
 
         {
-            newsA = new HTML("你好世界！","https://blackcatchen.blogspot.com/");
+            int last = userData.getNewsList().getNews().size();
+            News temp = userData.getNewsList().getNews().get(last-1);
+            newsA = new HTML(temp.getNewsTitle(),temp.getURL(),temp.getNewsDate());
+            temp = userData.getNewsList().getNews().get(last-2);
+            newsB = new HTML(temp.getNewsTitle(),temp.getURL(),temp.getNewsDate());
+            temp = userData.getNewsList().getNews().get(last-3);
+            newsC = new HTML(temp.getNewsTitle(),temp.getURL(),temp.getNewsDate());
+            temp = userData.getNewsList().getNews().get(last-4);
+            newsD = new HTML(temp.getNewsTitle(),temp.getURL(),temp.getNewsDate());
 
-            newsA.setBounds(400,400,220,30);
+
+            JLabel newsT = new JLabel("近期要闻：");
+            newsT.setBounds(100,320,150,30);
+            newsT.setFont(new Font("Microsoft Yahei", Font.BOLD,20));
+            add(newsT);
+            newsA.setBounds(100,350,500,30);
+            newsB.setBounds(100,380,500,30);
+            newsC.setBounds(100,410,500,30);
+            newsD.setBounds(100,440,500,30);
             add(newsA);
+            add(newsB);
+            add(newsC);
+            add(newsD);
+
 
 
 

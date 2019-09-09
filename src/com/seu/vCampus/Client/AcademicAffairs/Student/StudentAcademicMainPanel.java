@@ -4,6 +4,14 @@ import javax.swing.*;
 import java.awt.*;
 
 public class StudentAcademicMainPanel extends JPanel {
+    public CourseSelectionHallPanel getCourseSelectionHallPanel() {
+        return courseSelectionHallPanel;
+    }
+
+    public void setCourseSelectionHallPanel(CourseSelectionHallPanel courseSelectionHallPanel) {
+        this.courseSelectionHallPanel = courseSelectionHallPanel;
+    }
+
     private CourseSelectionHallPanel courseSelectionHallPanel;
     private CoursesSelectedPanel coursesSelectedPanel;
     private ScheduleTable scheduleTablePanel;
@@ -25,6 +33,8 @@ public class StudentAcademicMainPanel extends JPanel {
         switchPane.addTab("查询成绩",queryGradesPanel);
         add(switchPane);
         switchPane.setTabPlacement(JTabbedPane.TOP);
+        switchPane.setVisible(true);
+        this.setVisible(true);
     }
 
     public void refresh() {

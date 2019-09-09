@@ -179,6 +179,10 @@ public class ServerThread  extends Thread{
                     case TYPE_UPDATE_USER:
                         act.updatePerson((Person)msg);
                         break;
+                    case TYPE_QUERY_NEWS:
+                        act.sendNewsMessage((NewsManage)msg);
+                        System.out.println("");
+                        break;
                 }
 
                 System.out.println(msg.getType());

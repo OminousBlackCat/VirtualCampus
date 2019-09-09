@@ -17,7 +17,7 @@ import java.util.Vector;
 
 public class SelectCoursesPanel extends JPanel {
 
-    public SelectCoursesPanel(String sem, StudentAcademicMainPanel fatherPanel) {
+    public SelectCoursesPanel(String sem, StudentAcademicMainPanel grandPaPanel, CourseSelectionHallPanel fatherPanel) {
         Person student = new Person();
         Common studentData = Common.getInstance();
         Course course = new Course();
@@ -31,54 +31,44 @@ public class SelectCoursesPanel extends JPanel {
         student = (Person) studentData.getIO().ReceiveMessage();
 
         if (student.getType() == Message.MESSAGE_TYPE.TYPE_SUCCESS) {
-            Vector<java.io.Serializable> rowData = new Vector<>();
-            Vector<Vector<java.io.Serializable>> rowVec = new Vector<>();
+            String[] columnNames = {"课程编号","课程名","教师","学期","上课地点","上课时间","课程类型","学分",
+                    "是否考试","已选人数","上限","操作"};
             courseList = student.getCourses();
-            Vector<String> columnNames = new Vector<>();
-            columnNames.add("课程编号");
-            columnNames.add("课程名");
-            columnNames.add("教师");
-            columnNames.add("学期");
-            columnNames.add("上课地点");
-            columnNames.add("上课时间");
-            columnNames.add("课程类型");
-            columnNames.add("学分");
-            columnNames.add("已选人数");
-            columnNames.add("上限");
-            columnNames.add("操作");
-            for (Course c : courseList) {
-                rowData.clear();
-                rowData.add(c.getCourseNumber().split("-")[0]);
-                rowData.add(c.getCourseName());
-                rowData.add(c.getCourseLecturer());
-                rowData.add(c.getCourseSemester());
-                rowData.add(c.getCoursePlace());
-                rowData.add(c.getCourseTime());
-                rowData.add(c.getCourseType());
-                rowData.add(c.getCourseCredit());
-                rowData.add(c.getEnrolledStudents());
-                rowData.add(c.getMaximumStudents());
+            Object[][] data = new Object[courseList.size()][12];
+            for(int i = 0; i < courseList.size(); i++) {
+                Course c = courseList.get(i);
+                data[i][0] = c.getCourseNumber().split("-")[0];
+                data[i][1] = c.getCourseName();
+                data[i][2] = c.getCourseLecturer();
+                data[i][3] = c.getCourseSemester();
+                data[i][4] = c.getCoursePlace();
+                data[i][5] = TableUtils.ParseCourseTime(c.getCourseTime());
+                data[i][6] = c.getCourseType();
+                data[i][7] = c.getCourseCredit();
+                if(c.isExam()) data[i][8] = "是";
+                else data[i][8] = "否";
+                data[i][9] = c.getEnrolledStudents();
+                data[i][10] = c.getMaximumStudents();
                 if (c.getEnrolledStudents() >= c.getMaximumStudents()) {
-                    rowData.add("已满");
+                    data[i][11] = "已满";
 
                 } else if (c.isConflict()) {
-                    rowData.add("冲突");
+                    data[i][11] = "冲突";
                 } else {
-                    rowData.add("选课");
+                    data[i][11] = "选课";
                 }
-                rowVec.add(rowData);
             }
-
-            DefaultTableModel defaultModel = new DefaultTableModel(rowVec, columnNames);
-            JTable coursesTable = new JTable(rowVec,columnNames);
-            coursesTable.getColumnModel().getColumn(10).setCellRenderer(new TableButtonRender());
-            coursesTable.getColumnModel().getColumn(10).setCellEditor(new SelectCourseButton(coursesTable,fatherPanel));
+            JTable coursesTable = new JTable(data, columnNames);
+            coursesTable.getColumnModel().getColumn(11).setCellRenderer(new TableButtonRender());
+            coursesTable.getColumnModel().getColumn(11).setCellEditor(new SelectCourseButton(coursesTable, grandPaPanel, fatherPanel));
             coursesTable.setRowSelectionAllowed(false);
             coursesTable.setLayout(new BorderLayout());
             coursesTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
             TableUtils.FitTableColumns(coursesTable);
             JScrollPane scrollPane = new JScrollPane(coursesTable);
-            coursesTable.setFont(new Font("楷体",Font.PLAIN,14));
+            coursesTable.setFont(new Font("微软雅黑",Font.PLAIN,16));
+            coursesTable.setRowHeight(30);
+            coursesTable.setDefaultEditor(Object.class, null);
             setLayout(new BorderLayout());
             add(scrollPane, BorderLayout.CENTER);
             this.setVisible(true);

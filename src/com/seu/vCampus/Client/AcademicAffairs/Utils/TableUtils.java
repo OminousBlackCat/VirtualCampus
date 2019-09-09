@@ -27,4 +27,44 @@ public class TableUtils {
             column.setWidth(width + myTable.getIntercellSpacing().width + 10);
         }
     }
+
+    public static String ParseCourseTime(String ct) {
+        String[] cts = ct.split(";");
+        StringBuilder result = new StringBuilder("");
+        for (String s : cts) {
+            String weekDay, period;
+            int wd = Integer.parseInt(s.split("-")[0]);
+            int pr = Integer.parseInt(s.split("-")[1]);
+            switch (wd) {
+                case 1:
+                    weekDay = "周一";
+                    break;
+                case 2:
+                    weekDay = "周二";
+                    break;
+                case 3:
+                    weekDay = "周三";
+                    break;
+                case 4:
+                    weekDay = "周四";
+                    break;
+                case 5:
+                    weekDay = "周五";
+                    break;
+                case 6:
+                    weekDay = "周六";
+                    break;
+                case 7:
+                case 0:
+                    weekDay = "周日";
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + wd);
+            }
+            period = String.valueOf((pr * 2) - 1) + "~" + String.valueOf((pr * 2)) + "节 ";
+            result.append(weekDay).append(period);
+        }
+        result.deleteCharAt(result.length() - 1);
+        return result.toString();
+    }
 }

@@ -1,5 +1,6 @@
 package com.seu.vCampus.Client.AcademicAffairs.Utils;
 
+import com.seu.vCampus.Client.AcademicAffairs.Student.CourseSelectionHallPanel;
 import com.seu.vCampus.Client.AcademicAffairs.Student.StudentAcademicMainPanel;
 import com.seu.vCampus.Client.Common;
 import com.seu.vCampus.util.Course;
@@ -13,7 +14,7 @@ import java.awt.event.ActionListener;
 public class DeselectCourseButton extends DefaultCellEditor  {
     private Common messenger;
     private JButton button;
-    public DeselectCourseButton(final JTable table, final StudentAcademicMainPanel toRefresh) {
+    public DeselectCourseButton(final JTable table, final StudentAcademicMainPanel toRefresh, CourseSelectionHallPanel csP) {
         super(new JTextField());
 
         this.setClickCountToStart(1);
@@ -27,7 +28,9 @@ public class DeselectCourseButton extends DefaultCellEditor  {
                     courseNumber = courseNumber.concat("-" + (String) table.getValueAt(table.getSelectedRow(), 3));
                     System.out.println(courseNumber);
                     choose(courseNumber);
+                    int index = csP.getSemComboBox().getSelectedIndex();
                     toRefresh.refresh();
+                    toRefresh.getCourseSelectionHallPanel().getSemComboBox().setSelectedIndex(index);
                 }
             }
         });
