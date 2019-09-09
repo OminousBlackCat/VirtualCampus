@@ -15,6 +15,7 @@ import javax.swing.Timer;
 
 import com.seu.vCampus.Client.AcademicAffairs.Admin.MainPanel;
 import com.seu.vCampus.Client.AcademicAffairs.Student.StudentAcademicMainPanel;
+import com.seu.vCampus.Client.AcademicAffairs.Teacher.MainPanel;
 import com.seu.vCampus.Client.Bank.Bank;
 import com.seu.vCampus.Client.BasicInformation.BasicInformationPanel;
 import com.seu.vCampus.Client.Common;
@@ -54,8 +55,11 @@ public class Home extends JFrame{
     private SelectCoursesPanel coursePanelS;
     private MainShop mainShopPanel;
     private MangerShop mangerShopPanel;
-    private StuLib libraryPanel;
+    private JPanel libraryPanel;
     private AdminLib libraryManager;
+    private StudentAcademicMainPanel sam;
+    private MainPanel teacherPanel;
+    private MainPanel adminPanel;
 
     private int skinNumber = 1;
 
@@ -100,8 +104,10 @@ public class Home extends JFrame{
             bankPanel = new Bank();
             mainShopPanel = new MainShop();
             mangerShopPanel = new MangerShop();
-            libraryPanel = new StuLib();
+            libraryPanel = new StuLib().LibMPanel;
             libraryManager = new AdminLib();
+            sam = new StudentAcademicMainPanel();
+            teacherPanel = new MainPanel();
         }
 
 
@@ -282,9 +288,9 @@ public class Home extends JFrame{
                 break;
             }
             case GROUP_STUDENT:{
-                tabbedPane.addTab("图书", Library, libraryPanel.getPanel(), null);
+                tabbedPane.addTab("图书", Library, libraryPanel, null);
                 studentStudentAcademicMainPanel = new StudentAcademicMainPanel();
-                tabbedPane.addTab("教务", Edu, studentStudentAcademicMainPanel, null);
+                tabbedPane.addTab("教务", Edu, sam, null);
 
 
                 JPanel panel_3 = new JPanel();
@@ -298,10 +304,10 @@ public class Home extends JFrame{
             }
             case GROUP_TEACHER:{
                 JPanel panel_1 = new JPanel();
-                tabbedPane.addTab("图书馆", Library, libraryPanel.getPanel(), null);
+                tabbedPane.addTab("图书馆", Library, libraryPanel, null);
 
-                teacherMainPanel  = new com.seu.vCampus.Client.AcademicAffairs.Teacher.MainPanel();
-                tabbedPane.addTab("教务", Edu, teacherMainPanel, null);
+
+                tabbedPane.addTab("教务", Edu, teacherPanel, null);
 
                 JPanel panel_3 = new JPanel();
 

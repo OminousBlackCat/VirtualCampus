@@ -176,6 +176,9 @@ public class ServerThread  extends Thread{
                     case TYPE_RETURN_BOOK:
                         act.updateLendDate((Book)msg,1);
                         break;
+                    case TYPE_UPDATE_USER:
+                        act.updatePerson((Person)msg);
+                        break;
                 }
 
                 System.out.println(msg.getType());
