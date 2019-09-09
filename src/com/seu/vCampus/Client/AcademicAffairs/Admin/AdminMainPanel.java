@@ -3,10 +3,10 @@ package com.seu.vCampus.Client.AcademicAffairs.Admin;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
-public class MainPanel extends JPanel{
+public class AdminMainPanel extends JPanel{
 
 
-    public MainPanel(){
+    public AdminMainPanel(){
 
         setBounds(100, 100, 370, 475);
         setLayout(null);

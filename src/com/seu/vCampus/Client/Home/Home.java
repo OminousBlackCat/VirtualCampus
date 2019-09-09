@@ -13,9 +13,9 @@ import java.util.Date;
 import java.util.Enumeration;
 import javax.swing.Timer;
 
-import com.seu.vCampus.Client.AcademicAffairs.Admin.MainPanel;
+import com.seu.vCampus.Client.AcademicAffairs.Admin.AdminMainPanel;
 import com.seu.vCampus.Client.AcademicAffairs.Student.StudentAcademicMainPanel;
-import com.seu.vCampus.Client.AcademicAffairs.Teacher.MainPanel;
+import com.seu.vCampus.Client.AcademicAffairs.Teacher.TeacherMainPanel;
 import com.seu.vCampus.Client.Bank.Bank;
 import com.seu.vCampus.Client.BasicInformation.BasicInformationPanel;
 import com.seu.vCampus.Client.Common;
@@ -24,14 +24,9 @@ import com.seu.vCampus.Client.Library.AdminLib;
 import com.seu.vCampus.Client.Library.StuLib;
 import com.seu.vCampus.Client.Shop.MangerShop;
 import com.seu.vCampus.Client.AcademicAffairs.Student.SelectCoursesPanel;
-import com.seu.vCampus.Client.AcademicAffairs.Teacher.InputGrades;
-import com.seu.vCampus.Client.AcademicAffairs.Student.SelectCoursesPanel;
-import com.seu.vCampus.Client.AcademicAffairs.Teacher.InputGrades;
 import com.seu.vCampus.Client.Shop.MainShop;
 
 import com.seu.vCampus.util.*;
-
-import static com.seu.vCampus.util.Person.USER_GROUP.GROUP_ACADEMIC_MANAGER;
 
 
 public class Home extends JFrame{
@@ -49,8 +44,8 @@ public class Home extends JFrame{
     private JTabbedPane tabbedPane;
     private Bank bankPanel;
     private BasicInformationPanel homePanel;
-    private com.seu.vCampus.Client.AcademicAffairs.Admin.MainPanel adminMainPanel;
-    private com.seu.vCampus.Client.AcademicAffairs.Teacher.MainPanel teacherMainPanel;
+    private AdminMainPanel adminMainPanel;
+    private TeacherMainPanel teacherMainPanel;
     private StudentAcademicMainPanel studentStudentAcademicMainPanel;
     private SelectCoursesPanel coursePanelS;
     private MainShop mainShopPanel;
@@ -58,8 +53,8 @@ public class Home extends JFrame{
     private JPanel libraryPanel;
     private AdminLib libraryManager;
     private StudentAcademicMainPanel sam;
-    private MainPanel teacherPanel;
-    private MainPanel adminPanel;
+    private TeacherMainPanel teacherPanel;
+    private AdminMainPanel adminPanel;
 
     private int skinNumber = 1;
 
@@ -106,8 +101,8 @@ public class Home extends JFrame{
             mangerShopPanel = new MangerShop();
             libraryPanel = new StuLib().LibMPanel;
             libraryManager = new AdminLib();
-            sam = new StudentAcademicMainPanel();
-            teacherPanel = new MainPanel();
+            teacherPanel = new TeacherMainPanel();
+            adminMainPanel = new AdminMainPanel();
         }
 
 
@@ -290,6 +285,7 @@ public class Home extends JFrame{
             case GROUP_STUDENT:{
                 tabbedPane.addTab("图书", Library, libraryPanel, null);
                 studentStudentAcademicMainPanel = new StudentAcademicMainPanel();
+
                 tabbedPane.addTab("教务", Edu, sam, null);
 
 
@@ -328,8 +324,7 @@ public class Home extends JFrame{
                 break;
             }
             case GROUP_ACADEMIC_MANAGER: {
-                MainPanel academicManager = new MainPanel();
-                tabbedPane.addTab("教务管理", Edu,academicManager,null);
+                tabbedPane.addTab("教务管理", Edu, adminMainPanel,null);
                 break;
             }
 

@@ -4,9 +4,9 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MainPanel extends JPanel {
+public class TeacherMainPanel extends JPanel {
 
-    public MainPanel(){
+    public TeacherMainPanel(){
 
         setBounds(100, 100, 800, 800);
         setLayout(null);

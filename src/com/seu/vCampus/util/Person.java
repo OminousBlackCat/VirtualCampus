@@ -183,6 +183,9 @@ public class Person extends Message{
             case 4:
                 AuthorityLevel = USER_GROUP.GROUP_USER_MANAGER;
                 break;
+            case 5:
+                AuthorityLevel = USER_GROUP.GROUP_ACADEMIC_MANAGER;
+                break;
         }
     }
 
