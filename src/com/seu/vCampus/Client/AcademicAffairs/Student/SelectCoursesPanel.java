@@ -1,11 +1,13 @@
 package com.seu.vCampus.Client.AcademicAffairs.Student;
 
+import com.seu.vCampus.Client.AcademicAffairs.Utils.DeselectCourseButton;
+import com.seu.vCampus.Client.AcademicAffairs.Utils.SelectCourseButton;
+import com.seu.vCampus.Client.AcademicAffairs.Utils.TableButtonRender;
 import com.seu.vCampus.Client.AcademicAffairs.Utils.TableUtils;
 import com.seu.vCampus.Client.Common;
 import com.seu.vCampus.util.Course;
 import com.seu.vCampus.util.Message;
 import com.seu.vCampus.util.Person;
-import org.hsqldb.Table;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -14,11 +16,8 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 public class SelectCoursesPanel extends JPanel {
-    private JScrollPane sp;
-    private Vector<java.io.Serializable> rowData;
-    private Vector<Vector<java.io.Serializable>> rowVec;
 
-    public SelectCoursesPanel(String sem) {
+    public SelectCoursesPanel(String sem, StudentAcademicMainPanel fatherPanel) {
         Person student = new Person();
         Common studentData = Common.getInstance();
         Course course = new Course();
@@ -26,15 +25,17 @@ public class SelectCoursesPanel extends JPanel {
         ArrayList<Course> courseList = new ArrayList<Course>();
         courseList.add(course);
         student.setCourses(courseList);
+        student.setECardNumber(studentData.getUser().getECardNumber());
         student.setType(Message.MESSAGE_TYPE.TYPE_GET_COURSES_AVAILABLE);
         studentData.getIO().SendMessages(student);
         student = (Person) studentData.getIO().ReceiveMessage();
 
         if (student.getType() == Message.MESSAGE_TYPE.TYPE_SUCCESS) {
+            Vector<java.io.Serializable> rowData = new Vector<>();
+            Vector<Vector<java.io.Serializable>> rowVec = new Vector<>();
             courseList = student.getCourses();
-            sp.setLayout(new BorderLayout());
             Vector<String> columnNames = new Vector<>();
-            columnNames.add("课程号");
+            columnNames.add("课程编号");
             columnNames.add("课程名");
             columnNames.add("教师");
             columnNames.add("学期");
@@ -58,27 +59,29 @@ public class SelectCoursesPanel extends JPanel {
                 rowData.add(c.getEnrolledStudents());
                 rowData.add(c.getMaximumStudents());
                 if (c.getEnrolledStudents() >= c.getMaximumStudents()) {
-                    JButton courseFull = new JButton("已满");
-                    rowData.add(courseFull);
-                    courseFull.setEnabled(false);
+                    rowData.add("已满");
 
                 } else if (c.isConflict()) {
-                    JButton courseConflict = new JButton("冲突");
-                    rowData.add(courseConflict);
-                    courseConflict.setEnabled(false);
+                    rowData.add("冲突");
                 } else {
-                    JButton selectThisCourse = new JButton("选课");
-                    rowData.add(selectThisCourse);
-                    selectThisCourse.setEnabled(true);
+                    rowData.add("选课");
                 }
                 rowVec.add(rowData);
             }
+
             DefaultTableModel defaultModel = new DefaultTableModel(rowVec, columnNames);
-            JTable table = new JTable(defaultModel);
-            TableUtils.FitTableColumns(table);
-            table.setFont(new Font("楷体", Font.PLAIN, 14));
-            sp.add(table, BorderLayout.CENTER);
-            add(sp,BorderLayout.CENTER);
+            JTable coursesTable = new JTable(rowVec,columnNames);
+            coursesTable.getColumnModel().getColumn(10).setCellRenderer(new TableButtonRender());
+            coursesTable.getColumnModel().getColumn(10).setCellEditor(new SelectCourseButton(coursesTable,fatherPanel));
+            coursesTable.setRowSelectionAllowed(false);
+            coursesTable.setLayout(new BorderLayout());
+            coursesTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+            TableUtils.FitTableColumns(coursesTable);
+            JScrollPane scrollPane = new JScrollPane(coursesTable);
+            coursesTable.setFont(new Font("楷体",Font.PLAIN,14));
+            setLayout(new BorderLayout());
+            add(scrollPane, BorderLayout.CENTER);
+            this.setVisible(true);
         }
         else {
             add(new JTextField("暂无可选课程"),BorderLayout.CENTER);

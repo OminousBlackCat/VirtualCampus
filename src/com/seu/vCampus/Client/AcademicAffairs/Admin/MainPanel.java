@@ -6,35 +6,48 @@ import javax.swing.*;
 public class MainPanel extends JPanel{
 
 
-   public MainPanel(){
-       setBounds(100, 100, 442, 488);
-       setLayout(null);
+    public MainPanel(){
 
-       JButton button = new JButton("添加课程");
-       button.addActionListener(new ActionListener() {
+        setBounds(100, 100, 370, 475);
+        setLayout(null);
+
+        JButton button = new JButton("添加课程");
+        button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
+                AddCourse addCourse=new AddCourse();
             }
         });
-       button.setBounds(155, 121, 113, 27);
-       add(button);
+        button.setBounds(117, 89, 125, 27);
+        add(button);
 
-       JButton button_1 = new JButton("添加考试");
-       button_1.addActionListener(new ActionListener() {
-           public void actionPerformed(ActionEvent e) {
-            }
-        });
-       button_1.setBounds(155, 209, 113, 27);
-       add(button_1);
-
-       JButton button_2 = new JButton("修改成绩");
-       button_2.addActionListener(new ActionListener() {
+        JButton button_1 = new JButton("添加考试");
+        button_1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                ChangeGrade setgrades=new ChangeGrade();
-                setgrades.setVisible(true);
+                AddExams addExams=new AddExams();
             }
         });
-       button_2.setBounds(155, 289, 113, 27);
-       add(button_2);
+        button_1.setBounds(117, 169, 125, 27);
+        add(button_1);
+
+        JButton button_2 = new JButton("修改成绩");
+        button_2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                ChangeGrade setGrades=new ChangeGrade();
+                setGrades.setVisible(true);
+            }
+        });
+        button_2.setBounds(117, 252, 125, 27);
+        add(button_2);
+
+        JButton button_3 = new JButton("修改课程信息");
+        button_3.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                ChangeCourseInfo changeCourseInf= new ChangeCourseInfo();
+                changeCourseInf.setVisible(true);
+            }
+        });
+        button_3.setBounds(117, 333, 125, 27);
+        add(button_3);
     }
 
 }

@@ -140,7 +140,7 @@ public class DatabaseActions {
 
             Person per = new Person();
             per.setECardNumber(course.getECardNumber());
-            getCoursesSelected(per, "");
+            getCoursesSelected(per);
             ArrayList<Course> coursesSelected = per.getCourses();
 
             for (Course c : coursesSelected
@@ -167,10 +167,11 @@ public class DatabaseActions {
                     if ((courseRes.getInt("maximumStudents") -
                             courseRes.getInt("enrolledStudents")) > 0) {
                         try {
-                            sql = "insert into CoursesSelected values(?,?)";
+                            sql = "insert into CoursesSelected values(?,?,?)";
                             stmt = conn.prepareStatement(sql);
                             stmt.setString(1, course.getECardNumber());
                             stmt.setString(2, course.getCourseNumber());
+                            stmt.setInt(3,-1);
                             stmt.executeUpdate();
 
                             sql = "update Courses set enrolledStudents = ? where courseNumber = ?";
@@ -181,7 +182,7 @@ public class DatabaseActions {
                             course.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
                         } catch (SQLException e) {
                             e.printStackTrace();
-                            course.setType(Message.MESSAGE_TYPE.TYPE_COURSE_ALREADY_SELECTED);
+                            course.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
                         }
                     } else {
                         course.setType(Message.MESSAGE_TYPE.TYPE_COURSE_STUDENTS_FULL);
@@ -213,13 +214,15 @@ public class DatabaseActions {
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, course.getCourseNumber());
             ResultSet courseRes = stmt.executeQuery();
-
-            sql = "update Courses set enrolledStudents = ? where courseNumber = ?";
-            stmt = conn.prepareStatement(sql);
-            stmt.setInt(1, courseRes.getInt("enrolledStudents") - 1);
-            stmt.setString(2, course.getCourseNumber());
-            stmt.executeUpdate();
-            course.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
+            if(courseRes.next()) {
+                sql = "update Courses set enrolledStudents = ? where courseNumber = ?";
+                int num = courseRes.getInt("enrolledStudents") - 1;
+                stmt = conn.prepareStatement(sql);
+                stmt.setInt(1, num);
+                stmt.setString(2, course.getCourseNumber());
+                stmt.executeUpdate();
+                course.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
             course.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
@@ -246,6 +249,13 @@ public class DatabaseActions {
         String sql = "select * from Courses where exists (select * from CoursesSelected, Users where " +
                 "Courses.courseNumber = CoursesSelected.courseNumber and CoursesSelected.ECardNumber " +
                 "= Users.ECardNumber and Users.ECardNumber = ?) ";
+        setStudentCoursesList(sql,student,"");
+    }
+
+    public void getCoursesSelectedWithoutGrades(Person student) {
+        String sql = "select * from Courses where not exists (select * from CoursesSelected, Users where " +
+                "Courses.courseNumber = CoursesSelected.courseNumber and CoursesSelected.ECardNumber " +
+                "= Users.ECardNumber and Users.ECardNumber = ? and CoursesSelected.grade > -1) ";
         setStudentCoursesList(sql,student,"");
     }
 

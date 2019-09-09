@@ -37,9 +37,13 @@ public class CourseSelectionHallPanel extends JPanel {
         student.setType(Message.MESSAGE_TYPE.TYPE_GET_COURSES_AVAILABLE);
         StudentData.getIO().SendMessages(student);
         student = (Person) StudentData.getIO().ReceiveMessage();
+        courseList = student.getCourses();
+        student.setType(Message.MESSAGE_TYPE.TYPE_GET_WITHOUT_GRADES);
+        StudentData.getIO().SendMessages(student);
+        student = (Person) StudentData.getIO().ReceiveMessage();
+        courseList.addAll(student.getCourses());
         semesters = new ArrayList<String>();
-        if(student.getType() == Message.MESSAGE_TYPE.TYPE_SUCCESS) {
-            courseList = student.getCourses();
+        if(!courseList.isEmpty()) {
             for (Course c : courseList) {
                 String tempSem = c.getCourseSemester();
                 if (!semesters.contains(tempSem)) {
@@ -51,19 +55,25 @@ public class CourseSelectionHallPanel extends JPanel {
     /**
      * Constructor
      */
-    public CourseSelectionHallPanel() {
+    public CourseSelectionHallPanel(StudentAcademicMainPanel fatherPanel) {
         initialize();
         setLayout(new BorderLayout());
         if(!semesters.isEmpty()) {
-            JSplitPane splitPane = new JSplitPane();
-            splitPane.setDividerLocation(500);
-            add(splitPane);
-            semComboBox = new JComboBox<>((String[]) semesters.toArray());
+            scPs = new ArrayList<>();
+            cSPs = new ArrayList<>();
+            String[] temp = new String[semesters.size()];
+            temp = semesters.toArray(temp);
+            semComboBox = new JComboBox<String>(temp);
             add(semComboBox, BorderLayout.NORTH);
             for (String s : semesters) {
-                scPs.add(new SelectCoursesPanel(s));
-                cSPs.add(new CoursesSelectedPanel(s));
+                scPs.add(new SelectCoursesPanel(s,fatherPanel));
+                cSPs.add(new CoursesSelectedPanel(s,fatherPanel));
             }
+
+            JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT,cSPs.get(0),scPs.get(0));
+            splitPane.setDividerLocation(500);
+            add(splitPane,BorderLayout.CENTER);
+
             semComboBox.addItemListener(new ItemListener() {
                 @Override
                 public void itemStateChanged(ItemEvent e) {

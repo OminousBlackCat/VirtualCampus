@@ -73,7 +73,7 @@ public class ServerThread  extends Thread{
                         System.out.println("是获取基本信息mes，一卡通号是：" + msg.getECardNumber());
                         act.PersonMessageSend((Person) msg);
                         break;
-                    case TYPE_DELETE_COURSE:
+                    case TYPE_DESELECT_COURSE:
                         System.out.println("是删除课程mes，一卡通号是：" + msg.getECardNumber());
                         act.deselectCourse((Course) msg);
                         break;
@@ -104,6 +104,8 @@ public class ServerThread  extends Thread{
                         }
                         break;
                     }
+                    case TYPE_GET_WITHOUT_GRADES:
+                        act.getCoursesSelectedWithoutGrades((Person) msg);
                     case TYPE_GET_GRADES:
                         act.getGrades((Person) msg);
                         break;
