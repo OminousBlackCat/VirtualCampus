@@ -9,6 +9,7 @@ import java.awt.event.MouseEvent;
 
 import java.awt.event.*;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Enumeration;
 import javax.swing.Timer;
@@ -24,7 +25,8 @@ import com.seu.vCampus.Client.Library.AdminLib;
 import com.seu.vCampus.Client.Library.StuLib;
 import com.seu.vCampus.Client.Shop.MangerShop;
 import com.seu.vCampus.Client.AcademicAffairs.Student.SelectCoursesPanel;
-import com.seu.vCampus.Client.Shop.MainShop;
+import com.seu.vCampus.Client.Shop.*;
+
 
 import com.seu.vCampus.util.*;
 
@@ -90,6 +92,10 @@ public class Home extends JFrame{
             homeData.getIO().SendMessages(homeData.getShopInformation());
             homeData.setShopInformation((ShopManage)homeData.getIO().ReceiveMessage());
 
+            homeData.getNewsList().setType(Message.MESSAGE_TYPE.TYPE_QUERY_NEWS);
+            homeData.getIO().SendMessages(homeData.getNewsList());
+            homeData.setNewsList((NewsManage)homeData.getIO().ReceiveMessage());
+            System.out.println("");
         }
 
 
@@ -271,7 +277,7 @@ public class Home extends JFrame{
                 }
             });
         }
-
+        
 
         System.out.println(homeData.getUser().getAuthorityLevel());
         switch (homeData.getUser().getAuthorityLevel()){
@@ -286,6 +292,7 @@ public class Home extends JFrame{
 
                 sam = new StudentAcademicMainPanel();
                 tabbedPane.addTab("教务", Edu, sam, null);
+
 
                 JPanel panel_3 = new JPanel();
                 tabbedPane.addTab("商店",Shop, mainShopPanel.getPanel(), null);
@@ -368,6 +375,12 @@ public class Home extends JFrame{
                     Person test = new Person();
                     test.setAuthorityLevel(Person.USER_GROUP.GROUP_STUDENT);
                     temp.setUser(test);
+                    News A = new News("https://ak.hypergryph.com/index","title",new Date());
+                    ArrayList<News> aa = new ArrayList<>();
+                    for(int i =0;i<4;i++){
+                        aa.add(A);
+                    }
+                    temp.getNewsList().setNews(aa);
                     new Home();
                 } catch (Exception e) {
                     e.printStackTrace();

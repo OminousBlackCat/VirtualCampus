@@ -1,7 +1,6 @@
 package com.seu.vCampus.Database;
 import com.seu.vCampus.util.*;
 
-import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -653,6 +652,7 @@ public class DatabaseActions {
                 String ECB = res.getString("ECardBalance");
                 String Sex=res.getString("Sex");
                 String avatar = res.getString("AvatarID");
+                String major=res.getString("Major");
 
                 p.setName(Name);
                 p.setStudentNumber(SN);
@@ -661,6 +661,7 @@ public class DatabaseActions {
                 p.setECardBalance(Double.parseDouble(ECB));
                 p.setSex(Sex);
                 p.setAvatarID(avatar);
+                p.setMajor(major);
                 p.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
             }
             return p;
@@ -689,8 +690,8 @@ public class DatabaseActions {
     public void insertPerson(Person p){                     //添加一位用户信息
         try{
             PreparedStatement sql = conn.prepareStatement("insert into Users" +
-                    "(ECardNumber,userName,PassWord,Sex,AuthorityNumber,LendBooksNumber,ECardBalance,StudentNumber,AvatarID)" +
-                    "values(?,?,?,?,?,?,?,?,?)");
+                    "(ECardNumber,userName,PassWord,Sex,AuthorityNumber,LendBooksNumber,ECardBalance,StudentNumber,AvatarID,Major)" +
+                    "values(?,?,?,?,?,?,?,?,?,?)");
             sql.setString(1, p.getECardNumber());
             sql.setString(2, p.getName());
             sql.setString(3, p.getPassWord());
@@ -700,6 +701,7 @@ public class DatabaseActions {
             sql.setString(7, Double.toString(p.getECardBalance()));
             sql.setString(8, p.getStudentNumber());
             sql.setString(9,p.getAvatarID());
+            sql.setString(10,p.getMajor());
             sql.executeUpdate();
 
         }catch (SQLException E)
@@ -739,6 +741,7 @@ public class DatabaseActions {
                 short LendBooksNumber = (short)Integer.parseInt("LendBooksNumber");
                 double ECardBalance = Double.parseDouble("ECardBalance");
                 String Avatar = res.getString("AvatarID");
+                String Major=res.getString("Major");
 
                 temp.setECardNumber(ECardNumber);
                 temp.setName(userName);
@@ -748,6 +751,7 @@ public class DatabaseActions {
                 temp.setECardBalance(ECardBalance);
                 temp.setLendBooksNumber(LendBooksNumber);
                 temp.setAvatarID(Avatar);
+                temp.setMajor(Major);
 
                 PM.addUser(temp);
             }
@@ -1072,6 +1076,33 @@ public class DatabaseActions {
             e.printStackTrace();
             p.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
             return p;
+        }
+    }
+
+    public NewsManage sendNewsMessage(NewsManage NM){
+        try{
+            Statement st=conn.createStatement();
+            ResultSet res=st.executeQuery("select *from News");
+
+
+            while(res.next()){
+                News temp=new News();
+                String URL=res.getString("URLAddress");
+                String NT=res.getString("NewsTitle");
+                Date ND=res.getDate("NewsDate");
+
+                temp.setURL(URL);
+                temp.setNewsTitle(NT);
+                temp.setNewsDate(ND);
+
+                NM.addNews(temp);
+            }
+            NM.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
+            return NM;
+        }catch (SQLException E){
+            E.printStackTrace();
+            NM.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
+            return NM;
         }
     }
 }
