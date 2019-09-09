@@ -1,5 +1,6 @@
 package com.seu.vCampus.Client.AcademicAffairs.Utils;
 
+import com.seu.vCampus.Client.AcademicAffairs.Student.CourseSelectionHallPanel;
 import com.seu.vCampus.Client.AcademicAffairs.Student.StudentAcademicMainPanel;
 import com.seu.vCampus.Client.Common;
 import com.seu.vCampus.util.Course;
@@ -13,7 +14,7 @@ import java.awt.event.ActionListener;
 public class SelectCourseButton  extends DefaultCellEditor  {
     private Common messenger;
     private JButton button;
-    public SelectCourseButton(final JTable table, final StudentAcademicMainPanel toRefresh) {
+    public SelectCourseButton(final JTable table, final StudentAcademicMainPanel toRefresh, final CourseSelectionHallPanel csP) {
         super(new JTextField());
 
         this.setClickCountToStart(1);
@@ -22,12 +23,14 @@ public class SelectCourseButton  extends DefaultCellEditor  {
             @Override
             public void actionPerformed(ActionEvent e) {
                 SelectCourseButton.this.fireEditingCanceled();
-                if(table.getValueAt(table.getSelectedRow(), 10).equals("选课")) {
+                if(table.getValueAt(table.getSelectedRow(), 11).equals("选课")) {
                     String courseNumber = (String) table.getValueAt(table.getSelectedRow(), 0);
                     courseNumber = courseNumber.concat("-" + (String) table.getValueAt(table.getSelectedRow(), 3));
                     System.out.println(courseNumber);
                     choose(courseNumber);
+                    int index = csP.getSemComboBox().getSelectedIndex();
                     toRefresh.refresh();
+                    toRefresh.getCourseSelectionHallPanel().getSemComboBox().setSelectedIndex(index);
                 }
             }
         });

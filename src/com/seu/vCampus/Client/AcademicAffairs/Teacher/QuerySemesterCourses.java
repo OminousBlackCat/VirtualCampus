@@ -59,6 +59,7 @@ public class QuerySemesterCourses extends JPanel {
             coursesTable.getColumnModel().getColumn(10).setCellRenderer(new TableButtonRender());
             coursesTable.getColumnModel().getColumn(11).setCellRenderer(new TableButtonRender());
             coursesTable.setRowHeight(25);
+            coursesTable.setDefaultEditor(Object.class, null);
             JScrollPane scrollPane = new JScrollPane(coursesTable);
             setLayout(new BorderLayout());
             add(scrollPane, BorderLayout.CENTER);
