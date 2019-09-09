@@ -4,13 +4,21 @@ import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
 import com.seu.vCampus.Client.Common;
+import com.seu.vCampus.util.Goods;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.util.ArrayList;
 
 public class ProductPage extends Component {
-
+    /*获取商品信息*/
     private Common ShopProduct;
+    /*用于翻页计数*/
+    private int PageCounter;
+    private int InitialIndex;
     /*各个界面*/
     private JPanel Product1;
     private JPanel Product2;
@@ -49,21 +57,202 @@ public class ProductPage extends Component {
     private JLabel label0;
     private JPanel panel1;
 
+    private ImageIcon IconA;
+    private ImageIcon IconB;
+    private ImageIcon IconC;
+
+    private Goods GoodsA;
+    private Goods GoodsB;
+    private Goods GoodsC;
+    private ArrayList<Goods> thisClassGoodsList;
+    private int index;
+    private Common shopData;
+
+
+    public ProductPage(ArrayList<Goods> set) {
+        thisClassGoodsList = set;
+        $$$setupUI$$$();
+        shopData = Common.getInstance();
+        initialize();
+        PageDown.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                index += 3;
+                if (index + 3 < thisClassGoodsList.size()) {
+                    LoadGoods(3);
+                    PageUp.setEnabled(true);
+                    PageDown.setEnabled(true);
+                } else {
+                    LoadGoods(thisClassGoodsList.size() - index);
+                    PageDown.setEnabled(false);
+                    PageUp.setEnabled(true);
+                }
+            }
+        });
+        PageUp.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                index -= 3;
+                if (index == 0) {
+                    initialize();
+                } else {
+                    LoadGoods(3);
+                    PageUp.setEnabled(true);
+                    PageDown.setEnabled(true);
+                }
+            }
+        });
+        AddButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Goods addThisGoods = new Goods();
+                addThisGoods.setGoodsNumber(GoodsA.getGoodsNumber());
+                addThisGoods.setGoodsName(GoodsA.getGoodsName());
+                addThisGoods.setGoodsPrice(GoodsA.getGoodsPrice());
+                addThisGoods.setGoodsStock(Short.parseShort(textField1.getText()));
+                GoodsA.setGoodsStock((short) (GoodsA.getGoodsStock() - Short.parseShort(textField1.getText())));
+                shopData.getShoppingList().add(addThisGoods);
+                JOptionPane.showMessageDialog(null, "添加" + addThisGoods.getGoodsName() + "成功亲~请前往购物车查看~",
+                        "成功！", JOptionPane.INFORMATION_MESSAGE);
+                textField1.setText("");
+            }
+        });
+        AddButton2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Goods addThisGoods = new Goods();
+                addThisGoods.setGoodsNumber(GoodsB.getGoodsNumber());
+                addThisGoods.setGoodsName(GoodsB.getGoodsName());
+                addThisGoods.setGoodsPrice(GoodsB.getGoodsPrice());
+                addThisGoods.setGoodsStock(Short.parseShort(textField2.getText()));
+                GoodsB.setGoodsStock((short) (GoodsB.getGoodsStock() - Short.parseShort(textField2.getText())));
+                shopData.getShoppingList().add(addThisGoods);
+                JOptionPane.showMessageDialog(null, "添加" + addThisGoods.getGoodsName() + "成功亲~请前往购物车查看~",
+                        "成功！", JOptionPane.INFORMATION_MESSAGE);
+                textField1.setText("");
+            }
+        });
+
+        AddButton3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Goods addThisGoods = new Goods();
+                addThisGoods.setGoodsNumber(GoodsC.getGoodsNumber());
+                addThisGoods.setGoodsName(GoodsC.getGoodsName());
+                addThisGoods.setGoodsPrice(GoodsC.getGoodsPrice());
+                addThisGoods.setGoodsStock(Short.parseShort(textField3.getText()));
+                GoodsC.setGoodsStock((short) (GoodsC.getGoodsStock() - Short.parseShort(textField3.getText())));
+                shopData.getShoppingList().add(addThisGoods);
+                JOptionPane.showMessageDialog(null, "添加" + addThisGoods.getGoodsName() + "成功亲~请前往购物车查看~",
+                        "成功！", JOptionPane.INFORMATION_MESSAGE);
+                textField3.setText("");
+            }
+        });
+    }
+
+    public void initialize() {
+        PageUp.setEnabled(false);
+        PageDown.setEnabled(true);
+
+        index = 0;
+        if (thisClassGoodsList.size() >= 3) {
+            LoadGoods(3);
+        } else {
+            LoadGoods(thisClassGoodsList.size());
+        }
+    }
+
+    private void LoadGoods(int x) {
+        switch (x) {
+            case 1:
+                LoadGoodsA();
+                LoadGoodsB(false);
+                LoadGoodsC(false);
+                break;
+            case 2:
+                LoadGoodsA();
+                LoadGoodsB(true);
+                LoadGoodsC(false);
+                break;
+            case 3:
+                LoadGoodsA();
+                LoadGoodsB(true);
+                LoadGoodsC(true);
+                break;
+
+        }
+    }
+
+    public void LoadGoodsA() {
+        GoodsA = thisClassGoodsList.get(index);
+        Name1.setText(GoodsA.getGoodsName());
+        Price1.setText(Double.toString(GoodsA.getGoodsPrice()));
+        IconA = new ImageIcon("src/icon/ProductPicture/" + GoodsA.getPictureNumber() + ".png");
+        Picture1.setIcon(IconA);
+        Picture1.setText("");
+    }
+
+    public void LoadGoodsB(boolean isLoad) {
+        if (isLoad) {
+            Name2.setVisible(true);
+            Price2.setVisible(true);
+            AddButton2.setVisible(true);
+            textField2.setVisible(true);
+            Picture2.setVisible(true);
+            label21.setVisible(true);
+            GoodsB = thisClassGoodsList.get(index + 1);
+            Name2.setText(GoodsB.getGoodsName());
+            Price2.setText(Double.toString(GoodsB.getGoodsPrice()));
+            IconB = new ImageIcon("src/icon/ProductPicture/" + GoodsB.getPictureNumber() + ".png");
+            Picture2.setIcon(IconB);
+            Picture2.setText("");
+        } else {
+            Name2.setVisible(false);
+            Price2.setVisible(false);
+            AddButton2.setVisible(false);
+            textField2.setVisible(false);
+            Picture2.setVisible(false);
+            label21.setVisible(false);
+        }
+    }
+
+    public void LoadGoodsC(boolean isLoad) {
+        if (isLoad) {
+            Name3.setVisible(true);
+            Price3.setVisible(true);
+            AddButton3.setVisible(true);
+            textField3.setVisible(true);
+            Picture3.setVisible(true);
+            label31.setVisible(true);
+            GoodsC = thisClassGoodsList.get(index + 2);
+            Name3.setText(GoodsC.getGoodsName());
+            Price3.setText(Double.toString(GoodsC.getGoodsPrice()));
+            IconC = new ImageIcon("src/icon/ProductPicture/" + GoodsC.getPictureNumber() + ".png");
+            Picture3.setIcon(IconC);
+            Picture3.setText("");
+        } else {
+            Name3.setVisible(false);
+            Price3.setVisible(false);
+            AddButton3.setVisible(false);
+            textField3.setVisible(false);
+            Picture3.setVisible(false);
+            label31.setVisible(false);
+        }
+    }
+
+
+    public void setThisClassGoodsList(ArrayList<Goods> thisClassGoodsList) {
+        this.thisClassGoodsList = thisClassGoodsList;
+    }
 
     private void createUIComponents() {
         // TODO: place custom component creation code here
         panel1 = new JPanel();
     }
 
+
     public JPanel getMainPanel() {
         return panel1;
-    }
-
-    {
-// GUI initializer generated by IntelliJ IDEA GUI Designer
-// >>> IMPORTANT!! <<<
-// DO NOT EDIT OR ADD ANY CODE HERE!
-        $$$setupUI$$$();
     }
 
     /**
@@ -81,9 +270,6 @@ public class ProductPage extends Component {
         Product1.setLayout(new GridLayoutManager(4, 4, new Insets(0, 0, 0, 0), -1, -1));
         Product1.setBackground(new Color(-8355712));
         panel1.add(Product1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-        Picture1 = new JLabel();
-        Picture1.setText("商品图片");
-        Product1.add(Picture1, new GridConstraints(0, 0, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         Name1 = new JLabel();
         Name1.setForeground(new Color(-1));
         Name1.setText("商品名称");
@@ -91,8 +277,10 @@ public class ProductPage extends Component {
         Price1 = new JLabel();
         Price1.setForeground(new Color(-1));
         Price1.setText("商品价格");
-        Product1.add(Price1, new GridConstraints(2, 0, 1, 2, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        Product1.add(Price1, new GridConstraints(2, 0, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         label12 = new JLabel();
+        label12.setBackground(new Color(-12828863));
+        label12.setForeground(new Color(-1));
         label12.setText("购入数量：");
         Product1.add(label12, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         textField1 = new JTextField();
@@ -104,10 +292,13 @@ public class ProductPage extends Component {
         Product1.add(AddButton1, new GridConstraints(3, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final Spacer spacer1 = new Spacer();
         Product1.add(spacer1, new GridConstraints(3, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
+        Picture1 = new JLabel();
+        Picture1.setText("商品图片");
+        Product1.add(Picture1, new GridConstraints(0, 0, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         label11 = new JLabel();
         label11.setForeground(new Color(-1));
         label11.setText("元");
-        Product1.add(label11, new GridConstraints(2, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        Product1.add(label11, new GridConstraints(2, 3, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         Product3 = new JPanel();
         Product3.setLayout(new GridLayoutManager(4, 4, new Insets(0, 0, 0, 0), -1, -1));
         Product3.setBackground(new Color(-8355712));
@@ -122,7 +313,7 @@ public class ProductPage extends Component {
         Price3 = new JLabel();
         Price3.setForeground(new Color(-1));
         Price3.setText("商品价格");
-        Product3.add(Price3, new GridConstraints(2, 0, 1, 2, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        Product3.add(Price3, new GridConstraints(2, 0, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         label33 = new JLabel();
         label33.setForeground(new Color(-1));
         label33.setText("购入数量：");
@@ -139,7 +330,7 @@ public class ProductPage extends Component {
         label31 = new JLabel();
         label31.setForeground(new Color(-1));
         label31.setText("元");
-        Product3.add(label31, new GridConstraints(2, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        Product3.add(label31, new GridConstraints(2, 3, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         Product2 = new JPanel();
         Product2.setLayout(new GridLayoutManager(4, 4, new Insets(0, 0, 0, 0), -1, -1));
         Product2.setBackground(new Color(-8355712));
@@ -152,10 +343,13 @@ public class ProductPage extends Component {
         Name2.setText("商品名称");
         Product2.add(Name2, new GridConstraints(1, 0, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         Price2 = new JLabel();
+        Price2.setEnabled(true);
         Price2.setForeground(new Color(-1));
         Price2.setText("商品价格");
-        Product2.add(Price2, new GridConstraints(2, 0, 1, 2, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        Price2.setVerticalAlignment(0);
+        Product2.add(Price2, new GridConstraints(2, 0, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         label22 = new JLabel();
+        label22.setForeground(new Color(-1));
         label22.setText("购入数量：");
         Product2.add(label22, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         textField2 = new JTextField();
@@ -170,7 +364,7 @@ public class ProductPage extends Component {
         label21 = new JLabel();
         label21.setForeground(new Color(-1));
         label21.setText("元");
-        Product2.add(label21, new GridConstraints(2, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        Product2.add(label21, new GridConstraints(2, 3, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         ChangePage = new JPanel();
         ChangePage.setLayout(new GridLayoutManager(3, 6, new Insets(0, 0, 0, 0), -1, -1));
         ChangePage.setBackground(new Color(-8355712));
