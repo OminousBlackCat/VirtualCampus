@@ -2,10 +2,10 @@
 --------------------------------------
 
 开发人员: <br>
-@LostBlackCat-Chen<br>
-@RyougiZazer<br>
-@JamieLXZWolf<br>
-@zbJabs<br>
-@MaouSora<br>
-@DSRsilver<br>
-@Ete-Bosh<br>
+@LostBlackCat-Chen【组长】<br>
+@RyougiZazer【后端】<br>
+@JamieLXZWolf【后端】<br>
+@zbJabs【前端】<br>
+@MaouSora【前端】<br>
+@DSRsilver【前端】<br>
+@Ete-Bosh【前端】<br>

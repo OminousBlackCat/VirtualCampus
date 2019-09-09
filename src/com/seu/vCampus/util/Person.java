@@ -17,6 +17,7 @@ public class Person extends Message{
 
 
     public Person(){
+        this.courses = new ArrayList<Course>();
         this.ECardNumber = "null";
         this.Name = "null";
         this.Type = MESSAGE_TYPE.TYPE_QUERY_PERSON;
