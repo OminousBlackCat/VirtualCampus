@@ -16,6 +16,8 @@ import java.awt.event.ActionListener;
 import java.awt.image.ImagingOpException;
 import java.util.ArrayList;
 
+import static java.lang.Thread.sleep;
+
 
 public class MainShop {
 
@@ -24,8 +26,8 @@ public class MainShop {
     private ProductPage ProductComputer;
     private ProductPage ProductStudy;
     private ProductPage ProductFood;
-
     private Goods searchGoods;
+
 
     private static ImageIcon ShopLife = new ImageIcon("src/icon/ShopLife.png");
     private static ImageIcon ShopStudy = new ImageIcon("src/icon/ShopStudy.png");
@@ -70,6 +72,7 @@ public class MainShop {
             return false;
         }
     };
+
 
     public MainShop() {
 
@@ -133,32 +136,53 @@ public class MainShop {
             }
         });
         initialization();
+
+
+        Thread ListListener = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                int flag = ShopData.getShoppingList().size();
+                while (true) {
+                    if (flag == ShopData.getShoppingList().size()) {
+                        try {
+                            sleep(200);
+                        } catch (InterruptedException ie) {
+                            ie.printStackTrace();
+                        }
+                    }
+                    if (flag < ShopData.getShoppingList().size()) {
+                        flag = ShopData.getShoppingList().size();
+                        try {
+                            sleep(200);
+                        } catch (InterruptedException ie) {
+                            ie.printStackTrace();
+                        }
+                        Goods Temp = ShopData.getShoppingList().get(ShopData.getShoppingList().size() - 1);
+                        Object[] tempData = {
+                                Temp.getGoodsNumber(), Temp.getGoodsName(), Temp.getGoodsPrice(), Temp.getGoodsStock()};
+                        ShopListModel.addRow(tempData);
+                    }
+                    if (flag != 0 && ShopData.getShoppingList().size() == 0) {
+                        break;
+                    }
+                }
+            }
+        });
+        ListListener.start();
     }
 
     public void initialization() {
         ECardBalance.setText(Double.toString(ShopData.getUser().getECardBalance()));
-        double cost=0;
-        int counter=0;
-        while(counter<ShopData.getShoppingList().size()){
-            cost+=ShopData.getShoppingList().get(counter).getGoodsPrice()*ShopData.getShoppingList().get(counter).getGoodsStock();
+        double cost = 0;
+        int counter = 0;
+        while (counter < ShopData.getShoppingList().size()) {
+            cost += ShopData.getShoppingList().get(counter).getGoodsPrice() * ShopData.getShoppingList().get(counter).getGoodsStock();
             counter++;
         }
         TotalCost.setText(Double.toString(cost));
         SearchResult.setVisible(false);
     }
 
-    public static void main(String args[]) {
-        MainShop mainShop = new MainShop();
-        JFrame frame = new JFrame();
-        frame.setBounds(500, 500, 1200, 800);
-        frame.setContentPane(mainShop.$$$getRootComponent$$$());
-        frame.setVisible(true);
-
-    }
-
-    public Component getPanel() {
-        return basis;
-    }
 
     private void createUIComponents() {
         // TODO: place custom component creation code here
@@ -172,7 +196,7 @@ public class MainShop {
 
         for (int i = 0; i < ShopData.getShopInformation().getGoods().size(); i++) {
             Goods temp = ShopData.getShopInformation().getGoods().get(i);
-            switch (temp.getGoodsNumber().indexOf(0)) {
+            switch (temp.getGoodsNumber().charAt(0)) {
                 case '1':
                     Life.add(temp);
                     break;
@@ -197,18 +221,23 @@ public class MainShop {
         tabbedPane1.addTab("电子配件", ShopComputer, ProductComputer.getMainPanel(), "本页面将展示各类电子配件供同学们选择");
         tabbedPane1.addTab("零食饮料", ShopFood, ProductFood.getMainPanel(), "本页面将展示各类零食饮料供同学们选择");
 
-
-        int counter = 0;
-        while (counter < ShopData.getShoppingList().size()) {
-            Object[] TempData = {counter + 1, ShopData.getShoppingList().get(counter).getGoodsNumber(), ShopData.getShoppingList().get(counter).getGoodsPrice()
-                    , ShopData.getShoppingList().get(counter).getGoodsStock()};
-            ShopListModel.addRow(TempData);
-            counter++;
-        }
-        goodsTable=new JTable(ShopListModel);
+        goodsTable = new JTable(ShopListModel);
 
     }
 
+
+    public static void main(String args[]) {
+        MainShop mainShop = new MainShop();
+        JFrame frame = new JFrame();
+        frame.setBounds(500, 500, 1200, 800);
+        frame.setContentPane(mainShop.$$$getRootComponent$$$());
+        frame.setVisible(true);
+
+    }
+
+    public Component getPanel() {
+        return basis;
+    }
 
     /**
      * Method generated by IntelliJ IDEA GUI Designer
@@ -266,15 +295,15 @@ public class MainShop {
         Picture0 = new JLabel();
         Picture0.setForeground(new Color(-1));
         Picture0.setText("商品图片");
-        SearchResult.add(Picture0, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        SearchResult.add(Picture0, new GridConstraints(0, 0, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         Name0 = new JLabel();
         Name0.setForeground(new Color(-1));
         Name0.setText("商品名称");
-        SearchResult.add(Name0, new GridConstraints(1, 0, 1, 3, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        SearchResult.add(Name0, new GridConstraints(1, 0, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         Price0 = new JLabel();
         Price0.setForeground(new Color(-1));
         Price0.setText("商品价格");
-        SearchResult.add(Price0, new GridConstraints(2, 0, 1, 2, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        SearchResult.add(Price0, new GridConstraints(2, 0, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         label2 = new JLabel();
         label2.setForeground(new Color(-1));
         label2.setText("购入数量：");
@@ -286,12 +315,12 @@ public class MainShop {
         AddButton.setForeground(new Color(-1));
         AddButton.setText("添加");
         SearchResult.add(AddButton, new GridConstraints(3, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final Spacer spacer8 = new Spacer();
+        SearchResult.add(spacer8, new GridConstraints(3, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
         label1 = new JLabel();
         label1.setForeground(new Color(-1));
         label1.setText("元");
-        SearchResult.add(label1, new GridConstraints(2, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        final Spacer spacer8 = new Spacer();
-        SearchResult.add(spacer8, new GridConstraints(3, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
+        SearchResult.add(label1, new GridConstraints(2, 3, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         ShoppingTrolley = new JPanel();
         ShoppingTrolley.setLayout(new GridLayoutManager(1, 2, new Insets(0, 0, 0, 0), -1, -1));
         ShoppingTrolley.setBackground(new Color(-8355712));
@@ -353,6 +382,5 @@ public class MainShop {
     public JComponent $$$getRootComponent$$$() {
         return basis;
     }
-
 
 }

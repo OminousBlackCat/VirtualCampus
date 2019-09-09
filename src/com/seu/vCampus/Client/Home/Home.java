@@ -51,6 +51,8 @@ public class Home extends JFrame{
     private SelectCoursesPanel coursePanelS;
     private MainShop mainShopPanel;
     private MangerShop mangerShopPanel;
+    private StuLib libraryPanel;
+    private AdminLib libraryManager;
 
     private int skinNumber = 1;
 
@@ -89,11 +91,15 @@ public class Home extends JFrame{
 
         }
 
-        homePanel = new BasicInformationPanel("01");
-        bankPanel = new Bank();
-        MainShop  shopPanel = new MainShop();
-        mainShopPanel = new MainShop();
-        mangerShopPanel = new MangerShop();
+
+        {
+            homePanel = new BasicInformationPanel("01");
+            bankPanel = new Bank();
+            mainShopPanel = new MainShop();
+            mangerShopPanel = new MangerShop();
+            libraryPanel = new StuLib();
+            libraryManager = new AdminLib();
+        }
 
 
         setBounds(200, 200, 1200, 864);
@@ -273,7 +279,7 @@ public class Home extends JFrame{
                 break;
             }
             case GROUP_STUDENT:{
-                tabbedPane.addTab("图书", Library, new StuLib().LibMPanel, null);
+                tabbedPane.addTab("图书", Library, libraryPanel.getPanel(), null);
                 studentStudentAcademicMainPanel = new StudentAcademicMainPanel();
                 tabbedPane.addTab("教务", Edu, studentStudentAcademicMainPanel, null);
 
@@ -289,7 +295,7 @@ public class Home extends JFrame{
             }
             case GROUP_TEACHER:{
                 JPanel panel_1 = new JPanel();
-                tabbedPane.addTab("图书馆", Library, panel_1, null);
+                tabbedPane.addTab("图书馆", Library, libraryPanel.getPanel(), null);
 
                 teacherMainPanel  = new com.seu.vCampus.Client.AcademicAffairs.Teacher.MainPanel();
                 tabbedPane.addTab("教务", Edu, teacherMainPanel, null);
@@ -304,7 +310,7 @@ public class Home extends JFrame{
                 break;
             }
             case GROUP_LIBRARY_MANAGER:{
-                tabbedPane.addTab("图书管理",Library,new AdminLib().AdminLibMPanel,null);
+                tabbedPane.addTab("图书管理",Library,libraryManager.getPanel(),null);
                 break;
             }
             case GROUP_SHOP_MANAGER:{
