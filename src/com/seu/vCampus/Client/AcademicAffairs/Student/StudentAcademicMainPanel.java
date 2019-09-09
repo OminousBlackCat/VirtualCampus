@@ -4,6 +4,14 @@ import javax.swing.*;
 import java.awt.*;
 
 public class StudentAcademicMainPanel extends JPanel {
+    public CourseSelectionHallPanel getCourseSelectionHallPanel() {
+        return courseSelectionHallPanel;
+    }
+
+    public void setCourseSelectionHallPanel(CourseSelectionHallPanel courseSelectionHallPanel) {
+        this.courseSelectionHallPanel = courseSelectionHallPanel;
+    }
+
     private CourseSelectionHallPanel courseSelectionHallPanel;
     private CoursesSelectedPanel coursesSelectedPanel;
     private ScheduleTable scheduleTablePanel;

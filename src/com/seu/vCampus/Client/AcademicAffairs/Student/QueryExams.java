@@ -44,6 +44,7 @@ public class QueryExams extends JPanel {
                 TableUtils.FitTableColumns(coursesTable);
                 coursesTable.setFont(new Font("微软雅黑",Font.PLAIN,16));
                 coursesTable.setRowHeight(30);
+                coursesTable.setDefaultEditor(Object.class, null);
                 JScrollPane scrollPane = new JScrollPane(coursesTable);
                 setLayout(new BorderLayout());
                 add(scrollPane, BorderLayout.CENTER);
