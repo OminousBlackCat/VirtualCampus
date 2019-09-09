@@ -51,7 +51,7 @@ public class Home extends JFrame{
     private SelectCoursesPanel coursePanelS;
     private MainShop mainShopPanel;
     private MangerShop mangerShopPanel;
-    private StuLib libraryPanel;
+    private JPanel libraryPanel;
     private AdminLib libraryManager;
 
     private int skinNumber = 1;
@@ -97,7 +97,7 @@ public class Home extends JFrame{
             bankPanel = new Bank();
             mainShopPanel = new MainShop();
             mangerShopPanel = new MangerShop();
-            libraryPanel = new StuLib();
+            libraryPanel = new StuLib().LibMPanel;
             libraryManager = new AdminLib();
         }
 
@@ -279,7 +279,7 @@ public class Home extends JFrame{
                 break;
             }
             case GROUP_STUDENT:{
-                tabbedPane.addTab("图书", Library, libraryPanel.getPanel(), null);
+                tabbedPane.addTab("图书", Library, libraryPanel, null);
                 studentStudentAcademicMainPanel = new StudentAcademicMainPanel();
                 tabbedPane.addTab("教务", Edu, studentStudentAcademicMainPanel, null);
 
@@ -295,7 +295,7 @@ public class Home extends JFrame{
             }
             case GROUP_TEACHER:{
                 JPanel panel_1 = new JPanel();
-                tabbedPane.addTab("图书馆", Library, libraryPanel.getPanel(), null);
+                tabbedPane.addTab("图书馆", Library, libraryPanel, null);
 
                 teacherMainPanel  = new com.seu.vCampus.Client.AcademicAffairs.Teacher.MainPanel();
                 tabbedPane.addTab("教务", Edu, teacherMainPanel, null);
