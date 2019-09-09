@@ -115,7 +115,7 @@ public class MainShop {
                 if (searchGoods.getGoodsStock() >= Short.parseShort(ResulttextField.getText())) {
                     Goods temp = new Goods();
                     temp.setGoodsPrice(searchGoods.getGoodsPrice());
-                    temp.setGoodsStock(searchGoods.getGoodsStock());
+                    temp.setGoodsStock(Short.parseShort(ResulttextField.getText()));
                     temp.setGoodsName(searchGoods.getGoodsName());
                     temp.setGoodsNumber(searchGoods.getGoodsNumber());
 
