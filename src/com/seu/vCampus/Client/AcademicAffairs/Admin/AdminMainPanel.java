@@ -3,10 +3,10 @@ package com.seu.vCampus.Client.AcademicAffairs.Admin;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
-public class MainPanel extends JPanel{
+public class AdminMainPanel extends JPanel{
 
 
-    public MainPanel(){
+    public AdminMainPanel(){
 
         setBounds(100, 100, 370, 475);
         setLayout(null);
@@ -14,7 +14,7 @@ public class MainPanel extends JPanel{
         JButton button = new JButton("添加课程");
         button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-                AddCourse addCourse=new AddCourse();
+                AddCoursePanel addCoursePanel =new AddCoursePanel();
             }
         });
         button.setBounds(117, 89, 125, 27);

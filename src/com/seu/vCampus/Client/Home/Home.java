@@ -13,7 +13,9 @@ import java.util.Date;
 import java.util.Enumeration;
 import javax.swing.Timer;
 
+import com.seu.vCampus.Client.AcademicAffairs.Admin.AdminMainPanel;
 import com.seu.vCampus.Client.AcademicAffairs.Student.StudentAcademicMainPanel;
+import com.seu.vCampus.Client.AcademicAffairs.Teacher.TeacherMainPanel;
 import com.seu.vCampus.Client.Bank.Bank;
 import com.seu.vCampus.Client.BasicInformation.BasicInformationPanel;
 import com.seu.vCampus.Client.Common;
@@ -22,10 +24,8 @@ import com.seu.vCampus.Client.Library.AdminLib;
 import com.seu.vCampus.Client.Library.StuLib;
 import com.seu.vCampus.Client.Shop.MangerShop;
 import com.seu.vCampus.Client.AcademicAffairs.Student.SelectCoursesPanel;
-import com.seu.vCampus.Client.AcademicAffairs.Teacher.InputGrades;
-import com.seu.vCampus.Client.AcademicAffairs.Student.SelectCoursesPanel;
-import com.seu.vCampus.Client.AcademicAffairs.Teacher.InputGrades;
-import com.seu.vCampus.Client.Shop.MainShop;
+import com.seu.vCampus.Client.Shop.*;
+
 
 import com.seu.vCampus.util.*;
 
@@ -45,14 +45,16 @@ public class Home extends JFrame{
     private JTabbedPane tabbedPane;
     private Bank bankPanel;
     private BasicInformationPanel homePanel;
-    private com.seu.vCampus.Client.AcademicAffairs.Admin.MainPanel adminMainPanel;
-    private com.seu.vCampus.Client.AcademicAffairs.Teacher.MainPanel teacherMainPanel;
-    private StudentAcademicMainPanel studentStudentAcademicMainPanel;
+    private AdminMainPanel adminMainPanel;
+    private TeacherMainPanel teacherMainPanel;
     private SelectCoursesPanel coursePanelS;
     private MainShop mainShopPanel;
     private MangerShop mangerShopPanel;
-    private StuLib libraryPanel;
+    private JPanel libraryPanel;
     private AdminLib libraryManager;
+    private StudentAcademicMainPanel sam;
+    private TeacherMainPanel teacherPanel;
+    private AdminMainPanel adminPanel;
 
     private int skinNumber = 1;
 
@@ -97,8 +99,10 @@ public class Home extends JFrame{
             bankPanel = new Bank();
             mainShopPanel = new MainShop();
             mangerShopPanel = new MangerShop();
-            libraryPanel = new StuLib();
+            libraryPanel = new StuLib().LibMPanel;
             libraryManager = new AdminLib();
+            teacherPanel = new TeacherMainPanel();
+            adminMainPanel = new AdminMainPanel();
         }
 
 
@@ -279,15 +283,16 @@ public class Home extends JFrame{
                 break;
             }
             case GROUP_STUDENT:{
-                tabbedPane.addTab("图书", Library, libraryPanel.getPanel(), null);
-                studentStudentAcademicMainPanel = new StudentAcademicMainPanel();
-                tabbedPane.addTab("教务", Edu, studentStudentAcademicMainPanel, null);
+                tabbedPane.addTab("图书", Library, libraryPanel, null);
+                sam = new StudentAcademicMainPanel();
+                tabbedPane.addTab("教务", Edu, sam, null);
 
+
+                sam = new StudentAcademicMainPanel();
+                tabbedPane.addTab("教务", Edu, sam, null);
 
                 JPanel panel_3 = new JPanel();
                 tabbedPane.addTab("商店",Shop, mainShopPanel.getPanel(), null);
-
-
 
                 JPanel panel_4 = new JPanel();
                 tabbedPane.addTab("银行", Bank, bankPanel.getPanel(), null);
@@ -295,10 +300,10 @@ public class Home extends JFrame{
             }
             case GROUP_TEACHER:{
                 JPanel panel_1 = new JPanel();
-                tabbedPane.addTab("图书馆", Library, libraryPanel.getPanel(), null);
+                tabbedPane.addTab("图书馆", Library, libraryPanel, null);
 
-                teacherMainPanel  = new com.seu.vCampus.Client.AcademicAffairs.Teacher.MainPanel();
-                tabbedPane.addTab("教务", Edu, teacherMainPanel, null);
+
+                tabbedPane.addTab("教务", Edu, teacherPanel, null);
 
                 JPanel panel_3 = new JPanel();
 
@@ -316,6 +321,10 @@ public class Home extends JFrame{
             case GROUP_SHOP_MANAGER:{
                 JPanel ShopManager = new JPanel();
                 tabbedPane.addTab("商品管理",Shop,ShopManager,null);
+                break;
+            }
+            case GROUP_ACADEMIC_MANAGER: {
+                tabbedPane.addTab("教务管理", Edu, adminMainPanel,null);
                 break;
             }
 

@@ -81,7 +81,6 @@ public class ProductPage extends Component {
     private JLabel label62;
 
 
-
     private ImageIcon IconA;
     private ImageIcon IconB;
     private ImageIcon IconC;
@@ -138,6 +137,13 @@ public class ProductPage extends Component {
         AddButton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+                if (Short.parseShort(textField1.getText()) > GoodsA.getGoodsStock()) {
+                    JOptionPane.showMessageDialog(null, "你添加的太多了呢亲~", "兄啊你要干什么", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+
                 Goods addThisGoods = new Goods();
                 addThisGoods.setGoodsNumber(GoodsA.getGoodsNumber());
                 addThisGoods.setGoodsName(GoodsA.getGoodsName());
@@ -148,11 +154,18 @@ public class ProductPage extends Component {
                 JOptionPane.showMessageDialog(null, "添加" + addThisGoods.getGoodsName() + "成功亲~请前往购物车查看~",
                         "成功！", JOptionPane.INFORMATION_MESSAGE);
                 textField1.setText("");
+                LoadGoodsA();
             }
         });
         AddButton2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+                if (Short.parseShort(textField2.getText()) > GoodsB.getGoodsStock()) {
+                    JOptionPane.showMessageDialog(null, "你添加的太多了呢亲~", "兄啊你要干什么", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
                 Goods addThisGoods = new Goods();
                 addThisGoods.setGoodsNumber(GoodsB.getGoodsNumber());
                 addThisGoods.setGoodsName(GoodsB.getGoodsName());
@@ -162,13 +175,20 @@ public class ProductPage extends Component {
                 shopData.getShoppingList().add(addThisGoods);
                 JOptionPane.showMessageDialog(null, "添加" + addThisGoods.getGoodsName() + "成功亲~请前往购物车查看~",
                         "成功！", JOptionPane.INFORMATION_MESSAGE);
-                textField1.setText("");
+                textField2.setText("");
+                LoadGoodsB(true);
             }
         });
 
         AddButton3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if (Short.parseShort(textField3.getText()) > GoodsC.getGoodsStock()) {
+                    JOptionPane.showMessageDialog(null, "你添加的太多了呢亲~", "兄啊你要干什么", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+
                 Goods addThisGoods = new Goods();
                 addThisGoods.setGoodsNumber(GoodsC.getGoodsNumber());
                 addThisGoods.setGoodsName(GoodsC.getGoodsName());
@@ -179,6 +199,7 @@ public class ProductPage extends Component {
                 JOptionPane.showMessageDialog(null, "添加" + addThisGoods.getGoodsName() + "成功亲~请前往购物车查看~",
                         "成功！", JOptionPane.INFORMATION_MESSAGE);
                 textField3.setText("");
+                LoadGoodsC(true);
             }
         });
         AddButton4.addActionListener(new ActionListener() {
@@ -229,7 +250,10 @@ public class ProductPage extends Component {
     }
 
     public void initialize() {
+
         ChangePage.setBackground(null);
+
+
         PageUp.setEnabled(false);
         PageDown.setEnabled(true);
 
@@ -314,7 +338,8 @@ public class ProductPage extends Component {
     public void LoadGoodsA() {
         GoodsA = thisClassGoodsList.get(index);
         Name1.setText(GoodsA.getGoodsName());
-        Price1.setText(Double.toString(GoodsA.getGoodsPrice()));
+        Price1.setText(Double.toString(GoodsA.getGoodsPrice()) + "元");
+        Stock1.setText(Short.toString(GoodsA.getGoodsStock()) + "在库");
         IconA = new ImageIcon("src/icon/ProductPicture/" + GoodsA.getPictureNumber() + ".png");
         Picture1.setIcon(IconA);
         Picture1.setText("");
@@ -329,13 +354,16 @@ public class ProductPage extends Component {
             textField2.setVisible(true);
             Picture2.setVisible(true);
             label22.setVisible(true);
+            Stock2.setVisible(true);
             GoodsB = thisClassGoodsList.get(index + 1);
             Name2.setText(GoodsB.getGoodsName());
-            Price2.setText(Double.toString(GoodsB.getGoodsPrice()));
+            Price2.setText(Double.toString(GoodsB.getGoodsPrice()) + "元");
             IconB = new ImageIcon("src/icon/ProductPicture/" + GoodsB.getPictureNumber() + ".png");
             Picture2.setIcon(IconB);
+            Stock2.setText(Short.toString(GoodsB.getGoodsStock()) + "在库");
             Picture2.setText("");
         } else {
+            Stock2.setVisible(false);
             Name2.setVisible(false);
             Price2.setVisible(false);
             AddButton2.setVisible(false);
@@ -348,6 +376,7 @@ public class ProductPage extends Component {
     public void LoadGoodsC(boolean isLoad) {
         if (isLoad) {
             Name3.setVisible(true);
+            Stock3.setVisible(true);
             Price3.setVisible(true);
             AddButton3.setVisible(true);
             textField3.setVisible(true);
@@ -355,11 +384,13 @@ public class ProductPage extends Component {
             label32.setVisible(true);
             GoodsC = thisClassGoodsList.get(index + 2);
             Name3.setText(GoodsC.getGoodsName());
-            Price3.setText(Double.toString(GoodsC.getGoodsPrice()));
+            Price3.setText(Double.toString(GoodsC.getGoodsPrice()) + "元");
             IconC = new ImageIcon("src/icon/ProductPicture/" + GoodsC.getPictureNumber() + ".png");
             Picture3.setIcon(IconC);
+            Stock3.setText(Short.toString(GoodsC.getGoodsStock()) + "在库");
             Picture3.setText("");
         } else {
+            Stock3.setVisible(false);
             Name3.setVisible(false);
             Price3.setVisible(false);
             AddButton3.setVisible(false);
@@ -377,13 +408,16 @@ public class ProductPage extends Component {
             textField4.setVisible(true);
             Picture4.setVisible(true);
             label42.setVisible(true);
+            Stock4.setVisible(true);
             GoodsD = thisClassGoodsList.get(index + 3);
             Name4.setText(GoodsD.getGoodsName());
-            Price4.setText(Double.toString(GoodsD.getGoodsPrice()));
+            Price4.setText(Double.toString(GoodsD.getGoodsPrice()) + "元");
             IconD = new ImageIcon("src/icon/ProductPicture/" + GoodsD.getPictureNumber() + ".png");
             Picture4.setIcon(IconD);
+            Stock4.setText(Short.toString(GoodsD.getGoodsStock()) + "在库");
             Picture4.setText("");
         } else {
+            Stock4.setVisible(false);
             Name4.setVisible(false);
             Price4.setVisible(false);
             AddButton4.setVisible(false);
@@ -401,13 +435,16 @@ public class ProductPage extends Component {
             textField5.setVisible(true);
             Picture5.setVisible(true);
             label52.setVisible(true);
+            Stock5.setVisible(true);
             GoodsE = thisClassGoodsList.get(index + 4);
             Name5.setText(GoodsE.getGoodsName());
-            Price5.setText(Double.toString(GoodsE.getGoodsPrice()));
+            Price5.setText(Double.toString(GoodsE.getGoodsPrice()) + "元");
             IconE = new ImageIcon("src/icon/ProductPicture/" + GoodsE.getPictureNumber() + ".png");
             Picture5.setIcon(IconE);
+            Stock5.setText(Short.toString(GoodsE.getGoodsStock()) + "在库");
             Picture5.setText("");
         } else {
+            Stock5.setVisible(false);
             Name5.setVisible(false);
             Price5.setVisible(false);
             AddButton5.setVisible(false);
@@ -425,13 +462,16 @@ public class ProductPage extends Component {
             textField6.setVisible(true);
             Picture6.setVisible(true);
             label62.setVisible(true);
+            Stock6.setVisible(true);
             GoodsF = thisClassGoodsList.get(index + 5);
             Name6.setText(GoodsF.getGoodsName());
-            Price6.setText(Double.toString(GoodsF.getGoodsPrice()));
+            Price6.setText(Double.toString(GoodsF.getGoodsPrice()) + "元");
             IconF = new ImageIcon("src/icon/ProductPicture/" + GoodsF.getPictureNumber() + ".png");
             Picture6.setIcon(IconF);
+            Stock6.setText(Short.toString(GoodsF.getGoodsStock()) + "在库");
             Picture6.setText("");
         } else {
+            Stock6.setVisible(false);
             Name6.setVisible(false);
             Price6.setVisible(false);
             AddButton6.setVisible(false);

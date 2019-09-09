@@ -313,7 +313,7 @@ public class DatabaseActions {
         ArrayList<Course> cs = new ArrayList<Course>();
         String sql = "SELECT Courses.*, CoursesSelected.* FROM Courses INNER JOIN CoursesSelected ON " +
                 "(CoursesSelected.courseNumber = Courses.courseNumber and CoursesSelected.EcardNumber = ? and " +
-                "CoursesSelected.grade is not null)";
+                "CoursesSelected.grade > -1)";
         try {
             stmt = conn.prepareStatement(sql);
             stmt.setString(1,student.getECardNumber());
@@ -352,6 +352,35 @@ public class DatabaseActions {
         } catch (SQLException e) {
             course.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
             e.printStackTrace();
+        }
+    }
+
+    public void getStudentExamsInfo(Person student) {
+        String sql = "select * from Courses where exists (select * from CoursesSelected, Users where " +
+                "Courses.courseNumber = CoursesSelected.courseNumber and CoursesSelected.ECardNumber " +
+                "= Users.ECardNumber and Courses.isExam and Courses.examTime is not null and Users.ECardNumber = ?) ";
+        try {
+            ArrayList<Course> cs = new ArrayList<Course>();
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1,student.getECardNumber());
+            ResultSet coursesRes = stmt.executeQuery();
+            while (coursesRes.next()) {
+                if(!(coursesRes.getString("examTime").isEmpty())) {
+                    cs.add(new Course(coursesRes.getString("courseNumber"),
+                            coursesRes.getString("courseName"),
+                            coursesRes.getString("courseSemester"),
+                            coursesRes.getString("courseLecturer"),
+                            coursesRes.getString("courseCredit"),
+                            coursesRes.getString("courseType"),
+                            coursesRes.getString("examTime"),
+                            coursesRes.getString("examPlace")));
+                }
+            }
+            student.setCourses(cs);
+            student.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            student.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
         }
     }
 
@@ -622,6 +651,7 @@ public class DatabaseActions {
                 String ECB = res.getString("ECardBalance");
                 String Sex=res.getString("Sex");
                 String avatar = res.getString("AvatarID");
+                String major=res.getString("Major");
 
                 p.setName(Name);
                 p.setStudentNumber(SN);
@@ -630,6 +660,7 @@ public class DatabaseActions {
                 p.setECardBalance(Double.parseDouble(ECB));
                 p.setSex(Sex);
                 p.setAvatarID(avatar);
+                p.setMajor(major);
                 p.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
             }
             return p;
@@ -658,8 +689,8 @@ public class DatabaseActions {
     public void insertPerson(Person p){                     //添加一位用户信息
         try{
             PreparedStatement sql = conn.prepareStatement("insert into Users" +
-                    "(ECardNumber,userName,PassWord,Sex,AuthorityNumber,LendBooksNumber,ECardBalance,StudentNumber,AvatarID)" +
-                    "values(?,?,?,?,?,?,?,?,?)");
+                    "(ECardNumber,userName,PassWord,Sex,AuthorityNumber,LendBooksNumber,ECardBalance,StudentNumber,AvatarID,Major)" +
+                    "values(?,?,?,?,?,?,?,?,?,?)");
             sql.setString(1, p.getECardNumber());
             sql.setString(2, p.getName());
             sql.setString(3, p.getPassWord());
@@ -669,6 +700,7 @@ public class DatabaseActions {
             sql.setString(7, Double.toString(p.getECardBalance()));
             sql.setString(8, p.getStudentNumber());
             sql.setString(9,p.getAvatarID());
+            sql.setString(10,p.getMajor());
             sql.executeUpdate();
 
         }catch (SQLException E)
@@ -708,6 +740,7 @@ public class DatabaseActions {
                 short LendBooksNumber = (short)Integer.parseInt("LendBooksNumber");
                 double ECardBalance = Double.parseDouble("ECardBalance");
                 String Avatar = res.getString("AvatarID");
+                String Major=res.getString("Major");
 
                 temp.setECardNumber(ECardNumber);
                 temp.setName(userName);
@@ -717,6 +750,7 @@ public class DatabaseActions {
                 temp.setECardBalance(ECardBalance);
                 temp.setLendBooksNumber(LendBooksNumber);
                 temp.setAvatarID(Avatar);
+                temp.setMajor(Major);
 
                 PM.addUser(temp);
             }
@@ -1041,6 +1075,33 @@ public class DatabaseActions {
             e.printStackTrace();
             p.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
             return p;
+        }
+    }
+
+    public NewsManage sendNewsMessage(NewsManage NM){
+        try{
+            Statement st=conn.createStatement();
+            ResultSet res=st.executeQuery("select *from News");
+
+
+            while(res.next()){
+                News temp=new News();
+                String URL=res.getString("URLAddress");
+                String NT=res.getString("NewsTitle");
+                Date ND=res.getDate("NewsDate");
+
+                temp.setURL(URL);
+                temp.setNewsTitle(NT);
+                temp.setNewsData(ND);
+
+                NM.addNews(temp);
+            }
+            NM.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
+            return NM;
+        }catch (SQLException E){
+            E.printStackTrace();
+            NM.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
+            return NM;
         }
     }
 }

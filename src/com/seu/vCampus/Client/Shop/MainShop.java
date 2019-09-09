@@ -5,6 +5,10 @@ import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
 import com.seu.vCampus.Client.Common;
 import com.seu.vCampus.util.Goods;
+import com.seu.vCampus.util.Message;
+import com.seu.vCampus.util.Person;
+import com.seu.vCampus.util.ShopManage;
+
 
 
 import javax.swing.*;
@@ -12,6 +16,10 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import java.awt.image.ImagingOpException;
+import java.sql.ResultSet;
+
 import java.util.ArrayList;
 
 import static java.lang.Thread.sleep;
@@ -61,7 +69,11 @@ public class MainShop {
     private JPanel SearchPanel;
     private JPanel ShoppingCart;
     private JPanel PayBill;
+
     private JLabel Stock0;
+
+    private double SumOfMoney = 0;
+
 
     private static String[] header = {"编号", "名称", "价格", "数量"};
     private static DefaultTableModel ShopListModel = new DefaultTableModel(null, header) {
@@ -92,10 +104,12 @@ public class MainShop {
                         Picture0.setIcon(new ImageIcon("src/icon/ProductPicture/" + ShopData.getShopInformation().getGoods().get(counter).getGoodsNumber() + ".png"));
                         Picture0.setText("");
                         Price0.setText(Double.toString(ShopData.getShopInformation().getGoods().get(counter).getGoodsPrice()));
+                        Stock0.setText(Double.toString(ShopData.getShopInformation().getGoods().get(counter).getGoodsStock()));
                         searchGoods = ShopData.getShopInformation().getGoods().get(counter);
                         SearchResult.setVisible(true);
                         break;
                     }
+                    counter++;
                 }
                 if (counter == ShopData.getShopInformation().getGoods().size()) {
                     JOptionPane.showMessageDialog(null, "未找到匹配商品", "错误", JOptionPane.ERROR_MESSAGE);
@@ -106,8 +120,16 @@ public class MainShop {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (searchGoods.getGoodsStock() >= Short.parseShort(ResulttextField.getText())) {
-                    searchGoods.setGoodsStock(Short.parseShort(ResulttextField.getText()));
-                    ShopData.getShoppingList().add(searchGoods);
+                    Goods temp = new Goods();
+                    temp.setGoodsPrice(searchGoods.getGoodsPrice());
+                    temp.setGoodsStock(searchGoods.getGoodsStock());
+                    temp.setGoodsName(searchGoods.getGoodsName());
+                    temp.setGoodsNumber(searchGoods.getGoodsNumber());
+
+                    searchGoods.setGoodsStock((short) (searchGoods.getGoodsStock() - Short.parseShort(ResulttextField.getText())));
+                    ShopData.getShoppingList().add(temp);
+                    JOptionPane.showMessageDialog(null, "亲添加成功~", "成功", JOptionPane.INFORMATION_MESSAGE);
+                    ResulttextField.setText("");
                 } else
                     JOptionPane.showMessageDialog(null, "商品库存不足", "错误", JOptionPane.ERROR_MESSAGE);
             }
@@ -116,6 +138,9 @@ public class MainShop {
             @Override
             public void actionPerformed(ActionEvent e) {
                 ShopData.getShoppingList().clear();
+                SumOfMoney = 0;
+                TotalCost.setText("0元");
+
             }
         });
         PayBillButton.addActionListener(new ActionListener() {
@@ -123,10 +148,16 @@ public class MainShop {
             public void actionPerformed(ActionEvent e) {
                 if (PaytextField.getText().equals(ShopData.getUserCount().getBankPassword())) {
                     Double ECB = Double.parseDouble(ECardBalance.getText());
-                    Double Total = Double.parseDouble(TotalCost.getText());
-                    if (ECB >= Total) {
-                        ShopData.getUser().setECardBalance(ECB - Total);
+                    if (ECB >= SumOfMoney) {
+                        ShopData.getUser().setECardBalance(ECB - SumOfMoney);
+                        ShopData.getUser().setType(Message.MESSAGE_TYPE.TYPE_UPDATE_USER);
+                        ShopData.getIO().SendMessages(ShopData.getUser());
+                        ShopData.setUser((Person) ShopData.getIO().ReceiveMessage());
                         ShopData.getShoppingList().clear();
+                        ShopData.getShoppingList().clear();
+                        ResulttextField.setText("");
+                        PaytextField.setText("");
+                        JOptionPane.showMessageDialog(null, "支付成功呢亲", "压力马斯内", JOptionPane.INFORMATION_MESSAGE);
                     } else
                         JOptionPane.showMessageDialog(null, "一卡通余额不足", "错误", JOptionPane.ERROR_MESSAGE);
                 } else
@@ -158,10 +189,15 @@ public class MainShop {
                         Goods Temp = ShopData.getShoppingList().get(ShopData.getShoppingList().size() - 1);
                         Object[] tempData = {
                                 Temp.getGoodsNumber(), Temp.getGoodsName(), Temp.getGoodsPrice(), Temp.getGoodsStock()};
+                        SumOfMoney = SumOfMoney + Temp.getGoodsStock() * Temp.getGoodsPrice();
+                        TotalCost.setText(Double.toString(SumOfMoney) + "元");
                         ShopListModel.addRow(tempData);
                     }
                     if (flag != 0 && ShopData.getShoppingList().size() == 0) {
-                        break;
+                        for (int i = flag - 1; i >= 0; i--) {
+                            ShopListModel.removeRow(i);
+                        }
+                        flag = ShopData.getShoppingList().size();
                     }
                 }
             }
@@ -179,6 +215,16 @@ public class MainShop {
         }
         TotalCost.setText(Double.toString(cost));
         SearchResult.setVisible(false);
+        SearchResult.setBackground(null);
+        SearchResult.setOpaque(false);
+        SearchPanel.setBackground(null);
+        SearchPanel.setOpaque(false);
+        PayBill.setBackground(null);
+        PayBill.setOpaque(false);
+        ShoppingCart.setBackground(null);
+        ShoppingCart.setOpaque(false);
+        Search.setBackground(Color.BLACK);
+        ShoppingTrolley.setBackground(Color.BLACK);
     }
 
 
@@ -325,20 +371,24 @@ public class MainShop {
         ShoppingTrolley.setForeground(new Color(-1));
         tabbedPane1.addTab("购物车", ShoppingTrolley);
         ShoppingCart = new JPanel();
-        ShoppingCart.setLayout(new GridLayoutManager(2, 2, new Insets(0, 0, 0, 0), -1, -1));
+        ShoppingCart.setLayout(new GridLayoutManager(3, 2, new Insets(0, 0, 0, 0), -1, -1));
         ShoppingCart.setBackground(new Color(-8355712));
         ShoppingTrolley.add(ShoppingCart, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-        ShoppingCart.add(goodsTable, new GridConstraints(0, 0, 2, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
         CleanButton = new JButton();
         CleanButton.setBackground(new Color(-14672351));
         CleanButton.setForeground(new Color(-1));
         CleanButton.setText("清空购物车");
-        ShoppingCart.add(CleanButton, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        ShoppingCart.add(CleanButton, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         DeleteButton = new JButton();
         DeleteButton.setBackground(new Color(-14672351));
         DeleteButton.setForeground(new Color(-1));
         DeleteButton.setText("清除选中项");
-        ShoppingCart.add(DeleteButton, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        ShoppingCart.add(DeleteButton, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final JScrollPane scrollPane1 = new JScrollPane();
+        ShoppingCart.add(scrollPane1, new GridConstraints(0, 0, 3, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        goodsTable.setAutoCreateRowSorter(true);
+        goodsTable.setFillsViewportHeight(true);
+        scrollPane1.setViewportView(goodsTable);
         PayBill = new JPanel();
         PayBill.setLayout(new GridLayoutManager(3, 4, new Insets(0, 0, 0, 0), -1, -1));
         PayBill.setBackground(new Color(-8355712));

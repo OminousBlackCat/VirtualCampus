@@ -158,6 +158,18 @@ public class Course extends Message{
         this.gradeAdded = gradeAdded;
     }
 
+    public Course(String courseNumber, String courseName, String courseSemester, String courseLecturer,
+                  String courseCredit, String courseType, String examTime, String examPlace) {
+        this.courseNumber = courseNumber;
+        this.courseName = courseName;
+        this.courseSemester = courseSemester;
+        this.courseLecturer = courseLecturer;
+        this.courseCredit = courseCredit;
+        this.courseType = courseType;
+        this.examTime = examTime;
+        this.examPlace = examPlace;
+    }
+
     /**
      * The following methods are just basic setters and getters.
      */

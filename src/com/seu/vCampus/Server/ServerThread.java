@@ -106,6 +106,7 @@ public class ServerThread  extends Thread{
                     }
                     case TYPE_GET_WITHOUT_GRADES:
                         act.getCoursesSelectedWithoutGrades((Person) msg);
+                        break;
                     case TYPE_GET_GRADES:
                         act.getGrades((Person) msg);
                         break;
@@ -126,6 +127,12 @@ public class ServerThread  extends Thread{
                         break;
                     case TYPE_QUERY_EXAMINABLE_COURSES:
                         act.getCoursesForExam((Person) msg);
+                        break;
+                    case TYPE_GET_EXAM_INFO:
+                        act.getExamInfo((Course) msg);
+                        break;
+                    case TYPE_GET_STUDENT_EXAMS_INFO:
+                        act.getStudentExamsInfo((Person) msg);
                         break;
                     case TYPE_INPUT_EXAMS:
                         act.examsInput((Person) msg);
@@ -168,6 +175,9 @@ public class ServerThread  extends Thread{
                         break;
                     case TYPE_RETURN_BOOK:
                         act.updateLendDate((Book)msg,1);
+                        break;
+                    case TYPE_UPDATE_USER:
+                        act.updatePerson((Person)msg);
                         break;
                 }
 

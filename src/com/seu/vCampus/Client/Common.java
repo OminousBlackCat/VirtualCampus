@@ -41,6 +41,7 @@ public class Common {
     private ShopManage shopInformation;
     private BookManage bookInformation;
     private ArrayList<Goods> ShoppingList;
+    private static final int MAX_LEND_BOOK = 10;
 
 
     public static Common getInstance(){
@@ -113,5 +114,9 @@ public class Common {
             if(delete.getGoodsNumber().equals(ShoppingList.get(i).getGoodsNumber()))
                 ShoppingList.remove(i);
         }
+    }
+
+    public static int getMaxLendBook() {
+        return MAX_LEND_BOOK;
     }
 }

@@ -28,6 +28,8 @@ public class Message implements java.io.Serializable{
         TYPE_ADD_COURSE,
         TYPE_QUERY_EXAMINABLE_COURSES,
         TYPE_INPUT_EXAMS,
+        TYPE_GET_EXAM_INFO,
+        TYPE_GET_STUDENT_EXAMS_INFO,
         TYPE_QUERY_BANK_COUNT,
         TYPE_RECHARGE_ECARD,
         TYPE_QUERY_GOODS,
@@ -40,7 +42,8 @@ public class Message implements java.io.Serializable{
         TYPE_RENEWAL_BOOK,
         TYPE_RETURN_BOOK,
         TYPE_LEND_BOOK,
-        ;
+        TYPE_UPDATE_USER,
+        TYPE_QUERY_NEWS
     }
 
     public void setECardNumber(String ECardNumber) {

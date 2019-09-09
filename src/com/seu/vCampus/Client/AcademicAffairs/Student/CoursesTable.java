@@ -18,28 +18,28 @@ public class CoursesTable  extends JPanel {
         add(label_1);
 
         JLabel label_2 = new JLabel("周二",JLabel.CENTER);
-        label_1.setBounds(210, 42, 130, 42);
-        label_1.setOpaque(true);
-        label_1.setBackground(Color.GREEN);
-        add(label_1);
-
-        JLabel label_3 = new JLabel("周三",JLabel.CENTER);
-        label_2.setBounds(340, 42, 130, 42);
+        label_2.setBounds(210, 42, 130, 42);
         label_2.setOpaque(true);
         label_2.setBackground(Color.GREEN);
         add(label_2);
 
-        JLabel label_4 = new JLabel("周四",JLabel.CENTER);
-        label_3.setBounds(470, 42, 130, 42);
+        JLabel label_3 = new JLabel("周三",JLabel.CENTER);
+        label_3.setBounds(340, 42, 130, 42);
         label_3.setOpaque(true);
         label_3.setBackground(Color.GREEN);
         add(label_3);
 
-        JLabel label_5 = new JLabel("周五",JLabel.CENTER);
-        label_4.setBounds(600, 42, 130, 42);
+        JLabel label_4 = new JLabel("周四",JLabel.CENTER);
+        label_4.setBounds(470, 42, 130, 42);
         label_4.setOpaque(true);
         label_4.setBackground(Color.GREEN);
         add(label_4);
+
+        JLabel label_5 = new JLabel("周五",JLabel.CENTER);
+        label_5.setBounds(600, 42, 130, 42);
+        label_5.setOpaque(true);
+        label_5.setBackground(Color.GREEN);
+        add(label_5);
 
         JLabel label1 = new JLabel("1",JLabel.CENTER);
         label1.setBounds(14, 85, 56, 55);
@@ -93,16 +93,17 @@ public class CoursesTable  extends JPanel {
     }
     public void addCourse(String CourseTime,String CourseName){
         String []time;
-        time=CourseTime.split(";");
-        int n=time.length;
-        for(int i=0;i<n;i++){
-            int l= Integer.parseInt(time[0]);
-            int r= Integer.parseInt(time[2]);
+        time = CourseTime.split(";");
+        int n = time.length;
+        for(int i=0; i < n; i++){
+            String[] t = time[i].split("-");
+            int l= Integer.parseInt(t[0]);
+            int r= Integer.parseInt(t[1]);
             jLabel=new JLabel(CourseName,JLabel.CENTER);
             jLabel.setBounds(80+130*(l-1),85+55*(r-1),130,55);
             jLabel.setOpaque(true);
             jLabel.setBackground(Color.GRAY);
-            add(jLabel);
+            this.add(jLabel);
         }
 
 
