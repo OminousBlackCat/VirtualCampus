@@ -30,6 +30,8 @@ import com.seu.vCampus.Client.Shop.*;
 
 import com.seu.vCampus.util.*;
 
+import static java.lang.Thread.sleep;
+
 
 public class Home extends JFrame{
 
@@ -58,6 +60,20 @@ public class Home extends JFrame{
     private AdminMainPanel adminPanel;
 
     private int skinNumber = 1;
+    private Thread updatePanel = new Thread(new Runnable() {
+        @Override
+        public void run() {
+            while (true){
+                homePanel = new BasicInformationPanel("0"+Integer.toString(skinNumber));
+                tabbedPane.setComponentAt(0,homePanel);
+                try{
+                    sleep(2000);
+                }catch (InterruptedException ie ){
+                    ie.printStackTrace();
+                }
+            }
+        }
+    });
 
 
     private void LoadCommon(){
@@ -246,7 +262,11 @@ public class Home extends JFrame{
             skin.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    skinNumber++;
+                    if(skinNumber == 4){
+                        skinNumber = 1;
+                    }else {
+                        skinNumber++;
+                    }
                     switch (skinNumber) {
                         case 1:
                             getContentPane().setBackground(new Color(63, 87, 123));
@@ -271,13 +291,12 @@ public class Home extends JFrame{
                             tabbedPane.setBackground(new Color(0, 70, 40));
                             homePanel = new BasicInformationPanel("04");
                             tabbedPane.setComponentAt(0, homePanel);
-                            skinNumber = 0;
                             break;
                     }
                 }
             });
         }
-        
+
 
         System.out.println(homeData.getUser().getAuthorityLevel());
         switch (homeData.getUser().getAuthorityLevel()){
@@ -364,6 +383,7 @@ public class Home extends JFrame{
 
         this.setUndecorated(true);
         initialize();
+        updatePanel.start();
     }
 
 
