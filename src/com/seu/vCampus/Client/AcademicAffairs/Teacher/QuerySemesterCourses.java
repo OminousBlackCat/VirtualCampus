@@ -12,7 +12,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class QuerySemesterCourses extends JPanel {
-    public QuerySemesterCourses(String semester) {
+    public QuerySemesterCourses(String semester, QueryAllMyCoursesPanel qacP, TeacherMainPanel tmP) {
         Common teacherMessage = Common.getInstance();
         Course tempCourse = new Course();
         tempCourse.setCourseSemester(semester);
@@ -26,7 +26,7 @@ public class QuerySemesterCourses extends JPanel {
         courses =  ( (Person) teacherMessage.getIO().ReceiveMessage()).getCourses();
         if(!courses.isEmpty()) {
             String[] columnNames = {"课程编号", "课程名", "学期", "上课地点", "上课时间", "课程类型",
-                    "学分", "是否考试","人数上限","现有学生数","操作","操作"};
+                    "学分", "是否考试","人数上限","现有学生数","查看","操作"};
             Object[][] data = new Object[courses.size()][12];
 
             for(int i = 0; i < courses.size(); i++) {
@@ -42,12 +42,12 @@ public class QuerySemesterCourses extends JPanel {
                 else data[i][7] = "否";
                 data[i][8] = c.getMaximumStudents();
                 data[i][9] = c.getEnrolledStudents();
-                data[i][10] = "查看学生";
+                data[i][10] = "查看学生名单";
                 if(c.isGradeAdded()) {
-                    data[i][11] = "成绩已录入";
+                    data[i][11] = "查看成绩册";
                 }
                 else {
-                    data[i][11] = "录入成绩";
+                    data[i][11] = "录入成绩册";
                 }
             }
 
@@ -57,7 +57,10 @@ public class QuerySemesterCourses extends JPanel {
             TableUtils.FitTableColumns(coursesTable);
             coursesTable.setFont(new Font("微软雅黑",Font.PLAIN,16));
             coursesTable.getColumnModel().getColumn(10).setCellRenderer(new TableButtonRender());
+            coursesTable.getColumnModel().getColumn(10).setCellEditor(new QueryStudentsButton(coursesTable));
             coursesTable.getColumnModel().getColumn(11).setCellRenderer(new TableButtonRender());
+            coursesTable.getColumnModel().getColumn(11).setCellEditor(new GradesButton(coursesTable,qacP,
+                    tmP));
             coursesTable.setRowHeight(25);
             coursesTable.setDefaultEditor(Object.class, null);
             JScrollPane scrollPane = new JScrollPane(coursesTable);

@@ -9,6 +9,7 @@ import java.awt.event.MouseEvent;
 
 import java.awt.event.*;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Enumeration;
 import javax.swing.Timer;
@@ -91,6 +92,10 @@ public class Home extends JFrame{
             homeData.getIO().SendMessages(homeData.getShopInformation());
             homeData.setShopInformation((ShopManage)homeData.getIO().ReceiveMessage());
 
+            homeData.getNewsList().setType(Message.MESSAGE_TYPE.TYPE_QUERY_NEWS);
+            homeData.getIO().SendMessages(homeData.getNewsList());
+            homeData.setNewsList((NewsManage)homeData.getIO().ReceiveMessage());
+            System.out.println("");
         }
 
 
@@ -272,7 +277,7 @@ public class Home extends JFrame{
                 }
             });
         }
-
+        
 
         System.out.println(homeData.getUser().getAuthorityLevel());
         switch (homeData.getUser().getAuthorityLevel()){
@@ -284,12 +289,10 @@ public class Home extends JFrame{
             }
             case GROUP_STUDENT:{
                 tabbedPane.addTab("图书", Library, libraryPanel, null);
-                sam = new StudentAcademicMainPanel();
-                tabbedPane.addTab("教务", Edu, sam, null);
-
 
                 sam = new StudentAcademicMainPanel();
                 tabbedPane.addTab("教务", Edu, sam, null);
+
 
                 JPanel panel_3 = new JPanel();
                 tabbedPane.addTab("商店",Shop, mainShopPanel.getPanel(), null);
@@ -372,6 +375,12 @@ public class Home extends JFrame{
                     Person test = new Person();
                     test.setAuthorityLevel(Person.USER_GROUP.GROUP_STUDENT);
                     temp.setUser(test);
+                    News A = new News("https://ak.hypergryph.com/index","title",new Date());
+                    ArrayList<News> aa = new ArrayList<>();
+                    for(int i =0;i<4;i++){
+                        aa.add(A);
+                    }
+                    temp.getNewsList().setNews(aa);
                     new Home();
                 } catch (Exception e) {
                     e.printStackTrace();

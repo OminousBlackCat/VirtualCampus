@@ -10,13 +10,16 @@ import com.seu.vCampus.util.Person;
 import com.seu.vCampus.util.ShopManage;
 
 
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import java.awt.image.ImagingOpException;
 import java.sql.ResultSet;
+
 import java.util.ArrayList;
 
 import static java.lang.Thread.sleep;
@@ -50,7 +53,6 @@ public class MainShop {
     private JLabel Picture0;
     private JLabel Name0;
     private JLabel Price0;
-    private JLabel label1;
     private JLabel label2;
     private JPanel SearchResult;
     private JPanel ShoppingTrolley;
@@ -67,7 +69,11 @@ public class MainShop {
     private JPanel SearchPanel;
     private JPanel ShoppingCart;
     private JPanel PayBill;
+
+    private JLabel Stock0;
+
     private double SumOfMoney = 0;
+
 
     private static String[] header = {"编号", "名称", "价格", "数量"};
     private static DefaultTableModel ShopListModel = new DefaultTableModel(null, header) {
@@ -97,7 +103,8 @@ public class MainShop {
                         Name0.setText(ShopData.getShopInformation().getGoods().get(counter).getGoodsName());
                         Picture0.setIcon(new ImageIcon("src/icon/ProductPicture/" + ShopData.getShopInformation().getGoods().get(counter).getGoodsNumber() + ".png"));
                         Picture0.setText("");
-                        Price0.setText(Double.toString(ShopData.getShopInformation().getGoods().get(counter).getGoodsPrice()));
+                        Price0.setText(Double.toString(ShopData.getShopInformation().getGoods().get(counter).getGoodsPrice()) + "元");
+                        Stock0.setText(Double.toString(ShopData.getShopInformation().getGoods().get(counter).getGoodsStock()) + "在库");
                         searchGoods = ShopData.getShopInformation().getGoods().get(counter);
                         SearchResult.setVisible(true);
                         break;
@@ -120,6 +127,7 @@ public class MainShop {
                     temp.setGoodsNumber(searchGoods.getGoodsNumber());
 
                     searchGoods.setGoodsStock((short) (searchGoods.getGoodsStock() - Short.parseShort(ResulttextField.getText())));
+                    Stock0.setText(Double.toString(searchGoods.getGoodsStock()) + "在库");
                     ShopData.getShoppingList().add(temp);
                     JOptionPane.showMessageDialog(null, "亲添加成功~", "成功", JOptionPane.INFORMATION_MESSAGE);
                     ResulttextField.setText("");
@@ -208,6 +216,16 @@ public class MainShop {
         }
         TotalCost.setText(Double.toString(cost));
         SearchResult.setVisible(false);
+        SearchResult.setBackground(null);
+        SearchResult.setOpaque(false);
+        SearchPanel.setBackground(null);
+        SearchPanel.setOpaque(false);
+        PayBill.setBackground(null);
+        PayBill.setOpaque(false);
+        ShoppingCart.setBackground(null);
+        ShoppingCart.setOpaque(false);
+        Search.setBackground(Color.BLACK);
+        ShoppingTrolley.setBackground(Color.BLACK);
     }
 
 
@@ -239,10 +257,10 @@ public class MainShop {
             }
         }
 
-        ProductPage ProductLife = new ProductPage(Life);
-        ProductPage ProductStudy = new ProductPage(Study);
-        ProductPage ProductComputer = new ProductPage(Computer);
-        ProductPage ProductFood = new ProductPage(Food);
+        ProductLife = new ProductPage(Life);
+        ProductStudy = new ProductPage(Study);
+        ProductComputer = new ProductPage(Computer);
+        ProductFood = new ProductPage(Food);
         tabbedPane1.addTab("生活用品", ShopLife, ProductLife.getMainPanel(), "本页面将展示各类生活用品供同学们选择");
         tabbedPane1.addTab("教材工具", ShopStudy, ProductStudy.getMainPanel(), "本页面将展示各类教材工具供同学们选择");
         tabbedPane1.addTab("电子配件", ShopComputer, ProductComputer.getMainPanel(), "本页面将展示各类电子配件供同学们选择");
@@ -281,7 +299,7 @@ public class MainShop {
         tabbedPane1.setBackground(new Color(-8355712));
         basis.add(tabbedPane1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, new Dimension(200, 200), null, 0, false));
         Search = new JPanel();
-        Search.setLayout(new GridLayoutManager(1, 2, new Insets(0, 0, 0, 0), -1, -1));
+        Search.setLayout(new GridLayoutManager(2, 1, new Insets(0, 0, 0, 0), -1, -1));
         Search.setBackground(new Color(-8355712));
         Search.setEnabled(true);
         Search.setForeground(new Color(-1));
@@ -289,7 +307,7 @@ public class MainShop {
         SearchPanel = new JPanel();
         SearchPanel.setLayout(new GridLayoutManager(3, 4, new Insets(0, 0, 0, 0), -1, -1));
         SearchPanel.setBackground(new Color(-8355712));
-        Search.add(SearchPanel, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        Search.add(SearchPanel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         SearchtextField = new JTextField();
         SearchPanel.add(SearchtextField, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         label0 = new JLabel();
@@ -316,9 +334,9 @@ public class MainShop {
         final Spacer spacer7 = new Spacer();
         SearchPanel.add(spacer7, new GridConstraints(2, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         SearchResult = new JPanel();
-        SearchResult.setLayout(new GridLayoutManager(4, 4, new Insets(0, 0, 0, 0), -1, -1));
+        SearchResult.setLayout(new GridLayoutManager(5, 4, new Insets(0, 0, 0, 0), -1, -1));
         SearchResult.setBackground(new Color(-8355712));
-        Search.add(SearchResult, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        Search.add(SearchResult, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         Picture0 = new JLabel();
         Picture0.setForeground(new Color(-1));
         Picture0.setText("商品图片");
@@ -330,24 +348,24 @@ public class MainShop {
         Price0 = new JLabel();
         Price0.setForeground(new Color(-1));
         Price0.setText("商品价格");
-        SearchResult.add(Price0, new GridConstraints(2, 0, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        SearchResult.add(Price0, new GridConstraints(3, 0, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         label2 = new JLabel();
         label2.setForeground(new Color(-1));
         label2.setText("购入数量：");
-        SearchResult.add(label2, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        SearchResult.add(label2, new GridConstraints(4, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         ResulttextField = new JTextField();
-        SearchResult.add(ResulttextField, new GridConstraints(3, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        SearchResult.add(ResulttextField, new GridConstraints(4, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         AddButton = new JButton();
         AddButton.setBackground(new Color(-14672351));
         AddButton.setForeground(new Color(-1));
         AddButton.setText("添加");
-        SearchResult.add(AddButton, new GridConstraints(3, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        SearchResult.add(AddButton, new GridConstraints(4, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final Spacer spacer8 = new Spacer();
-        SearchResult.add(spacer8, new GridConstraints(3, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
-        label1 = new JLabel();
-        label1.setForeground(new Color(-1));
-        label1.setText("元");
-        SearchResult.add(label1, new GridConstraints(2, 3, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        SearchResult.add(spacer8, new GridConstraints(4, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
+        Stock0 = new JLabel();
+        Stock0.setForeground(new Color(-1));
+        Stock0.setText("商品库存");
+        SearchResult.add(Stock0, new GridConstraints(2, 0, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         ShoppingTrolley = new JPanel();
         ShoppingTrolley.setLayout(new GridLayoutManager(1, 2, new Insets(0, 0, 0, 0), -1, -1));
         ShoppingTrolley.setBackground(new Color(-8355712));
@@ -413,4 +431,5 @@ public class MainShop {
     public JComponent $$$getRootComponent$$$() {
         return basis;
     }
+
 }

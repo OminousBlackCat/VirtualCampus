@@ -1,7 +1,6 @@
 package com.seu.vCampus.Database;
 import com.seu.vCampus.util.*;
 
-import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -396,11 +395,12 @@ public class DatabaseActions {
      *               stored into the Person.courses list (the original courses list information will be overwritten).
      */
     public void getEnrolledStudents(Person lecturer) {
-        String sql = "SELECT Courses.*, Users.ECardNumber, Users.userName FROM Courses, CoursesSelected, Users WHERE " +
+        String sql = "SELECT Courses.*, Users.ECardNumber, Users.userName, CoursesSelected.grade" +
+                " FROM Courses, CoursesSelected, Users WHERE " +
                 "Courses.courseNumber = CoursesSelected.courseNumber AND CoursesSelected.ECardNumber" +
                 "= Users.ECardNumber AND Courses.courseNumber = ?";
         int l = lecturer.getCourses().size();
-        String cN = lecturer.getCourses().get(l-1).getCourseNumber();
+        String cN = lecturer.getCourses().get( l - 1 ).getCourseNumber();
         ArrayList<Course> cs = new ArrayList<Course>();
 
         try{
@@ -416,6 +416,7 @@ public class DatabaseActions {
                         cRes.getBoolean("isExam"));
                 c.setECardNumber(cRes.getString("ECardNumber"));
                 c.setStudentName(cRes.getString("userName"));
+                c.setCourseGrade(cRes.getInt("grade"));
                 cs.add(c);
             }
             lecturer.setCourses(cs);
@@ -475,7 +476,7 @@ public class DatabaseActions {
             for (Course c : lecturer.getCourses()) {
                 if (!c.getECardNumber().isEmpty()) {
                     setGrade(c);
-                    String sql = "UPDATE Courses SET gradeAdded WHERE courseNumber = ?";
+                    String sql = "UPDATE Courses SET gradeAdded = 1 WHERE courseNumber = ?";
                     stmt = conn.prepareStatement(sql);
                     stmt.setString(1,c.getCourseNumber());
                     stmt.executeUpdate();
@@ -1108,7 +1109,7 @@ public class DatabaseActions {
 
                 temp.setURL(URL);
                 temp.setNewsTitle(NT);
-                temp.setNewsData(ND);
+                temp.setNewsDate(ND);
 
                 NM.addNews(temp);
             }
