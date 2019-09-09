@@ -25,6 +25,8 @@ public class StudentAcademicMainPanel extends JPanel {
         switchPane.addTab("查询成绩",queryGradesPanel);
         add(switchPane);
         switchPane.setTabPlacement(JTabbedPane.TOP);
+        switchPane.setVisible(true);
+        this.setVisible(true);
     }
 
     public void refresh() {

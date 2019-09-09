@@ -7,6 +7,7 @@ import com.seu.vCampus.Client.Common;
 import com.seu.vCampus.util.Course;
 import com.seu.vCampus.util.Message;
 import com.seu.vCampus.util.Person;
+import javafx.scene.control.Tab;
 
 import javax.swing.*;
 import javax.swing.table.JTableHeader;
@@ -37,7 +38,7 @@ public class CoursesSelectedPanel extends JPanel {
                 data[i][2] = c.getCourseLecturer();
                 data[i][3] = c.getCourseSemester();
                 data[i][4] = c.getCoursePlace();
-                data[i][5] = c.getCourseTime();
+                data[i][5] = TableUtils.ParseCourseTime(c.getCourseTime());
                 data[i][6] = c.getCourseType();
                 data[i][7] = c.getCourseCredit();
                 if(c.isExam()) data[i][8] = "是";
@@ -47,7 +48,8 @@ public class CoursesSelectedPanel extends JPanel {
             coursesTable.setLayout(new BorderLayout());
             coursesTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
             TableUtils.FitTableColumns(coursesTable);
-            coursesTable.setFont(new Font("楷体",Font.PLAIN,14));
+            coursesTable.setFont(new Font("微软雅黑",Font.PLAIN,16));
+            coursesTable.setRowHeight(30);
             JScrollPane scrollPane = new JScrollPane(coursesTable);
             setLayout(new BorderLayout());
             add(scrollPane, BorderLayout.CENTER);
@@ -81,7 +83,7 @@ public class CoursesSelectedPanel extends JPanel {
                 data[i][2] = course.getCourseLecturer();
                 data[i][3] = course.getCourseSemester();
                 data[i][4] = course.getCoursePlace();
-                data[i][5] = course.getCourseTime();
+                data[i][5] = TableUtils.ParseCourseTime(course.getCourseTime());
                 data[i][6] = course.getCourseType();
                 data[i][7] = course.getCourseCredit();
                 if(c.isExam()) data[i][8] = "是";
@@ -95,7 +97,8 @@ public class CoursesSelectedPanel extends JPanel {
             coursesTable.getColumnModel().getColumn(9).setCellRenderer(new TableButtonRender());
             coursesTable.getColumnModel().getColumn(9).setCellEditor(new DeselectCourseButton(coursesTable,fatherPanel));
             JScrollPane scrollPane = new JScrollPane(coursesTable);
-            coursesTable.setFont(new Font("楷体",Font.PLAIN,14));
+            coursesTable.setFont(new Font("微软雅黑",Font.PLAIN,16));
+            coursesTable.setRowHeight(30);
             setLayout(new BorderLayout());
             add(scrollPane, BorderLayout.CENTER);
             this.setVisible(true);
