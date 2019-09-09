@@ -46,7 +46,6 @@ public class Home extends JFrame{
     private BasicInformationPanel homePanel;
     private AdminMainPanel adminMainPanel;
     private TeacherMainPanel teacherMainPanel;
-    private StudentAcademicMainPanel studentStudentAcademicMainPanel;
     private SelectCoursesPanel coursePanelS;
     private MainShop mainShopPanel;
     private MangerShop mangerShopPanel;
@@ -284,15 +283,12 @@ public class Home extends JFrame{
             }
             case GROUP_STUDENT:{
                 tabbedPane.addTab("图书", Library, libraryPanel, null);
-                studentStudentAcademicMainPanel = new StudentAcademicMainPanel();
 
+                sam = new StudentAcademicMainPanel();
                 tabbedPane.addTab("教务", Edu, sam, null);
-
 
                 JPanel panel_3 = new JPanel();
                 tabbedPane.addTab("商店",Shop, mainShopPanel.getPanel(), null);
-
-
 
                 JPanel panel_4 = new JPanel();
                 tabbedPane.addTab("银行", Bank, bankPanel.getPanel(), null);

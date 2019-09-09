@@ -53,7 +53,7 @@ public class SelectCoursesPanel extends JPanel {
                 rowData.add(c.getCourseLecturer());
                 rowData.add(c.getCourseSemester());
                 rowData.add(c.getCoursePlace());
-                rowData.add(c.getCourseTime());
+                rowData.add(TableUtils.ParseCourseTime(c.getCourseTime()));
                 rowData.add(c.getCourseType());
                 rowData.add(c.getCourseCredit());
                 rowData.add(c.getEnrolledStudents());
@@ -78,7 +78,8 @@ public class SelectCoursesPanel extends JPanel {
             coursesTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
             TableUtils.FitTableColumns(coursesTable);
             JScrollPane scrollPane = new JScrollPane(coursesTable);
-            coursesTable.setFont(new Font("楷体",Font.PLAIN,14));
+            coursesTable.setFont(new Font("微软雅黑",Font.PLAIN,16));
+            coursesTable.setRowHeight(30);
             setLayout(new BorderLayout());
             add(scrollPane, BorderLayout.CENTER);
             this.setVisible(true);

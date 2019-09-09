@@ -14,7 +14,7 @@ public class AdminMainPanel extends JPanel{
         JButton button = new JButton("添加课程");
         button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-                AddCourse addCourse=new AddCourse();
+                AddCoursePanel addCoursePanel =new AddCoursePanel();
             }
         });
         button.setBounds(117, 89, 125, 27);
