@@ -52,7 +52,7 @@ class setGradesFrame extends JFrame {
     }
     public setGradesFrame(Person person){
         user=person;
-
+        setBounds(200,200,800,800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 
@@ -81,9 +81,9 @@ class setGradesFrame extends JFrame {
             }
         });
 
-
-        jScrollPane.setLayout(new BorderLayout());
-        jScrollPane.add(table,BorderLayout.CENTER);
+        jScrollPane = new JScrollPane(table);
+        getContentPane().add(jScrollPane,BorderLayout.CENTER);
+        this.setVisible(true);
         JButton jb=new JButton("确定");
         jb.addActionListener(new ActionListener() {
             @Override

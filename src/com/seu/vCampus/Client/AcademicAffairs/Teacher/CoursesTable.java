@@ -1,5 +1,6 @@
 package com.seu.vCampus.Client.AcademicAffairs.Teacher;
 
+import com.seu.vCampus.Client.AcademicAffairs.Utils.TableUtils;
 import com.seu.vCampus.Client.Common;
 import com.seu.vCampus.util.Course;
 import com.seu.vCampus.util.Message;
@@ -11,7 +12,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Vector;
 
-public class CoursesTable extends JPanel {
+public class CoursesTable extends JFrame {
 
     private JTable table;
     private JScrollPane scrollPane;
@@ -26,16 +27,15 @@ public class CoursesTable extends JPanel {
     public void getInf(){
         commondata=Common.getInstance();
         user=new Person();
-        course=new Course();
-        courses=new ArrayList<>();
-        course.setECardNumber(commondata.getUser().getECardNumber());
-        courses.add(course);
-        user.setCourses(courses);
+        user.setECardNumber(commondata.getUser().getECardNumber());
         user.setType(Message.MESSAGE_TYPE.TYPE_GET_LECTURER_COURSES);
         commondata.getIO().SendMessages(user);
         user=(Person)commondata.getIO().ReceiveMessage();
+        courses = user.getCourses();
     }
     public CoursesTable(){
+        setBounds(200,200,800,800);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
         getInf();
         Vector columnNames=new Vector();
@@ -52,7 +52,7 @@ public class CoursesTable extends JPanel {
         int number=courses.size();
         for(int i=0;i<number;i++){
             course=courses.get(i);
-            rowData.add(course.getCourseNumber());
+            rowData.add(course.getCourseNumber().split("-")[0]);
             rowData.add(course.getCourseName());
             rowData.add(course.getCourseSemester());
             rowData.add(course.getCoursePlace());
@@ -67,8 +67,11 @@ public class CoursesTable extends JPanel {
                     return false;
             }
         };
-        scrollPane.setLayout(new BorderLayout());
-        scrollPane.add(table,BorderLayout.CENTER);
-        add(scrollPane,BorderLayout.CENTER);
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        TableUtils.FitTableColumns(table);
+        table.setFont(new Font("楷体",Font.PLAIN,14));
+        scrollPane = new JScrollPane(table);
+        getContentPane().add(scrollPane, BorderLayout.CENTER);
+        getContentPane().setVisible(true);
     }
 }

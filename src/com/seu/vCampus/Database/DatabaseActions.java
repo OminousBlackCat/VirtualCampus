@@ -313,7 +313,7 @@ public class DatabaseActions {
         ArrayList<Course> cs = new ArrayList<Course>();
         String sql = "SELECT Courses.*, CoursesSelected.* FROM Courses INNER JOIN CoursesSelected ON " +
                 "(CoursesSelected.courseNumber = Courses.courseNumber and CoursesSelected.EcardNumber = ? and " +
-                "CoursesSelected.grade is not null)";
+                "CoursesSelected.grade > -1)";
         try {
             stmt = conn.prepareStatement(sql);
             stmt.setString(1,student.getECardNumber());
@@ -352,6 +352,35 @@ public class DatabaseActions {
         } catch (SQLException e) {
             course.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
             e.printStackTrace();
+        }
+    }
+
+    public void getStudentExamsInfo(Person student) {
+        String sql = "select * from Courses where exists (select * from CoursesSelected, Users where " +
+                "Courses.courseNumber = CoursesSelected.courseNumber and CoursesSelected.ECardNumber " +
+                "= Users.ECardNumber and Courses.isExam and Courses.examTime is not null and Users.ECardNumber = ?) ";
+        try {
+            ArrayList<Course> cs = new ArrayList<Course>();
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1,student.getECardNumber());
+            ResultSet coursesRes = stmt.executeQuery();
+            while (coursesRes.next()) {
+                if(!(coursesRes.getString("examTime").isEmpty())) {
+                    cs.add(new Course(coursesRes.getString("courseNumber"),
+                            coursesRes.getString("courseName"),
+                            coursesRes.getString("courseSemester"),
+                            coursesRes.getString("courseLecturer"),
+                            coursesRes.getString("courseCredit"),
+                            coursesRes.getString("courseType"),
+                            coursesRes.getString("examTime"),
+                            coursesRes.getString("examPlace")));
+                }
+            }
+            student.setCourses(cs);
+            student.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            student.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
         }
     }
 

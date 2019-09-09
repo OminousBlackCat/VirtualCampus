@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.Enumeration;
 import javax.swing.Timer;
 
+import com.seu.vCampus.Client.AcademicAffairs.Admin.MainPanel;
 import com.seu.vCampus.Client.AcademicAffairs.Student.StudentAcademicMainPanel;
 import com.seu.vCampus.Client.Bank.Bank;
 import com.seu.vCampus.Client.BasicInformation.BasicInformationPanel;
@@ -28,6 +29,8 @@ import com.seu.vCampus.Client.AcademicAffairs.Teacher.InputGrades;
 import com.seu.vCampus.Client.Shop.MainShop;
 
 import com.seu.vCampus.util.*;
+
+import static com.seu.vCampus.util.Person.USER_GROUP.GROUP_ACADEMIC_MANAGER;
 
 
 public class Home extends JFrame{
@@ -316,6 +319,11 @@ public class Home extends JFrame{
             case GROUP_SHOP_MANAGER:{
                 JPanel ShopManager = new JPanel();
                 tabbedPane.addTab("商品管理",Shop,ShopManager,null);
+                break;
+            }
+            case GROUP_ACADEMIC_MANAGER: {
+                MainPanel academicManager = new MainPanel();
+                tabbedPane.addTab("教务管理", Edu,academicManager,null);
                 break;
             }
 
