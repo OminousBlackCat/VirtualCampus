@@ -207,4 +207,5 @@ public class MangerShop {
     public JComponent $$$getRootComponent$$$() {
         return panel1;
     }
+
 }
