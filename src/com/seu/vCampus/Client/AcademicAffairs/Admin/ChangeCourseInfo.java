@@ -15,8 +15,8 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
 
-public class AddCourse {
-    private JFrame frame;
+public class ChangeCourseInfo extends JFrame {
+
     private JTextField textField;
     private JTextField textField_1;
     private JTextField textField_2;
@@ -28,7 +28,7 @@ public class AddCourse {
     private JTextField textField_8;
     private JTextField textField_9;
 
-    private ArrayList <Course> courses;
+    private ArrayList<Course> courses;
     private Common commonData;
     private Person person;
     private Course course;
@@ -45,58 +45,54 @@ public class AddCourse {
     private int enrolledStudents;
 
 
-    public AddCourse() {
-        initialize();
-    }
+    public ChangeCourseInfo(){
 
-    /**
-     * Initialize the contents of the frame.
-     */
-    private void initialize() {
-        frame = new JFrame();
-        frame.setBounds(100, 100, 330, 559);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().setLayout(null);
+        /**
+         * Initialize the contents of the frame.
+         */
+        setBounds(100, 100, 330, 559);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        getContentPane().setLayout(null);
 
         JLabel label = new JLabel("课程号");
         label.setBounds(31, 60, 108, 18);
-        frame.getContentPane().add(label);
+        getContentPane().add(label);
 
         JLabel lblCoursename = new JLabel("课程名");
         lblCoursename.setBounds(31, 110, 97, 18);
-        frame.getContentPane().add(lblCoursename);
+        getContentPane().add(lblCoursename);
 
         JLabel lblNewLabel = new JLabel("课程学期");
         lblNewLabel.setBounds(31, 160, 119, 18);
-        frame.getContentPane().add(lblNewLabel);
+        getContentPane().add(lblNewLabel);
 
         JLabel lblCourselecturer = new JLabel("授课教师");
         lblCourselecturer.setBounds(31, 210, 119, 18);
-        frame.getContentPane().add(lblCourselecturer);
+        getContentPane().add(lblCourselecturer);
 
         JLabel lblCourseplace = new JLabel("上课地点");
         lblCourseplace.setBounds(31, 260, 108, 18);
-        frame.getContentPane().add(lblCourseplace);
+        getContentPane().add(lblCourseplace);
 
         JLabel lblCoursetime = new JLabel("上课时间");
         lblCoursetime.setBounds(31, 310, 108, 18);
-        frame.getContentPane().add(lblCoursetime);
+        getContentPane().add(lblCoursetime);
 
         JLabel lblMaximumstudents = new JLabel("最大学生数");
         lblMaximumstudents.setBounds(31, 360, 119, 18);
-        frame.getContentPane().add(lblMaximumstudents);
+        getContentPane().add(lblMaximumstudents);
 
         JLabel lblCoursetype = new JLabel("课程类型");
         lblCoursetype.setBounds(31, 410, 97, 18);
-        frame.getContentPane().add(lblCoursetype);
+        getContentPane().add(lblCoursetype);
 
         JLabel lblCoursecredit = new JLabel("课程学分");
         lblCoursecredit.setBounds(31, 460, 108, 18);
-        frame.getContentPane().add(lblCoursecredit);
+        getContentPane().add(lblCoursecredit);
 
         textField = new JTextField();
         textField.setBounds(183, 57, 86, 24);
-        frame.getContentPane().add(textField);
+        getContentPane().add(textField);
         textField.setColumns(10);
         Document dt=textField.getDocument();
         dt.addDocumentListener(new DocumentListener() {
@@ -118,7 +114,7 @@ public class AddCourse {
 
         textField_1 = new JTextField();
         textField_1.setBounds(183, 107, 86, 24);
-        frame.getContentPane().add(textField_1);
+        getContentPane().add(textField_1);
         textField_1.setColumns(10);
         Document dt_1=textField_1.getDocument();
         dt_1.addDocumentListener(new DocumentListener() {
@@ -140,7 +136,7 @@ public class AddCourse {
 
         textField_2 = new JTextField();
         textField_2.setBounds(183, 157, 86, 24);
-        frame.getContentPane().add(textField_2);
+        getContentPane().add(textField_2);
         textField_2.setColumns(10);
         Document dt_2=textField_2.getDocument();
         dt_2.addDocumentListener(new DocumentListener() {
@@ -162,7 +158,7 @@ public class AddCourse {
 
         textField_3 = new JTextField();
         textField_3.setBounds(183, 207, 86, 24);
-        frame.getContentPane().add(textField_3);
+        getContentPane().add(textField_3);
         textField_3.setColumns(10);
         Document dt_3=textField_3.getDocument();
         dt_3.addDocumentListener(new DocumentListener() {
@@ -184,7 +180,7 @@ public class AddCourse {
 
         textField_4 = new JTextField();
         textField_4.setBounds(183, 257, 86, 24);
-        frame.getContentPane().add(textField_4);
+        getContentPane().add(textField_4);
         textField_4.setColumns(10);
         Document dt_4=textField_4.getDocument();
         dt_4.addDocumentListener(new DocumentListener() {
@@ -206,7 +202,7 @@ public class AddCourse {
 
         textField_5 = new JTextField();
         textField_5.setBounds(183, 307, 86, 24);
-        frame.getContentPane().add(textField_5);
+        getContentPane().add(textField_5);
         textField_5.setColumns(10);
         Document dt_5=textField_5.getDocument();
         dt_5.addDocumentListener(new DocumentListener() {
@@ -228,7 +224,7 @@ public class AddCourse {
 
         textField_6 = new JTextField();
         textField_6.setBounds(183, 357, 86, 24);
-        frame.getContentPane().add(textField_6);
+        getContentPane().add(textField_6);
         textField_6.setColumns(10);
         Document dt_6=textField_6.getDocument();
         dt_6.addDocumentListener(new DocumentListener() {
@@ -251,7 +247,7 @@ public class AddCourse {
         String [] str=new String[] {"必修","选修"};
         JComboBox comboBox = new JComboBox(str);
         comboBox.setBounds(183, 407, 86, 24);
-        frame.getContentPane().add(comboBox);
+        getContentPane().add(comboBox);
         comboBox.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
@@ -264,7 +260,7 @@ public class AddCourse {
 
         textField_7 = new JTextField();
         textField_7.setBounds(183, 457, 86, 24);
-        frame.getContentPane().add(textField_7);
+        getContentPane().add(textField_7);
         textField_7.setColumns(10);
         Document dt_7=textField_7.getDocument();
         dt_7.addDocumentListener(new DocumentListener() {
@@ -286,11 +282,11 @@ public class AddCourse {
 
         JLabel label_1 = new JLabel("老师一卡通");
         label_1.setBounds(31, 510, 108, 18);
-        frame.getContentPane().add(label_1);
+        getContentPane().add(label_1);
 
         textField_8 = new JTextField();
         textField_8.setBounds(183, 507, 86, 24);
-        frame.getContentPane().add(textField_8);
+        getContentPane().add(textField_8);
         textField_8.setColumns(10);
         Document dt_8=textField_8.getDocument();
         dt_8.addDocumentListener(new DocumentListener() {
@@ -312,11 +308,11 @@ public class AddCourse {
 
         JLabel label_2 = new JLabel("已选学生数");
         label_2.setBounds(31, 560, 97, 18);
-        frame.getContentPane().add(label_2);
+        getContentPane().add(label_2);
 
         textField_9 = new JTextField();
         textField_9.setBounds(183, 557, 86, 24);
-        frame.getContentPane().add(textField_9);
+        getContentPane().add(textField_9);
         textField_9.setColumns(10);
         Document dt_9=textField_9.getDocument();
         dt_9.addDocumentListener(new DocumentListener() {
@@ -338,12 +334,12 @@ public class AddCourse {
 
         JLabel label_3 = new JLabel("是否有考试");
         label_3.setBounds(31, 610, 105, 18);
-        frame.getContentPane().add(label_3);
+        getContentPane().add(label_3);
 
         String []isexam=new String []{"是","否"};
         JComboBox comboBox_1 = new JComboBox(isexam);
         comboBox_1.setBounds(183, 607, 86, 24);
-        frame.getContentPane().add(comboBox_1);
+        getContentPane().add(comboBox_1);
         comboBox_1.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
@@ -357,27 +353,30 @@ public class AddCourse {
 
         JButton btnOk = new JButton("OK");
         btnOk.setBounds(31, 513, 97, 27);
-        frame.getContentPane().add(btnOk);
+        getContentPane().add(btnOk);
         btnOk.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                Course courseCopy=course;
+                courseCopy.setType(Message.MESSAGE_TYPE.TYPE_DESELECT_COURSE);
+                commonData.getIO().SendMessages(courseCopy);
+                courseCopy=(Course)commonData.getIO().ReceiveMessage();
+
                 course.setType(Message.MESSAGE_TYPE.TYPE_ADD_COURSE);
                 commonData.getIO().SendMessages(course);
                 course=(Course)commonData.getIO().ReceiveMessage();
-                frame.dispose();
+                dispose();
             }
         });
 
         JButton btnCancel = new JButton("CANCEL");
         btnCancel.setBounds(185, 513, 97, 27);
-        frame.getContentPane().add(btnCancel);
+        getContentPane().add(btnCancel);
         btnCancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                frame.dispose();
+                dispose();
             }
         });
-
-
     }
 }

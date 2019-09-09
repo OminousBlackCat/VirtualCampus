@@ -18,6 +18,7 @@ public class Person extends Message{
 
 
     public Person(){
+        this.courses = new ArrayList<Course>();
         this.ECardNumber = "null";
         this.Name = "null";
         this.Type = MESSAGE_TYPE.TYPE_QUERY_PERSON;
@@ -36,6 +37,7 @@ public class Person extends Message{
         GROUP_SHOP_MANAGER(2),
         GROUP_LIBRARY_MANAGER(3),
         GROUP_USER_MANAGER(4),
+        GROUP_ACADEMIC_MANAGER(5),
         ;
 
         private final int value;
@@ -58,6 +60,8 @@ public class Person extends Message{
                     return "图书管理员";
                 case 4:
                     return "总管理员";
+                case 5:
+                    return "教务管理员";
             }
             return null;
         }
@@ -183,6 +187,9 @@ public class Person extends Message{
                 break;
             case 4:
                 AuthorityLevel = USER_GROUP.GROUP_USER_MANAGER;
+                break;
+            case 5:
+                AuthorityLevel = USER_GROUP.GROUP_ACADEMIC_MANAGER;
                 break;
         }
     }
