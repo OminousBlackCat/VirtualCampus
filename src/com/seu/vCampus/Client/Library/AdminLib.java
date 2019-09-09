@@ -17,6 +17,14 @@ import java.awt.event.MouseEvent;
 import java.util.regex.PatternSyntaxException;
 
 public class AdminLib {
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("AdminLib");
+        frame.setContentPane(new AdminLib().AdminLibMPanel);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+    }
+
     public JPanel AdminLibMPanel;
     private JButton DeleteBookButton;
     private JButton AddBookButton;
@@ -102,7 +110,7 @@ public class AdminLib {
         ABookData= Common.getInstance();
         int Blistsize=ABookData.getBookInformation().getBookList().size();
         int cnt=0;
-        while(cnt<=Blistsize){
+        while(cnt<Blistsize){
             Book NBook=ABookData.getBookInformation().getBookList().get(cnt);
             Object[] newRow={NBook.getName(),NBook.getAuthor(),"Undecided",NBook.getBID()};
             AModel.addRow(newRow);

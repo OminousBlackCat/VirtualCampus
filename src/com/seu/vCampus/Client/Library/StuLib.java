@@ -34,7 +34,7 @@ public class StuLib {
                     Object NIsbn=Stutable.getValueAt(selectedRow,3);
                     int Blistsize=BookData.getBookInformation().getBookList().size();
                     int cnt=0;
-                    while(cnt<=Blistsize){
+                    while(cnt<Blistsize){
                         Book NBook=BookData.getBookInformation().getBookList().get(cnt);
                         Object NBid=NBook.getBID();
                         if(NIsbn.equals(NBid)){
@@ -63,7 +63,7 @@ public class StuLib {
                     Object NIsbn=Stutable.getValueAt(selectedRow,3);
                     int Blistsize=BookData.getBookInformation().getBookList().size();
                     int cnt=0;
-                    while(cnt<=Blistsize){
+                    while(cnt<Blistsize){
                         Book NBook=BookData.getBookInformation().getBookList().get(cnt);
                         Object NBid=NBook.getBID();
                         if(NIsbn.equals(NBid)){
@@ -161,12 +161,20 @@ public class StuLib {
         }
     };
 
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("StuLib");
+        frame.setContentPane(new StuLib().LibMPanel);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+    }
+
     private void createUIComponents() {
         // TODO: place custom component creation code here
         BookData=Common.getInstance();
         int Blistsize=BookData.getBookInformation().getBookList().size();
         int cnt=0;
-        while(cnt<=Blistsize){
+        while(cnt<Blistsize){
             Book NBook=BookData.getBookInformation().getBookList().get(cnt);
             Object[] newRow={NBook.getName(),NBook.getAuthor(),"Undecided",NBook.getBID()};
             if(NBook.isLent()){

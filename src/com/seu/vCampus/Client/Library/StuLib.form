@@ -52,7 +52,7 @@
                     <constraints/>
                     <properties>
                       <autoCreateColumnsFromModel value="true"/>
-                      <autoCreateRowSorter value="true"/>
+                      <autoCreateRowSorter value="false"/>
                       <fillsViewportHeight value="true"/>
                       <rowHeight value="30"/>
                     </properties>
