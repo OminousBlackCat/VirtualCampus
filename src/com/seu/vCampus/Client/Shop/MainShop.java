@@ -103,8 +103,8 @@ public class MainShop {
                         Name0.setText(ShopData.getShopInformation().getGoods().get(counter).getGoodsName());
                         Picture0.setIcon(new ImageIcon("src/icon/ProductPicture/" + ShopData.getShopInformation().getGoods().get(counter).getGoodsNumber() + ".png"));
                         Picture0.setText("");
-                        Price0.setText(Double.toString(ShopData.getShopInformation().getGoods().get(counter).getGoodsPrice()));
-                        Stock0.setText(Double.toString(ShopData.getShopInformation().getGoods().get(counter).getGoodsStock()));
+                        Price0.setText(Double.toString(ShopData.getShopInformation().getGoods().get(counter).getGoodsPrice()) + "元");
+                        Stock0.setText(Double.toString(ShopData.getShopInformation().getGoods().get(counter).getGoodsStock()) + "在库");
                         searchGoods = ShopData.getShopInformation().getGoods().get(counter);
                         SearchResult.setVisible(true);
                         break;
@@ -127,6 +127,7 @@ public class MainShop {
                     temp.setGoodsNumber(searchGoods.getGoodsNumber());
 
                     searchGoods.setGoodsStock((short) (searchGoods.getGoodsStock() - Short.parseShort(ResulttextField.getText())));
+                    Stock0.setText(Double.toString(searchGoods.getGoodsStock())+"在库");
                     ShopData.getShoppingList().add(temp);
                     JOptionPane.showMessageDialog(null, "亲添加成功~", "成功", JOptionPane.INFORMATION_MESSAGE);
                     ResulttextField.setText("");
