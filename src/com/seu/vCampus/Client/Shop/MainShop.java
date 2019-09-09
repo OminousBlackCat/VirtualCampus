@@ -122,12 +122,12 @@ public class MainShop {
                 if (searchGoods.getGoodsStock() >= Short.parseShort(ResulttextField.getText())) {
                     Goods temp = new Goods();
                     temp.setGoodsPrice(searchGoods.getGoodsPrice());
-                    temp.setGoodsStock(searchGoods.getGoodsStock());
+                    temp.setGoodsStock(Short.parseShort(ResulttextField.getText()));
                     temp.setGoodsName(searchGoods.getGoodsName());
                     temp.setGoodsNumber(searchGoods.getGoodsNumber());
 
                     searchGoods.setGoodsStock((short) (searchGoods.getGoodsStock() - Short.parseShort(ResulttextField.getText())));
-                    Stock0.setText(Double.toString(searchGoods.getGoodsStock())+"在库");
+                    Stock0.setText(Double.toString(searchGoods.getGoodsStock()) + "在库");
                     ShopData.getShoppingList().add(temp);
                     JOptionPane.showMessageDialog(null, "亲添加成功~", "成功", JOptionPane.INFORMATION_MESSAGE);
                     ResulttextField.setText("");

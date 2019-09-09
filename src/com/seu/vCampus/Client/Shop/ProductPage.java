@@ -19,7 +19,6 @@ public class ProductPage extends Component {
     private JPanel Product1;
     private JPanel Product2;
     private JPanel Product3;
-    private JPanel ChangePage;
 
     /*各个页面的按钮和文本框*/
     private JButton PageUp;
@@ -47,10 +46,13 @@ public class ProductPage extends Component {
     private JLabel label22;
 
     private JLabel label32;
+    private JLabel label31;
+    private JLabel label33;
     private JPanel panel1;
     private JLabel Stock3;
     private JLabel Stock1;
     private JLabel Stock2;
+
     private JLabel label0;
     private JLabel Page;
 
@@ -79,6 +81,9 @@ public class ProductPage extends Component {
     private JLabel label42;
     private JLabel label52;
     private JLabel label62;
+
+
+    private JPanel ChangePage;
 
 
     private ImageIcon IconA;
@@ -114,10 +119,12 @@ public class ProductPage extends Component {
                     LoadGoods(6);
                     PageUp.setEnabled(true);
                     PageDown.setEnabled(true);
+                    Page.setText(Integer.toString(index / 6));
                 } else {
                     LoadGoods(thisClassGoodsList.size() - index);
                     PageDown.setEnabled(false);
                     PageUp.setEnabled(true);
+                    Page.setText(Integer.toString((index / 6) + 1));
                 }
             }
         });
@@ -131,6 +138,7 @@ public class ProductPage extends Component {
                     LoadGoods(6);
                     PageUp.setEnabled(true);
                     PageDown.setEnabled(true);
+                    Page.setText(Integer.toString((index / 6) - 1));
                 }
             }
         });
@@ -253,6 +261,7 @@ public class ProductPage extends Component {
 
         ChangePage.setBackground(null);
 
+        Page.setText("1");
 
         PageUp.setEnabled(false);
         PageDown.setEnabled(true);

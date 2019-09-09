@@ -1,7 +1,6 @@
 package com.seu.vCampus.Database;
 import com.seu.vCampus.util.*;
 
-import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -1092,7 +1091,7 @@ public class DatabaseActions {
 
                 temp.setURL(URL);
                 temp.setNewsTitle(NT);
-                temp.setNewsData(ND);
+                temp.setNewsDate(ND);
 
                 NM.addNews(temp);
             }
