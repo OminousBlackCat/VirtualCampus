@@ -13,32 +13,30 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class AddExams extends JFrame {
+public class AddExams extends JPanel {
     private Common common;
     private Person person;
     private Course course;
     private ArrayList<Course> courses;
 
     public AddExams(){
-        setBounds(100, 100, 375, 500);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        getContentPane().setLayout(null);
 
-        JLabel label = new JLabel("课程号：",JLabel.CENTER);
-        label.setBounds(70, 120, 86, 20);
-        getContentPane().add(label);
+        common = Common.getInstance();
+
+        setBounds(100, 100, 375, 500);
+        setLayout(null);
 
         JLabel label_1 = new JLabel("考试时间：",JLabel.CENTER);
         label_1.setBounds(70, 200, 86, 20);
-        getContentPane().add(label_1);
+        add(label_1);
 
         JLabel label_2 = new JLabel("考试地点：",JLabel.CENTER);
         label_2.setBounds(70, 280, 86, 20);
-        getContentPane().add(label_2);
+        add(label_2);
 
         JTextField textField = new JTextField();
         textField.setBounds(194, 118, 86, 24);
-        getContentPane().add(textField);
+        add(textField);
         textField.setColumns(10);
         Document dt=textField.getDocument();
         dt.addDocumentListener(new DocumentListener() {
@@ -60,7 +58,7 @@ public class AddExams extends JFrame {
 
         JTextField textField_1 = new JTextField();
         textField_1.setBounds(194, 198, 86, 24);
-        getContentPane().add(textField_1);
+        add(textField_1);
         textField_1.setColumns(10);
         Document dt_1=textField_1.getDocument();
         dt_1.addDocumentListener(new DocumentListener() {
@@ -82,7 +80,7 @@ public class AddExams extends JFrame {
 
         JTextField textField_2 = new JTextField();
         textField_2.setBounds(194, 278, 86, 24);
-        getContentPane().add(textField_2);
+        add(textField_2);
         textField_2.setColumns(10);
         Document dt_2=textField_2.getDocument();
         dt_2.addDocumentListener(new DocumentListener() {
@@ -104,27 +102,18 @@ public class AddExams extends JFrame {
 
         JButton button = new JButton("确定");
         button.setBounds(70, 358, 86, 27);
-        getContentPane().add(button);
+        add(button);
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                course.setExam(true);
-                courses.add(course);
-                person.setCourses(courses);
-                person.setType(Message.MESSAGE_TYPE.TYPE_INPUT_EXAMS);
-                common.getIO().SendMessages(person);
-                person=(Person)common.getIO().ReceiveMessage();
-                dispose();
-            }
-        });
-
-        JButton button_1 = new JButton("取消");
-        button_1.setBounds(194, 358, 86, 27);
-        getContentPane().add(button_1);
-        button_1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose();
+                if (JOptionPane.showConfirmDialog(null,"确定添加？") == JOptionPane.YES_OPTION) {
+                    course.setExam(true);
+                    courses.add(course);
+                    person.setCourses(courses);
+                    person.setType(Message.MESSAGE_TYPE.TYPE_INPUT_EXAMS);
+                    common.getIO().SendMessages(person);
+                    person = (Person) common.getIO().ReceiveMessage();
+                }
             }
         });
     }
