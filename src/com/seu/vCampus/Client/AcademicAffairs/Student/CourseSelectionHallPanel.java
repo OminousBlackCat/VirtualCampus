@@ -70,15 +70,16 @@ public class CourseSelectionHallPanel extends JPanel {
                 cSPs.add(new CoursesSelectedPanel(s,fatherPanel));
             }
 
-            JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT,cSPs.get(0),scPs.get(0));
-            splitPane.setDividerLocation(500);
+            JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT,scPs.get(0),cSPs.get(0));
+            splitPane.setDividerLocation(300);
             add(splitPane,BorderLayout.CENTER);
 
             semComboBox.addItemListener(new ItemListener() {
                 @Override
                 public void itemStateChanged(ItemEvent e) {
-                    splitPane.setLeftComponent(cSPs.get(semComboBox.getSelectedIndex()));
-                    splitPane.setRightComponent(scPs.get(semComboBox.getSelectedIndex()));
+                    splitPane.setLeftComponent(scPs.get(semComboBox.getSelectedIndex()));
+                    splitPane.setRightComponent(cSPs.get(semComboBox.getSelectedIndex()));
+                    splitPane.setDividerLocation(300);
                 }
             });
 
