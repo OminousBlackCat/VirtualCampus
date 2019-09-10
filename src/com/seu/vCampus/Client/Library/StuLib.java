@@ -281,7 +281,7 @@ public class StuLib {
         LibMPanel.add(LibtabbedPane, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, new Dimension(1200, 800), null, 0, false));
         StuBPanel = new JPanel();
         StuBPanel.setLayout(new GridLayoutManager(2, 4, new Insets(0, 0, 0, 0), -1, -1));
-        LibtabbedPane.addTab("MyBooks", StuBPanel);
+        LibtabbedPane.addTab("我的图书", StuBPanel);
         ReturnButton = new JButton();
         ReturnButton.setText("还书");
         StuBPanel.add(ReturnButton, new GridConstraints(1, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, new Dimension(100, 30), new Dimension(100, 30), new Dimension(100, 30), 0, false));
@@ -299,7 +299,7 @@ public class StuLib {
         StuBPanel.add(spacer1, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
         LibBPanel = new JPanel();
         LibBPanel.setLayout(new GridLayoutManager(4, 4, new Insets(0, 0, 0, 0), -1, -1));
-        LibtabbedPane.addTab("Library", LibBPanel);
+        LibtabbedPane.addTab("馆藏图书", LibBPanel);
         borrowButton = new JButton();
         borrowButton.setText("借书");
         LibBPanel.add(borrowButton, new GridConstraints(3, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, new Dimension(100, 30), new Dimension(100, 30), new Dimension(100, 30), 0, false));
@@ -314,7 +314,7 @@ public class StuLib {
         LibScrollPane.setViewportView(Libtable);
         LibBPanel.add(FilterText, new GridConstraints(2, 1, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, new Dimension(300, -1), new Dimension(400, -1), new Dimension(500, -1), 0, false));
         final JLabel label1 = new JLabel();
-        label1.setText("Filter");
+        label1.setText("查询");
         LibBPanel.add(label1, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JLabel label2 = new JLabel();
         label2.setText("借书上限10本");
@@ -329,5 +329,4 @@ public class StuLib {
     public JComponent $$$getRootComponent$$$() {
         return LibMPanel;
     }
-
 }

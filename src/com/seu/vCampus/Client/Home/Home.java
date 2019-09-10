@@ -15,6 +15,7 @@ import com.seu.vCampus.Client.Shop.MainShop;
 import com.seu.vCampus.Client.Shop.MangerShop;
 import com.seu.vCampus.util.*;
 
+import static java.lang.Thread.sleep;
 import javax.swing.*;
 import javax.swing.plaf.FontUIResource;
 import java.awt.*;
@@ -52,6 +53,26 @@ public class Home extends JFrame{
     private AdminMainPanel adminPanel;
 
     private int skinNumber = 1;
+    private Thread updatePanel = new Thread(new Runnable() {
+        @Override
+        public void run() {
+            double EFlag = homeData.getUser().getECardBalance();
+            short BFlag = homeData.getUser().getLendBooksNumber();
+            while (true){
+                if(EFlag != homeData.getUser().getECardBalance() || BFlag != homeData.getUser().getLendBooksNumber()){
+                    homePanel = new BasicInformationPanel("0"+Integer.toString(skinNumber));
+                    tabbedPane.setComponentAt(0,homePanel);
+                    EFlag = homeData.getUser().getECardBalance();
+                    BFlag = homeData.getUser().getLendBooksNumber();
+                }
+                try{
+                    sleep(1000);
+                }catch (InterruptedException ie ){
+                    ie.printStackTrace();
+                }
+            }
+        }
+    });
 
 
     private void LoadCommon(){
@@ -243,8 +264,16 @@ public class Home extends JFrame{
             skin.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
+
+                    if(skinNumber == 4){
+                        skinNumber = 1;
+                    }else {
+                        skinNumber++;
+                    }
+
                     skinNumber++;
                     homeData.setSkinNumber(skinNumber);
+
                     switch (skinNumber) {
                         case 1:
                             getContentPane().setBackground(new Color(63, 87, 123));
@@ -278,17 +307,19 @@ public class Home extends JFrame{
                             tabbedPane.setBackground(new Color(0, 70, 40));
                             homePanel = new BasicInformationPanel("04");
                             tabbedPane.setComponentAt(0, homePanel);
+
                             skinNumber = 0;
                             mainShopPanel.initialization();
                             bankPanel.initialization();
                             mangerShopPanel.initialization();
+
                             break;
                     }
 
                 }
             });
         }
-        
+
 
         System.out.println(homeData.getUser().getAuthorityLevel());
         switch (homeData.getUser().getAuthorityLevel()){
@@ -374,6 +405,7 @@ public class Home extends JFrame{
 
         this.setUndecorated(true);
         initialize();
+        updatePanel.start();
     }
 
 

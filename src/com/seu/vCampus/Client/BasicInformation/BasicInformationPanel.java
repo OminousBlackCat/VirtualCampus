@@ -10,6 +10,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import static java.lang.Thread.sleep;
+
 public class BasicInformationPanel extends JPanel {
 
     private Common userData;
@@ -37,6 +39,7 @@ public class BasicInformationPanel extends JPanel {
     private static final int AvatarNumber = 31;
     private int current;
     private int next;
+
 
 
     private void initialize(String index){
@@ -70,17 +73,14 @@ public class BasicInformationPanel extends JPanel {
             add(CurrentAvatar);
             ChangeAvatar = new JButton("修改头像");
             ChangeAvatar.setBackground(Color.BLACK);
-            ChangeAvatar.setForeground(Color.WHITE);
             ChangeAvatar.setBounds(728, 300, 110, 40);
             add(ChangeAvatar);
             ConfirmAvatar = new JButton("保存");
-            ConfirmAvatar.setForeground(Color.WHITE);
             ConfirmAvatar.setBackground(Color.pink);
             ConfirmAvatar.setBounds(660, 300, 70, 40);
             CancelAvatar = new JButton("取消");
-            CancelAvatar.setForeground(Color.WHITE);
             CancelAvatar.setBackground(Color.ORANGE);
-            CancelAvatar.setBounds(830, 300, 70, 40);
+            CancelAvatar.setBounds(835, 300, 70, 40);
             add(CancelAvatar);
             add(ConfirmAvatar);
             CancelAvatar.setVisible(false);
@@ -142,107 +142,7 @@ public class BasicInformationPanel extends JPanel {
         /**
          * @用户基本信息显示相关代码
          * */
-        {
-            Sex = new JLabel();
-            UserName = new JLabel();
-            StudentNumber = new JLabel();
-            Group = new JLabel();
-            ECardNumber = new JLabel();
-            LendBookNumber = new JLabel();
-            ECardBalance = new JLabel();
-            Major = new JLabel();
-            JLabel UserNameT = new JLabel("用户名：");
-            JLabel StudentNumberT = new JLabel("学号：");
-            JLabel SexT = new JLabel("性   别：");
-            JLabel GroupT = new JLabel("用户组：");
-            JLabel ECardNumberT = new JLabel("一卡通号：");
-            JLabel LendBookNumberT = new JLabel("已借阅图书数量：");
-            JLabel ECardBalanceT = new JLabel("一卡通余额：");
-            JLabel MajorT = new JLabel("专业：");
-            System.out.println(userData.getUser().getAuthorityLevel());
-            System.out.println(userData.getUser().getSex());
-            Sex.setText(userData.getUser().getSex());
-            UserName.setText(userData.getUser().getName());
-            StudentNumber.setText(userData.getUser().getStudentNumber());
-            Group.setText(userData.getUser().getAuthorityLevel().toString());
-            ECardNumber.setText(userData.getUser().getECardNumber());
-            LendBookNumber.setText(Integer.toString(userData.getUser().getLendBooksNumber())+" 本");
-            ECardBalance.setText(Double.toString(userData.getUser().getECardBalance())+" 元");
-            Major.setText(userData.getUser().getMajor());
-
-            UserNameT.setBounds(100,100,80,30);
-            UserName.setBounds(170,100,50,30);
-            UserNameT.setForeground(Color.WHITE);
-            UserName.setForeground(Color.cyan);
-            UserNameT.setFont(new Font("Microsoft Yahei", Font.BOLD,20));
-            UserName.setFont(new Font("Microsoft Yahei", Font.BOLD,20));
-            add(UserName);
-            add(UserNameT);
-
-            ECardNumberT.setBounds(240,100,100,30);
-            ECardNumber.setBounds(330,100,100,30);
-            ECardNumberT.setForeground(Color.WHITE);
-            ECardNumber.setForeground(Color.cyan);
-            ECardNumber.setFont(new Font("Microsoft Yahei", Font.BOLD,20));
-            ECardNumberT.setFont(new Font("Microsoft Yahei", Font.BOLD,20));
-            add(ECardNumber);
-            add(ECardNumberT);
-
-            StudentNumberT.setBounds(450,100,80,30);
-            StudentNumber.setBounds(500,100,80,30);
-            StudentNumberT.setForeground(Color.WHITE);
-            StudentNumber.setForeground(Color.cyan);
-            StudentNumberT.setFont(new Font("Microsoft Yahei", Font.BOLD,20));
-            StudentNumber.setFont(new Font("Microsoft Yahei", Font.BOLD,20));
-            add(StudentNumberT);
-            add(StudentNumber);
-
-            GroupT.setBounds(100,140,100,30);
-            Group.setBounds(170,140,100,30);
-            GroupT.setForeground(Color.WHITE);
-            Group.setForeground(Color.YELLOW);
-            GroupT.setFont(new Font("Microsoft Yahei", Font.BOLD,20));
-            Group.setFont(new Font("Microsoft Yahei", Font.BOLD,20));
-            add(Group);
-            add(GroupT);
-
-            SexT.setBounds(240,140,100,30);
-            Sex.setBounds(310,140,100,30);
-            SexT.setForeground(Color.WHITE);
-            Sex.setForeground(Color.YELLOW);
-            SexT.setFont(new Font("Microsoft Yahei", Font.BOLD,20));
-            Sex.setFont(new Font("Microsoft Yahei", Font.BOLD,20));
-            add(Sex);
-            add(SexT);
-
-            MajorT.setBounds(450,140,80,30);
-            Major.setBounds(500,140,150,30);
-            MajorT.setForeground(Color.WHITE);
-            Major.setForeground(Color.YELLOW);
-            MajorT.setFont(new Font("Microsoft Yahei", Font.BOLD,20));
-            Major.setFont(new Font("Microsoft Yahei", Font.BOLD,20));
-            add(MajorT);
-            add(Major);
-
-            ECardBalanceT.setBounds(100,180,150,30);
-            ECardBalance.setBounds(250,180,200,30);
-            ECardBalanceT.setForeground(Color.WHITE);
-            ECardBalance.setForeground(Color.RED);
-            ECardBalanceT.setFont(new Font("Microsoft Yahei", Font.BOLD,25));
-            ECardBalance.setFont(new Font("Microsoft Yahei", Font.BOLD,25));
-            add(ECardBalanceT);
-            add(ECardBalance);
-
-            LendBookNumberT.setBounds(100,220,300,30);
-            LendBookNumber.setBounds(300,220,200,30);
-            LendBookNumberT.setForeground(Color.WHITE);
-            LendBookNumber.setForeground(Color.RED);
-            LendBookNumberT.setFont(new Font("Microsoft Yahei", Font.BOLD,25));
-            LendBookNumber.setFont(new Font("Microsoft Yahei", Font.BOLD,25));
-            add(LendBookNumberT);
-            add(LendBookNumber);
-
-        }
+        flush();
 
         {
             int last = userData.getNewsList().getNews().size();
@@ -269,9 +169,6 @@ public class BasicInformationPanel extends JPanel {
             add(newsC);
             add(newsD);
 
-
-
-
         }
 
 
@@ -289,6 +186,110 @@ public class BasicInformationPanel extends JPanel {
         System.out.println(filepath);
         BackGroundImage = new ImageIcon(filepath);
     }
+    public void flush(){
+        userData = Common.getInstance();
+
+        Sex = new JLabel();
+        UserName = new JLabel();
+        StudentNumber = new JLabel();
+        Group = new JLabel();
+        ECardNumber = new JLabel();
+        LendBookNumber = new JLabel();
+        ECardBalance = new JLabel();
+        Major = new JLabel();
+        JLabel UserNameT = new JLabel("用户名：");
+        JLabel StudentNumberT = new JLabel("学号：");
+        JLabel SexT = new JLabel("性   别：");
+        JLabel GroupT = new JLabel("用户组：");
+        JLabel ECardNumberT = new JLabel("一卡通号：");
+        JLabel LendBookNumberT = new JLabel("已借阅图书数量：");
+        JLabel ECardBalanceT = new JLabel("一卡通余额：");
+        JLabel MajorT = new JLabel("专业：");
+        Sex.setText(userData.getUser().getSex());
+        UserName.setText(userData.getUser().getName());
+        StudentNumber.setText(userData.getUser().getStudentNumber());
+        Group.setText(userData.getUser().getAuthorityLevel().toString());
+        ECardNumber.setText(userData.getUser().getECardNumber());
+        LendBookNumber.setText(Integer.toString(userData.getUser().getLendBooksNumber())+" 本");
+        ECardBalance.setText(Double.toString(userData.getUser().getECardBalance())+" 元");
+        System.out.println(userData.getUser().getECardBalance());
+        Major.setText(userData.getUser().getMajor());
+
+        UserNameT.setBounds(100,100,80,30);
+        UserName.setBounds(170,100,50,30);
+        UserNameT.setForeground(Color.WHITE);
+        UserName.setForeground(Color.cyan);
+        UserNameT.setFont(new Font("Microsoft Yahei", Font.BOLD,20));
+        UserName.setFont(new Font("Microsoft Yahei", Font.BOLD,20));
+        add(UserName);
+        add(UserNameT);
+
+        ECardNumberT.setBounds(240,100,100,30);
+        ECardNumber.setBounds(330,100,100,30);
+        ECardNumberT.setForeground(Color.WHITE);
+        ECardNumber.setForeground(Color.cyan);
+        ECardNumber.setFont(new Font("Microsoft Yahei", Font.BOLD,20));
+        ECardNumberT.setFont(new Font("Microsoft Yahei", Font.BOLD,20));
+        add(ECardNumber);
+        add(ECardNumberT);
+
+        StudentNumberT.setBounds(450,100,80,30);
+        StudentNumber.setBounds(500,100,80,30);
+        StudentNumberT.setForeground(Color.WHITE);
+        StudentNumber.setForeground(Color.cyan);
+        StudentNumberT.setFont(new Font("Microsoft Yahei", Font.BOLD,20));
+        StudentNumber.setFont(new Font("Microsoft Yahei", Font.BOLD,20));
+        add(StudentNumberT);
+        add(StudentNumber);
+
+        GroupT.setBounds(100,140,100,30);
+        Group.setBounds(170,140,100,30);
+        GroupT.setForeground(Color.WHITE);
+        Group.setForeground(Color.YELLOW);
+        GroupT.setFont(new Font("Microsoft Yahei", Font.BOLD,20));
+        Group.setFont(new Font("Microsoft Yahei", Font.BOLD,20));
+        add(Group);
+        add(GroupT);
+
+        SexT.setBounds(240,140,100,30);
+        Sex.setBounds(310,140,100,30);
+        SexT.setForeground(Color.WHITE);
+        Sex.setForeground(Color.YELLOW);
+        SexT.setFont(new Font("Microsoft Yahei", Font.BOLD,20));
+        Sex.setFont(new Font("Microsoft Yahei", Font.BOLD,20));
+        add(Sex);
+        add(SexT);
+
+        MajorT.setBounds(450,140,80,30);
+        Major.setBounds(500,140,150,30);
+        MajorT.setForeground(Color.WHITE);
+        Major.setForeground(Color.YELLOW);
+        MajorT.setFont(new Font("Microsoft Yahei", Font.BOLD,20));
+        Major.setFont(new Font("Microsoft Yahei", Font.BOLD,20));
+        add(MajorT);
+        add(Major);
+
+        ECardBalanceT.setBounds(100,180,150,30);
+        ECardBalance.setBounds(250,180,200,30);
+        ECardBalanceT.setForeground(Color.WHITE);
+        ECardBalance.setForeground(Color.RED);
+        ECardBalanceT.setFont(new Font("Microsoft Yahei", Font.BOLD,25));
+        ECardBalance.setFont(new Font("Microsoft Yahei", Font.BOLD,25));
+        add(ECardBalanceT);
+        add(ECardBalance);
+
+        LendBookNumberT.setBounds(100,220,300,30);
+        LendBookNumber.setBounds(300,220,200,30);
+        LendBookNumberT.setForeground(Color.WHITE);
+        LendBookNumber.setForeground(Color.RED);
+        LendBookNumberT.setFont(new Font("Microsoft Yahei", Font.BOLD,25));
+        LendBookNumber.setFont(new Font("Microsoft Yahei", Font.BOLD,25));
+        add(LendBookNumberT);
+        add(LendBookNumber);
+
+
+    }
+
 
 
 }

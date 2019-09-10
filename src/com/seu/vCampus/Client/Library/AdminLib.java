@@ -182,7 +182,7 @@ public class AdminLib {
         DeleteBookButton.setText("删除图书");
         AdminLibMPanel.add(DeleteBookButton, new GridConstraints(2, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, new Dimension(100, 30), new Dimension(100, 30), new Dimension(100, 30), 0, false));
         final JLabel label1 = new JLabel();
-        label1.setText("Filter");
+        label1.setText("查询");
         AdminLibMPanel.add(label1, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         label1.setLabelFor(FilterField);
     }
@@ -193,5 +193,4 @@ public class AdminLib {
     public JComponent $$$getRootComponent$$$() {
         return AdminLibMPanel;
     }
-
 }

@@ -68,7 +68,7 @@
         </constraints>
         <properties>
           <labelFor value="71b9"/>
-          <text value="Filter"/>
+          <text value="查询"/>
         </properties>
       </component>
     </children>
