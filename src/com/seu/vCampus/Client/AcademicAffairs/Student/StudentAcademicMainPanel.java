@@ -1,5 +1,7 @@
 package com.seu.vCampus.Client.AcademicAffairs.Student;
 
+import com.seu.vCampus.Client.AcademicAffairs.Utils.TabbedPaneUI;
+
 import javax.swing.*;
 import java.awt.*;
 

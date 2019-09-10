@@ -41,8 +41,10 @@ public class Common {
     private ShopManage shopInformation;
     private BookManage bookInformation;
     private ArrayList<Goods> ShoppingList;
+    public static final int MAX_LEND_BOOK = 10;//Changed by MaouSora
     private NewsManage NewsList;
-    private static final int MAX_LEND_BOOK = 10;
+
+
 
     public int getSkinNumber() {
         return skinNumber;

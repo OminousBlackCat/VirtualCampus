@@ -128,7 +128,17 @@ public class LauncherPanel extends JPanel {
 
                     if(user.getType() == Message.MESSAGE_TYPE.TYPE_SUCCESS){
                         launcherData.setUser(user);
-                        new Home();
+                        try {
+                            new Home();
+                        } catch (ClassNotFoundException ex) {
+                            ex.printStackTrace();
+                        } catch (UnsupportedLookAndFeelException ex) {
+                            ex.printStackTrace();
+                        } catch (InstantiationException ex) {
+                            ex.printStackTrace();
+                        } catch (IllegalAccessException ex) {
+                            ex.printStackTrace();
+                        }
                     }
                     if(user.getType() == Message.MESSAGE_TYPE.TYPE_FAIL){
                         JOptionPane.showMessageDialog(null,"网络连接异常",

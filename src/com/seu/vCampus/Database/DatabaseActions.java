@@ -513,28 +513,6 @@ public class DatabaseActions {
     }
 
     /**
-     * Change maximum number of students.
-     * @param course Should contain capacity and course number info.
-     */
-    public void changeCourseCapacity(Course course) {
-        String sql = "UPDATE Courses SET maximumStudents = ? WHERE courseNumber = ?";
-        try {
-            stmt = conn.prepareStatement(sql);
-            stmt.setInt(1,course.getMaximumStudents());
-            stmt.setString(2,course.getCourseNumber());
-            if(stmt.executeUpdate() != 0) {
-                course.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
-            }
-            else {
-                course.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
-            }
-        } catch (SQLException e) {
-            course.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
-            e.printStackTrace();
-        }
-    }
-
-    /**
      * Add a new course to the database.
      * @param course Course object. Should contain all the information, with the ECardNumber being the lecturer's.
      */
@@ -542,12 +520,12 @@ public class DatabaseActions {
         try{
             String sql = "insert into Courses (courseNumber, courseName, courseSemester, lecturerECardNumber," +
                     "coursePlace, courseTime, maximumStudents, enrolledStudents, courseCredit, courseType," +
-                    "courseLecturer, isExam) values (?,?,?,?,?,?,?,?,?,?,?,?)";
+                    "courseLecturer, isExam, examPlace, examTime, gradeAdded ) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             stmt = conn.prepareStatement(sql);
             stmt.setString(1,course.getCourseNumber());
             stmt.setString(2,course.getCourseName());
             stmt.setString(3,course.getCourseSemester());
-            stmt.setString(4,course.getECardNumber());
+            stmt.setString(4,course.getLecturerECardNumber());
             stmt.setString(5,course.getCoursePlace());
             stmt.setString(6,course.getCourseTime());
             stmt.setInt(7,course.getMaximumStudents());
@@ -556,6 +534,41 @@ public class DatabaseActions {
             stmt.setString(10,course.getCourseType());
             stmt.setString(11,course.getCourseLecturer());
             stmt.setBoolean(12,course.isExam());
+            stmt.setString(13,"");
+            stmt.setString(14, "");
+            stmt.setInt(15, 0);
+            stmt.executeUpdate();
+            course.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            course.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
+        }
+    }
+
+    /**
+     * Change course info.
+     * @param course Contains all the info except grade and exam info.
+     */
+    public void changeCourseInfo(Course course) {
+        try{
+            String sql = "update Courses set courseName = ?, courseSemester = ?, lecturerECardNumber = ?," +
+                    "coursePlace = ?, courseTime = ?, maximumStudents = ?, enrolledStudents = ?, " +
+                    "courseCredit = ?, courseType = ?,courseLecturer = ?, isExam = ?, gradeAdded = ? " +
+                    "where  courseNumber = ?";
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1,course.getCourseName());
+            stmt.setString(2,course.getCourseSemester());
+            stmt.setString(3,course.getLecturerECardNumber());
+            stmt.setString(4,course.getCoursePlace());
+            stmt.setString(5,course.getCourseTime());
+            stmt.setInt(6,course.getMaximumStudents());
+            stmt.setInt(7,course.getEnrolledStudents());
+            stmt.setString(8,course.getCourseCredit());
+            stmt.setString(9,course.getCourseType());
+            stmt.setString(10,course.getCourseLecturer());
+            stmt.setBoolean(11,course.isExam());
+            stmt.setBoolean(12,course.isGradeAdded());
+            stmt.setString(13,course.getCourseNumber());
             stmt.executeUpdate();
             course.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
         } catch (SQLException e) {
@@ -597,6 +610,35 @@ public class DatabaseActions {
         }
     }
 
+    public void getAllCourses(Person admin) {
+        String sql = "SELECT * FROM Courses";
+        try{
+            ArrayList<Course> cs = new ArrayList<Course>();
+            stmt = conn.prepareStatement(sql);
+            ResultSet coursesRes = stmt.executeQuery();
+            while (coursesRes.next()) {
+                cs.add(new Course(coursesRes.getString("courseNumber"),
+                                coursesRes.getString("courseName"),
+                                coursesRes.getString("courseSemester"),
+                                coursesRes.getString("courseLecturer"),
+                                coursesRes.getString("lecturerECardNumber"),
+                                coursesRes.getString("coursePlace"),
+                                coursesRes.getString("courseTime"),
+                                coursesRes.getString("courseCredit"),
+                                coursesRes.getString("courseType"),
+                                coursesRes.getInt("maximumStudents"),
+                                coursesRes.getInt("enrolledStudents"),
+                                coursesRes.getBoolean("isExam"),
+                                coursesRes.getBoolean("gradeAdded")));
+            }
+            admin.setCourses(cs);
+            admin.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
+        } catch (Exception e) {
+            admin.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
+            e.printStackTrace();
+        }
+    }
+
     /**
      * Set exam time for a course.
      * @param course Should have course number and exam time and place info.
@@ -631,6 +673,7 @@ public class DatabaseActions {
             admin.setType(c.getType());
         }
     }
+
 
     /*-
     The following is written by mbh.
@@ -712,11 +755,13 @@ public class DatabaseActions {
     }
     public void updatePerson(Person p){                                  //修改个人信息
         try{
-            String sql = "UPDATE Users set ECardBalance=?,LendBooksNumber=? where ECardNumber=?";
+            String sql = "UPDATE Users set ECardBalance=?,LendBooksNumber=?,Major=?,AuthorityNumber=? where ECardNumber=?";
             stmt = conn.prepareStatement(sql);
             stmt.setDouble(1, p.getECardBalance());
             stmt.setShort(2, p.getLendBooksNumber());
-            stmt.setString(3,p.getECardNumber());
+            stmt.setString(3,p.getMajor());
+            stmt.setShort(4,(short)p.getAuthorityLevel().valueOf());
+            stmt.setString(5,p.getECardNumber());
 
             p.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
         }catch (SQLException e) {
@@ -901,6 +946,22 @@ public class DatabaseActions {
             E.printStackTrace();
             bankCountUsers.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
             return  bankCountUsers;
+        }
+    }
+
+    public void insertBankBill(BankBill bankBill){      //添加账单
+        try {
+            stmt=conn.prepareStatement("insert into BankBill(ECardNumber,State,Amount,TransactionTime)value (?,?,?,?)");
+
+            stmt.setString(1,bankBill.getECardNumber());
+            stmt.setString(2,bankBill.getBillTypeString());
+            stmt.setShort(3, (short) bankBill.getBillAmount());
+            stmt.setDate(4, (java.sql.Date) bankBill.getBillDate());
+            bankBill.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            bankBill.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
         }
     }
 
