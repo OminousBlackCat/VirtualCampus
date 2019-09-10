@@ -27,7 +27,11 @@
             <children>
               <component id="c1ae5" class="javax.swing.JButton" binding="ReturnButton">
                 <constraints>
-                  <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                    <minimum-size width="100" height="30"/>
+                    <preferred-size width="100" height="30"/>
+                    <maximum-size width="100" height="30"/>
+                  </grid>
                 </constraints>
                 <properties>
                   <text value="还书"/>
@@ -35,7 +39,11 @@
               </component>
               <component id="4c714" class="javax.swing.JButton" binding="RenewalButton">
                 <constraints>
-                  <grid row="1" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="1" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                    <minimum-size width="100" height="30"/>
+                    <preferred-size width="100" height="30"/>
+                    <maximum-size width="100" height="30"/>
+                  </grid>
                 </constraints>
                 <properties>
                   <text value="续借"/>
@@ -76,7 +84,11 @@
             <children>
               <component id="601d9" class="javax.swing.JButton" binding="borrowButton" default-binding="true">
                 <constraints>
-                  <grid row="3" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="3" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                    <minimum-size width="100" height="30"/>
+                    <preferred-size width="100" height="30"/>
+                    <maximum-size width="100" height="30"/>
+                  </grid>
                 </constraints>
                 <properties>
                   <text value="借书"/>
