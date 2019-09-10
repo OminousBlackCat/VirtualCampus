@@ -20,6 +20,7 @@ public class TableButtonRender implements TableCellRenderer {
     public Component getTableCellRendererComponent(JTable table, Object value,
                                                    boolean isSelected, boolean hasFocus, int row, int column) {
         this.button.setText(value == null ? "" : String.valueOf(value));
+
         if (String.valueOf(value).equals("冲突")||String.valueOf(value).equals("已满")
                 ||String.valueOf(value).equals("成绩已录入") || String.valueOf(value).equals("无法修改") ||
                 String.valueOf(value).equals("暂无成绩"))

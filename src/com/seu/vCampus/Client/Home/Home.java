@@ -1,21 +1,8 @@
 package com.seu.vCampus.Client.Home;
 
-import javax.swing.*;
-import javax.swing.plaf.FontUIResource;
-
-import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
-import java.awt.event.*;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Enumeration;
-import javax.swing.Timer;
-
 import com.alee.laf.WebLookAndFeel;
 import com.seu.vCampus.Client.AcademicAffairs.Admin.AdminMainPanel;
+import com.seu.vCampus.Client.AcademicAffairs.Student.SelectCoursesPanel;
 import com.seu.vCampus.Client.AcademicAffairs.Student.StudentAcademicMainPanel;
 import com.seu.vCampus.Client.AcademicAffairs.Teacher.TeacherMainPanel;
 import com.seu.vCampus.Client.Bank.Bank;
@@ -24,12 +11,18 @@ import com.seu.vCampus.Client.Common;
 import com.seu.vCampus.Client.Launcher.Launcher;
 import com.seu.vCampus.Client.Library.AdminLib;
 import com.seu.vCampus.Client.Library.StuLib;
+import com.seu.vCampus.Client.Shop.MainShop;
 import com.seu.vCampus.Client.Shop.MangerShop;
-import com.seu.vCampus.Client.AcademicAffairs.Student.SelectCoursesPanel;
-import com.seu.vCampus.Client.Shop.*;
-
-
 import com.seu.vCampus.util.*;
+
+import javax.swing.*;
+import javax.swing.plaf.FontUIResource;
+import java.awt.*;
+import java.awt.event.*;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Enumeration;
 
 
 public class Home extends JFrame{
@@ -112,7 +105,7 @@ public class Home extends JFrame{
         }
 
 
-        setBounds(200, 200, 1200, 864);
+        setBounds(200, 150, 1200, 864);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
         getContentPane().setBackground(new Color(63, 87, 123));
