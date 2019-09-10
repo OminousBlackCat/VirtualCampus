@@ -904,6 +904,22 @@ public class DatabaseActions {
         }
     }
 
+    public void insertBankBill(BankBill bankBill){      //添加账单
+        try {
+            stmt=conn.prepareStatement("insert into BankBill(ECardNumber,State,Amount,TransactionTime)value (?,?,?,?)");
+
+            stmt.setString(1,bankBill.getECardNumber());
+            stmt.setString(2,bankBill.getBillTypeString());
+            stmt.setShort(3, (short) bankBill.getBillAmount());
+            stmt.setDate(4, (java.sql.Date) bankBill.getBillDate());
+            bankBill.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            bankBill.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
+        }
+    }
+
     public BankBill ECardRecharge(BankBill bankBill)   //一卡通充值
     {
         try {

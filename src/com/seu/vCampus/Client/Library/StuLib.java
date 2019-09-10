@@ -33,15 +33,14 @@ public class StuLib {
                 super.mouseClicked(e);
                 int selectedRow = Stutable.getSelectedRow();
                 if (selectedRow != -1) {
-                    SModel.setValueAt(30, selectedRow, 4);
+                    Object NIsbn=Stutable.getValueAt(selectedRow,3);
+                    int Blistsize=BookData.getBookInformation().getBookList().size();
+                    int cnt=0;
+                    while(cnt<Blistsize){
+                        Book NBook=BookData.getBookInformation().getBookList().get(cnt);
+                        Object NBid=NBook.getBID();
+                        if(NIsbn.equals(NBid)){
 
-                    Object NIsbn = Stutable.getValueAt(selectedRow, 3);
-                    int Blistsize = BookData.getBookInformation().getBookList().size();
-                    int cnt = 0;
-                    while (cnt < Blistsize) {
-                        Book NBook = BookData.getBookInformation().getBookList().get(cnt);
-                        Object NBid = NBook.getBID();
-                        if (NIsbn.equals(NBid)) {
                             SModel.setValueAt(30, selectedRow, 4);
                             NBook.setLendDays((short) 0);
                             NBook.setType(Message.MESSAGE_TYPE.TYPE_RENEWAL_BOOK);
@@ -64,13 +63,13 @@ public class StuLib {
                 super.mouseClicked(e);
                 int selectedRow = Stutable.getSelectedRow();
                 if (selectedRow != -1) {
-                    Object NIsbn = Stutable.getValueAt(selectedRow, 3);
-                    int Blistsize = BookData.getBookInformation().getBookList().size();
-                    int cnt = 0;
-                    while (cnt < Blistsize) {
-                        Book NBook = BookData.getBookInformation().getBookList().get(cnt);
-                        Object NBid = NBook.getBID();
-                        if (NIsbn.equals(NBid)) {
+                    Object NIsbn=Stutable.getValueAt(selectedRow,3);
+                    int Blistsize=BookData.getBookInformation().getBookList().size();
+                    int cnt=0;
+                    while(cnt<Blistsize){
+                        Book NBook=BookData.getBookInformation().getBookList().get(cnt);
+                        Object NBid=NBook.getBID();
+                        if(NIsbn.equals(NBid)){
                             SModel.removeRow(selectedRow);
                             LModel.setValueAt("在库", cnt, 4);
                             NBook.setLent(false);
@@ -79,6 +78,8 @@ public class StuLib {
                             NBook = (Book) BookData.getIO().ReceiveMessage();
                             if (NBook.getType() == Message.MESSAGE_TYPE.TYPE_SUCCESS) {
                                 JOptionPane.showMessageDialog(null, "还书操作成功", "成功", JOptionPane.INFORMATION_MESSAGE);
+                                short NN=(short)(BookData.getUser().getLendBooksNumber()- 1);
+                                BookData.getUser().setLendBooksNumber(NN);
                             } else {
                                 JOptionPane.showMessageDialog(null, "还书操作失败", "错误", JOptionPane.ERROR_MESSAGE);
                             }
@@ -103,6 +104,10 @@ public class StuLib {
                 if (modelRow != -1) {
 
                     Book NBook = BookData.getBookInformation().getBookList().get(modelRow);
+                    if(BookData.getUser().getLendBooksNumber()>=BookData.MAX_LEND_BOOK){
+                        JOptionPane.showMessageDialog(null, "已经达到借书上线", "错误", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
                     if (NBook.isLent()) {
                         JOptionPane.showMessageDialog(null, "这本书已经有主了", "错误", JOptionPane.ERROR_MESSAGE);
                         return;
@@ -120,16 +125,18 @@ public class StuLib {
                     BookData.getIO().SendMessages(NBook);
                     NBook = (Book) BookData.getIO().ReceiveMessage();
                     if (NBook.getType() == Message.MESSAGE_TYPE.TYPE_SUCCESS) {
-                        JOptionPane.showMessageDialog(null, "借书数据库操作成功", "成功", JOptionPane.INFORMATION_MESSAGE);
+                        short NN=(short)(BookData.getUser().getLendBooksNumber()+1);
+                        BookData.getUser().setLendBooksNumber(NN);
+                        JOptionPane.showMessageDialog(null, "借书操作成功", "成功", JOptionPane.INFORMATION_MESSAGE);
                     } else {
-                        JOptionPane.showMessageDialog(null, "借书数据库操作失败", "错误", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "借书操作失败", "错误", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }
         });
     }
 
-    private static ImageIcon MybookIcon = new ImageIcon("src/icon/left/library.png");
+
     public JPanel LibMPanel;
     private JTabbedPane LibtabbedPane;
     private JPanel LibBPanel;
@@ -173,19 +180,16 @@ public class StuLib {
         }
     };
 
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("StuLib");
+        frame.setContentPane(new StuLib().LibMPanel);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+    }
+
     private void createUIComponents() {
         // TODO: place custom component creation code here
-//<<<<<<<HEAD
-//
-//        Object[] Data1 = {"How to play dota2", "Maou", "游戏", 222, 5};
-//        Object[] Data2 = {"How to play guitar", "Sora", "音乐", 444, 27};
-//        Object[] Data3 = {"How to play csgo", "Maou", "白给", 111, false};
-//
-//        SModel.addRow(Data1);
-//        SModel.addRow(Data2);
-//        Stutable = new JTable(SModel);
-//        LModel.addRow(Data3);
-//=======
         BookData = Common.getInstance();
         int Blistsize = BookData.getBookInformation().getBookList().size();
         int cnt = 0;
@@ -198,6 +202,7 @@ public class StuLib {
                 LModel.setValueAt("已被借阅", cnt, 4);
             } else {
                 LModel.setValueAt("在库", cnt, 4);
+
             }
             String NEcard = NBook.getECardNumber();
             String NUser = BookData.getUser().getECardNumber();
@@ -209,7 +214,6 @@ public class StuLib {
             }
             cnt++;
         }
-
 
         Stutable = new JTable(SModel);
         Libtable = new JTable(LModel);
@@ -259,7 +263,7 @@ public class StuLib {
 
 
     public JPanel getPanel() {
-        return LibBPanel;
+        return LibMPanel;
     }
 
     /**
@@ -272,35 +276,35 @@ public class StuLib {
     private void $$$setupUI$$$() {
         createUIComponents();
         LibMPanel = new JPanel();
-        LibMPanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
+        LibMPanel.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
         LibtabbedPane = new JTabbedPane();
-        LibMPanel.add(LibtabbedPane, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, new Dimension(1200, 800), null, 0, false));
+        LibMPanel.add(LibtabbedPane, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, new Dimension(1200, 800), null, 0, false));
         StuBPanel = new JPanel();
-        StuBPanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(2, 4, new Insets(0, 0, 0, 0), -1, -1));
+        StuBPanel.setLayout(new GridLayoutManager(2, 4, new Insets(0, 0, 0, 0), -1, -1));
         LibtabbedPane.addTab("MyBooks", StuBPanel);
         ReturnButton = new JButton();
         ReturnButton.setText("还书");
-        StuBPanel.add(ReturnButton, new com.intellij.uiDesigner.core.GridConstraints(1, 3, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        StuBPanel.add(ReturnButton, new GridConstraints(1, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         RenewalButton = new JButton();
         RenewalButton.setText("续借");
-        StuBPanel.add(RenewalButton, new com.intellij.uiDesigner.core.GridConstraints(1, 1, 1, 2, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        StuBPanel.add(RenewalButton, new GridConstraints(1, 1, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         StuScrollPane = new JScrollPane();
-        StuBPanel.add(StuScrollPane, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 4, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        StuBPanel.add(StuScrollPane, new GridConstraints(0, 0, 1, 4, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         Stutable.setAutoCreateColumnsFromModel(true);
         Stutable.setAutoCreateRowSorter(true);
         Stutable.setFillsViewportHeight(true);
         Stutable.setRowHeight(30);
         StuScrollPane.setViewportView(Stutable);
-        final com.intellij.uiDesigner.core.Spacer spacer1 = new com.intellij.uiDesigner.core.Spacer();
-        StuBPanel.add(spacer1, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
+        final Spacer spacer1 = new Spacer();
+        StuBPanel.add(spacer1, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
         LibBPanel = new JPanel();
-        LibBPanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(4, 4, new Insets(0, 0, 0, 0), -1, -1));
+        LibBPanel.setLayout(new GridLayoutManager(4, 4, new Insets(0, 0, 0, 0), -1, -1));
         LibtabbedPane.addTab("Library", LibBPanel);
         borrowButton = new JButton();
         borrowButton.setText("Borrow");
-        LibBPanel.add(borrowButton, new com.intellij.uiDesigner.core.GridConstraints(3, 3, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        LibBPanel.add(borrowButton, new GridConstraints(3, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         LibScrollPane = new JScrollPane();
-        LibBPanel.add(LibScrollPane, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 4, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        LibBPanel.add(LibScrollPane, new GridConstraints(0, 0, 1, 4, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         Libtable.setAutoCreateColumnsFromModel(true);
         Libtable.setAutoCreateRowSorter(false);
         Libtable.setEnabled(true);
@@ -308,18 +312,18 @@ public class StuLib {
         Libtable.setPreferredScrollableViewportSize(new Dimension(1000, 400));
         Libtable.setRowHeight(30);
         LibScrollPane.setViewportView(Libtable);
-        LibBPanel.add(FilterText, new com.intellij.uiDesigner.core.GridConstraints(2, 1, 1, 2, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, new Dimension(300, -1), new Dimension(400, -1), new Dimension(500, -1), 0, false));
+        LibBPanel.add(FilterText, new GridConstraints(2, 1, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, new Dimension(300, -1), new Dimension(400, -1), new Dimension(500, -1), 0, false));
         final JLabel label1 = new JLabel();
         label1.setText("Filter");
-        LibBPanel.add(label1, new com.intellij.uiDesigner.core.GridConstraints(2, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        LibBPanel.add(label1, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JLabel label2 = new JLabel();
         label2.setText("Status");
-        LibBPanel.add(label2, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 2, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        LibBPanel.add(label2, new GridConstraints(1, 0, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JLabel label3 = new JLabel();
         label3.setText("Label");
-        LibBPanel.add(label3, new com.intellij.uiDesigner.core.GridConstraints(1, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        final com.intellij.uiDesigner.core.Spacer spacer2 = new com.intellij.uiDesigner.core.Spacer();
-        LibBPanel.add(spacer2, new com.intellij.uiDesigner.core.GridConstraints(3, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
+        LibBPanel.add(label3, new GridConstraints(1, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final Spacer spacer2 = new Spacer();
+        LibBPanel.add(spacer2, new GridConstraints(3, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
     }
 
     /**
