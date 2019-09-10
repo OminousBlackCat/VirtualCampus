@@ -40,6 +40,7 @@ public class AdminAddBook {
                 String addIsbn = ISBNText.getText();
                 boolean find = false;
                 while (cnt < Blistsize) {
+
                     Book NBook = AABookData.getBookInformation().getBookList().get(cnt);
                     if (addIsbn.equals(NBook.getECardNumber())) {
                         find = true;

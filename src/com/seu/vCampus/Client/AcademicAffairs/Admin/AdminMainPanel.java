@@ -1,40 +1,44 @@
 package com.seu.vCampus.Client.AcademicAffairs.Admin;
 
-import com.seu.vCampus.Client.AcademicAffairs.Utils.TabbedPaneUI;
-
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.*;
-public class AdminMainPanel extends JPanel{
 
+public class AdminMainPanel extends JPanel {
 
-    private JTabbedPane jTabbedPane;
-    private TabbedPaneUI tabbedPaneUI;
-    private AddCoursePanel addCoursePanel;
-    private AddExams addExamsPanel;
-    private ChangeCourseInfo changeCourseInfo;
-    private ChangeGrade changeGrade;
+    private QueryCoursesPanel qcP;
+    private AddCoursePanel acP;
+    private ChangeGradePanel cgP;
+    private JTabbedPane switchPane;
     public AdminMainPanel(){
-
-        setBounds(100, 100, 370, 475);
-        setLayout(new BorderLayout());
-
-        addCoursePanel=new AddCoursePanel();
-        addExamsPanel=new AddExams();
-        changeCourseInfo=new ChangeCourseInfo();
-        changeGrade=new ChangeGrade();
-        jTabbedPane=new JTabbedPane();
-        tabbedPaneUI=new TabbedPaneUI(Color.GRAY,Color.WHITE);
-        jTabbedPane.setUI(tabbedPaneUI);
-        jTabbedPane.addTab("添加课程",null,addCoursePanel,null);
-        jTabbedPane.addTab("添加考试",null,addExamsPanel,null);
-        jTabbedPane.addTab("修改课程信息",null,changeCourseInfo,null);
-        jTabbedPane.addTab("修改成绩",null,changeGrade,null);
-        add(jTabbedPane,BorderLayout.CENTER);
-        jTabbedPane.setTabPlacement(JTabbedPane.TOP);
-        jTabbedPane.setVisible(true);
-        this.setVisible(true);
+        this.setLayout(new BorderLayout());
+        switchPane = new JTabbedPane();
+        qcP = new QueryCoursesPanel();
+        acP = new AddCoursePanel();
+        cgP = new ChangeGradePanel();
+        add(switchPane);
+        switchPane.addTab("查询学校课程",qcP);
+        switchPane.addTab("添加课程",acP);
+        switchPane.addTab("更改学生成绩",cgP);
+        switchPane.setTabPlacement(JTabbedPane.TOP);
     }
 
+    public void refresh() {
+        this.setLayout(new BorderLayout());
+        switchPane.setVisible(false);
+        qcP.setVisible(false);
+        acP.setVisible(false);
+        cgP.setVisible(false);
+        qcP = new QueryCoursesPanel();
+        acP = new AddCoursePanel();
+        cgP = new ChangeGradePanel();
+        switchPane = new JTabbedPane();
+        switchPane.addTab("查询学校课程",qcP);
+        switchPane.addTab("添加课程",acP);
+        switchPane.addTab("更改学生成绩",cgP);
+        switchPane.setVisible(true);
+        add(switchPane);
+        switchPane.setTabPlacement(JTabbedPane.TOP);
+    }
 }
