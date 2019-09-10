@@ -755,11 +755,13 @@ public class DatabaseActions {
     }
     public void updatePerson(Person p){                                  //修改个人信息
         try{
-            String sql = "UPDATE Users set ECardBalance=?,LendBooksNumber=? where ECardNumber=?";
+            String sql = "UPDATE Users set ECardBalance=?,LendBooksNumber=?,Major=?,AuthorityNumber=? where ECardNumber=?";
             stmt = conn.prepareStatement(sql);
             stmt.setDouble(1, p.getECardBalance());
             stmt.setShort(2, p.getLendBooksNumber());
-            stmt.setString(3,p.getECardNumber());
+            stmt.setString(3,p.getMajor());
+            stmt.setShort(4,(short)p.getAuthorityLevel().valueOf());
+            stmt.setString(5,p.getECardNumber());
 
             p.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
         }catch (SQLException e) {
