@@ -122,6 +122,7 @@ public class StuLib {
                     SModel.addRow(newRow);
                     NBook.setLent(true);
                     NBook.setType(Message.MESSAGE_TYPE.TYPE_LEND_BOOK);
+                    NBook.setECardNumber(BookData.getUser().getECardNumber());
                     BookData.getIO().SendMessages(NBook);
                     NBook = (Book) BookData.getIO().ReceiveMessage();
                     if (NBook.getType() == Message.MESSAGE_TYPE.TYPE_SUCCESS) {
@@ -196,7 +197,21 @@ public class StuLib {
         while (cnt < Blistsize) {
 
             Book NBook = BookData.getBookInformation().getBookList().get(cnt);
-            Object[] newRow = {NBook.getName(), NBook.getAuthor(), "Undecided", NBook.getBID()};
+            String type = "null";
+            switch (NBook.getBID().charAt(0)) {
+                case '1':
+                    type = "技巧";
+                    break;
+                case '2':
+                    type = "小说";
+                    break;
+                case '3':
+                    type = "生活";
+                    break;
+            }
+
+
+            Object[] newRow = {NBook.getName(), NBook.getAuthor(), type, NBook.getBID()};
             LModel.addRow(newRow);
             if (NBook.isLent()) {
                 LModel.setValueAt("已被借阅", cnt, 4);
@@ -209,7 +224,7 @@ public class StuLib {
             if (NBook.isLent()) {
                 if (NEcard.equals(NUser)) {
                     SModel.addRow(newRow);
-                    SModel.setValueAt(30 - NBook.getLendDays(), SModel.getRowCount(), 4);
+                    SModel.setValueAt(30 - NBook.getLendDays(), SModel.getRowCount() - 1, 4);
                 }
             }
             cnt++;

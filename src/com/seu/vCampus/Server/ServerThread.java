@@ -192,6 +192,9 @@ public class ServerThread  extends Thread{
                     case TYPE_UPDATE_COUNT:
                         act.updateCount((BankCount)msg);
                         break;
+                    case TYPE_UPDATE_GOODS:
+                        act.updateGoods((ShopManage) msg);
+                        break;
                 }
 
                 System.out.println(msg.getType());

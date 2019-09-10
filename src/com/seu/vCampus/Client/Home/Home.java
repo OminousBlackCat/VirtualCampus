@@ -270,8 +270,6 @@ public class Home extends JFrame{
                     }else {
                         skinNumber++;
                     }
-
-                    skinNumber++;
                     homeData.setSkinNumber(skinNumber);
 
                     switch (skinNumber) {

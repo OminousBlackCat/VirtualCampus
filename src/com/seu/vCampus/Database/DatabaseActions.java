@@ -903,8 +903,9 @@ public class DatabaseActions {
                     Short stock=res.getShort("Stock");
                     sql = "UPDATE Goods set Stock=? where GID=?";
                     stmt = conn.prepareStatement(sql);
-                    stmt.setShort(1, (short) (stock-SM.getGoods().get(counter).getGoodsStock()));
+                    stmt.setString(1, Integer.toString(stock-SM.getGoods().get(counter).getGoodsStock()));
                     stmt.setString(2, SM.getGoods().get(counter).getGoodsNumber());
+                    stmt.executeUpdate();
                 }
                 counter++;
             }
@@ -1123,29 +1124,32 @@ public class DatabaseActions {
                 case 0: {                                                         //续订
                     String sql = "UPDATE Books set lendDays=? where BID=?";
                     stmt = conn.prepareStatement(sql);
-                    stmt.setShort(1, (short) 30);
+                    stmt.setString(1, "30");
                     stmt.setString(2,book.getBID());
                     book.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
+                    stmt.executeUpdate();
                     break;
                 }
                 case 1:{                                                          //还书
                     String sql = "UPDATE Books set lendDays=?,isLent=?,ECardNumber=? where BID=?";
                     stmt = conn.prepareStatement(sql);
-                    stmt.setShort(1, (short) 0);
+                    stmt.setString(1, "0");
                     stmt.setString(2,"在库");
                     stmt.setString(3, "");
                     stmt.setString(4,book.getBID());
                     book.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
+                    stmt.executeUpdate();
                     break;
                 }
                 case 2:{                                                         //借书
                     String sql = "UPDATE Books set lendDays=?,isLent=?,ECardNumber=? where BID=?";
                     stmt = conn.prepareStatement(sql);
-                    stmt.setShort(1, (short) 30);
+                    stmt.setString(1, "30");
                     stmt.setString(2,"借出");
                     stmt.setString(3, book.getECardNumber());
                     stmt.setString(4,book.getBID());
                     book.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
+                    stmt.executeUpdate();
                     break;
                 }
                 default:

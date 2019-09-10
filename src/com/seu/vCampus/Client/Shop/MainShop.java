@@ -7,6 +7,7 @@ import com.seu.vCampus.Client.Common;
 import com.seu.vCampus.util.Goods;
 import com.seu.vCampus.util.Message;
 import com.seu.vCampus.util.Person;
+import com.seu.vCampus.util.ShopManage;
 
 
 import javax.swing.*;
@@ -151,6 +152,10 @@ public class MainShop {
                         ShopData.getUser().setType(Message.MESSAGE_TYPE.TYPE_UPDATE_USER);
                         ShopData.getIO().SendMessages(ShopData.getUser());
                         ShopData.setUser((Person) ShopData.getIO().ReceiveMessage());
+                        ShopManage sendManage = new ShopManage();
+                        sendManage.setGoods(ShopData.getShoppingList());
+                        ShopData.getIO().SendMessages(sendManage);
+                        ShopData.getIO().ReceiveMessage();
                         ShopData.getShoppingList().clear();
                         ShopData.getShoppingList().clear();
                         ResulttextField.setText("");

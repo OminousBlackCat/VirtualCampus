@@ -13,4 +13,8 @@ public class ShopManage extends Goods{
     public void addGoods(Goods g){
         goods.add(g);
     }
+
+    public void setGoods(List<Goods> goods) {
+        this.goods = goods;
+    }
 }

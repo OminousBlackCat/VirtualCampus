@@ -47,6 +47,7 @@ public class Message implements java.io.Serializable{
         TYPE_UPDATE_USER,
         TYPE_QUERY_NEWS,
         TYPE_UPDATE_COUNT,
+        TYPE_UPDATE_GOODS,
     }
 
     public void setECardNumber(String ECardNumber) {
