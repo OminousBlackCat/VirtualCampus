@@ -14,6 +14,7 @@ import java.util.Date;
 import java.util.Enumeration;
 import javax.swing.Timer;
 
+import com.alee.laf.WebLookAndFeel;
 import com.seu.vCampus.Client.AcademicAffairs.Admin.AdminMainPanel;
 import com.seu.vCampus.Client.AcademicAffairs.Student.StudentAcademicMainPanel;
 import com.seu.vCampus.Client.AcademicAffairs.Teacher.TeacherMainPanel;
@@ -81,10 +82,10 @@ public class Home extends JFrame{
     }
 
 
-    private void initialize() {
+    private void initialize() throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException {
         InitGlobalFont(new Font("Microsoft Yahei", Font.BOLD, 17));
         LoadCommon();
-
+        WebLookAndFeel.install ();
 
 
         {
@@ -379,7 +380,7 @@ public class Home extends JFrame{
 
     }
 
-    public Home() {
+    public Home() throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException {
 
         this.setUndecorated(true);
         initialize();

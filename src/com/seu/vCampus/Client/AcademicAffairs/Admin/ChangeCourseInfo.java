@@ -16,7 +16,6 @@ import java.awt.event.ItemListener;
 import java.util.ArrayList;
 
 public class ChangeCourseInfo extends JFrame {
-
     private JTextField textField;
     private JTextField textField_1;
     private JTextField textField_2;
@@ -47,9 +46,6 @@ public class ChangeCourseInfo extends JFrame {
 
     public ChangeCourseInfo(){
 
-        /**
-         * Initialize the contents of the frame.
-         */
         setBounds(100, 100, 330, 559);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
