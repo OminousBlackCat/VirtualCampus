@@ -30,9 +30,8 @@ public class AdminLib {
     private JButton AddBookButton;
     private JTextField FilterField;
     protected JTable AdminLibTable;
-    private static String[] columnNames = {"Name of Book",
-
-            "Author",
+    private static String[] columnNames = {"书名",
+            "作者",
             "类型",
             "ISBN"
     };

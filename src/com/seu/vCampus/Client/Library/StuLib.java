@@ -152,14 +152,14 @@ public class StuLib {
     private TableRowSorter<DefaultTableModel> sorter;
     private Common BookData;
 
-    private static String[] StutableHeader = {"Name of Book",
-            "Author",
+    private static String[] StutableHeader = {"书名",
+            "作者",
             "类型",
             "ISBN",
             "剩余借阅天数"
     };
-    private static String[] LibtableHeader = {"Name of Book",
-            "Author",
+    private static String[] LibtableHeader = {"书名",
+            "作者",
             "类型",
             "ISBN",
             "借阅情况"
