@@ -176,6 +176,21 @@ public class Course extends Message{
         this.examPlace = examPlace;
     }
 
+    public Course(String courseNumber, String examTime, String examPlace) {
+        this.courseNumber = courseNumber;
+        this.examTime = examTime;
+        this.examPlace = examPlace;
+    }
+
+    public Course(String courseNumber, String courseName, String courseSemester, String courseLecturer, String examTime, String examPlace) {
+        this.courseNumber = courseNumber;
+        this.courseName = courseName;
+        this.courseSemester = courseSemester;
+        this.courseLecturer = courseLecturer;
+        this.examTime = examTime;
+        this.examPlace = examPlace;
+    }
+
     /**
      * The following methods are just basic setters and getters.
      */

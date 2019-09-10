@@ -1,5 +1,7 @@
 package com.seu.vCampus.Client.AcademicAffairs.Admin;
 
+import com.seu.vCampus.Client.AcademicAffairs.Utils.TableButtonRender;
+import com.seu.vCampus.Client.AcademicAffairs.Utils.TableUtils;
 import com.seu.vCampus.Client.Common;
 import com.seu.vCampus.util.Course;
 import com.seu.vCampus.util.Message;
@@ -9,6 +11,7 @@ import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.Document;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -19,102 +22,39 @@ public class AddExamsPanel extends JPanel {
     private Course course;
     private ArrayList<Course> courses;
 
-    public AddExamsPanel(){
-
-        common = Common.getInstance();
-
-        setBounds(100, 100, 375, 500);
-        setLayout(null);
-
-        JLabel label_1 = new JLabel("考试时间：",JLabel.CENTER);
-        label_1.setBounds(70, 200, 86, 20);
-        add(label_1);
-
-        JLabel label_2 = new JLabel("考试地点：",JLabel.CENTER);
-        label_2.setBounds(70, 280, 86, 20);
-        add(label_2);
-
-        JTextField textField = new JTextField();
-        textField.setBounds(194, 118, 86, 24);
-        add(textField);
-        textField.setColumns(10);
-        Document dt=textField.getDocument();
-        dt.addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                course.setCourseNumber(textField.getText());
+    public AddExamsPanel(AdminMainPanel amP){
+        Common messenger = Common.getInstance();
+        Person admin = new Person();
+        admin.setType(Message.MESSAGE_TYPE.TYPE_QUERY_EXAMINABLE_COURSES);
+        messenger.getIO().SendMessages(admin);
+        admin = (Person) messenger.getIO().ReceiveMessage();
+        if(admin.getType() == Message.MESSAGE_TYPE.TYPE_SUCCESS && !admin.getCourses().isEmpty()) {
+            ArrayList<Course> cs = admin.getCourses();
+            String[] columnNames = {"课程编号", "课程名", "学期", "考试时间","考试地点","操作"};
+            Object[][] data = new Object[cs.size()][14];
+            for(int i = 0; i < cs.size(); i++) {
+                Course c = cs.get(i);
+                data[i][0] = c.getCourseNumber().split("-")[0];
+                data[i][1] = c.getCourseName();
+                data[i][2] = c.getCourseSemester();
+                data[i][3] = c.getExamTime();
+                data[i][4] = c.getExamPlace();
+                data[i][5] = "提交";
             }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-
-            }
-        });
-
-        JTextField textField_1 = new JTextField();
-        textField_1.setBounds(194, 198, 86, 24);
-        add(textField_1);
-        textField_1.setColumns(10);
-        Document dt_1=textField_1.getDocument();
-        dt_1.addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                course.setExamTime(textField_1.getText());
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-
-            }
-        });
-
-        JTextField textField_2 = new JTextField();
-        textField_2.setBounds(194, 278, 86, 24);
-        add(textField_2);
-        textField_2.setColumns(10);
-        Document dt_2=textField_2.getDocument();
-        dt_2.addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                course.setExamPlace(textField_2.getText());
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-
-            }
-        });
-
-        JButton button = new JButton("确定");
-        button.setBounds(70, 358, 86, 27);
-        add(button);
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (JOptionPane.showConfirmDialog(null,"确定添加？") == JOptionPane.YES_OPTION) {
-                    course.setExam(true);
-                    courses.add(course);
-                    person.setCourses(courses);
-                    person.setType(Message.MESSAGE_TYPE.TYPE_INPUT_EXAMS);
-                    common.getIO().SendMessages(person);
-                    person = (Person) common.getIO().ReceiveMessage();
-                }
-            }
-        });
+            JTable coursesTable = new JTable(data,columnNames);
+            coursesTable.setLayout(new BorderLayout());
+            coursesTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+            TableUtils.FitTableColumns(coursesTable);
+            coursesTable.setFont(new Font("微软雅黑",Font.PLAIN,16));
+            coursesTable.getColumnModel().getColumn(5).setCellRenderer(new TableButtonRender());
+            coursesTable.getColumnModel().getColumn(5).setCellEditor(new AddExamButton(coursesTable,
+                    amP));
+            coursesTable.setRowHeight(40);
+            JScrollPane scrollPane = new JScrollPane(coursesTable);
+            setLayout(new BorderLayout());
+            add(scrollPane, BorderLayout.CENTER);
+            this.setVisible(true);
+        }
+        else add(new JLabel("暂无课程"));
     }
 }

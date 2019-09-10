@@ -42,12 +42,14 @@ public class GradesFrame extends JFrame {
         teacher.setType(Message.MESSAGE_TYPE.TYPE_GET_ENROLLED_STUDENTS);
         messenger.getIO().SendMessages(teacher);
         teacher = (Person) messenger.getIO().ReceiveMessage();
-        if(teacher.getType() == Message.MESSAGE_TYPE.TYPE_SUCCESS) {
-            courseList = teacher.getCourses();
+        courseList = teacher.getCourses();
+        if(teacher.getType() == Message.MESSAGE_TYPE.TYPE_SUCCESS && !courseList.isEmpty()) {
 
             if(isRead) {
                 setTitle("查看成绩");
                 jLabel = new JLabel(courseList.get(0).getCourseName() + " 成绩册");
+                jLabel.setHorizontalAlignment(JLabel.CENTER);
+                jLabel.setVerticalAlignment(JLabel.CENTER);
                 getContentPane().add(jLabel, BorderLayout.NORTH);
                 String[] columnNames = {"一卡通号", "姓名","成绩"};
                 Object[][] data = new Object[courseList.size()][3];
@@ -61,9 +63,7 @@ public class GradesFrame extends JFrame {
                 table = new JTable(data, columnNames);
                 table.setLayout(new BorderLayout());
                 table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-                table.getColumnModel().getColumn(0).setPreferredWidth(200);
-                table.getColumnModel().getColumn(1).setPreferredWidth(100);
-                table.getColumnModel().getColumn(2).setPreferredWidth(200);
+                TableUtils.FitTableColumns(table);
                 table.setFont(new Font("微软雅黑",Font.PLAIN,16));
                 table.setRowHeight(25);
                 table.setDefaultEditor(Object.class, null);
@@ -73,6 +73,8 @@ public class GradesFrame extends JFrame {
             else {
                 setTitle("录入成绩");
                 jLabel = new JLabel(courseList.get(0).getCourseName() + " 成绩册录入栏");
+                jLabel.setHorizontalAlignment(JLabel.CENTER);
+                jLabel.setVerticalAlignment(JLabel.CENTER);
                 getContentPane().add(jLabel, BorderLayout.NORTH);
 
                 String[] columnNames = {"一卡通号", "姓名","请输入成绩"};
@@ -95,11 +97,9 @@ public class GradesFrame extends JFrame {
 
                 table.setLayout(new BorderLayout());
                 table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-                table.getColumnModel().getColumn(0).setPreferredWidth(150);
-                table.getColumnModel().getColumn(1).setPreferredWidth(100);
-                table.getColumnModel().getColumn(2).setPreferredWidth(150);
                 table.setFont(new Font("微软雅黑",Font.PLAIN,16));
                 table.setRowHeight(25);
+                TableUtils.FitTableColumns(table);
             }
             scrollPane = new JScrollPane(table);
             getContentPane().add(scrollPane, BorderLayout.CENTER);
@@ -141,6 +141,9 @@ public class GradesFrame extends JFrame {
                 getContentPane().add(submitButton,BorderLayout.SOUTH);
             }
             setVisible(true);
+        }
+        else {
+            JOptionPane.showMessageDialog(null,"没有学生！","错误",JOptionPane.ERROR_MESSAGE);
         }
     }
 }

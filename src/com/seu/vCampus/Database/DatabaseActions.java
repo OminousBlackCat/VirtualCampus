@@ -582,28 +582,24 @@ public class DatabaseActions {
      * @param admin Should contain semester info. in the tail of admin.courses
      */
     public void getCoursesForExam(Person admin) {
-        String sql = "SELECT * FROM Courses WHERE isExam AND courseSemester = ?";
-        String semester;
+        String sql = "SELECT * FROM Courses WHERE isExam";
         try{
-            if(admin.getCourses().isEmpty()) {
-                throw PersonCoursesEmptyException;
+
+            ArrayList<Course> cs = new ArrayList<Course>();
+            stmt = conn.prepareStatement(sql);
+            ResultSet coursesRes = stmt.executeQuery();
+            while (coursesRes.next()) {
+                cs.add(new Course(coursesRes.getString("courseNumber"),
+                        coursesRes.getString("courseName"),
+                        coursesRes.getString("courseSemester"),
+                        coursesRes.getString("courseLecturer"),
+                        coursesRes.getString("examTime"),
+                coursesRes.getString("examPlace")
+                        ));
             }
-            else {
-                ArrayList<Course> cs = new ArrayList<Course>();
-                semester = admin.getCourses().get(admin.getCourses().size() - 1).getCourseSemester();
-                stmt = conn.prepareStatement(sql);
-                stmt.setString(1,semester);
-                ResultSet coursesRes = stmt.executeQuery();
-                while (coursesRes.next()) {
-                    cs.add(new Course(coursesRes.getString("courseNumber"),
-                            coursesRes.getString("courseName"),
-                            coursesRes.getString("courseSemester"),
-                            coursesRes.getString("courseLecturer")
-                            ));
-                }
-                admin.setCourses(cs);
-                admin.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
-            }
+            admin.setCourses(cs);
+            admin.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
+
         } catch (Exception e) {
             admin.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
             e.printStackTrace();
@@ -647,7 +643,7 @@ public class DatabaseActions {
         String sql = "UPDATE Courses SET examTime = ?, examPlace = ?  WHERE courseNumber = ?";
         try{
             stmt = conn.prepareStatement(sql);
-            stmt.setString(1,course.getCourseTime());
+            stmt.setString(1,course.getExamTime());
             stmt.setString(2,course.getExamPlace());
             stmt.setString(3,course.getCourseNumber());
             if(stmt.executeUpdate() != 0) {

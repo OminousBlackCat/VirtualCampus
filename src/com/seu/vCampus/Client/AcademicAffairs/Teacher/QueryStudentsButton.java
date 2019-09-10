@@ -40,8 +40,8 @@ public class QueryStudentsButton extends DefaultCellEditor {
                     me.setType(Message.MESSAGE_TYPE.TYPE_GET_ENROLLED_STUDENTS);
                     messenger.getIO().SendMessages(me);
                     me = (Person) messenger.getIO().ReceiveMessage();
-                    if(me.getType() == Message.MESSAGE_TYPE.TYPE_SUCCESS) {
-                        courses = me.getCourses();
+                    courses = me.getCourses();
+                    if(me.getType() == Message.MESSAGE_TYPE.TYPE_SUCCESS && !courses.isEmpty()) {
                         JFrame ViewStudentsFrame = new JFrame();
                         String[] columnNames = {"一卡通号", "姓名"};
                         Object[][] data = new Object[courses.size()][2];
@@ -55,21 +55,24 @@ public class QueryStudentsButton extends DefaultCellEditor {
                         JTable coursesTable = new JTable(data, columnNames);
                         coursesTable.setLayout(new BorderLayout());
                         coursesTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-                        coursesTable.getColumnModel().getColumn(0).setPreferredWidth(200);
-                        coursesTable.getColumnModel().getColumn(1).setPreferredWidth(100);
                         coursesTable.setFont(new Font("微软雅黑",Font.PLAIN,16));
                         coursesTable.setRowHeight(25);
                         coursesTable.setDefaultEditor(Object.class, null);
                         JScrollPane scrollPane = new JScrollPane(coursesTable);
-                        ViewStudentsFrame.setBounds(500,200,320,600);
+                        ViewStudentsFrame.setBounds(500,200,250,600);
+                        TableUtils.FitTableColumns(coursesTable);
                         ViewStudentsFrame.getContentPane().setLayout(new BorderLayout());
                         ViewStudentsFrame.getContentPane().add(scrollPane,BorderLayout.CENTER);
                         ViewStudentsFrame.setTitle("学生名单");
                         JLabel jLabel = new JLabel(courses.get(0).getCourseName() + "   学生名单");
+                        jLabel.setHorizontalAlignment(JLabel.CENTER);
+                        jLabel.setVerticalAlignment(JLabel.CENTER);
                         ViewStudentsFrame.getContentPane().add(jLabel, BorderLayout.NORTH);
                         ViewStudentsFrame.setVisible(true);
                     }
-
+                    else {
+                        JOptionPane.showMessageDialog(null,"没有学生！","错误",JOptionPane.ERROR_MESSAGE);
+                    }
                 }
             }
         });
