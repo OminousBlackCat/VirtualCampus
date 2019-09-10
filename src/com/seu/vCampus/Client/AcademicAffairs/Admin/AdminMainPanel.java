@@ -1,53 +1,44 @@
 package com.seu.vCampus.Client.AcademicAffairs.Admin;
 
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.*;
-public class AdminMainPanel extends JPanel{
 
+public class AdminMainPanel extends JPanel {
 
+    private QueryCoursesPanel qcP;
+    private AddCoursePanel acP;
+    private ChangeGradePanel cgP;
+    private JTabbedPane switchPane;
     public AdminMainPanel(){
-
-        setBounds(100, 100, 370, 475);
-        setLayout(null);
-
-        JButton button = new JButton("添加课程");
-        button.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-                AddCoursePanel addCoursePanel =new AddCoursePanel();
-            }
-        });
-        button.setBounds(117, 89, 125, 27);
-        add(button);
-
-        JButton button_1 = new JButton("添加考试");
-        button_1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                AddExams addExams=new AddExams();
-            }
-        });
-        button_1.setBounds(117, 169, 125, 27);
-        add(button_1);
-
-        JButton button_2 = new JButton("修改成绩");
-        button_2.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                ChangeGrade setGrades=new ChangeGrade();
-                setGrades.setVisible(true);
-            }
-        });
-        button_2.setBounds(117, 252, 125, 27);
-        add(button_2);
-
-        JButton button_3 = new JButton("修改课程信息");
-        button_3.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-                ChangeCourseInfo changeCourseInf= new ChangeCourseInfo();
-                changeCourseInf.setVisible(true);
-            }
-        });
-        button_3.setBounds(117, 333, 125, 27);
-        add(button_3);
+        this.setLayout(new BorderLayout());
+        switchPane = new JTabbedPane();
+        qcP = new QueryCoursesPanel();
+        acP = new AddCoursePanel();
+        cgP = new ChangeGradePanel();
+        add(switchPane);
+        switchPane.addTab("查询学校课程",qcP);
+        switchPane.addTab("添加课程",acP);
+        switchPane.addTab("更改学生成绩",cgP);
+        switchPane.setTabPlacement(JTabbedPane.TOP);
     }
 
+    public void refresh() {
+        this.setLayout(new BorderLayout());
+        switchPane.setVisible(false);
+        qcP.setVisible(false);
+        acP.setVisible(false);
+        cgP.setVisible(false);
+        qcP = new QueryCoursesPanel();
+        acP = new AddCoursePanel();
+        cgP = new ChangeGradePanel();
+        switchPane = new JTabbedPane();
+        switchPane.addTab("查询学校课程",qcP);
+        switchPane.addTab("添加课程",acP);
+        switchPane.addTab("更改学生成绩",cgP);
+        switchPane.setVisible(true);
+        add(switchPane);
+        switchPane.setTabPlacement(JTabbedPane.TOP);
+    }
 }

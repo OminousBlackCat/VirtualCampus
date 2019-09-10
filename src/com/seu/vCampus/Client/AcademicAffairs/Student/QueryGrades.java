@@ -50,13 +50,13 @@ public class QueryGrades extends JPanel {
             }
             else
             {
-                this.add(new JTextField("暂无"));
+                this.add(new JLabel("暂时没有您的成绩呢~"));
                 this.setVisible(true);
             }
         }
         else
         {
-            this.add(new JTextField("错误"));
+            this.add(new JLabel("错误！"));
             this.setVisible(true);
         }
     }

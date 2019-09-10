@@ -56,43 +56,43 @@ public class AddCoursePanel extends JPanel{
         setLayout(null);
 
         JLabel label = new JLabel("课程号");
-        label.setBounds(31, 60, 108, 18);
+        label.setBounds(181, 90, 108, 18);
         add(label);
 
         JLabel lblCoursename = new JLabel("课程名");
-        lblCoursename.setBounds(31, 110, 97, 18);
+        lblCoursename.setBounds(581, 90, 97, 18);
         add(lblCoursename);
 
         JLabel lblNewLabel = new JLabel("课程学期");
-        lblNewLabel.setBounds(31, 160, 119, 18);
+        lblNewLabel.setBounds(181, 190, 119, 18);
         add(lblNewLabel);
 
         JLabel lblCourselecturer = new JLabel("授课教师");
-        lblCourselecturer.setBounds(31, 210, 119, 18);
+        lblCourselecturer.setBounds(581, 190, 119, 18);
         add(lblCourselecturer);
 
         JLabel lblCourseplace = new JLabel("上课地点");
-        lblCourseplace.setBounds(31, 260, 108, 18);
+        lblCourseplace.setBounds(181, 290, 108, 18);
         add(lblCourseplace);
 
         JLabel lblCoursetime = new JLabel("上课时间");
-        lblCoursetime.setBounds(31, 310, 108, 18);
+        lblCoursetime.setBounds(581, 290, 108, 18);
         add(lblCoursetime);
 
         JLabel lblMaximumstudents = new JLabel("最大学生数");
-        lblMaximumstudents.setBounds(31, 360, 119, 18);
+        lblMaximumstudents.setBounds(181, 390, 119, 18);
         add(lblMaximumstudents);
 
         JLabel lblCoursetype = new JLabel("课程类型");
-        lblCoursetype.setBounds(31, 410, 97, 18);
+        lblCoursetype.setBounds(581, 390, 97, 18);
         add(lblCoursetype);
 
         JLabel lblCoursecredit = new JLabel("课程学分");
-        lblCoursecredit.setBounds(31, 460, 108, 18);
+        lblCoursecredit.setBounds(181, 490, 108, 18);
         add(lblCoursecredit);
 
         textField = new JTextField();
-        textField.setBounds(183, 57, 86, 24);
+        textField.setBounds(353, 87, 86, 24);
         add(textField);
         textField.setColumns(10);
         Document dt=textField.getDocument();
@@ -114,7 +114,7 @@ public class AddCoursePanel extends JPanel{
         });
 
         textField_1 = new JTextField();
-        textField_1.setBounds(183, 107, 86, 24);
+        textField_1.setBounds(753, 87, 86, 24);
         add(textField_1);
         textField_1.setColumns(10);
         Document dt_1=textField_1.getDocument();
@@ -136,7 +136,7 @@ public class AddCoursePanel extends JPanel{
         });
 
         textField_2 = new JTextField();
-        textField_2.setBounds(183, 157, 86, 24);
+        textField_2.setBounds(353, 187, 86, 24);
         add(textField_2);
         textField_2.setColumns(10);
         Document dt_2=textField_2.getDocument();
@@ -158,7 +158,7 @@ public class AddCoursePanel extends JPanel{
         });
 
         textField_3 = new JTextField();
-        textField_3.setBounds(183, 207, 86, 24);
+        textField_3.setBounds(753, 187, 86, 24);
         add(textField_3);
         textField_3.setColumns(10);
         Document dt_3=textField_3.getDocument();
@@ -180,7 +180,7 @@ public class AddCoursePanel extends JPanel{
         });
 
         textField_4 = new JTextField();
-        textField_4.setBounds(183, 257, 86, 24);
+        textField_4.setBounds(353, 287, 86, 24);
         add(textField_4);
         textField_4.setColumns(10);
         Document dt_4=textField_4.getDocument();
@@ -202,7 +202,7 @@ public class AddCoursePanel extends JPanel{
         });
 
         textField_5 = new JTextField();
-        textField_5.setBounds(183, 307, 86, 24);
+        textField_5.setBounds(753, 287, 86, 24);
         add(textField_5);
         textField_5.setColumns(10);
         Document dt_5=textField_5.getDocument();
@@ -224,7 +224,7 @@ public class AddCoursePanel extends JPanel{
         });
 
         textField_6 = new JTextField();
-        textField_6.setBounds(183, 357, 86, 24);
+        textField_6.setBounds(353, 387, 86, 24);
         add(textField_6);
         textField_6.setColumns(10);
         Document dt_6=textField_6.getDocument();
@@ -247,7 +247,7 @@ public class AddCoursePanel extends JPanel{
 
         String [] str=new String[] {"必修","选修"};
         JComboBox comboBox = new JComboBox(str);
-        comboBox.setBounds(183, 407, 86, 24);
+        comboBox.setBounds(753, 387, 86, 24);
         add(comboBox);
         comboBox.addItemListener(new ItemListener() {
             @Override
@@ -260,7 +260,7 @@ public class AddCoursePanel extends JPanel{
         });
 
         textField_7 = new JTextField();
-        textField_7.setBounds(183, 457, 86, 24);
+        textField_7.setBounds(353, 487, 86, 24);
         add(textField_7);
         textField_7.setColumns(10);
         Document dt_7=textField_7.getDocument();
@@ -282,11 +282,11 @@ public class AddCoursePanel extends JPanel{
         });
 
         JLabel label_1 = new JLabel("老师一卡通");
-        label_1.setBounds(31, 510, 108, 18);
+        label_1.setBounds(581, 490, 108, 18);
         add(label_1);
 
         textField_8 = new JTextField();
-        textField_8.setBounds(183, 507, 86, 24);
+        textField_8.setBounds(753, 487, 86, 24);
         add(textField_8);
         textField_8.setColumns(10);
         Document dt_8=textField_8.getDocument();
@@ -308,11 +308,11 @@ public class AddCoursePanel extends JPanel{
         });
 
         JLabel label_2 = new JLabel("已选学生数");
-        label_2.setBounds(31, 560, 97, 18);
+        label_2.setBounds(181, 590, 97, 18);
         add(label_2);
 
         textField_9 = new JTextField();
-        textField_9.setBounds(183, 557, 86, 24);
+        textField_9.setBounds(353, 587, 86, 24);
         add(textField_9);
         textField_9.setColumns(10);
         Document dt_9=textField_9.getDocument();
@@ -334,12 +334,12 @@ public class AddCoursePanel extends JPanel{
         });
 
         JLabel label_3 = new JLabel("是否有考试");
-        label_3.setBounds(31, 610, 105, 18);
+        label_3.setBounds(581, 590, 105, 18);
         add(label_3);
 
         String []isexam=new String []{"是","否"};
         JComboBox comboBox_1 = new JComboBox(isexam);
-        comboBox_1.setBounds(183, 607, 86, 24);
+        comboBox_1.setBounds(753, 587, 86, 24);
         add(comboBox_1);
         comboBox_1.addItemListener(new ItemListener() {
             @Override
@@ -353,7 +353,7 @@ public class AddCoursePanel extends JPanel{
         });
 
         JButton btnOk = new JButton("提交");
-        btnOk.setBounds(31, 513, 97, 27);
+        btnOk.setBounds(431, 713, 97, 27);
         add(btnOk);
         btnOk.addActionListener(new ActionListener() {
             @Override
