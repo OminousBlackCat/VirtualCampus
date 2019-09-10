@@ -64,6 +64,7 @@ public class LauncherPanel extends JPanel {
 
         ECardNumber = new JTextField();
         ECardNumber.setBounds(200,180,150,25);
+        ECardNumber.setText("09017211");
         add(ECardNumber);
         JLabel cardNumber = new JLabel("一卡通号：");
         cardNumber.setBounds(130,180,80,25);
