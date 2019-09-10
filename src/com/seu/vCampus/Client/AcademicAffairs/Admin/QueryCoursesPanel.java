@@ -30,7 +30,7 @@ class QueryCoursesPanel extends JPanel {
                 data[i][2] = c.getCourseSemester();
                 data[i][3] = c.getLecturerECardNumber();
                 data[i][4] = c.getCourseLecturer();
-                data[i][5] = TableUtils.ParseCourseTime(c.getCourseTime());
+                data[i][5] = c.getCourseTime();
                 data[i][6] = c.getCoursePlace();
                 data[i][7] = c.getCourseType();
                 data[i][8] = c.getCourseCredit();
@@ -58,7 +58,6 @@ class QueryCoursesPanel extends JPanel {
             coursesTable.getColumnModel().getColumn(13).setCellRenderer(new TableButtonRender());
 
             coursesTable.setRowHeight(40);
-            coursesTable.setDefaultEditor(Object.class, null);
             JScrollPane scrollPane = new JScrollPane(coursesTable);
             setLayout(new BorderLayout());
             add(scrollPane, BorderLayout.CENTER);
