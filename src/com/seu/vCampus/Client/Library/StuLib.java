@@ -103,6 +103,10 @@ public class StuLib {
                 if (modelRow != -1) {
 
                     Book NBook = BookData.getBookInformation().getBookList().get(modelRow);
+                    if(BookData.getUser().getLendBooksNumber()>=BookData.MAX_LEND_BOOK){
+                        JOptionPane.showMessageDialog(null, "已经达到借书上线", "错误", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
                     if (NBook.isLent()) {
                         JOptionPane.showMessageDialog(null, "这本书已经有主了", "错误", JOptionPane.ERROR_MESSAGE);
                         return;
@@ -120,15 +124,14 @@ public class StuLib {
                     BookData.getIO().SendMessages(NBook);
                     NBook = (Book) BookData.getIO().ReceiveMessage();
                     if (NBook.getType() == Message.MESSAGE_TYPE.TYPE_SUCCESS) {
-                        JOptionPane.showMessageDialog(null, "借书数据库操作成功", "成功", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "借书操作成功", "成功", JOptionPane.INFORMATION_MESSAGE);
                     } else {
-                        JOptionPane.showMessageDialog(null, "借书数据库操作失败", "错误", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "借书操作失败", "错误", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }
         });
     }
-    private static ImageIcon MybookIcon = new ImageIcon("src/icon/left/library.png");
     public JPanel LibMPanel;
     private JTabbedPane LibtabbedPane;
     private JPanel LibBPanel;
@@ -182,19 +185,6 @@ public class StuLib {
 
     private void createUIComponents() {
         // TODO: place custom component creation code here
-
-
-//<<<<<<<HEAD
-//
-//        Object[] Data1 = {"How to play dota2", "Maou", "游戏", 222, 5};
-//        Object[] Data2 = {"How to play guitar", "Sora", "音乐", 444, 27};
-//        Object[] Data3 = {"How to play csgo", "Maou", "白给", 111, false};
-//
-//        SModel.addRow(Data1);
-//        SModel.addRow(Data2);
-//        Stutable = new JTable(SModel);
-//        LModel.addRow(Data3);
-//=======
         BookData = Common.getInstance();
         int Blistsize = BookData.getBookInformation().getBookList().size();
         int cnt = 0;
@@ -219,7 +209,6 @@ public class StuLib {
             }
             cnt++;
         }
-
 
         Stutable = new JTable(SModel);
         Libtable = new JTable(LModel);
@@ -269,7 +258,7 @@ public class StuLib {
 
 
     public JPanel getPanel() {
-        return LibBPanel;
+        return LibMPanel;
     }
 
     /**

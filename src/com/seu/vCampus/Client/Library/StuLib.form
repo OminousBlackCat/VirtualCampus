@@ -79,7 +79,7 @@
                   <grid row="3" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <text value="Borrow"/>
+                  <text value="借书"/>
                 </properties>
               </component>
               <scrollpane id="69004" binding="LibScrollPane">
@@ -125,15 +125,7 @@
                   <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <text value="Status"/>
-                </properties>
-              </component>
-              <component id="b4ac4" class="javax.swing.JLabel">
-                <constraints>
-                  <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="Label"/>
+                  <text value="借书上限10本"/>
                 </properties>
               </component>
               <hspacer id="47f09">

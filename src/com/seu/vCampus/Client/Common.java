@@ -41,7 +41,7 @@ public class Common {
     private ShopManage shopInformation;
     private BookManage bookInformation;
     private ArrayList<Goods> ShoppingList;
-    private static final int MAX_LEND_BOOK = 10;
+    public static final int MAX_LEND_BOOK = 10;//Changed by MaouSora
 
 
     public static Common getInstance(){
