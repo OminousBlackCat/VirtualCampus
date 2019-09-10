@@ -76,10 +76,14 @@ public class StuLib {
                             NBook.setType(Message.MESSAGE_TYPE.TYPE_RETURN_BOOK);
                             BookData.getIO().SendMessages(NBook);
                             NBook = (Book) BookData.getIO().ReceiveMessage();
+
                             if (NBook.getType() == Message.MESSAGE_TYPE.TYPE_SUCCESS) {
                                 JOptionPane.showMessageDialog(null, "还书操作成功", "成功", JOptionPane.INFORMATION_MESSAGE);
                                 short NN = (short) (BookData.getUser().getLendBooksNumber() - 1);
                                 BookData.getUser().setLendBooksNumber(NN);
+                                BookData.getUser().setType(Message.MESSAGE_TYPE.TYPE_UPDATE_USER);
+                                BookData.getIO().SendMessages(BookData.getUser());
+                                BookData.getIO().ReceiveMessage();
                             } else {
                                 JOptionPane.showMessageDialog(null, "还书操作失败", "错误", JOptionPane.ERROR_MESSAGE);
                             }
@@ -125,9 +129,13 @@ public class StuLib {
                     NBook.setECardNumber(BookData.getUser().getECardNumber());
                     BookData.getIO().SendMessages(NBook);
                     NBook = (Book) BookData.getIO().ReceiveMessage();
+
                     if (NBook.getType() == Message.MESSAGE_TYPE.TYPE_SUCCESS) {
                         short NN = (short) (BookData.getUser().getLendBooksNumber() + 1);
                         BookData.getUser().setLendBooksNumber(NN);
+                        BookData.getUser().setType(Message.MESSAGE_TYPE.TYPE_UPDATE_USER);
+                        BookData.getIO().SendMessages(BookData.getUser());
+                        BookData.getIO().ReceiveMessage();
                         JOptionPane.showMessageDialog(null, "借书操作成功", "成功", JOptionPane.INFORMATION_MESSAGE);
                     } else {
                         JOptionPane.showMessageDialog(null, "借书操作失败", "错误", JOptionPane.ERROR_MESSAGE);
@@ -224,7 +232,7 @@ public class StuLib {
             if (NBook.isLent()) {
                 if (NEcard.equals(NUser)) {
                     SModel.addRow(newRow);
-                    SModel.setValueAt(30 - NBook.getLendDays(), SModel.getRowCount() - 1, 4);
+                    SModel.setValueAt(NBook.getLendDays(), SModel.getRowCount() - 1, 4);
                 }
             }
             cnt++;
