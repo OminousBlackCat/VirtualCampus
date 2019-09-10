@@ -364,8 +364,7 @@ public class Home extends JFrame{
                 break;
             }
             case GROUP_SHOP_MANAGER:{
-                JPanel ShopManager = new JPanel();
-                tabbedPane.addTab("商品管理",Shop,ShopManager,null);
+                tabbedPane.addTab("商品管理",Shop,mangerShopPanel.$$$getRootComponent$$$(),null);
                 break;
             }
             case GROUP_ACADEMIC_MANAGER: {
