@@ -54,23 +54,28 @@ public class ScheduleTable extends JPanel {
 
     public ScheduleTable(){
         initialize();
-        ct = coursesTables.get(0);
-        setLayout(new BorderLayout());
-        String [] temp = new String[semester.size()];
-        comboBox= new JComboBox(semester.toArray(temp));
-        add(comboBox, BorderLayout.NORTH);
-        ScheduleTable.this.add(ct, BorderLayout.CENTER);
-        ct.setVisible(true);
-        comboBox.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                int i = comboBox.getSelectedIndex();
-                ct.setVisible(false);
-                ct = coursesTables.get(i);
-                ScheduleTable.this.add(ct, BorderLayout.CENTER);
-                ct.setVisible(true);
-            }
-        });
+        if(!coursesTables.isEmpty()) {
+            ct = coursesTables.get(0);
+            setLayout(new BorderLayout());
+            String[] temp = new String[semester.size()];
+            comboBox = new JComboBox(semester.toArray(temp));
+            add(comboBox, BorderLayout.NORTH);
+            ScheduleTable.this.add(ct, BorderLayout.CENTER);
+            ct.setVisible(true);
+            comboBox.addItemListener(new ItemListener() {
+                @Override
+                public void itemStateChanged(ItemEvent e) {
+                    int i = comboBox.getSelectedIndex();
+                    ct.setVisible(false);
+                    ct = coursesTables.get(i);
+                    ScheduleTable.this.add(ct, BorderLayout.CENTER);
+                    ct.setVisible(true);
+                }
+            });
+        }
+        else {
+            add(new JLabel("您还没有选课呢~"),BorderLayout.NORTH);
+        }
     }
 
 }

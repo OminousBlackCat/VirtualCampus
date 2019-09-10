@@ -35,20 +35,20 @@ public class TabbedPaneUI extends BasicTabbedPaneUI {
         setColor(bgColorHex,frontColorHex);
 
         selectedColorSet = new ColorSet();
-        selectedColorSet.topGradColor1 = Color.decode("#E0EEEE");//选中的最上层
-        selectedColorSet.topGradColor2 = Color.decode("#FFFFFF");//选中的第二层
-        selectedColorSet.bottomGradColor1 = Color.decode("#FFFFFF");//选中的第三层
-        selectedColorSet.bottomGradColor2 = Color.decode("#FFFFFF");//选中的最下层
+        selectedColorSet.topGradColor1 = Color.decode("#57E550");//选中的最上层
+        selectedColorSet.topGradColor2 = Color.decode("#57E550");//选中的第二层
+        selectedColorSet.bottomGradColor1 = Color.decode("#57E550");//选中的第三层
+        selectedColorSet.bottomGradColor2 = Color.decode("#57E550");//选中的最下层
         defaultColorSet = new ColorSet();
         defaultColorSet.topGradColor1 = Color.decode("#FFFFFF");//未选的最上层
-        defaultColorSet.topGradColor2 = Color.decode("#DEEBFE");
+        defaultColorSet.topGradColor2 = Color.decode("#D6E5F5");
         defaultColorSet.bottomGradColor1 = Color.decode("#D6E5F5");
         defaultColorSet.bottomGradColor2 = Color.decode("#D6E5F5");
         hoverColorSet = new ColorSet();
-        hoverColorSet.topGradColor1 = Color.decode("#FFFFFF");//鼠标悬停最上层
-        hoverColorSet.topGradColor2 = Color.decode("#FFFFFF");
-        hoverColorSet.bottomGradColor1 = Color.decode("#FFFFFF");
-        hoverColorSet.bottomGradColor2 = Color.decode("#FFFFFF");
+        hoverColorSet.topGradColor1 = Color.decode("#64E0D8");//鼠标悬停最上层
+        hoverColorSet.topGradColor2 = Color.decode("#64E0D8");
+        hoverColorSet.bottomGradColor1 = Color.decode("#64E0D8");
+        hoverColorSet.bottomGradColor2 = Color.decode("#64E0D8");
 
     }
 //

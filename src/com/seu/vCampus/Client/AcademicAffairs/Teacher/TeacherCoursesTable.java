@@ -1,13 +1,11 @@
-package com.seu.vCampus.Client.AcademicAffairs.Student;
+package com.seu.vCampus.Client.AcademicAffairs.Teacher;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class CoursesTable  extends JPanel {
-
+public class TeacherCoursesTable extends JPanel{
     private JLabel jLabel;
-    public CoursesTable(){
-
+    public TeacherCoursesTable(){
         setBounds(100, 100, 800, 800);
         setLayout(null);
 
@@ -105,7 +103,6 @@ public class CoursesTable  extends JPanel {
         label10.setOpaque(true);
         label10.setBackground(Color.getHSBColor((float)0.583,(float)0.12, (float) 0.96));
         add(label10);
-
     }
     public void addCourse(String CourseTime,String CourseName){
         String []time;
@@ -122,7 +119,5 @@ public class CoursesTable  extends JPanel {
             jLabel.setBackground(Color.GRAY);
             this.add(jLabel);
         }
-
-
     }
 }

@@ -13,13 +13,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class AddExams extends JPanel {
+public class AddExamsPanel extends JPanel {
     private Common common;
     private Person person;
     private Course course;
     private ArrayList<Course> courses;
 
-    public AddExams(){
+    public AddExamsPanel(){
 
         common = Common.getInstance();
 

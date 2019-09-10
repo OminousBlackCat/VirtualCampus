@@ -13,6 +13,7 @@ public class Course extends Message{
     private String courseName;
     private String courseSemester;
     private String courseLecturer;
+    private String lecturerECardNumber;
     private String coursePlace;
     private String courseTime;
     private String courseCredit;
@@ -123,9 +124,13 @@ public class Course extends Message{
      * @param maximumStudents Maximum student capacity
      * @param isExam Whether there will be an exam
      */
+
+    /**
+     * Constructor for querying courses for lecturers.
+     */
     public Course(String courseNumber, String courseName, String courseSemester, String courseLecturer,
-                  String coursePlace, String courseTime, String courseCredit, String courseType,
-                  int maximumStudents, boolean isExam) {
+                       String coursePlace, String courseTime, String courseCredit, String courseType,
+                       int maximumStudents, int enrolledStudents, boolean isExam, boolean gradeAdded) {
         this.courseNumber = courseNumber;
         this.courseName = courseName;
         this.courseSemester = courseSemester;
@@ -135,19 +140,20 @@ public class Course extends Message{
         this.courseCredit = courseCredit;
         this.courseType = courseType;
         this.maximumStudents = maximumStudents;
+        this.enrolledStudents = enrolledStudents;
         this.isExam = isExam;
+        this.gradeAdded = gradeAdded;
     }
 
-    /**
-     * Constructor for querying courses for lecturers.
-     */
     public Course(String courseNumber, String courseName, String courseSemester, String courseLecturer,
+                  String lecturerECardNumber,
                   String coursePlace, String courseTime, String courseCredit, String courseType,
                   int maximumStudents, int enrolledStudents, boolean isExam, boolean gradeAdded) {
         this.courseNumber = courseNumber;
         this.courseName = courseName;
         this.courseSemester = courseSemester;
         this.courseLecturer = courseLecturer;
+        this.lecturerECardNumber = lecturerECardNumber;
         this.coursePlace = coursePlace;
         this.courseTime = courseTime;
         this.courseCredit = courseCredit;
@@ -306,6 +312,14 @@ public class Course extends Message{
 
     public void setGradeAdded(boolean gradeAdded) {
         this.gradeAdded = gradeAdded;
+    }
+
+    public String getLecturerECardNumber() {
+        return lecturerECardNumber;
+    }
+
+    public void setLecturerECardNumber(String lecturerECardNumber) {
+        this.lecturerECardNumber = lecturerECardNumber;
     }
 
 }
