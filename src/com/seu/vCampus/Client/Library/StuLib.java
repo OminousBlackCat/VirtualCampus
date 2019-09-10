@@ -33,13 +33,13 @@ public class StuLib {
                 super.mouseClicked(e);
                 int selectedRow = Stutable.getSelectedRow();
                 if (selectedRow != -1) {
-                    Object NIsbn=Stutable.getValueAt(selectedRow,3);
-                    int Blistsize=BookData.getBookInformation().getBookList().size();
-                    int cnt=0;
-                    while(cnt<Blistsize){
-                        Book NBook=BookData.getBookInformation().getBookList().get(cnt);
-                        Object NBid=NBook.getBID();
-                        if(NIsbn.equals(NBid)){
+                    Object NIsbn = Stutable.getValueAt(selectedRow, 3);
+                    int Blistsize = BookData.getBookInformation().getBookList().size();
+                    int cnt = 0;
+                    while (cnt < Blistsize) {
+                        Book NBook = BookData.getBookInformation().getBookList().get(cnt);
+                        Object NBid = NBook.getBID();
+                        if (NIsbn.equals(NBid)) {
 
                             SModel.setValueAt(30, selectedRow, 4);
                             NBook.setLendDays((short) 0);
@@ -63,13 +63,13 @@ public class StuLib {
                 super.mouseClicked(e);
                 int selectedRow = Stutable.getSelectedRow();
                 if (selectedRow != -1) {
-                    Object NIsbn=Stutable.getValueAt(selectedRow,3);
-                    int Blistsize=BookData.getBookInformation().getBookList().size();
-                    int cnt=0;
-                    while(cnt<Blistsize){
-                        Book NBook=BookData.getBookInformation().getBookList().get(cnt);
-                        Object NBid=NBook.getBID();
-                        if(NIsbn.equals(NBid)){
+                    Object NIsbn = Stutable.getValueAt(selectedRow, 3);
+                    int Blistsize = BookData.getBookInformation().getBookList().size();
+                    int cnt = 0;
+                    while (cnt < Blistsize) {
+                        Book NBook = BookData.getBookInformation().getBookList().get(cnt);
+                        Object NBid = NBook.getBID();
+                        if (NIsbn.equals(NBid)) {
                             SModel.removeRow(selectedRow);
                             LModel.setValueAt("在库", cnt, 4);
                             NBook.setLent(false);
@@ -78,7 +78,7 @@ public class StuLib {
                             NBook = (Book) BookData.getIO().ReceiveMessage();
                             if (NBook.getType() == Message.MESSAGE_TYPE.TYPE_SUCCESS) {
                                 JOptionPane.showMessageDialog(null, "还书操作成功", "成功", JOptionPane.INFORMATION_MESSAGE);
-                                short NN=(short)(BookData.getUser().getLendBooksNumber()- 1);
+                                short NN = (short) (BookData.getUser().getLendBooksNumber() - 1);
                                 BookData.getUser().setLendBooksNumber(NN);
                             } else {
                                 JOptionPane.showMessageDialog(null, "还书操作失败", "错误", JOptionPane.ERROR_MESSAGE);
@@ -104,7 +104,7 @@ public class StuLib {
                 if (modelRow != -1) {
 
                     Book NBook = BookData.getBookInformation().getBookList().get(modelRow);
-                    if(BookData.getUser().getLendBooksNumber()>=BookData.MAX_LEND_BOOK){
+                    if (BookData.getUser().getLendBooksNumber() >= BookData.MAX_LEND_BOOK) {
                         JOptionPane.showMessageDialog(null, "已经达到借书上线", "错误", JOptionPane.ERROR_MESSAGE);
                         return;
                     }
@@ -125,7 +125,7 @@ public class StuLib {
                     BookData.getIO().SendMessages(NBook);
                     NBook = (Book) BookData.getIO().ReceiveMessage();
                     if (NBook.getType() == Message.MESSAGE_TYPE.TYPE_SUCCESS) {
-                        short NN=(short)(BookData.getUser().getLendBooksNumber()+1);
+                        short NN = (short) (BookData.getUser().getLendBooksNumber() + 1);
                         BookData.getUser().setLendBooksNumber(NN);
                         JOptionPane.showMessageDialog(null, "借书操作成功", "成功", JOptionPane.INFORMATION_MESSAGE);
                     } else {
@@ -291,7 +291,7 @@ public class StuLib {
         StuScrollPane = new JScrollPane();
         StuBPanel.add(StuScrollPane, new GridConstraints(0, 0, 1, 4, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         Stutable.setAutoCreateColumnsFromModel(true);
-        Stutable.setAutoCreateRowSorter(true);
+        Stutable.setAutoCreateRowSorter(false);
         Stutable.setFillsViewportHeight(true);
         Stutable.setRowHeight(30);
         StuScrollPane.setViewportView(Stutable);
@@ -301,7 +301,7 @@ public class StuLib {
         LibBPanel.setLayout(new GridLayoutManager(4, 4, new Insets(0, 0, 0, 0), -1, -1));
         LibtabbedPane.addTab("Library", LibBPanel);
         borrowButton = new JButton();
-        borrowButton.setText("Borrow");
+        borrowButton.setText("借书");
         LibBPanel.add(borrowButton, new GridConstraints(3, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         LibScrollPane = new JScrollPane();
         LibBPanel.add(LibScrollPane, new GridConstraints(0, 0, 1, 4, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
@@ -317,11 +317,8 @@ public class StuLib {
         label1.setText("Filter");
         LibBPanel.add(label1, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JLabel label2 = new JLabel();
-        label2.setText("Status");
+        label2.setText("借书上限10本");
         LibBPanel.add(label2, new GridConstraints(1, 0, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        final JLabel label3 = new JLabel();
-        label3.setText("Label");
-        LibBPanel.add(label3, new GridConstraints(1, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final Spacer spacer2 = new Spacer();
         LibBPanel.add(spacer2, new GridConstraints(3, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
     }

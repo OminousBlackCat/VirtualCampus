@@ -1,29 +1,29 @@
-package com.seu.vCampus.Client.AcademicAffairs.Teacher;
+package com.seu.vCampus.Client.AcademicAffairs.Admin;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class GradesButton extends DefaultCellEditor {
+public class AdminGradesButton extends DefaultCellEditor {
     private JButton button;
 
-    public GradesButton(final JTable table, QueryAllMyCoursesPanel qacP, TeacherMainPanel tmP) {
+    public AdminGradesButton(final JTable table, AdminMainPanel amP) {
         super(new JTextField());
         this.setClickCountToStart(1);
         this.button = new JButton();
         this.button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                GradesButton.this.fireEditingCanceled();
+                AdminGradesButton.this.fireEditingCanceled();
                 String realCourseNumber = (String) table.getValueAt(table.getSelectedRow(), 0)
                         + "-" + (String) table.getValueAt(table.getSelectedRow(), 2);
-                if(table.getValueAt(table.getSelectedRow(), 11).equals("查看成绩册")) {
-                    new GradesFrame(realCourseNumber, true, qacP,tmP);
+                if(table.getValueAt(table.getSelectedRow(), 12).equals("查看成绩册")) {
+                    new AdminGradesFrame(realCourseNumber, false, amP);
                 }
                 else {
-                    new GradesFrame(realCourseNumber, false,qacP,tmP);
-                }
+                    new AdminGradesFrame(realCourseNumber, true, amP);
+            }
             }
         });
     }
