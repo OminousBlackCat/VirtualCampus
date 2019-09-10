@@ -1,7 +1,7 @@
 package com.seu.vCampus.Client.Shop;
 
 import com.intellij.uiDesigner.core.GridLayoutManager;
-import com.sun.xml.internal.messaging.saaj.soap.JpegDataContentHandler;
+
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

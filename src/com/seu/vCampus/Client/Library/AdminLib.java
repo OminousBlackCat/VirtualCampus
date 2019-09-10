@@ -17,6 +17,14 @@ import java.awt.event.MouseEvent;
 import java.util.regex.PatternSyntaxException;
 
 public class AdminLib {
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("AdminLib");
+        frame.setContentPane(new AdminLib().AdminLibMPanel);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+    }
+
     public JPanel AdminLibMPanel;
     private JButton DeleteBookButton;
     private JButton AddBookButton;
@@ -103,7 +111,6 @@ public class AdminLib {
 
     private void createUIComponents() {
         // TODO: place custom component creation code here
-        AModel = new DefaultTableModel(null, columnNames);
 
         ABookData = Common.getInstance();
         int Blistsize = ABookData.getBookInformation().getBookList().size();

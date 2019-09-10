@@ -7,6 +7,7 @@ import com.seu.vCampus.util.Course;
 import com.seu.vCampus.util.Message;
 import com.seu.vCampus.util.Person;
 
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -50,6 +51,7 @@ public class CoursesSelectedPanel extends JPanel {
             setLayout(new BorderLayout());
             add(scrollPane, BorderLayout.CENTER);
             this.setVisible(true);
+
         }
 
     }
