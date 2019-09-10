@@ -65,6 +65,7 @@ public class SelectCoursesPanel extends JPanel {
             coursesTable.setLayout(new BorderLayout());
             coursesTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
             TableUtils.FitTableColumns(coursesTable);
+            coursesTable.setLocation(100,100);
             JScrollPane scrollPane = new JScrollPane(coursesTable);
             coursesTable.setFont(new Font("微软雅黑",Font.PLAIN,16));
             coursesTable.setRowHeight(30);
