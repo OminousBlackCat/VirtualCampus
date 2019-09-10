@@ -3,6 +3,7 @@ package com.seu.vCampus.Client.AcademicAffairs.Utils;
 import javax.swing.*;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
+import java.awt.*;
 import java.util.Enumeration;
 
 public class TableUtils {
@@ -67,4 +68,5 @@ public class TableUtils {
         result.deleteCharAt(result.length() - 1);
         return result.toString();
     }
+
 }

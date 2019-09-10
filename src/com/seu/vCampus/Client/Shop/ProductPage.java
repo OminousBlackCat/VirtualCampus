@@ -16,9 +16,13 @@ import java.util.ArrayList;
 public class ProductPage extends Component {
 
     /*各个界面*/
+    private JPanel panel1;
     private JPanel Product1;
     private JPanel Product2;
     private JPanel Product3;
+    private JPanel Product4;
+    private JPanel Product5;
+    private JPanel Product6;
 
     /*各个页面的按钮和文本框*/
     private JButton PageUp;
@@ -46,9 +50,8 @@ public class ProductPage extends Component {
     private JLabel label22;
 
     private JLabel label32;
-    private JLabel label31;
-    private JLabel label33;
-    private JPanel panel1;
+
+
     private JLabel Stock3;
     private JLabel Stock1;
     private JLabel Stock2;
@@ -57,9 +60,6 @@ public class ProductPage extends Component {
     private JLabel Page;
 
 
-    private JPanel Product4;
-    private JPanel Product5;
-    private JPanel Product6;
     private JLabel Picture4;
     private JLabel Picture5;
     private JLabel Picture6;
@@ -259,9 +259,51 @@ public class ProductPage extends Component {
 
     public void initialize() {
 
-        ChangePage.setBackground(null);
-
         Page.setText("1");
+
+        switch (shopData.getSkinNumber()) {
+            case 1:
+                panel1.setBackground(new Color(63, 87, 123));
+
+                Product1.setBackground(new Color(63, 87, 123));
+                Product2.setBackground(new Color(63, 87, 123));
+                Product3.setBackground(new Color(63, 87, 123));
+                Product4.setBackground(new Color(63, 87, 123));
+                Product5.setBackground(new Color(63, 87, 123));
+                Product6.setBackground(new Color(63, 87, 123));
+                ChangePage.setBackground(new Color(63, 87, 123));
+                break;
+            case 2:
+                panel1.setBackground(Color.BLACK);
+                Product1.setBackground(Color.BLACK);
+                Product2.setBackground(Color.BLACK);
+                Product3.setBackground(Color.BLACK);
+                Product4.setBackground(Color.BLACK);
+                Product5.setBackground(Color.BLACK);
+                Product6.setBackground(Color.BLACK);
+                ChangePage.setBackground(Color.BLACK);
+                break;
+            case 3:
+                panel1.setBackground(new Color(85, 20, 0));
+                Product1.setBackground(new Color(85, 20, 0));
+                Product2.setBackground(new Color(85, 20, 0));
+                Product3.setBackground(new Color(85, 20, 0));
+                Product4.setBackground(new Color(85, 20, 0));
+                Product5.setBackground(new Color(85, 20, 0));
+                Product6.setBackground(new Color(85, 20, 0));
+                ChangePage.setBackground(new Color(85, 20, 0));
+                break;
+            case 4:
+                panel1.setBackground(new Color(0, 70, 40));
+                Product1.setBackground(new Color(0, 70, 40));
+                Product2.setBackground(new Color(0, 70, 40));
+                Product3.setBackground(new Color(0, 70, 40));
+                Product4.setBackground(new Color(0, 70, 40));
+                Product5.setBackground(new Color(0, 70, 40));
+                Product6.setBackground(new Color(0, 70, 40));
+                ChangePage.setBackground(new Color(0, 70, 40));
+                break;
+        }
 
         PageUp.setEnabled(false);
         PageDown.setEnabled(true);
@@ -272,22 +314,6 @@ public class ProductPage extends Component {
         } else {
             LoadGoods(thisClassGoodsList.size());
         }
-
-        Product1.setBackground(null);
-        Product1.setOpaque(false);
-        Product2.setBackground(null);
-        Product2.setOpaque(false);
-        Product3.setBackground(null);
-        Product3.setOpaque(false);
-        Product4.setBackground(null);
-        Product4.setOpaque(false);
-        Product5.setBackground(null);
-        Product5.setOpaque(false);
-        Product6.setBackground(null);
-        Product6.setOpaque(false);
-        ChangePage.setBackground(null);
-        ChangePage.setOpaque(false);
-
 
     }
 
@@ -535,7 +561,7 @@ public class ProductPage extends Component {
         Product1.add(textField1, new GridConstraints(4, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         AddButton1 = new JButton();
         AddButton1.setBackground(new Color(-14672351));
-        AddButton1.setForeground(new Color(-1));
+        AddButton1.setForeground(new Color(-16777216));
         AddButton1.setText("添加");
         Product1.add(AddButton1, new GridConstraints(4, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final Spacer spacer1 = new Spacer();
@@ -570,7 +596,7 @@ public class ProductPage extends Component {
         Product3.add(textField3, new GridConstraints(4, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         AddButton3 = new JButton();
         AddButton3.setBackground(new Color(-14672351));
-        AddButton3.setForeground(new Color(-1));
+        AddButton3.setForeground(new Color(-16777216));
         AddButton3.setText("添加");
         Product3.add(AddButton3, new GridConstraints(4, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final Spacer spacer2 = new Spacer();
@@ -585,7 +611,7 @@ public class ProductPage extends Component {
         panel1.add(ChangePage, new GridConstraints(2, 0, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         PageUp = new JButton();
         PageUp.setBackground(new Color(-14672351));
-        PageUp.setForeground(new Color(-1));
+        PageUp.setForeground(new Color(-16777216));
         PageUp.setText("上一页");
         ChangePage.add(PageUp, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         label0 = new JLabel();
@@ -598,7 +624,7 @@ public class ProductPage extends Component {
         ChangePage.add(Page, new GridConstraints(0, 3, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         PageDown = new JButton();
         PageDown.setBackground(new Color(-14672351));
-        PageDown.setForeground(new Color(-1));
+        PageDown.setForeground(new Color(-16777216));
         PageDown.setText("下一页");
         ChangePage.add(PageDown, new GridConstraints(0, 4, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final Spacer spacer3 = new Spacer();
@@ -626,7 +652,7 @@ public class ProductPage extends Component {
         Product4.add(textField4, new GridConstraints(4, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         AddButton4 = new JButton();
         AddButton4.setBackground(new Color(-14672351));
-        AddButton4.setForeground(new Color(-1));
+        AddButton4.setForeground(new Color(-16777216));
         AddButton4.setText("添加");
         Product4.add(AddButton4, new GridConstraints(4, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final Spacer spacer5 = new Spacer();
@@ -663,7 +689,7 @@ public class ProductPage extends Component {
         Product2.add(textField2, new GridConstraints(4, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         AddButton2 = new JButton();
         AddButton2.setBackground(new Color(-14672351));
-        AddButton2.setForeground(new Color(-1));
+        AddButton2.setForeground(new Color(-16777216));
         AddButton2.setText("添加");
         Product2.add(AddButton2, new GridConstraints(4, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final Spacer spacer6 = new Spacer();
@@ -693,7 +719,7 @@ public class ProductPage extends Component {
         Product5.add(textField5, new GridConstraints(4, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         AddButton5 = new JButton();
         AddButton5.setBackground(new Color(-14672351));
-        AddButton5.setForeground(new Color(-1));
+        AddButton5.setForeground(new Color(-16777216));
         AddButton5.setText("添加");
         Product5.add(AddButton5, new GridConstraints(4, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final Spacer spacer7 = new Spacer();
@@ -726,7 +752,7 @@ public class ProductPage extends Component {
         Product6.add(textField6, new GridConstraints(4, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         AddButton6 = new JButton();
         AddButton6.setBackground(new Color(-14672351));
-        AddButton6.setForeground(new Color(-1));
+        AddButton6.setForeground(new Color(-16777216));
         AddButton6.setText("添加");
         Product6.add(AddButton6, new GridConstraints(4, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final Spacer spacer8 = new Spacer();

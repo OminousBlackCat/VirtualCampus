@@ -140,8 +140,8 @@ public class ServerThread  extends Thread{
                     case TYPE_GET_STUDENT_EXAMS_INFO:
                         act.getStudentExamsInfo((Person) msg);
                         break;
-                    case TYPE_INPUT_EXAMS:
-                        act.examsInput((Person) msg);
+                    case TYPE_SET_EXAM:
+                        act.addExam((Course) msg);
                         break;
                     case TYPE_QUERY_GOODS:
                         act.getShopMessage((ShopManage) msg);

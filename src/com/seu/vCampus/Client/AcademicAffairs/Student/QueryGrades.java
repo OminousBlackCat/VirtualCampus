@@ -8,6 +8,7 @@ import com.seu.vCampus.util.Person;
 
 import javax.swing.*;
 import java.awt.*;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class QueryGrades extends JPanel {
@@ -46,6 +47,12 @@ public class QueryGrades extends JPanel {
                 JScrollPane scrollPane = new JScrollPane(coursesTable);
                 setLayout(new BorderLayout());
                 add(scrollPane, BorderLayout.CENTER);
+                student.calculateGPA();
+                DecimalFormat df = new DecimalFormat("#0.00");
+                JLabel gpaLabel = new JLabel("您的预估GPA为：   " + String.valueOf(df.format(student.getGPA())));
+                gpaLabel.setHorizontalAlignment(JLabel.CENTER);
+                gpaLabel.setVerticalAlignment(JLabel.CENTER);
+                add(gpaLabel,BorderLayout.SOUTH);
                 this.setVisible(true);
             }
             else

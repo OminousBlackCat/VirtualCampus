@@ -46,13 +46,23 @@ public class Common {
 
 
 
+    public int getSkinNumber() {
+        return skinNumber;
+    }
+
+    public void setSkinNumber(int skinNumber) {
+        this.skinNumber = skinNumber;
+    }
+
+    private int skinNumber;
+
 
     public static Common getInstance(){
         return instance;
     }
 
     private Common(){
-        this.ipAddress = "10.203.162.249";
+        this.ipAddress = "169.254.80.230";
         this.Port = 8000;
         this.isLogin = false;
         User = new Person();
@@ -61,6 +71,7 @@ public class Common {
         bookInformation = new BookManage();
         ShoppingList = new ArrayList<>();
         NewsList = new NewsManage();
+        skinNumber = 1;
     }
 
     public void startIO()throws Exception{

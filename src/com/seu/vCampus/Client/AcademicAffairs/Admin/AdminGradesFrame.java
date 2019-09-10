@@ -45,10 +45,12 @@ public class AdminGradesFrame extends JFrame {
             setVisible(true);
             if(isRead) {
                 setTitle("查看成绩");
-                jLabel = new JLabel(courseList.get(0).getCourseName() + " 成绩册");
+                jLabel = new JLabel(courseList.get(0).getCourseName() + " 学生名单");
+                jLabel.setHorizontalAlignment(JLabel.CENTER);
+                jLabel.setVerticalAlignment(JLabel.CENTER);
                 getContentPane().add(jLabel, BorderLayout.NORTH);
                 String[] columnNames = {"一卡通号", "姓名"};
-                Object[][] data = new Object[courseList.size()][3];
+                Object[][] data = new Object[courseList.size()][2];
 
                 for(int i = 0; i < courseList.size(); i++) {
                     Course c = courseList.get(i);
@@ -58,20 +60,21 @@ public class AdminGradesFrame extends JFrame {
                 table = new JTable(data, columnNames);
                 table.setLayout(new BorderLayout());
                 table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-                table.getColumnModel().getColumn(0).setPreferredWidth(200);
-                table.getColumnModel().getColumn(1).setPreferredWidth(100);
+                TableUtils.FitTableColumns(table);
                 table.setFont(new Font("微软雅黑",Font.PLAIN,16));
                 table.setRowHeight(25);
                 table.setDefaultEditor(Object.class, null);
                 scrollPane = new JScrollPane(table);
+                setBounds(200, 200, 300, 500);
 
             }
             else {
                 setTitle("修改成绩");
                 jLabel = new JLabel(courseList.get(0).getCourseName() + " 成绩册修改");
+                jLabel.setHorizontalAlignment(JLabel.CENTER);
+                jLabel.setVerticalAlignment(JLabel.CENTER);
                 getContentPane().add(jLabel, BorderLayout.NORTH);
-
-                String[] columnNames = {"一卡通号", "姓名","请输入成绩"};
+                String[] columnNames = {"一卡通号", "姓名","成绩"};
                 Object[][] data = new Object[courseList.size()][3];
 
                 for(int i = 0; i < courseList.size(); i++) {
@@ -112,7 +115,7 @@ public class AdminGradesFrame extends JFrame {
                                 Course c = new Course();
                                 c.setECardNumber((String) table.getValueAt(i, 0));
                                 c.setCourseNumber(courseNumber);
-                                c.setCourseGrade((Integer.parseInt((String) table.getValueAt(i,2))));
+                                c.setCourseGrade((Integer.parseInt(String.valueOf(table.getValueAt(i,2)))));
                                 courseList.add(c);
                             }
                             admin.setCourses(courseList);
