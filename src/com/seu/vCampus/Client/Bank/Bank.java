@@ -60,11 +60,22 @@ public class Bank {
                         bankData.getUser().setECardBalance(Etemp);
                         BankBill thisBill = new BankBill();
                         thisBill.setBillAmount(Double.parseDouble(money.getText()));
+                        thisBill.setECardNumber(bankData.getUser().getECardNumber());
                         thisBill.setBillDate(new Date());
                         thisBill.setBillType(BankBill.BILL_TYPE.TYPE_EXPENDITURE);
+
                         thisBill.setType(Message.MESSAGE_TYPE.TYPE_RECHARGE_ECARD);
                         bankData.getUserCount().addBill(thisBill);
                         bankData.getIO().SendMessages(thisBill);
+                        bankData.getIO().ReceiveMessage();
+
+                        bankData.getUserCount().setType(Message.MESSAGE_TYPE.TYPE_UPDATE_COUNT);
+                        bankData.getIO().SendMessages(bankData.getUserCount());
+                        bankData.getIO().ReceiveMessage();
+
+                        bankData.getUser().setType(Message.MESSAGE_TYPE.TYPE_UPDATE_USER);
+                        bankData.getIO().SendMessages(bankData.getUser());
+                        bankData.getIO().ReceiveMessage();
 
                         DateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
                         String tempDate = format1.format(thisBill.getBillDate());
@@ -72,6 +83,7 @@ public class Bank {
                         Object[] TempData = {bankData.getUserCount().getCountBill().size(), thisBill.getBillTypeString(),
                                 thisBill.getBillAmount(), tempDate};
                         bankBillModel.addRow(TempData);
+                        JOptionPane.showMessageDialog(null, "钱，可以让我变得更强!", "成功", JOptionPane.INFORMATION_MESSAGE);
                         initialization();
                     } else {
                         JOptionPane.showMessageDialog(null, "银行卡余额不足！！！！", "错误", JOptionPane.ERROR_MESSAGE);

@@ -1,7 +1,11 @@
 package com.seu.vCampus.Database;
+import com.seu.vCampus.Client.Bank.Bank;
+import com.seu.vCampus.Client.Shop.Shop;
 import com.seu.vCampus.util.*;
 
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -714,16 +718,32 @@ public class DatabaseActions {
         try{
             String sql = "UPDATE Users set ECardBalance=?,LendBooksNumber=?,Major=?,AuthorityNumber=? where ECardNumber=?";
             stmt = conn.prepareStatement(sql);
-            stmt.setDouble(1, p.getECardBalance());
-            stmt.setShort(2, p.getLendBooksNumber());
+            stmt.setString(1, Double.toString(p.getECardBalance()));
+            stmt.setString(2, Short.toString(p.getLendBooksNumber()));
             stmt.setString(3,p.getMajor());
-            stmt.setShort(4,(short)p.getAuthorityLevel().valueOf());
+            stmt.setString(4,Integer.toString(p.getAuthorityLevel().valueOf()));
             stmt.setString(5,p.getECardNumber());
-
+            stmt.executeUpdate();
             p.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
         }catch (SQLException e) {
             e.printStackTrace();
             p.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
+        }
+    }
+
+    public BankCount updateCount(BankCount count){
+        try {
+            String sql = "UPDATE BankCount set BankBalance=? where ECardNumber=?";
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1,Double.toString(count.getBankBalance()));
+            stmt.setString(2,count.getECardNumber());
+            stmt.executeUpdate();
+            count.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
+            return count;
+        }catch (SQLException e){
+            e.printStackTrace();
+            count.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
+            return count;
         }
     }
 
@@ -906,19 +926,24 @@ public class DatabaseActions {
         }
     }
 
-    public void insertBankBill(BankBill bankBill){      //添加账单
+    public BankBill insertBankBill(BankBill bankBill){      //添加账单
         try {
-            stmt=conn.prepareStatement("insert into BankBill(ECardNumber,State,Amount,TransactionTime)value (?,?,?,?)");
+            stmt=conn.prepareStatement("insert into BankBill(ECardNumber,State,Amount,TransactionTime) values (?,?,?,?)");
 
             stmt.setString(1,bankBill.getECardNumber());
             stmt.setString(2,bankBill.getBillTypeString());
-            stmt.setShort(3, (short) bankBill.getBillAmount());
-            stmt.setDate(4, (java.sql.Date) bankBill.getBillDate());
+            stmt.setString(3, Double.toString(bankBill.getBillAmount()) );
+
+            java.sql.Date tempDate = new java.sql.Date(bankBill.getBillDate().getTime());
+            stmt.setDate(4, tempDate);
             bankBill.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
+            stmt.executeUpdate();
+            return bankBill;
 
         } catch (SQLException e) {
             e.printStackTrace();
             bankBill.setType(Message.MESSAGE_TYPE.TYPE_FAIL);
+            return bankBill;
         }
     }
 
@@ -936,28 +961,40 @@ public class DatabaseActions {
                 ECB = res.getDouble("ECardBalance");
                 ECB = ECB + bankBill.getBillAmount();
 
+                String SQLin = "select*from BankCount where ECardNumber=?";
+                stmt = conn.prepareStatement(SQLin);
+                stmt.setString(1,bankBill.getECardNumber());
+                ResultSet RESin = stmt.executeQuery();
+                BB = Double.parseDouble(RESin.getString("BankBalance")) - bankBill.getBillAmount();
+
+
+
+
                 sql = "select*from BankCount where ECardNumber=?";
                 stmt = conn.prepareStatement(sql);
                 stmt.setString(1,bankBill.getECardNumber());
-                res = stmt.executeQuery();
-                BB = res.getDouble("BankBalance") - bankBill.getBillAmount();
+                ResultSet RES = stmt.executeQuery();
+                BB = Double.parseDouble(RES.getString("BankBalance")) - bankBill.getBillAmount();
 
                 sql = "UPDATE Users set ECardBalance=? where ECardNumber=?";
                 stmt = conn.prepareStatement(sql);
-                stmt.setDouble(1, ECB);
+                stmt.setString(1, Double.toString(ECB));
                 stmt.setString(2, bankBill.getECardNumber());
+                stmt.executeUpdate();
 
                 sql = "UPDATE BankCount set BankBalance=? where ECardNumber=?";
                 stmt = conn.prepareStatement(sql);
-                stmt.setDouble(1,BB);
+                stmt.setString(1,Double.toString(BB));
                 stmt.setString(2,bankBill.getECardNumber());
+                stmt.executeUpdate();
 
                 sql="insert into BankBill(ECardNumber,State,Amount,TransactionTime) value (?,?,?,?)";
                 stmt=conn.prepareStatement(sql);
                 stmt.setString(1,bankBill.getECardNumber());
                 stmt.setString(2,"支出");
-                stmt.setDouble(3,bankBill.getBillAmount());
+                stmt.setString(3,Double.toString(bankBill.getBillAmount()));
                 stmt.setDate(4, (java.sql.Date) bankBill.getBillDate());
+                stmt.executeUpdate();
 
                 bankBill.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);
                 return bankBill;

@@ -73,17 +73,14 @@ public class BasicInformationPanel extends JPanel {
             add(CurrentAvatar);
             ChangeAvatar = new JButton("修改头像");
             ChangeAvatar.setBackground(Color.BLACK);
-            ChangeAvatar.setForeground(Color.WHITE);
             ChangeAvatar.setBounds(728, 300, 110, 40);
             add(ChangeAvatar);
             ConfirmAvatar = new JButton("保存");
-            ConfirmAvatar.setForeground(Color.WHITE);
             ConfirmAvatar.setBackground(Color.pink);
             ConfirmAvatar.setBounds(660, 300, 70, 40);
             CancelAvatar = new JButton("取消");
-            CancelAvatar.setForeground(Color.WHITE);
             CancelAvatar.setBackground(Color.ORANGE);
-            CancelAvatar.setBounds(830, 300, 70, 40);
+            CancelAvatar.setBounds(835, 300, 70, 40);
             add(CancelAvatar);
             add(ConfirmAvatar);
             CancelAvatar.setVisible(false);

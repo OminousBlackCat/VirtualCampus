@@ -64,11 +64,17 @@ public class Home extends JFrame{
     private Thread updatePanel = new Thread(new Runnable() {
         @Override
         public void run() {
+            double EFlag = homeData.getUser().getECardBalance();
+            short BFlag = homeData.getUser().getLendBooksNumber();
             while (true){
-                homePanel = new BasicInformationPanel("0"+Integer.toString(skinNumber));
-                tabbedPane.setComponentAt(0,homePanel);
+                if(EFlag != homeData.getUser().getECardBalance() || BFlag != homeData.getUser().getLendBooksNumber()){
+                    homePanel = new BasicInformationPanel("0"+Integer.toString(skinNumber));
+                    tabbedPane.setComponentAt(0,homePanel);
+                    EFlag = homeData.getUser().getECardBalance();
+                    BFlag = homeData.getUser().getLendBooksNumber();
+                }
                 try{
-                    sleep(2000);
+                    sleep(1000);
                 }catch (InterruptedException ie ){
                     ie.printStackTrace();
                 }

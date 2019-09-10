@@ -150,7 +150,7 @@ public class ServerThread  extends Thread{
                         act.getPersonManage((PersonManage) msg);
                         break;
                     case TYPE_RECHARGE_ECARD:
-                        act.ECardRecharge((BankBill) msg);
+                        act.insertBankBill((BankBill) msg);
                         break;
                     case TYPE_QUERY_BANK_COUNT:
                         act.getBankMessage((BankCount) msg);
@@ -178,10 +178,13 @@ public class ServerThread  extends Thread{
                         break;
                     case TYPE_UPDATE_USER:
                         act.updatePerson((Person)msg);
+                        System.out.println("");
                         break;
                     case TYPE_QUERY_NEWS:
                         act.sendNewsMessage((NewsManage)msg);
-                        System.out.println("");
+                        break;
+                    case TYPE_UPDATE_COUNT:
+                        act.updateCount((BankCount)msg);
                         break;
                 }
 
