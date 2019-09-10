@@ -70,7 +70,6 @@ public class StuLib {
                         Book NBook=BookData.getBookInformation().getBookList().get(cnt);
                         Object NBid=NBook.getBID();
                         if(NIsbn.equals(NBid)){
-
                             SModel.removeRow(selectedRow);
                             LModel.setValueAt("在库", cnt, 4);
                             NBook.setLent(false);
@@ -79,6 +78,8 @@ public class StuLib {
                             NBook = (Book) BookData.getIO().ReceiveMessage();
                             if (NBook.getType() == Message.MESSAGE_TYPE.TYPE_SUCCESS) {
                                 JOptionPane.showMessageDialog(null, "还书操作成功", "成功", JOptionPane.INFORMATION_MESSAGE);
+                                short NN=(short)(BookData.getUser().getLendBooksNumber()- 1);
+                                BookData.getUser().setLendBooksNumber(NN);
                             } else {
                                 JOptionPane.showMessageDialog(null, "还书操作失败", "错误", JOptionPane.ERROR_MESSAGE);
                             }
@@ -124,6 +125,8 @@ public class StuLib {
                     BookData.getIO().SendMessages(NBook);
                     NBook = (Book) BookData.getIO().ReceiveMessage();
                     if (NBook.getType() == Message.MESSAGE_TYPE.TYPE_SUCCESS) {
+                        short NN=(short)(BookData.getUser().getLendBooksNumber()+1);
+                        BookData.getUser().setLendBooksNumber(NN);
                         JOptionPane.showMessageDialog(null, "借书操作成功", "成功", JOptionPane.INFORMATION_MESSAGE);
                     } else {
                         JOptionPane.showMessageDialog(null, "借书操作失败", "错误", JOptionPane.ERROR_MESSAGE);
