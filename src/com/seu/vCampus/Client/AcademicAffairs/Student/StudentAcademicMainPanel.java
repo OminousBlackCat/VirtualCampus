@@ -1,5 +1,7 @@
 package com.seu.vCampus.Client.AcademicAffairs.Student;
 
+import com.seu.vCampus.Client.AcademicAffairs.Utils.TabbedPaneUI;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -18,6 +20,7 @@ public class StudentAcademicMainPanel extends JPanel {
     private QueryExams queryExamsPanel;
     private QueryGrades queryGradesPanel;
     private JTabbedPane switchPane;
+    private TabbedPaneUI tabbedPaneUI;
     public StudentAcademicMainPanel() {
         this.setLayout(new BorderLayout());
         courseSelectionHallPanel = new CourseSelectionHallPanel(this);
@@ -26,6 +29,8 @@ public class StudentAcademicMainPanel extends JPanel {
         queryExamsPanel = new QueryExams();
         queryGradesPanel = new QueryGrades();
         switchPane = new JTabbedPane();
+        tabbedPaneUI=new TabbedPaneUI(Color.GRAY,Color.WHITE);
+        switchPane.setUI(tabbedPaneUI);
         switchPane.addTab("选课大厅", courseSelectionHallPanel);
         switchPane.addTab("已选课程", coursesSelectedPanel);
         switchPane.addTab("查询课表", scheduleTablePanel);
