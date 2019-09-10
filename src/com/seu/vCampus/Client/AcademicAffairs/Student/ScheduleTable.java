@@ -23,7 +23,7 @@ public class ScheduleTable extends JPanel {
 
     private JComboBox comboBox;
     public void initialize(){
-        commonData=Common.getInstance();
+        commonData = Common.getInstance();
         user = new Person();
         course = new Course();
         user.setECardNumber(commonData.getUser().getECardNumber());
@@ -41,11 +41,11 @@ public class ScheduleTable extends JPanel {
         }
 
         coursesTables = new ArrayList<CoursesTable>();
-        for(int i=0;i<semester.size();i++){
+        for(int i=0; i < semester.size(); i++){
             coursesTable = new CoursesTable();
             for(int j=0; j<n; j++){
-                if(courses.get(j).getCourseSemester() == semester.get(i)){
-                    coursesTable.addCourse(courses.get(i).getCourseTime(), courses.get(i).getCourseName());
+                if(courses.get(j).getCourseSemester().equals(semester.get(i))){
+                    coursesTable.addCourse(courses.get(j).getCourseTime(), courses.get(j).getCourseName());
                 }
             }
             coursesTables.add(coursesTable);

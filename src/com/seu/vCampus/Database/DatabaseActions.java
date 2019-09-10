@@ -113,8 +113,11 @@ public class DatabaseActions {
                 int maxStuds = courseRes.getInt("maximumStudents");
                 int erdStuds = courseRes.getInt("enrolledStudents");
                 boolean isExam = courseRes.getBoolean("isExam");
-                cs.add(new Course(courseNumber,courseName,courseSemester,courseLecturer,coursePlace,courseTime,
-                        courseCredit,courseType,maxStuds,erdStuds,isExam));
+                Course c = new Course(courseNumber,courseName,courseSemester,courseLecturer,coursePlace,courseTime,
+                        courseCredit,courseType,maxStuds,erdStuds,isExam);
+                boolean gradeAdded = courseRes.getBoolean("gradeAdded");
+                c.setGradeAdded(gradeAdded);
+                cs.add(c);
             }
             person.setCourses(cs);
             person.setType(Message.MESSAGE_TYPE.TYPE_SUCCESS);

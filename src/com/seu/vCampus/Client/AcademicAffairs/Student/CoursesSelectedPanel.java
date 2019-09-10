@@ -84,9 +84,15 @@ public class CoursesSelectedPanel extends JPanel {
                 data[i][5] = TableUtils.ParseCourseTime(course.getCourseTime());
                 data[i][6] = course.getCourseType();
                 data[i][7] = course.getCourseCredit();
-                if(c.isExam()) data[i][8] = "是";
+                System.out.println(course.isExam());
+                if(course.isExam()) data[i][8] = "是";
                 else data[i][8] = "否";
-                data[i][9] = "退课";
+                if(course.isGradeAdded()) {
+                    data[i][9] = "有分";
+                }
+                else {
+                    data[i][9] = "退课";
+                }
             }
             JTable coursesTable = new JTable(data,columnNames);
             coursesTable.setLayout(new BorderLayout());
