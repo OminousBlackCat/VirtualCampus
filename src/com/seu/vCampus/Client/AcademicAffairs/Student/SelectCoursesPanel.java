@@ -1,7 +1,5 @@
 package com.seu.vCampus.Client.AcademicAffairs.Student;
 
-import com.seu.vCampus.Client.AcademicAffairs.Utils.DeselectCourseButton;
-import com.seu.vCampus.Client.AcademicAffairs.Utils.SelectCourseButton;
 import com.seu.vCampus.Client.AcademicAffairs.Utils.TableButtonRender;
 import com.seu.vCampus.Client.AcademicAffairs.Utils.TableUtils;
 import com.seu.vCampus.Client.Common;
@@ -10,10 +8,8 @@ import com.seu.vCampus.util.Message;
 import com.seu.vCampus.util.Person;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Vector;
 
 public class SelectCoursesPanel extends JPanel {
 

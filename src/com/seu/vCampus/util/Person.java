@@ -12,6 +12,7 @@ public class Person extends Message{
     private String passWord;
     private ArrayList<Course> courses;
     private String AvatarID;
+    private String Major;
 
     private double GPA;
 
@@ -154,6 +155,10 @@ public class Person extends Message{
     public double getECardBalance() {
         return ECardBalance;
     }
+
+    public String getMajor() { return Major; }
+
+    public void setMajor(String major) { Major = major; }
 
     public void setName(String name) {
         Name = name;

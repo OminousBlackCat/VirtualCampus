@@ -128,6 +128,7 @@ public class StuLib {
             }
         });
     }
+
     private static ImageIcon MybookIcon = new ImageIcon("src/icon/left/library.png");
     public JPanel LibMPanel;
     private JTabbedPane LibtabbedPane;
@@ -327,4 +328,5 @@ public class StuLib {
     public JComponent $$$getRootComponent$$$() {
         return LibMPanel;
     }
+
 }
