@@ -26,9 +26,10 @@ public class GradesFrame extends JFrame {
     private JTable table;
     private JScrollPane scrollPane;
     private JTextField textField;
+    private JLabel jLabel;
 
     public GradesFrame(String courseNumber, boolean isRead, QueryAllMyCoursesPanel qacP, TeacherMainPanel tmP){
-        setBounds(200, 200, 800, 800);
+        setBounds(200, 200, 420, 400);
         getContentPane().setLayout(new BorderLayout());
         messenger = Common.getInstance();
         teacher = new Person();
@@ -46,9 +47,8 @@ public class GradesFrame extends JFrame {
 
             if(isRead) {
                 setTitle("查看成绩");
-                textField = new JTextField(courseList.get(0).getCourseName() + " 成绩册");
-                textField.setEditable(false);
-                getContentPane().add(textField, BorderLayout.NORTH);
+                jLabel = new JLabel(courseList.get(0).getCourseName() + " 成绩册");
+                getContentPane().add(jLabel, BorderLayout.NORTH);
                 String[] columnNames = {"一卡通号", "姓名","成绩"};
                 Object[][] data = new Object[courseList.size()][3];
 
@@ -61,7 +61,9 @@ public class GradesFrame extends JFrame {
                 table = new JTable(data, columnNames);
                 table.setLayout(new BorderLayout());
                 table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-                TableUtils.FitTableColumns(table);
+                table.getColumnModel().getColumn(0).setPreferredWidth(200);
+                table.getColumnModel().getColumn(1).setPreferredWidth(100);
+                table.getColumnModel().getColumn(2).setPreferredWidth(200);
                 table.setFont(new Font("微软雅黑",Font.PLAIN,16));
                 table.setRowHeight(25);
                 table.setDefaultEditor(Object.class, null);
@@ -70,9 +72,8 @@ public class GradesFrame extends JFrame {
             }
             else {
                 setTitle("录入成绩");
-                textField = new JTextField(courseList.get(0).getCourseName() + " 成绩册录入栏");
-                textField.setEditable(false);
-                getContentPane().add(textField, BorderLayout.NORTH);
+                jLabel = new JLabel(courseList.get(0).getCourseName() + " 成绩册录入栏");
+                getContentPane().add(jLabel, BorderLayout.NORTH);
 
                 String[] columnNames = {"一卡通号", "姓名","请输入成绩"};
                 Object[][] data = new Object[courseList.size()][3];
@@ -94,7 +95,9 @@ public class GradesFrame extends JFrame {
 
                 table.setLayout(new BorderLayout());
                 table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-                TableUtils.FitTableColumns(table);
+                table.getColumnModel().getColumn(0).setPreferredWidth(150);
+                table.getColumnModel().getColumn(1).setPreferredWidth(100);
+                table.getColumnModel().getColumn(2).setPreferredWidth(150);
                 table.setFont(new Font("微软雅黑",Font.PLAIN,16));
                 table.setRowHeight(25);
             }

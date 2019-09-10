@@ -105,7 +105,7 @@ public class Home extends JFrame{
         }
 
 
-        setBounds(200, 200, 1200, 864);
+        setBounds(200, 150, 1200, 864);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
         getContentPane().setBackground(new Color(63, 87, 123));
