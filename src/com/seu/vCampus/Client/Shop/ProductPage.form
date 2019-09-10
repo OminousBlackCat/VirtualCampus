@@ -62,7 +62,7 @@
             </constraints>
             <properties>
               <background color="-14672351"/>
-              <foreground color="-1"/>
+              <foreground color="-16777216"/>
               <text value="添加"/>
             </properties>
           </component>
@@ -149,7 +149,7 @@
             </constraints>
             <properties>
               <background color="-14672351"/>
-              <foreground color="-1"/>
+              <foreground color="-16777216"/>
               <text value="添加"/>
             </properties>
           </component>
@@ -185,7 +185,7 @@
             </constraints>
             <properties>
               <background color="-14672351"/>
-              <foreground color="-1"/>
+              <foreground color="-16777216"/>
               <text value="上一页"/>
             </properties>
           </component>
@@ -213,7 +213,7 @@
             </constraints>
             <properties>
               <background color="-14672351"/>
-              <foreground color="-1"/>
+              <foreground color="-16777216"/>
               <text value="下一页"/>
             </properties>
           </component>
@@ -281,7 +281,7 @@
             </constraints>
             <properties>
               <background color="-14672351"/>
-              <foreground color="-1"/>
+              <foreground color="-16777216"/>
               <text value="添加"/>
             </properties>
           </component>
@@ -370,7 +370,7 @@
             </constraints>
             <properties>
               <background color="-14672351"/>
-              <foreground color="-1"/>
+              <foreground color="-16777216"/>
               <text value="添加"/>
             </properties>
           </component>
@@ -442,7 +442,7 @@
             </constraints>
             <properties>
               <background color="-14672351"/>
-              <foreground color="-1"/>
+              <foreground color="-16777216"/>
               <text value="添加"/>
             </properties>
           </component>
@@ -522,7 +522,7 @@
             </constraints>
             <properties>
               <background color="-14672351"/>
-              <foreground color="-1"/>
+              <foreground color="-16777216"/>
               <text value="添加"/>
             </properties>
           </component>

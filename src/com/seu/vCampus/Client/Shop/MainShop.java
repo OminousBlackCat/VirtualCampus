@@ -7,8 +7,6 @@ import com.seu.vCampus.Client.Common;
 import com.seu.vCampus.util.Goods;
 import com.seu.vCampus.util.Message;
 import com.seu.vCampus.util.Person;
-import com.seu.vCampus.util.ShopManage;
-
 
 
 import javax.swing.*;
@@ -16,9 +14,6 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import java.awt.image.ImagingOpException;
-import java.sql.ResultSet;
 
 import java.util.ArrayList;
 
@@ -71,6 +66,8 @@ public class MainShop {
     private JPanel PayBill;
 
     private JLabel Stock0;
+    private JLabel Advertisement;
+    private JLabel AdvertisementSearchPanel;
 
     private double SumOfMoney = 0;
 
@@ -207,6 +204,73 @@ public class MainShop {
     }
 
     public void initialization() {
+
+        goodsTable.setRowHeight(30);
+
+        switch (ShopData.getSkinNumber()) {
+            case 1:
+                basis.setBackground(new Color(63, 87, 123));
+                tabbedPane1.setBackground(new Color(63, 87, 123));
+                Search.setBackground(new Color(63, 87, 123));
+                SearchPanel.setBackground(new Color(63, 87, 123));
+                SearchResult.setBackground(new Color(63, 87, 123));
+                ShoppingTrolley.setBackground(new Color(63, 87, 123));
+                ShoppingCart.setBackground(new Color(63, 87, 123));
+                PayBill.setBackground(new Color(63, 87, 123));
+                ProductLife.initialize();
+                ProductComputer.initialize();
+                ProductFood.initialize();
+                ProductStudy.initialize();
+                break;
+            case 2:
+                basis.setBackground(Color.BLACK);
+                tabbedPane1.setBackground(Color.BLACK);
+                Search.setBackground(Color.BLACK);
+                SearchPanel.setBackground(Color.BLACK);
+                SearchResult.setBackground(Color.BLACK);
+                ShoppingTrolley.setBackground(Color.BLACK);
+                ShoppingCart.setBackground(Color.BLACK);
+                PayBill.setBackground(Color.BLACK);
+                ProductLife.initialize();
+                ProductComputer.initialize();
+                ProductFood.initialize();
+                ProductStudy.initialize();
+                break;
+            case 3:
+                basis.setBackground(new Color(85, 20, 0));
+                tabbedPane1.setBackground(new Color(85, 20, 0));
+                Search.setBackground(new Color(85, 20, 0));
+                SearchPanel.setBackground(new Color(85, 20, 0));
+                SearchResult.setBackground(new Color(85, 20, 0));
+                ShoppingTrolley.setBackground(new Color(85, 20, 0));
+                ShoppingCart.setBackground(new Color(85, 20, 0));
+                PayBill.setBackground(new Color(85, 20, 0));
+                ProductLife.initialize();
+                ProductComputer.initialize();
+                ProductFood.initialize();
+                ProductStudy.initialize();
+                break;
+            case 4:
+                basis.setBackground(new Color(0, 70, 40));
+                tabbedPane1.setBackground(new Color(0, 70, 40));
+                Search.setBackground(new Color(0, 70, 40));
+                SearchPanel.setBackground(new Color(0, 70, 40));
+                SearchResult.setBackground(new Color(0, 70, 40));
+                ShoppingTrolley.setBackground(new Color(0, 70, 40));
+                ShoppingCart.setBackground(new Color(0, 70, 40));
+                PayBill.setBackground(new Color(0, 70, 40));
+                ProductLife.initialize();
+                ProductComputer.initialize();
+                ProductFood.initialize();
+                ProductStudy.initialize();
+                break;
+        }
+
+        AdvertisementSearchPanel.setText("");
+        AdvertisementSearchPanel.setIcon(new ImageIcon("src/icon/Advertisement2.jpg"));
+        Advertisement.setText("");
+        Advertisement.setIcon(new ImageIcon("src/icon/Advertisement1.jpg"));
+
         ECardBalance.setText(Double.toString(ShopData.getUser().getECardBalance()));
         double cost = 0;
         int counter = 0;
@@ -215,17 +279,7 @@ public class MainShop {
             counter++;
         }
         TotalCost.setText(Double.toString(cost));
-        SearchResult.setVisible(false);
-        SearchResult.setBackground(null);
-        SearchResult.setOpaque(false);
-        SearchPanel.setBackground(null);
-        SearchPanel.setOpaque(false);
-        PayBill.setBackground(null);
-        PayBill.setOpaque(false);
-        ShoppingCart.setBackground(null);
-        ShoppingCart.setOpaque(false);
-        Search.setBackground(Color.BLACK);
-        ShoppingTrolley.setBackground(Color.BLACK);
+
     }
 
 
@@ -271,15 +325,6 @@ public class MainShop {
     }
 
 
-    public static void main(String args[]) {
-        MainShop mainShop = new MainShop();
-        JFrame frame = new JFrame();
-        frame.setBounds(500, 500, 1200, 800);
-        frame.setContentPane(mainShop.$$$getRootComponent$$$());
-        frame.setVisible(true);
-
-    }
-
     public Component getPanel() {
         return basis;
     }
@@ -299,15 +344,15 @@ public class MainShop {
         tabbedPane1.setBackground(new Color(-8355712));
         basis.add(tabbedPane1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, new Dimension(200, 200), null, 0, false));
         Search = new JPanel();
-        Search.setLayout(new GridLayoutManager(2, 1, new Insets(0, 0, 0, 0), -1, -1));
+        Search.setLayout(new GridLayoutManager(1, 2, new Insets(0, 0, 0, 0), -1, -1));
         Search.setBackground(new Color(-8355712));
         Search.setEnabled(true);
         Search.setForeground(new Color(-1));
         tabbedPane1.addTab("搜索界面", Search);
         SearchPanel = new JPanel();
-        SearchPanel.setLayout(new GridLayoutManager(3, 4, new Insets(0, 0, 0, 0), -1, -1));
+        SearchPanel.setLayout(new GridLayoutManager(4, 4, new Insets(0, 0, 0, 0), -1, -1));
         SearchPanel.setBackground(new Color(-8355712));
-        Search.add(SearchPanel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        Search.add(SearchPanel, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         SearchtextField = new JTextField();
         SearchPanel.add(SearchtextField, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         label0 = new JLabel();
@@ -316,27 +361,22 @@ public class MainShop {
         SearchPanel.add(label0, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         Searchbutton = new JButton();
         Searchbutton.setBackground(new Color(-14672351));
-        Searchbutton.setForeground(new Color(-1));
+        Searchbutton.setForeground(new Color(-16777216));
         Searchbutton.setText("搜索");
         SearchPanel.add(Searchbutton, new GridConstraints(1, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final Spacer spacer1 = new Spacer();
         SearchPanel.add(spacer1, new GridConstraints(1, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
+        AdvertisementSearchPanel = new JLabel();
+        AdvertisementSearchPanel.setText("Label");
+        SearchPanel.add(AdvertisementSearchPanel, new GridConstraints(3, 0, 1, 4, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final Spacer spacer2 = new Spacer();
         SearchPanel.add(spacer2, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         final Spacer spacer3 = new Spacer();
         SearchPanel.add(spacer3, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
-        final Spacer spacer4 = new Spacer();
-        SearchPanel.add(spacer4, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
-        final Spacer spacer5 = new Spacer();
-        SearchPanel.add(spacer5, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
-        final Spacer spacer6 = new Spacer();
-        SearchPanel.add(spacer6, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
-        final Spacer spacer7 = new Spacer();
-        SearchPanel.add(spacer7, new GridConstraints(2, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         SearchResult = new JPanel();
         SearchResult.setLayout(new GridLayoutManager(5, 4, new Insets(0, 0, 0, 0), -1, -1));
         SearchResult.setBackground(new Color(-8355712));
-        Search.add(SearchResult, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        Search.add(SearchResult, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         Picture0 = new JLabel();
         Picture0.setForeground(new Color(-1));
         Picture0.setText("商品图片");
@@ -357,11 +397,11 @@ public class MainShop {
         SearchResult.add(ResulttextField, new GridConstraints(4, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         AddButton = new JButton();
         AddButton.setBackground(new Color(-14672351));
-        AddButton.setForeground(new Color(-1));
+        AddButton.setForeground(new Color(-16777216));
         AddButton.setText("添加");
         SearchResult.add(AddButton, new GridConstraints(4, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        final Spacer spacer8 = new Spacer();
-        SearchResult.add(spacer8, new GridConstraints(4, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
+        final Spacer spacer4 = new Spacer();
+        SearchResult.add(spacer4, new GridConstraints(4, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
         Stock0 = new JLabel();
         Stock0.setForeground(new Color(-1));
         Stock0.setText("商品库存");
@@ -372,57 +412,66 @@ public class MainShop {
         ShoppingTrolley.setForeground(new Color(-1));
         tabbedPane1.addTab("购物车", ShoppingTrolley);
         ShoppingCart = new JPanel();
-        ShoppingCart.setLayout(new GridLayoutManager(3, 2, new Insets(0, 0, 0, 0), -1, -1));
+        ShoppingCart.setLayout(new GridLayoutManager(3, 1, new Insets(0, 0, 0, 0), -1, -1));
         ShoppingCart.setBackground(new Color(-8355712));
         ShoppingTrolley.add(ShoppingCart, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-        CleanButton = new JButton();
-        CleanButton.setBackground(new Color(-14672351));
-        CleanButton.setForeground(new Color(-1));
-        CleanButton.setText("清空购物车");
-        ShoppingCart.add(CleanButton, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        DeleteButton = new JButton();
-        DeleteButton.setBackground(new Color(-14672351));
-        DeleteButton.setForeground(new Color(-1));
-        DeleteButton.setText("清除选中项");
-        ShoppingCart.add(DeleteButton, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JScrollPane scrollPane1 = new JScrollPane();
         ShoppingCart.add(scrollPane1, new GridConstraints(0, 0, 3, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         goodsTable.setAutoCreateRowSorter(true);
         goodsTable.setFillsViewportHeight(true);
         scrollPane1.setViewportView(goodsTable);
         PayBill = new JPanel();
-        PayBill.setLayout(new GridLayoutManager(3, 4, new Insets(0, 0, 0, 0), -1, -1));
+        PayBill.setLayout(new GridLayoutManager(7, 5, new Insets(0, 0, 0, 0), -1, -1));
         PayBill.setBackground(new Color(-8355712));
         ShoppingTrolley.add(PayBill, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         label6 = new JLabel();
         label6.setForeground(new Color(-1));
         label6.setText("一卡通余额：");
-        PayBill.add(label6, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        PayBill.add(label6, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         label7 = new JLabel();
         label7.setForeground(new Color(-1));
         label7.setText("商品总价值：");
-        PayBill.add(label7, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        PayBill.add(label7, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         label8 = new JLabel();
         label8.setForeground(new Color(-1));
         label8.setText("请输入密码：");
-        PayBill.add(label8, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        PayBillButton = new JButton();
-        PayBillButton.setBackground(new Color(-14672351));
-        PayBillButton.setForeground(new Color(-1));
-        PayBillButton.setText("结账");
-        PayBill.add(PayBillButton, new GridConstraints(2, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        PayBill.add(label8, new GridConstraints(3, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         PaytextField = new JTextField();
-        PayBill.add(PaytextField, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        PayBill.add(PaytextField, new GridConstraints(3, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         TotalCost = new JLabel();
         TotalCost.setForeground(new Color(-1));
         TotalCost.setText("Label");
-        PayBill.add(TotalCost, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        PayBill.add(TotalCost, new GridConstraints(2, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         ECardBalance = new JLabel();
         ECardBalance.setForeground(new Color(-1));
         ECardBalance.setText("Label");
-        PayBill.add(ECardBalance, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        final Spacer spacer9 = new Spacer();
-        PayBill.add(spacer9, new GridConstraints(2, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
+        PayBill.add(ECardBalance, new GridConstraints(1, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        Advertisement = new JLabel();
+        Advertisement.setText("Label");
+        PayBill.add(Advertisement, new GridConstraints(6, 1, 1, 4, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        CleanButton = new JButton();
+        CleanButton.setBackground(new Color(-14672351));
+        CleanButton.setForeground(new Color(-16777216));
+        CleanButton.setText("清空购物车");
+        PayBill.add(CleanButton, new GridConstraints(5, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        PayBillButton = new JButton();
+        PayBillButton.setBackground(new Color(-14672351));
+        PayBillButton.setForeground(new Color(-16777216));
+        PayBillButton.setText("结账");
+        PayBill.add(PayBillButton, new GridConstraints(3, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        DeleteButton = new JButton();
+        DeleteButton.setBackground(new Color(-14672351));
+        DeleteButton.setForeground(new Color(-16777216));
+        DeleteButton.setText("清除选中项");
+        PayBill.add(DeleteButton, new GridConstraints(5, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final Spacer spacer5 = new Spacer();
+        PayBill.add(spacer5, new GridConstraints(3, 4, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
+        final Spacer spacer6 = new Spacer();
+        PayBill.add(spacer6, new GridConstraints(4, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        final Spacer spacer7 = new Spacer();
+        PayBill.add(spacer7, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
+        final Spacer spacer8 = new Spacer();
+        PayBill.add(spacer8, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
     }
 
     /**

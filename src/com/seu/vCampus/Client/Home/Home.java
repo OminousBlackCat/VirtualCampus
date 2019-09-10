@@ -61,8 +61,11 @@ public class Home extends JFrame{
 
     private void initialize() throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException {
         InitGlobalFont(new Font("Microsoft Yahei", Font.BOLD, 17));
+
         LoadCommon();
+        homeData.setSkinNumber(skinNumber);
         WebLookAndFeel.install ();
+
 
 
         {
@@ -241,24 +244,34 @@ public class Home extends JFrame{
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     skinNumber++;
+                    homeData.setSkinNumber(skinNumber);
                     switch (skinNumber) {
                         case 1:
                             getContentPane().setBackground(new Color(63, 87, 123));
                             tabbedPane.setBackground(new Color(63, 87, 123));
                             homePanel = new BasicInformationPanel("01");
                             tabbedPane.setComponentAt(0, homePanel);
+                            mainShopPanel.initialization();
+                            bankPanel.initialization();
+                            mangerShopPanel.initialization();
                             break;
                         case 2:
                             getContentPane().setBackground(Color.BLACK);
                             tabbedPane.setBackground(Color.BLACK);
                             homePanel = new BasicInformationPanel("02");
                             tabbedPane.setComponentAt(0, homePanel);
+                            mainShopPanel.initialization();
+                            bankPanel.initialization();
+                            mangerShopPanel.initialization();
                             break;
                         case 3:
                             getContentPane().setBackground(new Color(85, 20, 0));
                             tabbedPane.setBackground(new Color(85, 20, 0));
                             homePanel = new BasicInformationPanel("03");
                             tabbedPane.setComponentAt(0, homePanel);
+                            mainShopPanel.initialization();
+                            bankPanel.initialization();
+                            mangerShopPanel.initialization();
                             break;
                         case 4:
                             getContentPane().setBackground(new Color(0, 70, 40));
@@ -266,8 +279,12 @@ public class Home extends JFrame{
                             homePanel = new BasicInformationPanel("04");
                             tabbedPane.setComponentAt(0, homePanel);
                             skinNumber = 0;
+                            mainShopPanel.initialization();
+                            bankPanel.initialization();
+                            mangerShopPanel.initialization();
                             break;
                     }
+
                 }
             });
         }
