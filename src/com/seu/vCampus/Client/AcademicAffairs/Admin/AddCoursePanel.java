@@ -76,44 +76,44 @@ public class AddCoursePanel extends JPanel{
         add(lblCoursecredit);
 
         courseNumberField = new JTextField();
-        courseNumberField.setBounds(353, 87, 100, 24);
+        courseNumberField.setBounds(353, 83, 100, 30);
         add(courseNumberField);
         courseNumberField.setColumns(10);
 
         courseNameField = new JTextField();
-        courseNameField.setBounds(753, 87, 100, 24);
+        courseNameField.setBounds(753, 83, 100, 30);
         add(courseNameField);
         courseNameField.setColumns(10);
 
         courseSemesterField = new JTextField();
-        courseSemesterField.setBounds(353, 187, 100, 24);
+        courseSemesterField.setBounds(353, 183, 100, 30);
         add(courseSemesterField);
         courseSemesterField.setColumns(10);
 
         courseLecturerField = new JTextField();
-        courseLecturerField.setBounds(753, 187, 100, 24);
+        courseLecturerField.setBounds(753, 183, 100, 30);
         add(courseLecturerField);
         courseLecturerField.setColumns(10);
 
         coursePlaceField = new JTextField();
-        coursePlaceField.setBounds(353, 287, 100, 24);
+        coursePlaceField.setBounds(353, 283, 100, 30);
         add(coursePlaceField);
         coursePlaceField.setColumns(10);
 
         courseTimeField = new JTextField();
-        courseTimeField.setBounds(753, 287, 100, 24);
+        courseTimeField.setBounds(753, 283, 100, 30);
         add(courseTimeField);
         courseTimeField.setColumns(10);
 
         maximumStudentsField = new JTextField();
-        maximumStudentsField.setBounds(353, 387, 100, 24);
+        maximumStudentsField.setBounds(353, 383, 100, 30);
         add(maximumStudentsField);
         maximumStudentsField.setColumns(10);
         Document dt_6= maximumStudentsField.getDocument();
 
         String [] str=new String[] {"必修","选修"};
         JComboBox comboBox = new JComboBox(str);
-        comboBox.setBounds(753, 387, 100, 26);
+        comboBox.setBounds(753, 383, 100, 30);
         add(comboBox);
         courseType = "必修";
         comboBox.addItemListener(new ItemListener() {
@@ -127,7 +127,7 @@ public class AddCoursePanel extends JPanel{
         });
 
         courseCreditField = new JTextField();
-        courseCreditField.setBounds(353, 487, 100, 24);
+        courseCreditField.setBounds(353, 483, 100, 30);
         add(courseCreditField);
         courseCreditField.setColumns(10);
 
@@ -136,7 +136,7 @@ public class AddCoursePanel extends JPanel{
         add(label_1);
 
         lecturerECardNumberField = new JTextField();
-        lecturerECardNumberField.setBounds(753, 487, 100, 24);
+        lecturerECardNumberField.setBounds(753, 483, 100, 30);
         add(lecturerECardNumberField);
         lecturerECardNumberField.setColumns(10);
 
@@ -145,7 +145,7 @@ public class AddCoursePanel extends JPanel{
         add(label_2);
 
         enrolledStudentsField = new JTextField();
-        enrolledStudentsField.setBounds(353, 587, 100, 24);
+        enrolledStudentsField.setBounds(353, 583, 100, 30);
         add(enrolledStudentsField);
         enrolledStudentsField.setColumns(10);
 
@@ -155,7 +155,7 @@ public class AddCoursePanel extends JPanel{
 
         String []isexam=new String []{"是","否"};
         JComboBox isExamBox = new JComboBox(isexam);
-        isExamBox.setBounds(753, 587, 100, 26);
+        isExamBox.setBounds(753, 583, 100, 30);
         add(isExamBox);
         isExamBox.addItemListener(new ItemListener() {
             @Override
@@ -169,7 +169,7 @@ public class AddCoursePanel extends JPanel{
         });
 
         JButton btnOk = new JButton("提交");
-        btnOk.setBounds(431, 713, 97, 27);
+        btnOk.setBounds(451, 713, 110, 40);
         add(btnOk);
         btnOk.addActionListener(new ActionListener() {
             @Override
