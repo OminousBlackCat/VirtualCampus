@@ -50,6 +50,8 @@ public class StudentAcademicMainPanel extends JPanel {
         scheduleTablePanel = new ScheduleTable();
         queryExamsPanel = new QueryExams();
         queryGradesPanel = new QueryGrades();
+        tabbedPaneUI=new TabbedPaneUI(Color.GRAY,Color.WHITE);
+        switchPane.setUI(tabbedPaneUI);
         switchPane.addTab("选课大厅", courseSelectionHallPanel);
         switchPane.addTab("已选课程", coursesSelectedPanel);
         switchPane.addTab("查询课表", scheduleTablePanel);

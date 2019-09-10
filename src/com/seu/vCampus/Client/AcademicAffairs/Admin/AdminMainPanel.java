@@ -1,53 +1,40 @@
 package com.seu.vCampus.Client.AcademicAffairs.Admin;
 
+import com.seu.vCampus.Client.AcademicAffairs.Utils.TabbedPaneUI;
+
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 public class AdminMainPanel extends JPanel{
 
 
+    private JTabbedPane jTabbedPane;
+    private TabbedPaneUI tabbedPaneUI;
+    private AddCoursePanel addCoursePanel;
+    private AddExams addExamsPanel;
+    private ChangeCourseInfo changeCourseInfo;
+    private ChangeGrade changeGrade;
     public AdminMainPanel(){
 
         setBounds(100, 100, 370, 475);
-        setLayout(null);
+        setLayout(new BorderLayout());
 
-        JButton button = new JButton("添加课程");
-        button.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-                AddCoursePanel addCoursePanel =new AddCoursePanel();
-            }
-        });
-        button.setBounds(117, 89, 125, 27);
-        add(button);
-
-        JButton button_1 = new JButton("添加考试");
-        button_1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                AddExams addExams=new AddExams();
-            }
-        });
-        button_1.setBounds(117, 169, 125, 27);
-        add(button_1);
-
-        JButton button_2 = new JButton("修改成绩");
-        button_2.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                ChangeGrade setGrades=new ChangeGrade();
-                setGrades.setVisible(true);
-            }
-        });
-        button_2.setBounds(117, 252, 125, 27);
-        add(button_2);
-
-        JButton button_3 = new JButton("修改课程信息");
-        button_3.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-                ChangeCourseInfo changeCourseInf= new ChangeCourseInfo();
-                changeCourseInf.setVisible(true);
-            }
-        });
-        button_3.setBounds(117, 333, 125, 27);
-        add(button_3);
+        addCoursePanel=new AddCoursePanel();
+        addExamsPanel=new AddExams();
+        changeCourseInfo=new ChangeCourseInfo();
+        changeGrade=new ChangeGrade();
+        jTabbedPane=new JTabbedPane();
+        tabbedPaneUI=new TabbedPaneUI(Color.GRAY,Color.WHITE);
+        jTabbedPane.setUI(tabbedPaneUI);
+        jTabbedPane.addTab("添加课程",null,addCoursePanel,null);
+        jTabbedPane.addTab("添加考试",null,addExamsPanel,null);
+        jTabbedPane.addTab("修改课程信息",null,changeCourseInfo,null);
+        jTabbedPane.addTab("修改成绩",null,changeGrade,null);
+        add(jTabbedPane,BorderLayout.CENTER);
+        jTabbedPane.setTabPlacement(JTabbedPane.TOP);
+        jTabbedPane.setVisible(true);
+        this.setVisible(true);
     }
 
 }

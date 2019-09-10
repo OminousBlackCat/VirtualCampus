@@ -14,7 +14,7 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Vector;
 
-public class ChangeGrade extends JFrame {
+public class ChangeGrade extends JPanel {
 
     private JTextField textField;
     private JTextField textField_1;
@@ -30,20 +30,19 @@ public class ChangeGrade extends JFrame {
 
     public ChangeGrade(){
         setBounds(100, 100, 436, 484);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        JPanel panel = new JPanel();
-        getContentPane().add(panel, BorderLayout.CENTER);
-        panel.setLayout(null);
-
+        student=new Person();
+        course=new Course();
+        courses=new ArrayList<Course>();
+        selectedNumber=0;
         JLabel label = new JLabel("学生一卡通：");
         label.setBounds(87, 111, 95, 18);
-        panel.add(label);
+        add(label);
 
         courseNames=new Vector<String>();
         textField = new JTextField();
         textField.setBounds(223, 108, 95, 24);
-        panel.add(textField);
+        add(textField);
         textField.setColumns(10);
         textField.addKeyListener(new KeyListener() {
             @Override
@@ -65,6 +64,7 @@ public class ChangeGrade extends JFrame {
                     for(int i=0;i<n;i++){
                         courseNames.add(courses.get(i).getCourseName());
                     }
+                    textField_1.setText(String.valueOf(courses.get(selectedNumber).getCourseGrade()));
                 }
             }
 
@@ -78,12 +78,12 @@ public class ChangeGrade extends JFrame {
 
         JLabel label_1 = new JLabel("课程名：");
         label_1.setBounds(87, 181, 61, 18);
-        panel.add(label_1);
+        add(label_1);
 
 
         JComboBox comboBox = new JComboBox(courseNames);
         comboBox.setBounds(223, 178, 95, 24);
-        panel.add(comboBox);
+        add(comboBox);
         comboBox.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
@@ -93,22 +93,21 @@ public class ChangeGrade extends JFrame {
 
         JLabel label_2 = new JLabel("目前成绩：");
         label_2.setBounds(87, 254, 95, 18);
-        panel.add(label_2);
+        add(label_2);
 
         textField_1 = new JTextField();
         textField_1.setBounds(223, 251, 95, 24);
-        textField_1.setText(String.valueOf(courses.get(selectedNumber).getCourseGrade()));
         textField_1.setEditable(false);
-        panel.add(textField_1);
+        add(textField_1);
         textField_1.setColumns(10);
 
         JLabel label_3 = new JLabel("修改为：");
         label_3.setBounds(87, 320, 72, 18);
-        panel.add(label_3);
+        add(label_3);
 
         textField_2 = new JTextField();
         textField_2.setBounds(223, 317, 95, 24);
-        panel.add(textField_2);
+        add(textField_2);
         textField_2.setColumns(10);
         Document dt_2=textField_2.getDocument();
         dt_2.addDocumentListener(new DocumentListener() {
@@ -130,7 +129,7 @@ public class ChangeGrade extends JFrame {
 
         JButton button_1=new JButton("确定");
         button_1.setBounds(87,390,90,24);
-        panel.add(button_1);
+        add(button_1);
         button_1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -144,6 +143,6 @@ public class ChangeGrade extends JFrame {
 
         JButton button_2=new JButton("取消");
         button_2.setBounds(223,387,90,24);
-        panel.add(button_2);
+        add(button_2);
     }
 }
