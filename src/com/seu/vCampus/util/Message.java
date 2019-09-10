@@ -13,6 +13,7 @@ public class Message implements java.io.Serializable{
         TYPE_QUERY_PERSON,
         TYPE_QUERY_PERSON_MANAGE,
         TYPE_SELECT_COURSE,
+        TYPE_CHANGE_COURSE_INFO,
         TYPE_COURSE_STUDENTS_FULL,
         TYPE_DESELECT_COURSE,
         TYPE_COURSE_CONFLICT,

@@ -55,18 +55,18 @@ public class QueryStudentsButton extends DefaultCellEditor {
                         JTable coursesTable = new JTable(data, columnNames);
                         coursesTable.setLayout(new BorderLayout());
                         coursesTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-                        TableUtils.FitTableColumns(coursesTable);
+                        coursesTable.getColumnModel().getColumn(0).setPreferredWidth(200);
+                        coursesTable.getColumnModel().getColumn(1).setPreferredWidth(100);
                         coursesTable.setFont(new Font("微软雅黑",Font.PLAIN,16));
                         coursesTable.setRowHeight(25);
                         coursesTable.setDefaultEditor(Object.class, null);
                         JScrollPane scrollPane = new JScrollPane(coursesTable);
-                        ViewStudentsFrame.setBounds(500,200,300,600);
+                        ViewStudentsFrame.setBounds(500,200,320,600);
                         ViewStudentsFrame.getContentPane().setLayout(new BorderLayout());
                         ViewStudentsFrame.getContentPane().add(scrollPane,BorderLayout.CENTER);
                         ViewStudentsFrame.setTitle("学生名单");
-                        JTextField tfd = new JTextField(courses.get(0).getCourseName() + "   学生名单");
-                        tfd.setEditable(false);
-                        ViewStudentsFrame.getContentPane().add(tfd, BorderLayout.NORTH);
+                        JLabel jLabel = new JLabel(courses.get(0).getCourseName() + "   学生名单");
+                        ViewStudentsFrame.getContentPane().add(jLabel, BorderLayout.NORTH);
                         ViewStudentsFrame.setVisible(true);
                     }
 

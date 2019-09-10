@@ -16,42 +16,26 @@ import java.awt.event.ItemListener;
 import java.util.ArrayList;
 
 public class AddCoursePanel extends JPanel{
-    private JTextField textField;
-    private JTextField textField_1;
-    private JTextField textField_2;
-    private JTextField textField_3;
-    private JTextField textField_4;
-    private JTextField textField_5;
-    private JTextField textField_6;
-    private JTextField textField_7;
-    private JTextField textField_8;
-    private JTextField textField_9;
+    private JTextField courseNumberField;
+    private JTextField courseNameField;
+    private JTextField courseSemesterField;
+    private JTextField courseLecturerField;
+    private JTextField coursePlaceField;
+    private JTextField courseTimeField;
+    private JTextField maximumStudentsField;
+    private JTextField courseCreditField;
+    private JTextField lecturerECardNumberField;
+    private JTextField enrolledStudentsField;
+    private String courseType;
+    private boolean isExam;
 
     private ArrayList <Course> courses;
     private Common commonData;
     private Person person;
     private Course course;
-    private String courseNumber;
-    private String courseName;
-    private String courseSemester;
-    private String courseLecturer;
-    private String coursePlace;
-    private String courseTime;
-    private String courseCredit;
-    private String courseType;
-    private int maximumStudents;
-    private String lecturerECardNumber;
-    private int enrolledStudents;
 
 
-    public AddCoursePanel() {
-        initialize();
-    }
-
-    /**
-     * Initialize the contents of the frame.
-     */
-    private void initialize() {
+    public AddCoursePanel(AdminMainPanel amP) {
         setBounds(100, 100, 330, 559);
         setLayout(null);
 
@@ -91,277 +75,124 @@ public class AddCoursePanel extends JPanel{
         lblCoursecredit.setBounds(181, 490, 108, 18);
         add(lblCoursecredit);
 
-        textField = new JTextField();
-        textField.setBounds(353, 87, 86, 24);
-        add(textField);
-        textField.setColumns(10);
-        Document dt=textField.getDocument();
-        dt.addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                course.setCourseNumber(textField.getText());
-            }
+        courseNumberField = new JTextField();
+        courseNumberField.setBounds(353, 83, 100, 30);
+        add(courseNumberField);
+        courseNumberField.setColumns(10);
 
-            @Override
-            public void removeUpdate(DocumentEvent e) {
+        courseNameField = new JTextField();
+        courseNameField.setBounds(753, 83, 100, 30);
+        add(courseNameField);
+        courseNameField.setColumns(10);
 
-            }
+        courseSemesterField = new JTextField();
+        courseSemesterField.setBounds(353, 183, 100, 30);
+        add(courseSemesterField);
+        courseSemesterField.setColumns(10);
 
-            @Override
-            public void changedUpdate(DocumentEvent e) {
+        courseLecturerField = new JTextField();
+        courseLecturerField.setBounds(753, 183, 100, 30);
+        add(courseLecturerField);
+        courseLecturerField.setColumns(10);
 
-            }
-        });
+        coursePlaceField = new JTextField();
+        coursePlaceField.setBounds(353, 283, 100, 30);
+        add(coursePlaceField);
+        coursePlaceField.setColumns(10);
 
-        textField_1 = new JTextField();
-        textField_1.setBounds(753, 87, 86, 24);
-        add(textField_1);
-        textField_1.setColumns(10);
-        Document dt_1=textField_1.getDocument();
-        dt_1.addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                course.setCourseName(textField_1.getText());
-            }
+        courseTimeField = new JTextField();
+        courseTimeField.setBounds(753, 283, 100, 30);
+        add(courseTimeField);
+        courseTimeField.setColumns(10);
 
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-
-            }
-        });
-
-        textField_2 = new JTextField();
-        textField_2.setBounds(353, 187, 86, 24);
-        add(textField_2);
-        textField_2.setColumns(10);
-        Document dt_2=textField_2.getDocument();
-        dt_2.addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                course.setCourseSemester(textField_2.getText());
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-
-            }
-        });
-
-        textField_3 = new JTextField();
-        textField_3.setBounds(753, 187, 86, 24);
-        add(textField_3);
-        textField_3.setColumns(10);
-        Document dt_3=textField_3.getDocument();
-        dt_3.addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                course.setCourseLecturer(textField_3.getText());
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-
-            }
-        });
-
-        textField_4 = new JTextField();
-        textField_4.setBounds(353, 287, 86, 24);
-        add(textField_4);
-        textField_4.setColumns(10);
-        Document dt_4=textField_4.getDocument();
-        dt_4.addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                course.setCoursePlace(textField_4.getText());
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-
-            }
-        });
-
-        textField_5 = new JTextField();
-        textField_5.setBounds(753, 287, 86, 24);
-        add(textField_5);
-        textField_5.setColumns(10);
-        Document dt_5=textField_5.getDocument();
-        dt_5.addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                course.setCourseTime(textField_5.getText());
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-
-            }
-        });
-
-        textField_6 = new JTextField();
-        textField_6.setBounds(353, 387, 86, 24);
-        add(textField_6);
-        textField_6.setColumns(10);
-        Document dt_6=textField_6.getDocument();
-        dt_6.addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                course.setMaximumStudents(Integer.parseInt(textField_6.getText()));
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-
-            }
-        });
+        maximumStudentsField = new JTextField();
+        maximumStudentsField.setBounds(353, 383, 100, 30);
+        add(maximumStudentsField);
+        maximumStudentsField.setColumns(10);
+        Document dt_6= maximumStudentsField.getDocument();
 
         String [] str=new String[] {"必修","选修"};
         JComboBox comboBox = new JComboBox(str);
-        comboBox.setBounds(753, 387, 86, 24);
+        comboBox.setBounds(753, 383, 100, 30);
         add(comboBox);
+        courseType = "必修";
         comboBox.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
                 if(comboBox.getSelectedIndex()==0)
-                    course.setCourseType("必修");
+                    courseType = "必修";
                 else
-                    course.setCourseType("选修");
+                    courseType = "选修";
             }
         });
 
-        textField_7 = new JTextField();
-        textField_7.setBounds(353, 487, 86, 24);
-        add(textField_7);
-        textField_7.setColumns(10);
-        Document dt_7=textField_7.getDocument();
-        dt_7.addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                course.setCourseCredit(textField_7.getText());
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-
-            }
-        });
+        courseCreditField = new JTextField();
+        courseCreditField.setBounds(353, 483, 100, 30);
+        add(courseCreditField);
+        courseCreditField.setColumns(10);
 
         JLabel label_1 = new JLabel("老师一卡通");
         label_1.setBounds(581, 490, 108, 18);
         add(label_1);
 
-        textField_8 = new JTextField();
-        textField_8.setBounds(753, 487, 86, 24);
-        add(textField_8);
-        textField_8.setColumns(10);
-        Document dt_8=textField_8.getDocument();
-        dt_8.addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                course.setECardNumber(textField_8.getText());
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-
-            }
-        });
+        lecturerECardNumberField = new JTextField();
+        lecturerECardNumberField.setBounds(753, 483, 100, 30);
+        add(lecturerECardNumberField);
+        lecturerECardNumberField.setColumns(10);
 
         JLabel label_2 = new JLabel("已选学生数");
         label_2.setBounds(181, 590, 97, 18);
         add(label_2);
 
-        textField_9 = new JTextField();
-        textField_9.setBounds(353, 587, 86, 24);
-        add(textField_9);
-        textField_9.setColumns(10);
-        Document dt_9=textField_9.getDocument();
-        dt_9.addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                course.setEnrolledStudents(Integer.parseInt(textField_9.getText()));
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-
-            }
-        });
+        enrolledStudentsField = new JTextField();
+        enrolledStudentsField.setBounds(353, 583, 100, 30);
+        add(enrolledStudentsField);
+        enrolledStudentsField.setColumns(10);
 
         JLabel label_3 = new JLabel("是否有考试");
         label_3.setBounds(581, 590, 105, 18);
         add(label_3);
 
         String []isexam=new String []{"是","否"};
-        JComboBox comboBox_1 = new JComboBox(isexam);
-        comboBox_1.setBounds(753, 587, 86, 24);
-        add(comboBox_1);
-        comboBox_1.addItemListener(new ItemListener() {
+        JComboBox isExamBox = new JComboBox(isexam);
+        isExamBox.setBounds(753, 583, 100, 30);
+        add(isExamBox);
+        isExamBox.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
-                if(comboBox_1.getSelectedIndex()==0){
-                    course.setExam(true);
+                if(isExamBox.getSelectedIndex()==0){
+                    isExam = true;
                 }
                 else
-                    course.setExam(false);
+                    isExam = false;
             }
         });
 
         JButton btnOk = new JButton("提交");
-        btnOk.setBounds(431, 713, 97, 27);
+        btnOk.setBounds(451, 713, 110, 40);
         add(btnOk);
         btnOk.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (JOptionPane.showConfirmDialog(null,"确定提交？") == JOptionPane.YES_OPTION) {
+                    course = new Course(courseNumberField.getText() + "-" + courseSemesterField.getText(),
+                            courseNameField.getText(),
+                            courseSemesterField.getText(), courseLecturerField.getText(),
+                            lecturerECardNumberField.getText(), coursePlaceField.getText(),
+                            courseTimeField.getText(), courseCreditField.getText(), courseType,
+                            Integer.parseInt(maximumStudentsField.getText()),
+                            Integer.parseInt(enrolledStudentsField.getText()), isExam, false);
                     course.setType(Message.MESSAGE_TYPE.TYPE_ADD_COURSE);
+                    commonData = Common.getInstance();
                     commonData.getIO().SendMessages(course);
-                    course=(Course)commonData.getIO().ReceiveMessage();
+                    course = (Course) commonData.getIO().ReceiveMessage();
+                    course.setECardNumber(commonData.getUser().getECardNumber());
+                    if(course.getType() == Message.MESSAGE_TYPE.TYPE_SUCCESS) {
+                        JOptionPane.showMessageDialog(null,"提交成功","提示",
+                                JOptionPane.INFORMATION_MESSAGE);
+                        amP.refresh();
+
+                    }
                 }
             }
         });

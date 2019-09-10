@@ -15,10 +15,14 @@
       </hspacer>
       <component id="d5841" class="javax.swing.JButton" binding="AddBookButton">
         <constraints>
-          <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <minimum-size width="100" height="30"/>
+            <preferred-size width="100" height="30"/>
+            <maximum-size width="100" height="30"/>
+          </grid>
         </constraints>
         <properties>
-          <text value="Add Book"/>
+          <text value="添加图书"/>
         </properties>
       </component>
       <component id="71b9" class="javax.swing.JTextField" binding="FilterField" custom-create="true">
@@ -48,10 +52,14 @@
       </scrollpane>
       <component id="6b5e1" class="javax.swing.JButton" binding="DeleteBookButton">
         <constraints>
-          <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <minimum-size width="100" height="30"/>
+            <preferred-size width="100" height="30"/>
+            <maximum-size width="100" height="30"/>
+          </grid>
         </constraints>
         <properties>
-          <text value="Delete Book"/>
+          <text value="删除图书"/>
         </properties>
       </component>
       <component id="ae4c5" class="javax.swing.JLabel">
@@ -60,7 +68,7 @@
         </constraints>
         <properties>
           <labelFor value="71b9"/>
-          <text value="Filter"/>
+          <text value="查询"/>
         </properties>
       </component>
     </children>

@@ -30,9 +30,8 @@ public class AdminLib {
     private JButton AddBookButton;
     private JTextField FilterField;
     protected JTable AdminLibTable;
-    private static String[] columnNames = {"Name of Book",
-
-            "Author",
+    private static String[] columnNames = {"书名",
+            "作者",
             "类型",
             "ISBN"
     };
@@ -171,8 +170,8 @@ public class AdminLib {
         final Spacer spacer1 = new Spacer();
         AdminLibMPanel.add(spacer1, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
         AddBookButton = new JButton();
-        AddBookButton.setText("Add Book");
-        AdminLibMPanel.add(AddBookButton, new GridConstraints(2, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        AddBookButton.setText("添加图书");
+        AdminLibMPanel.add(AddBookButton, new GridConstraints(2, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, new Dimension(100, 30), new Dimension(100, 30), new Dimension(100, 30), 0, false));
         AdminLibMPanel.add(FilterField, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(400, -1), new Dimension(400, -1), 0, false));
         final JScrollPane scrollPane1 = new JScrollPane();
         AdminLibMPanel.add(scrollPane1, new GridConstraints(0, 0, 1, 5, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
@@ -180,8 +179,8 @@ public class AdminLib {
         AdminLibTable.setRowHeight(30);
         scrollPane1.setViewportView(AdminLibTable);
         DeleteBookButton = new JButton();
-        DeleteBookButton.setText("Delete Book");
-        AdminLibMPanel.add(DeleteBookButton, new GridConstraints(2, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        DeleteBookButton.setText("删除图书");
+        AdminLibMPanel.add(DeleteBookButton, new GridConstraints(2, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, new Dimension(100, 30), new Dimension(100, 30), new Dimension(100, 30), 0, false));
         final JLabel label1 = new JLabel();
         label1.setText("Filter");
         AdminLibMPanel.add(label1, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
@@ -194,5 +193,4 @@ public class AdminLib {
     public JComponent $$$getRootComponent$$$() {
         return AdminLibMPanel;
     }
-
 }
