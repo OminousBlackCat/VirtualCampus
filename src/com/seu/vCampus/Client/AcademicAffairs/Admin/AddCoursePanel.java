@@ -113,7 +113,7 @@ public class AddCoursePanel extends JPanel{
 
         String [] str=new String[] {"必修","选修"};
         JComboBox comboBox = new JComboBox(str);
-        comboBox.setBounds(753, 387, 100, 24);
+        comboBox.setBounds(753, 387, 100, 26);
         add(comboBox);
         courseType = "必修";
         comboBox.addItemListener(new ItemListener() {
@@ -155,7 +155,7 @@ public class AddCoursePanel extends JPanel{
 
         String []isexam=new String []{"是","否"};
         JComboBox isExamBox = new JComboBox(isexam);
-        isExamBox.setBounds(753, 587, 100, 24);
+        isExamBox.setBounds(753, 587, 100, 26);
         add(isExamBox);
         isExamBox.addItemListener(new ItemListener() {
             @Override
