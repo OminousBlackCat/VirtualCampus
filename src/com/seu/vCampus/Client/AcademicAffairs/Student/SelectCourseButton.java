@@ -1,7 +1,5 @@
-package com.seu.vCampus.Client.AcademicAffairs.Utils;
+package com.seu.vCampus.Client.AcademicAffairs.Student;
 
-import com.seu.vCampus.Client.AcademicAffairs.Student.CourseSelectionHallPanel;
-import com.seu.vCampus.Client.AcademicAffairs.Student.StudentAcademicMainPanel;
 import com.seu.vCampus.Client.Common;
 import com.seu.vCampus.util.Course;
 import com.seu.vCampus.util.Message;
@@ -11,10 +9,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class DeselectCourseButton extends DefaultCellEditor  {
+public class SelectCourseButton  extends DefaultCellEditor  {
     private Common messenger;
     private JButton button;
-    public DeselectCourseButton(final JTable table, final StudentAcademicMainPanel toRefresh, CourseSelectionHallPanel csP) {
+    public SelectCourseButton(final JTable table, final StudentAcademicMainPanel toRefresh, final CourseSelectionHallPanel csP) {
         super(new JTextField());
 
         this.setClickCountToStart(1);
@@ -22,8 +20,8 @@ public class DeselectCourseButton extends DefaultCellEditor  {
         this.button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                DeselectCourseButton.this.fireEditingCanceled();
-                if(table.getValueAt(table.getSelectedRow(), 9).equals("退课")) {
+                SelectCourseButton.this.fireEditingCanceled();
+                if(table.getValueAt(table.getSelectedRow(), 11).equals("选课")) {
                     String courseNumber = (String) table.getValueAt(table.getSelectedRow(), 0);
                     courseNumber = courseNumber.concat("-" + (String) table.getValueAt(table.getSelectedRow(), 3));
                     System.out.println(courseNumber);
@@ -50,17 +48,21 @@ public class DeselectCourseButton extends DefaultCellEditor  {
 
     private void choose(String courseNumber) {
 
-        if (JOptionPane.showConfirmDialog(null,"确定退课？") == JOptionPane.YES_OPTION) {
+        if (JOptionPane.showConfirmDialog(null,"确定选课？") == JOptionPane.YES_OPTION) {
             messenger = Common.getInstance();
             Course course = new Course();
             course.setECardNumber(messenger.getUser().getECardNumber());
             course.setCourseNumber(courseNumber);
-            course.setType(Message.MESSAGE_TYPE.TYPE_DESELECT_COURSE);
+            course.setType(Message.MESSAGE_TYPE.TYPE_SELECT_COURSE);
             messenger.getIO().SendMessages(course);
             course = (Course) messenger.getIO().ReceiveMessage();
             Message.MESSAGE_TYPE type = course.getType();
             if(type == Message.MESSAGE_TYPE.TYPE_SUCCESS) {
-                JOptionPane.showMessageDialog(null,"退课成功","提示",
+                JOptionPane.showMessageDialog(null,"选课成功","恭喜",
+                        JOptionPane.INFORMATION_MESSAGE);
+            }
+            else if (type == Message.MESSAGE_TYPE.TYPE_COURSE_STUDENTS_FULL) {
+                JOptionPane.showMessageDialog(null,"已满", "抱歉",
                         JOptionPane.INFORMATION_MESSAGE);
             }
             else {

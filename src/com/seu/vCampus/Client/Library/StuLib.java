@@ -132,6 +132,8 @@ public class StuLib {
             }
         });
     }
+
+
     public JPanel LibMPanel;
     private JTabbedPane LibtabbedPane;
     private JPanel LibBPanel;
@@ -327,4 +329,5 @@ public class StuLib {
     public JComponent $$$getRootComponent$$$() {
         return LibMPanel;
     }
+
 }

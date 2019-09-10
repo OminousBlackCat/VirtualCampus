@@ -1065,4 +1065,5 @@ public class Shop {
     public JComponent $$$getRootComponent$$$() {
         return panel1;
     }
+
 }

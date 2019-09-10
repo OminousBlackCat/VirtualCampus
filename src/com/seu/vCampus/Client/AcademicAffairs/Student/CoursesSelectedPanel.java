@@ -1,6 +1,5 @@
 package com.seu.vCampus.Client.AcademicAffairs.Student;
 
-import com.seu.vCampus.Client.AcademicAffairs.Utils.DeselectCourseButton;
 import com.seu.vCampus.Client.AcademicAffairs.Utils.TableButtonRender;
 import com.seu.vCampus.Client.AcademicAffairs.Utils.TableUtils;
 import com.seu.vCampus.Client.Common;
@@ -10,11 +9,8 @@ import com.seu.vCampus.util.Person;
 
 
 import javax.swing.*;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Enumeration;
 
 public class CoursesSelectedPanel extends JPanel {
     private Common studentData;

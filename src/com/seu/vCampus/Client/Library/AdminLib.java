@@ -194,4 +194,5 @@ public class AdminLib {
     public JComponent $$$getRootComponent$$$() {
         return AdminLibMPanel;
     }
+
 }
