@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Class-Path: library\rsyntaxtextarea-2.6.0.jar commons-logging-1.1.3.ja
+ r forms_rt-7.0.3.jar jackcess-2.1.11.jar weblaf-core-1.2.9.jar jdom-1
+ .0.jar filters-2.0.235.jar weblaf-plugin-1.2.9.jar weblaf-ui-1.2.9.ja
+ r commons-lang-2.6.jar apiguardian-api-1.1.0.jar junit-jupiter-api-5.
+ 5.1.jar asm-tree-3.0.jar slf4j-api-1.7.25.jar asm-3.0.jar jericho-htm
+ l-3.3.jar hsqldb-2.3.1.jar svg-salamander-1.0.jar java-image-scaling-
+ 0.8.6.jar ucanaccess-4.0.4.jar junit-platform-engine-1.5.1.jar junit-
+ jupiter-engine-5.5.1.jar junit-platform-commons-1.5.1.jar forms-1.1-p
+ review.jar xstream-1.4.9.jar asm-commons-3.0.jar opentest4j-1.2.0.jar
+Main-Class: com.seu.vCampus.Server.ServerUI
+
