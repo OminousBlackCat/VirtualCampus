@@ -46,8 +46,8 @@ public class TeacherScheduleTable extends JPanel {
         for(int i=0;i<semester.size();i++){
             coursesTable = new TeacherCoursesTable();
             for(int j=0; j<n; j++){
-                if(courses.get(j).getCourseSemester() == semester.get(i)){
-                    coursesTable.addCourse(courses.get(i).getCourseTime(), courses.get(i).getCourseName());
+                if(courses.get(j).getCourseSemester().equals(semester.get(i))){
+                    coursesTable.addCourse(courses.get(j).getCourseTime(), courses.get(j).getCourseName());
                 }
             }
             coursesTables.add(coursesTable);

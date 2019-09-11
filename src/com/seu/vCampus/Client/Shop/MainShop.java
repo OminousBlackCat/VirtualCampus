@@ -196,6 +196,16 @@ public class MainShop {
                         TotalCost.setText(Double.toString(SumOfMoney) + "元");
                         ShopListModel.addRow(tempData);
                     }
+                    if (flag > ShopData.getShoppingList().size()) {
+                        flag = ShopData.getShoppingList().size();
+                        try {
+                            sleep(200);
+                        } catch (InterruptedException ie) {
+                            ie.printStackTrace();
+                        }
+                        int index = goodsTable.getSelectedRow();
+                        ShopListModel.removeRow(index);
+                    }
                     if (flag != 0 && ShopData.getShoppingList().size() == 0) {
                         for (int i = flag - 1; i >= 0; i--) {
                             ShopListModel.removeRow(i);
@@ -206,6 +216,16 @@ public class MainShop {
             }
         });
         ListListener.start();
+        DeleteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int index = goodsTable.getSelectedRow();
+                Goods Temp = ShopData.getShoppingList().get(index);
+                SumOfMoney = SumOfMoney - Temp.getGoodsStock() * Temp.getGoodsPrice();
+                TotalCost.setText(Double.toString(SumOfMoney) + "元");
+                ShopData.getShoppingList().remove(index);
+            }
+        });
     }
 
     public void initialization() {
@@ -485,5 +505,4 @@ public class MainShop {
     public JComponent $$$getRootComponent$$$() {
         return basis;
     }
-
 }

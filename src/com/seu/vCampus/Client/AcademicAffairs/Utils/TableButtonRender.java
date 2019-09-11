@@ -21,7 +21,8 @@ public class TableButtonRender implements TableCellRenderer {
                                                    boolean isSelected, boolean hasFocus, int row, int column) {
         this.button.setText(value == null ? "" : String.valueOf(value));
 
-        if (String.valueOf(value).equals("冲突")||String.valueOf(value).equals("已满")
+        if (String.valueOf(value).equals("冲突")||String.valueOf(value).equals("已满") ||
+                String.valueOf(value).equals("有分")
                 ||String.valueOf(value).equals("成绩已录入") || String.valueOf(value).equals("无法修改") ||
                 String.valueOf(value).equals("暂无成绩"))
             this.button.setEnabled(false);
