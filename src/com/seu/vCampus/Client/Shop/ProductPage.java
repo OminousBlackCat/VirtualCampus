@@ -1,6 +1,5 @@
 package com.seu.vCampus.Client.Shop;
 
-import com.alee.managers.animation.easing.Back;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
@@ -378,7 +377,7 @@ public class ProductPage extends Component {
         Name1.setText(GoodsA.getGoodsName());
         Price1.setText(Double.toString(GoodsA.getGoodsPrice()) + "元");
         Stock1.setText(Short.toString(GoodsA.getGoodsStock()) + "在库");
-        IconA = new ImageIcon("src/icon/ProductPicture/" + GoodsA.getPictureNumber() + ".png");
+        IconA = new ImageIcon(Common.picturePath + "/icon/ProductPicture/" + GoodsA.getPictureNumber() + ".png");
         Picture1.setIcon(IconA);
         Picture1.setText("");
 
@@ -396,7 +395,7 @@ public class ProductPage extends Component {
             GoodsB = thisClassGoodsList.get(index + 1);
             Name2.setText(GoodsB.getGoodsName());
             Price2.setText(Double.toString(GoodsB.getGoodsPrice()) + "元");
-            IconB = new ImageIcon("src/icon/ProductPicture/" + GoodsB.getPictureNumber() + ".png");
+            IconB = new ImageIcon(Common.picturePath + "/icon/ProductPicture/" + GoodsB.getPictureNumber() + ".png");
             Picture2.setIcon(IconB);
             Stock2.setText(Short.toString(GoodsB.getGoodsStock()) + "在库");
             Picture2.setText("");
@@ -423,7 +422,7 @@ public class ProductPage extends Component {
             GoodsC = thisClassGoodsList.get(index + 2);
             Name3.setText(GoodsC.getGoodsName());
             Price3.setText(Double.toString(GoodsC.getGoodsPrice()) + "元");
-            IconC = new ImageIcon("src/icon/ProductPicture/" + GoodsC.getPictureNumber() + ".png");
+            IconC = new ImageIcon(Common.picturePath + "/icon/ProductPicture/" + GoodsC.getPictureNumber() + ".png");
             Picture3.setIcon(IconC);
             Stock3.setText(Short.toString(GoodsC.getGoodsStock()) + "在库");
             Picture3.setText("");
@@ -450,7 +449,7 @@ public class ProductPage extends Component {
             GoodsD = thisClassGoodsList.get(index + 3);
             Name4.setText(GoodsD.getGoodsName());
             Price4.setText(Double.toString(GoodsD.getGoodsPrice()) + "元");
-            IconD = new ImageIcon("src/icon/ProductPicture/" + GoodsD.getPictureNumber() + ".png");
+            IconD = new ImageIcon(Common.picturePath + "/icon/ProductPicture/" + GoodsD.getPictureNumber() + ".png");
             Picture4.setIcon(IconD);
             Stock4.setText(Short.toString(GoodsD.getGoodsStock()) + "在库");
             Picture4.setText("");
@@ -477,7 +476,7 @@ public class ProductPage extends Component {
             GoodsE = thisClassGoodsList.get(index + 4);
             Name5.setText(GoodsE.getGoodsName());
             Price5.setText(Double.toString(GoodsE.getGoodsPrice()) + "元");
-            IconE = new ImageIcon("src/icon/ProductPicture/" + GoodsE.getPictureNumber() + ".png");
+            IconE = new ImageIcon(Common.picturePath + "/icon/ProductPicture/" + GoodsE.getPictureNumber() + ".png");
             Picture5.setIcon(IconE);
             Stock5.setText(Short.toString(GoodsE.getGoodsStock()) + "在库");
             Picture5.setText("");
@@ -504,7 +503,7 @@ public class ProductPage extends Component {
             GoodsF = thisClassGoodsList.get(index + 5);
             Name6.setText(GoodsF.getGoodsName());
             Price6.setText(Double.toString(GoodsF.getGoodsPrice()) + "元");
-            IconF = new ImageIcon("src/icon/ProductPicture/" + GoodsF.getPictureNumber() + ".png");
+            IconF = new ImageIcon(Common.picturePath + "/icon/ProductPicture/" + GoodsF.getPictureNumber() + ".png");
             Picture6.setIcon(IconF);
             Stock6.setText(Short.toString(GoodsF.getGoodsStock()) + "在库");
             Picture6.setText("");

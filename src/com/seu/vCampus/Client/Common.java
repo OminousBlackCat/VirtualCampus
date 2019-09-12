@@ -42,6 +42,7 @@ public class Common {
     private BookManage bookInformation;
     private ArrayList<Goods> ShoppingList;
     public static final int MAX_LEND_BOOK = 10;//Changed by MaouSora
+    public static final String picturePath = System.getProperty("user.dir")+"/picture";
     private NewsManage NewsList;
 
 
@@ -62,7 +63,7 @@ public class Common {
     }
 
     private Common(){
-        this.ipAddress = "169.254.80.230";
+        this.ipAddress = "192.168.43.38";
         this.Port = 8000;
         this.isLogin = false;
         User = new Person();
@@ -81,10 +82,15 @@ public class Common {
     public void reset(){
         isLogin = false;
         io = null;
-        User = null;
-        userCount = null;
-        shopInformation = null;
-        bookInformation = null;
+        User = new Person();
+        userCount = new BankCount();
+        shopInformation = new ShopManage();
+        bookInformation = new BookManage();
+        ShoppingList = new ArrayList<>();
+        userBill = new BankBill();
+        ShoppingList = new ArrayList<>();
+        NewsList = new NewsManage();
+        skinNumber = 1;
     }
 
 

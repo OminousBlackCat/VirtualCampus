@@ -11,7 +11,7 @@ import java.sql.*;
 public class DatabaseConnection{
 
     private static final String dbURL = "jdbc:ucanaccess://" +
-            "D:/java/w/VirtualCampus.accdb";
+            System.getProperty("user.dir")+"/DataBase/VirtualCampus.accdb";
 
     static {
         try {

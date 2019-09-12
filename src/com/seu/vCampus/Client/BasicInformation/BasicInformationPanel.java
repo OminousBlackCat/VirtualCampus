@@ -60,8 +60,8 @@ public class BasicInformationPanel extends JPanel {
             AvatarPanel.setBackground(Color.WHITE);
             Avatar = new JLabel();
             Avatar.setBackground(Color.WHITE);
-            System.out.println("src/Head_Big/" + userData.getUser().getAvatarID() + ".png");
-            AvatarImage = new ImageIcon("src/Head_Big/" + userData.getUser().getAvatarID() + ".png");
+            System.out.println(Common.picturePath +"/Head_Big/" + userData.getUser().getAvatarID() + ".png");
+            AvatarImage = new ImageIcon(Common.picturePath +"/Head_Big/" + userData.getUser().getAvatarID() + ".png");
             Avatar.setBounds(0, 0, 180, 180);
             Avatar.setIcon(AvatarImage);
             AvatarPanel.add(Avatar);
@@ -100,7 +100,7 @@ public class BasicInformationPanel extends JPanel {
                         current = 1;
                         next = 1;
                     }
-                    AvatarImage = new ImageIcon("src/Head_Big/" + Integer.toString(next) + ".png");
+                    AvatarImage = new ImageIcon(Common.picturePath +"/Head_Big/" + Integer.toString(next) + ".png");
                     Avatar.setIcon(AvatarImage);
                     CancelAvatar.setVisible(true);
                     ConfirmAvatar.setVisible(true);
@@ -130,7 +130,7 @@ public class BasicInformationPanel extends JPanel {
             CancelAvatar.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    AvatarImage = new ImageIcon("src/Head_Big/" + userData.getUser().getAvatarID() + ".png");
+                    AvatarImage = new ImageIcon(Common.picturePath +"/Head_Big/" + userData.getUser().getAvatarID() + ".png");
                     Avatar.setIcon(AvatarImage);
                     CancelAvatar.setVisible(false);
                     ConfirmAvatar.setVisible(false);
@@ -182,7 +182,7 @@ public class BasicInformationPanel extends JPanel {
         initialize(index);
     }
     public void ChangeBackGround(String index){
-        String filepath = "src/BackGroundImage/"+index+".jpg";
+        String filepath = Common.picturePath +"/BackGroundImage/"+index+".jpg";
         System.out.println(filepath);
         BackGroundImage = new ImageIcon(filepath);
     }
@@ -216,7 +216,7 @@ public class BasicInformationPanel extends JPanel {
         Major.setText(userData.getUser().getMajor());
 
         UserNameT.setBounds(100,100,80,30);
-        UserName.setBounds(170,100,50,30);
+        UserName.setBounds(170,100,150,30);
         UserNameT.setForeground(Color.WHITE);
         UserName.setForeground(Color.cyan);
         UserNameT.setFont(new Font("Microsoft Yahei", Font.BOLD,20));
@@ -224,8 +224,8 @@ public class BasicInformationPanel extends JPanel {
         add(UserName);
         add(UserNameT);
 
-        ECardNumberT.setBounds(240,100,100,30);
-        ECardNumber.setBounds(330,100,100,30);
+        ECardNumberT.setBounds(290,100,100,30);
+        ECardNumber.setBounds(380,100,100,30);
         ECardNumberT.setForeground(Color.WHITE);
         ECardNumber.setForeground(Color.cyan);
         ECardNumber.setFont(new Font("Microsoft Yahei", Font.BOLD,20));
@@ -233,8 +233,8 @@ public class BasicInformationPanel extends JPanel {
         add(ECardNumber);
         add(ECardNumberT);
 
-        StudentNumberT.setBounds(450,100,80,30);
-        StudentNumber.setBounds(500,100,80,30);
+        StudentNumberT.setBounds(500,100,80,30);
+        StudentNumber.setBounds(550,100,80,30);
         StudentNumberT.setForeground(Color.WHITE);
         StudentNumber.setForeground(Color.cyan);
         StudentNumberT.setFont(new Font("Microsoft Yahei", Font.BOLD,20));
@@ -251,8 +251,8 @@ public class BasicInformationPanel extends JPanel {
         add(Group);
         add(GroupT);
 
-        SexT.setBounds(240,140,100,30);
-        Sex.setBounds(310,140,100,30);
+        SexT.setBounds(290,140,100,30);
+        Sex.setBounds(360,140,100,30);
         SexT.setForeground(Color.WHITE);
         Sex.setForeground(Color.YELLOW);
         SexT.setFont(new Font("Microsoft Yahei", Font.BOLD,20));
@@ -260,8 +260,8 @@ public class BasicInformationPanel extends JPanel {
         add(Sex);
         add(SexT);
 
-        MajorT.setBounds(450,140,80,30);
-        Major.setBounds(500,140,150,30);
+        MajorT.setBounds(500,140,80,30);
+        Major.setBounds(550,140,150,30);
         MajorT.setForeground(Color.WHITE);
         Major.setForeground(Color.YELLOW);
         MajorT.setFont(new Font("Microsoft Yahei", Font.BOLD,20));

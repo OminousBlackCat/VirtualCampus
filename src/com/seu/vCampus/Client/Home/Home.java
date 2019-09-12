@@ -30,13 +30,13 @@ public class Home extends JFrame{
 
     private Common homeData;
     private static Point origin = new Point();
-    private static ImageIcon TitleIcon = new ImageIcon("src/icon/head/logo.png");
-    private static ImageIcon Home = new ImageIcon("src/icon/left/Home.png");
-    private static ImageIcon Library = new ImageIcon("src/icon/left/library.png");
-    private static ImageIcon Shop = new ImageIcon("src/icon/left/shop.png");
-    private static ImageIcon Bank = new ImageIcon("src/icon/left/Bank.png");
-    private static ImageIcon Edu = new ImageIcon("src/icon/left/school.png");
-    private static ImageIcon UserImage = new ImageIcon("src/icon/left/user.png");
+    private static ImageIcon TitleIcon = new ImageIcon(Common.picturePath +"/icon/head/logo.png");
+    private static ImageIcon Home = new ImageIcon(Common.picturePath +"/icon/left/Home.png");
+    private static ImageIcon Library = new ImageIcon(Common.picturePath +"/icon/left/library.png");
+    private static ImageIcon Shop = new ImageIcon(Common.picturePath +"/icon/left/shop.png");
+    private static ImageIcon Bank = new ImageIcon(Common.picturePath +"/icon/left/Bank.png");
+    private static ImageIcon Edu = new ImageIcon(Common.picturePath +"/icon/left/school.png");
+    private static ImageIcon UserImage = new ImageIcon(Common.picturePath +"/icon/left/user.png");
 
     private JTabbedPane tabbedPane;
     private Bank bankPanel;

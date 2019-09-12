@@ -81,7 +81,7 @@ public class LauncherPanel extends JPanel {
         IPLabel.setBounds(160,140,200,30);
         add(IPLabel);
 
-        ImageIcon image = new ImageIcon("src/BackGroundImage/Launcher.png");
+        ImageIcon image = new ImageIcon(Common.picturePath +"/BackGroundImage/Launcher.png");
         setBackground(image);
 
         Login.addActionListener(new ActionListener() {

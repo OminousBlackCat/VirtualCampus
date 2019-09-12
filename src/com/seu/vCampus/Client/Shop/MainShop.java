@@ -31,12 +31,12 @@ public class MainShop {
     private Goods searchGoods;
 
 
-    private static ImageIcon ShopLife = new ImageIcon("src/icon/ShopLife.png");
-    private static ImageIcon ShopStudy = new ImageIcon("src/icon/ShopStudy.png");
-    private static ImageIcon ShopComputer = new ImageIcon("src/icon/ShopComputer.png");
-    private static ImageIcon ShopFood = new ImageIcon("src/icon/ShopFood.png");
-    private static ImageIcon ShopSearch = new ImageIcon("src/icon/ShopSearch.jpg");
-    private static ImageIcon ShoppingT = new ImageIcon("src/icon/ShoppingTrolley.png");
+    private static ImageIcon ShopLife = new ImageIcon(Common.picturePath + "/icon/ShopLife.png");
+    private static ImageIcon ShopStudy = new ImageIcon(Common.picturePath + "/icon/ShopStudy.png");
+    private static ImageIcon ShopComputer = new ImageIcon(Common.picturePath + "/icon/ShopComputer.png");
+    private static ImageIcon ShopFood = new ImageIcon(Common.picturePath + "/icon/ShopFood.png");
+    private static ImageIcon ShopSearch = new ImageIcon(Common.picturePath + "/icon/ShopSearch.jpg");
+    private static ImageIcon ShoppingT = new ImageIcon(Common.picturePath + "/icon/ShoppingTrolley.png");
 
     private JTabbedPane tabbedPane1;
     private JPanel basis;
@@ -99,7 +99,7 @@ public class MainShop {
                         SearchResult.setVisible(true);
                         Picture0.setText("");
                         Name0.setText(ShopData.getShopInformation().getGoods().get(counter).getGoodsName());
-                        Picture0.setIcon(new ImageIcon("src/icon/ProductPicture/" + ShopData.getShopInformation().getGoods().get(counter).getGoodsNumber() + ".png"));
+                        Picture0.setIcon(new ImageIcon(Common.picturePath + "/icon/ProductPicture/" + ShopData.getShopInformation().getGoods().get(counter).getGoodsNumber() + ".png"));
                         Picture0.setText("");
                         Price0.setText(Double.toString(ShopData.getShopInformation().getGoods().get(counter).getGoodsPrice()) + "元");
                         Stock0.setText(Double.toString(ShopData.getShopInformation().getGoods().get(counter).getGoodsStock()) + "在库");
@@ -292,9 +292,9 @@ public class MainShop {
         }
 
         AdvertisementSearchPanel.setText("");
-        AdvertisementSearchPanel.setIcon(new ImageIcon("src/icon/Advertisement2.jpg"));
+        AdvertisementSearchPanel.setIcon(new ImageIcon(Common.picturePath + "/icon/Advertisement2.jpg"));
         Advertisement.setText("");
-        Advertisement.setIcon(new ImageIcon("src/icon/Advertisement1.jpg"));
+        Advertisement.setIcon(new ImageIcon(Common.picturePath + "/icon/Advertisement1.jpg"));
 
         ECardBalance.setText(Double.toString(ShopData.getUser().getECardBalance()));
         double cost = 0;

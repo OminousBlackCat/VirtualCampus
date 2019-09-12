@@ -7,7 +7,6 @@ import com.seu.vCampus.Client.Common;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.geom.Line2D;
 
 public class ProductPanel {
     private JTextField textField1;
@@ -25,7 +24,7 @@ public class ProductPanel {
         ShopData = Common.getInstance();
         Name.setText(ShopData.getShopInformation().getGoods().get(index).getGoodsNumber());
         Price.setText(Double.toString(ShopData.getShopInformation().getGoods().get(index).getGoodsPrice()));
-        Productimage = new ImageIcon("src/icon/ProductPicture" + index + ".png");
+        Productimage = new ImageIcon(Common.picturePath + "/icon/ProductPicture" + index + ".png");
         Picture.setIcon(Productimage);
     }
 
@@ -84,6 +83,5 @@ public class ProductPanel {
     public JComponent $$$getRootComponent$$$() {
         return panel1;
     }
-
 }
 

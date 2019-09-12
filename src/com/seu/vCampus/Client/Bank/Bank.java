@@ -14,7 +14,6 @@ import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
 import com.seu.vCampus.Client.Common;
 import com.seu.vCampus.util.BankBill;
-import com.seu.vCampus.util.BankCount;
 import com.seu.vCampus.util.Message;
 
 
@@ -109,7 +108,7 @@ public class Bank {
         UserNumber.setText(bankData.getUserCount().getCounterNumber());
         ECardBalance.setText(Double.toString(bankData.getUser().getECardBalance()));
         Advertisement.setText("");
-        Advertisement.setIcon(new ImageIcon("src/icon/Advertisement3.jpg"));
+        Advertisement.setIcon(new ImageIcon(Common.picturePath + "/icon/Advertisement3.jpg"));
 
         switch (bankData.getSkinNumber()) {
             case 1:
@@ -261,5 +260,4 @@ public class Bank {
     public JComponent $$$getRootComponent$$$() {
         return bankPanel;
     }
-
 }

@@ -58,9 +58,9 @@ public class MangerShop {
         initialization();
 
         Advertisement1.setText("");
-        Advertisement1.setIcon(new ImageIcon("src/icon/90004.jpg"));
+        Advertisement1.setIcon(new ImageIcon(Common.picturePath + "/icon/90004.jpg"));
         Advertisement2.setText("");
-        Advertisement2.setIcon(new ImageIcon("src/icon/90004.jpg"));
+        Advertisement2.setIcon(new ImageIcon(Common.picturePath + "/icon/90004.jpg"));
 
         ConfirmChange.addActionListener(new ActionListener() {
             /**
@@ -70,7 +70,7 @@ public class MangerShop {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                int chooseIndex = ShopTable.getSelectedRow();
+                int chooseIndex = ShopTable1.getSelectedRow();
                 Goods temp = new Goods();
                 temp.setGoodsPrice(Double.parseDouble(ChangePrice.getText()));
                 temp.setGoodsNumber(ChangeNumber.getText());
